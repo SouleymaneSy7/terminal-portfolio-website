@@ -10,7 +10,7 @@
   --font-family: var(--font-family-jetbrains);
 
   /* Font Size */
-  --fs-16-18: clamp(1rem, 0.9643rem + 0.1786vw, 1.125rem);
+  --fs-14-16: clamp(0.875rem, 0.8393rem + 0.1786vw, 1rem);
   --body-font-size: var(--fs-16-18);
 
   /* Colors */
@@ -59,4 +59,6 @@ body {
   background: var(--background-clr);
   color: var(--text-clr);
   font-family: var(--font-family);
+  height: 100%;
+  overflow: auto;
 }
