@@ -9,6 +9,12 @@
 
   --font-family: var(--font-family-jetbrains);
 
+  /* Font Weight */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semi-bold: 600;
+  --fw-bold: 700;
+
   /* Font Size */
   --fs-14-16: clamp(0.875rem, 0.8393rem + 0.1786vw, 1rem);
   --body-font-size: var(--fs-16-18);
