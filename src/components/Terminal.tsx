@@ -41,15 +41,13 @@ const Terminal: React.FC = () => {
       <div>
         {history.map((item: CommandHistory, index: number) => (
           <div key={index} className="opacity-90">
-            <p className="font-semibold text-[var(--secondary-clr)] inline-block">
+            <p className="text-[var(--secondary-clr)] inline-block">
               <span className="text-[var(--primary-clr)]">guest</span>@
               <span className="text-[var(--tertiary-clr)]">
                 souleymane-sy-portfolio
               </span>
             </p>
-            <span className="font-semibold text-[var(--secondary-clr)]">
-              :~$
-            </span>
+            <span className="text-[var(--secondary-clr)]">:~$</span>
             <span className="text-[var(--secondary-clr)]"> {item.command}</span>
             <br />
             <CommandOutput outputLines={item.output} />
