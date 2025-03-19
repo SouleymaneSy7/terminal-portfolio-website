@@ -1,56 +1,53 @@
+import {
+  aboutMeCommandOutput,
+  dateCommandOutput,
+  exitCommandOutput,
+  helpCommandOutput,
+  hostNameCommandOutput,
+  neofetchCommandOutput,
+  projectsCommandOutput,
+  sudoCommandOutput,
+  themeCommandOutput,
+  welcomeCommandOutput,
+  whoAmICommandOutput,
+} from "@/constants";
+
 export const executeCommand = async (command: string): Promise<string[]> => {
   const [cmd] = command.toLowerCase().split(" ");
 
   switch (cmd) {
     case "help":
-      return [
-        "Here are all the available commands :",
-        "",
-        "about     - About me.",
-        "date      - Show the current date.",
-        "exit      - Close the windows.",
-        "hostname  - Display the host name.",
-        "help      - Show available command list",
-        "projects  - Show projects list.",
-        "theme     - Change the themes.",
-        "neofetch  - Show User Personal informations.",
-        "sudo      - An Easter eggs for the Admin.",
-        "whoami    - Display the guest name.",
-        "welcome   - Display the welcome banner.",
-      ];
+      return helpCommandOutput;
 
     case "about":
-      return ["About Me..."];
+      return aboutMeCommandOutput;
 
     case "date":
-      return ["Current Date"];
+      return dateCommandOutput;
 
     case "hostname":
-      return ["souleymane-sy-portfolio"];
+      return hostNameCommandOutput;
 
     case "whoami":
-      return ["guest"];
+      return whoAmICommandOutput;
 
     case "exit":
-      return ["Please close the tab to exit."];
+      return exitCommandOutput;
 
     case "projects":
-      return ["List of Projects"];
+      return projectsCommandOutput;
 
     case "theme":
-      return ["Change the theme. Features comming soon..."];
+      return themeCommandOutput;
 
     case "neofetch":
-      return ["User information"];
+      return neofetchCommandOutput;
 
     case "sudo":
-      return ["You're not the admin; please contact the admin "];
+      return sudoCommandOutput
 
     case "welcome":
-      return [
-        "Welcome on my terminal portfolio.",
-        "Type 'help' to see available commands.",
-      ];
+      return welcomeCommandOutput
 
     default:
       return [
