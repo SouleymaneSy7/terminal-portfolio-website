@@ -1,14 +1,6 @@
 @import "tailwindcss";
 
 :root {
-  /* Font Families */
-  --font-family-jetbrains: "JetBrains Mono", monospace;
-  --font-family-operator-mono: "Operator Mono", monospace;
-  --font-family-fira-code: "Fira Code", monospace;
-  --font-family-cascadia-code: "Cascadia Code", monospace;
-
-  --font-family: var(--font-family-jetbrains);
-
   /* Font Weight */
   --fw-regular: 400;
   --fw-medium: 500;
@@ -17,7 +9,7 @@
 
   /* Font Size */
   --fs-14-16: clamp(0.875rem, 0.8393rem + 0.1786vw, 1rem);
-  --body-font-size: var(--fs-16-18);
+  --body-font-size: var(--fs-14-16);
 
   /* Colors */
   /* Monokai Pro Theme Colors */
@@ -27,44 +19,13 @@
   --primary-clr: #ff657a;
   --secondary-clr: #ff9b5e;
   --tertiary-clr: #9cd1bb;
-
-  /* Dracula Theme Colors */
-  /* --background-clr: #1E1F29;
-  --foreground-clr: #44475A;
-  --text-clr: #F8F8F2;
-  --primary-clr: #FF79C6;
-  --secondary-clr: #6272A4;
-  --tertiary-clr: #BD93F9; */
-
-  /* One Dark Theme Colors */
-  /* --background-clr: #1E2127;
-  --foreground-clr: #1E1F2B;
-  --text-clr: #AAB2BF;
-  --primary-clr: #56B6C2;
-  --secondary-clr: #C678DD;
-  --tertiary-clr: #E06C75; */
-
-  /* Moonlight II Theme Colors */
-  /* --background-clr: #191A2A;
-  --foreground-clr: #222436;
-  --text-clr: #C8D3F5;
-  --primary-clr: #C3E88D;
-  --secondary-clr: #82AAFF;
-  --tertiary-clr: #FF757F; */
-
-  /* Tokyo Night Theme Colors */
-  /* --background-clr: #1E1F2B;
-  --foreground-clr: #24283B;
-  --text-clr: #A6AFD6;
-  --primary-clr: #7DCFFF;
-  --secondary-clr: #E0AF68;
-  --tertiary-clr: #9ECE6A; */
 }
 
 body {
   background: var(--background-clr);
   color: var(--text-clr);
-  font-family: var(--font-family);
-  height: 100%;
-  overflow: auto;
+  font-family: var(--font-fira-code);
+  font-size: var(--body-font-size);
+  font-weight: var(--fw-regular);
+  line-height: 1.5;
 }
