@@ -7,7 +7,7 @@ const CommandOutput: React.FC<CommandOutputPropsType> = ({ outputLines }) => {
   return (
     <div>
       {outputLines.map((outpute: string, index: number) => (
-        <div key={index}>{outpute}</div>
+        <p key={index}>{outpute}</p>
       ))}
     </div>
   );
