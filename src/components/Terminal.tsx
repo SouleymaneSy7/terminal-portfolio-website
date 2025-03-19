@@ -13,6 +13,13 @@ const Terminal: React.FC = () => {
     {
       command: "welcome",
       output: [
+        `
+███████  ██████  ██    ██ ██      ███████ ██    ██ ███    ███  █████  ███    ██ ███████     ███████ ██    ██
+██      ██    ██ ██    ██ ██      ██       ██  ██  ████  ████ ██   ██ ████   ██ ██          ██       ██  ██
+███████ ██    ██ ██    ██ ██      █████     ████   ██ ████ ██ ███████ ██ ██  ██ █████       ███████   ████
+     ██ ██    ██ ██    ██ ██      ██         ██    ██  ██  ██ ██   ██ ██  ██ ██ ██               ██    ██
+███████  ██████   ██████  ███████ ███████    ██    ██      ██ ██   ██ ██   ████ ███████     ███████    ██    
+        `.trim(),
         "--------------------------------",
         "Welcome on my terminal portfolio.",
         "--------------------------------",
@@ -40,7 +47,7 @@ const Terminal: React.FC = () => {
     <div ref={outputRef}>
       <div>
         {history.map((item: CommandHistory, index: number) => (
-          <div key={index} className="opacity-90">
+          <div key={index} className="opacity-90 whitespace-pre">
             <p className="text-[var(--secondary-clr)] inline-block">
               <span className="text-[var(--primary-clr)]">guest</span>@
               <span className="text-[var(--tertiary-clr)]">
