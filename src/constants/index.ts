@@ -38,6 +38,8 @@ export const sudoCommandOutput = [
 ];
 
 export const welcomeCommandOutput = [
+  "--------------------------------",
   "Welcome on my terminal portfolio.",
+  "--------------------------------",
   "Type 'help' to see available commands.",
 ];
