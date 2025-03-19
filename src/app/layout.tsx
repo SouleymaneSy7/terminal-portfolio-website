@@ -6,12 +6,12 @@ import "./globals.css";
 const JetbrainsMono = localFont({
   src: [
     {
-      path: "/public/fonts/jetbrains-mono-regular.woff2",
+      path: "../..//public/fonts/jetbrains-mono-regular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "/public/fonts/jetbrains-mono-semi-bold.woff2",
+      path: "../..//public/fonts/jetbrains-mono-semi-bold.woff2",
       weight: "600",
       style: "normal",
     },
@@ -24,12 +24,12 @@ const JetbrainsMono = localFont({
 const CascadiaCode = localFont({
   src: [
     {
-      path: "/public/fonts/cascadia-code-regular.woff2",
+      path: "../..//public/fonts/cascadia-code-regular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "/public/fonts/cascadia-code-semi-bold.woff2",
+      path: "../..//public/fonts/cascadia-code-semi-bold.woff2",
       weight: "600",
       style: "normal",
     },
@@ -42,12 +42,12 @@ const CascadiaCode = localFont({
 const FiraCode = localFont({
   src: [
     {
-      path: "/public/fonts/fira-code-regular.woff2",
+      path: "../..//public/fonts/fira-code-regular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "/public/fonts/fira-code-semi-bold.woff2",
+      path: "../..//public/fonts/fira-code-semi-bold.woff2",
       weight: "600",
       style: "normal",
     },
