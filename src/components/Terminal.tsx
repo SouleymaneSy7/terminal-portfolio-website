@@ -13,7 +13,9 @@ const Terminal: React.FC = () => {
     {
       command: "welcome",
       output: [
+        "--------------------------------",
         "Welcome on my terminal portfolio.",
+        "--------------------------------",
         "Type 'help' to see available commands.",
       ],
     },
@@ -38,12 +40,17 @@ const Terminal: React.FC = () => {
     <div ref={outputRef}>
       <div>
         {history.map((item: CommandHistory, index: number) => (
-          <div key={index}>
-            <span style={{ color: "green" }}>
-              guest@souleymane-sy-portfolio
+          <div key={index} className="opacity-90">
+            <p className="font-semibold text-[var(--secondary-clr)] inline-block">
+              <span className="text-[var(--primary-clr)]">guest</span>@
+              <span className="text-[var(--tertiary-clr)]">
+                souleymane-sy-portfolio
+              </span>
+            </p>
+            <span className="font-semibold text-[var(--secondary-clr)]">
+              :~$
             </span>
-            <span style={{ color: "white" }}>:~$</span>
-            <span style={{ color: "white" }}> {item.command}</span>
+            <span className="text-[var(--secondary-clr)]"> {item.command}</span>
             <br />
             <CommandOutput outputLines={item.output} />
           </div>
