@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Terminal Portfolio Website 🖥️
 
-## Getting Started
+> ⚠️ **Note**: This project is currently under active development and construction. Features and documentation may change frequently.
 
-First, run the development server:
+## Overview
+
+A portfolio website designed to mimic a terminal interface, providing a distinctive and interactive way to showcase my work and skills.
+
+## 🌟 Features
+
+- Terminal-like interface
+- Interactive command system
+- Custom commands and easter eggs
+
+## 🛠️ Technologies Used
+
+- Next.js
+- Typescript
+- TailwindCSS v4
+- Bun
+
+## 🚀 Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+# Clone the repository
+git clone https://github.com/souleymanesy7/terminal-portfolio-website.git
+
+# Navigate to project directory
+cd terminal-portfolio-website
+
+# Install dependencies (if any)
+bun install
+
+# Start the development server
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎯 Usage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Type `help` in the terminal interface to see available commands. Here are some basic commands:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `about` - Learn more about me
+- `projects` - View my projects.
+- `date` - Display current date and time in various formats
+- `whoami` - Display current user information
+- `sudo` - Try to gain administrative privileges (with a surprise!)
+- `welcome` - Show the welcome message and available commands
+- `exit` - Close the terminal session
 
-## Learn More
+## 🔄 Current Development Status
 
-To learn more about Next.js, take a look at the following resources:
+- [x] Basic terminal interface
+- [x] Core command functionality
+- [ ] Command history navigation
+- [ ] Basic animations and transitions
+- [ ] Complete project showcase
+- [ ] Advanced features and animations
+- [ ] Command auto-completion
+- [ ] Easter eggs and hidden features
+- [ ] Persistent storage for settings
+- [ ] Multiple themes support
+- [ ] Mobile responsiveness
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎨 Design Inspiration
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project draws inspiration from these amazing developers and their work:
 
-## Deploy on Vercel
+- [M4tt72's Terminal](https://term.m4tt72.com/) - Clean terminal design and functionality.
+- [Forrest's Portfolio](https://fkcodes.com/) - Creative terminal-based portfolio implementation.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 👤 Author & Contact
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [GitHub](https://github.com/SouleymaneSy7) - Check out my Github & projects.
+- [Frontend Mentor](https://www.frontendmentor.io/profile/SouleymaneSy7) - See my frontend challenges.
+- [Dev Challenges](https://devchallenges.io/profile/534cd213-3165-4c16-bdcf-058e1f468da0) - View my coding solutions.
+- [Twitter](https://twitter.com/Souleymanesy43) - Follow me for updates.
+
+Connect with me to discuss web development, collaboration opportunities, or just to say hi! 👋
+
+---
+
+⚡️ **Note**: This README will be updated as the project evolves.
