@@ -28,7 +28,7 @@ git clone https://github.com/souleymanesy7/terminal-portfolio-website.git
 # Navigate to project directory
 cd terminal-portfolio-website
 
-# Install dependencies (if any)
+# Install dependencies
 bun install
 
 # Start the development server
@@ -61,7 +61,7 @@ Type `help` in the terminal interface to see available commands. Here are some b
 - [ ] Multiple themes support
 - [ ] Mobile responsiveness
 
-## 🎨 Design Inspiration
+## 🎨 Design & Functionality Inspiration
 
 This project draws inspiration from these amazing developers and their work:
 
