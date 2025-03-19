@@ -36,7 +36,7 @@
 }
 
 *::-webkit-scrollbar-thumb {
-  background: var(--primary-clr);
+  background: var(--tertiary-clr);
   border-radius: 0.9375rem;
 }
 
@@ -45,7 +45,7 @@ body {
   color: var(--text-clr);
   font-family: var(--font-fira-code);
   font-size: var(--body-font-size);
-  font-weight: var(--fw-regular);
+  font-weight: var(--fw-semi-bold);
   line-height: 1.5;
 }
 
