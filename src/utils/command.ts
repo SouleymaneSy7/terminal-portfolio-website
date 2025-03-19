@@ -6,13 +6,17 @@ export const executeCommand = async (command: string): Promise<string[]> => {
       return [
         "Here are all the available commands :",
         "",
-        "about   - About me.",
-        "date    - Show the date",
-        "help    - Show command list",
-        "projects  - Show projects list",
-        "theme     - Change the themes",
-        "neofetch  - Show User Personal informations",
-        "sudo      - An Easter eggs for the Admin",
+        "about     - About me.",
+        "date      - Show the current date.",
+        "exit      - Close the windows.",
+        "hostname  - Display the host name.",
+        "help      - Show available command list",
+        "projects  - Show projects list.",
+        "theme     - Change the themes.",
+        "neofetch  - Show User Personal informations.",
+        "sudo      - An Easter eggs for the Admin.",
+        "whoami    - Display the guest name.",
+        "welcome   - Display the welcome banner.",
       ];
 
     case "about":
@@ -20,6 +24,15 @@ export const executeCommand = async (command: string): Promise<string[]> => {
 
     case "date":
       return ["Current Date"];
+
+    case "hostname":
+      return ["souleymane-sy-portfolio"];
+
+    case "whoami":
+      return ["guest"];
+
+    case "exit":
+      return ["Please close the tab to exit."];
 
     case "projects":
       return ["List of Projects"];
@@ -41,7 +54,7 @@ export const executeCommand = async (command: string): Promise<string[]> => {
 
     default:
       return [
-        `command not found: (${cmd}).`,
+        `"${cmd}" : command not found.`,
         "Type 'help' to see the list of available commands.",
       ];
   }
