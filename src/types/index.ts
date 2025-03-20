@@ -15,6 +15,8 @@ export interface ProjectTypes {
 
 export interface CommandInputPropsType {
   onCommandType: (command: string) => void;
+  input: string;
+  setInput: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export interface CommandOutputPropsType {
