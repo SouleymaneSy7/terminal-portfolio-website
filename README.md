@@ -51,6 +51,7 @@ Type `help` in the terminal interface to see available commands. Here are some b
 
 - [x] Basic terminal interface
 - [x] Core command functionality
+- [x] Mobile responsiveness
 - [ ] Command history navigation
 - [ ] Basic animations and transitions
 - [ ] Complete project showcase
@@ -59,7 +60,6 @@ Type `help` in the terminal interface to see available commands. Here are some b
 - [ ] Easter eggs and hidden features
 - [ ] Persistent storage for settings
 - [ ] Multiple themes support
-- [ ] Mobile responsiveness
 
 ## 🎨 Design & Functionality Inspiration
 
