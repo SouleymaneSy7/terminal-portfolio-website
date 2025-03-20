@@ -6,11 +6,7 @@ import CommandInput from "./CommandInput";
 import CommandOutput from "./CommandOutput";
 
 import { executeCommand } from "@/utils/command";
-import { CommandHistory, CommandHistoryTypes } from "@/types";
-
-type TerminalPropsTypes = {
-  containerRef: React.RefObject<HTMLDivElement | null>;
-};
+import { CommandHistory, CommandHistoryTypes, TerminalPropsTypes } from "@/types";
 
 const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
   const [input, setInput] = React.useState("");
