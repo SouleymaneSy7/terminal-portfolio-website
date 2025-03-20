@@ -4,7 +4,7 @@ import * as React from "react";
 import Terminal from "@/components/Terminal";
 
 export default function Home() {
-  const containerRef = React.useRef(null);
+  const containerRef = React.useRef<HTMLDivElement | null>(null);
 
   return (
     <main className="w-full h-screen overflow-hidden p-4 lg:p-5">
