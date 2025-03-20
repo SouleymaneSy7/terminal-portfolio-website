@@ -3,8 +3,8 @@
 import * as React from "react";
 import { CommandInputPropsType } from "@/types";
 
-const CommandInput: React.FC<CommandInputPropsType> = ({ onCommandType }) => {
-  const [input, setInput] = React.useState("");
+const CommandInput: React.FC<CommandInputPropsType> = ({ onCommandType, input, setInput }) => {
+
   const commandInputRef = React.useRef<HTMLInputElement>(null);
 
   // Focus when terminal is mount
