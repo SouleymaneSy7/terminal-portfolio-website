@@ -35,11 +35,9 @@ const Terminal: React.FC = () => {
   ]);
 
   React.useEffect(() => {
-    setTimeout(() => {
-      if (outputRef.current) {
-        outputRef.current.scrollTop = outputRef.current.scrollHeight;
-      }
-    }, 50);
+    if (outputRef.current) {
+      outputRef.current.scrollTo(0, outputRef.current.scrollHeight);
+    }
   }, [history]);
 
   const handleCommand = async (command: string) => {
