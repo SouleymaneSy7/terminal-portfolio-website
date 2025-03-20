@@ -19,6 +19,9 @@ export const executeCommand = async (command: string): Promise<string[]> => {
     case "help":
       return helpCommandOutput;
 
+    case "clear":
+      return [];
+
     case "about":
       return aboutMeCommandOutput;
 
@@ -44,10 +47,10 @@ export const executeCommand = async (command: string): Promise<string[]> => {
       return neofetchCommandOutput;
 
     case "sudo":
-      return sudoCommandOutput
+      return sudoCommandOutput;
 
     case "welcome":
-      return welcomeCommandOutput
+      return welcomeCommandOutput;
 
     default:
       return [
