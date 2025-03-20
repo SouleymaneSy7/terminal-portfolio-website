@@ -8,9 +8,11 @@ import CommandOutput from "./CommandOutput";
 import { executeCommand } from "@/utils/command";
 import { CommandHistory, CommandHistoryTypes } from "@/types";
 
-const Terminal: React.FC = () => {
-  const outputRef = React.useRef<HTMLDivElement>(null);
+interface TerminalPropsTypes {
+  containerRef: null | React.RefObject<HTMLDivElement>;
+}
 
+const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
   const [input, setInput] = React.useState("");
   const [history, setHistory] = React.useState<CommandHistoryTypes>([
     {
@@ -35,8 +37,8 @@ const Terminal: React.FC = () => {
   ]);
 
   React.useEffect(() => {
-    if (outputRef.current) {
-      outputRef.current.scrollTo(0, outputRef.current.scrollHeight);
+    if (containerRef && containerRef.current) {
+      containerRef.current.scrollTo(0, containerRef.current.scrollHeight);
     }
   }, [history]);
 
@@ -51,7 +53,7 @@ const Terminal: React.FC = () => {
   };
 
   return (
-    <div ref={outputRef}>
+    <div>
       <div>
         {history.map((item: CommandHistory, index: number) => (
           <div key={index} className="opacity-90 whitespace-pre">
