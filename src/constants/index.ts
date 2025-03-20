@@ -1,5 +1,7 @@
+import { getDate, getTime } from "@/utils/date";
+
 export const helpCommandOutput = [
-  "Available commands:",
+  "Here are all the available commands:",
   "   ",
   "about       - Learn more about me and my background.",
   "clear       - Clear the terminal screen.",
@@ -11,13 +13,16 @@ export const helpCommandOutput = [
   "projects    - Browse my projects.",
   "sudo        - Try to gain admin privileges (Easter egg).",
   "theme       - Change the terminal color theme.",
+  "time        - Display current time.",
   "welcome     - Display the welcome message and banner.",
   "whoami      - Show current user identity.",
 ];
 
 export const aboutMeCommandOutput = ["About Me..."];
 
-export const dateCommandOutput = [new Date().toString()];
+export const dateCommandOutput = [getDate()];
+
+export const timeCommandOutput = [getTime()];
 
 export const hostNameCommandOutput = ["souleymane-sy-portfolio"];
 
