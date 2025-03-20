@@ -9,6 +9,7 @@ import { executeCommand } from "@/utils/command";
 import { CommandHistory, CommandHistoryTypes } from "@/types";
 
 const Terminal: React.FC = () => {
+  const [input, setInput] = React.useState("");
   const [history, setHistory] = React.useState<CommandHistoryTypes>([
     {
       command: "welcome",
@@ -40,12 +41,16 @@ const Terminal: React.FC = () => {
   const handleCommand = async (command: string) => {
     const output = await executeCommand(command);
 
-    setHistory((prevState) => [...prevState, { command, output }]);
+    if (input.trim().toLowerCase() === "clear") {
+      setHistory([]);
+    } else {
+      setHistory((prevState) => [...prevState, { command, output }]);
+    }
   };
 
   return (
-    <div ref={outputRef}>
-      <div>
+    <div>
+      <div ref={outputRef}>
         {history.map((item: CommandHistory, index: number) => (
           <div key={index} className="opacity-90 whitespace-pre">
             <p className="text-[var(--secondary-clr)] inline-block">
@@ -62,7 +67,11 @@ const Terminal: React.FC = () => {
         ))}
       </div>
 
-      <CommandInput onCommandType={handleCommand} />
+      <CommandInput
+        onCommandType={handleCommand}
+        input={input}
+        setInput={setInput}
+      />
     </div>
   );
 };
