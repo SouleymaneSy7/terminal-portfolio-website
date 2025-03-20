@@ -9,33 +9,37 @@ import { executeCommand } from "@/utils/command";
 import { CommandHistory, CommandHistoryTypes } from "@/types";
 
 const Terminal: React.FC = () => {
+  const outputRef = React.useRef<HTMLDivElement>(null);
+
   const [input, setInput] = React.useState("");
   const [history, setHistory] = React.useState<CommandHistoryTypes>([
     {
       command: "welcome",
       output: [
+        " ",
         `
-███████  ██████  ██    ██ ██      ███████ ██    ██ ███    ███  █████  ███    ██ ███████     ███████ ██    ██
-██      ██    ██ ██    ██ ██      ██       ██  ██  ████  ████ ██   ██ ████   ██ ██          ██       ██  ██
-███████ ██    ██ ██    ██ ██      █████     ████   ██ ████ ██ ███████ ██ ██  ██ █████       ███████   ████
-     ██ ██    ██ ██    ██ ██      ██         ██    ██  ██  ██ ██   ██ ██  ██ ██ ██               ██    ██
-███████  ██████   ██████  ███████ ███████    ██    ██      ██ ██   ██ ██   ████ ███████     ███████    ██    
+███████╗ ██████╗ ██╗   ██╗██╗     ███████╗██╗   ██╗███╗   ███╗ █████╗ ███╗   ██╗███████╗    ███████╗██╗   ██╗
+██╔════╝██╔═══██╗██║   ██║██║     ██╔════╝╚██╗ ██╔╝████╗ ████║██╔══██╗████╗  ██║██╔════╝    ██╔════╝╚██╗ ██╔╝
+███████╗██║   ██║██║   ██║██║     █████╗   ╚████╔╝ ██╔████╔██║███████║██╔██╗ ██║█████╗      ███████╗ ╚████╔╝ 
+╚════██║██║   ██║██║   ██║██║     ██╔══╝    ╚██╔╝  ██║╚██╔╝██║██╔══██║██║╚██╗██║██╔══╝      ╚════██║  ╚██╔╝  
+███████║╚██████╔╝╚██████╔╝███████╗███████╗   ██║   ██║ ╚═╝ ██║██║  ██║██║ ╚████║███████╗    ███████║   ██║   
+╚══════╝ ╚═════╝  ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝    ╚══════╝   ╚═╝  
         `.trim(),
+        " ",
         "--------------------------------",
         "Welcome on my terminal portfolio.",
-        "--------------------------------",
+        "-------------------------------------",
         "Type 'help' to see available commands.",
       ],
     },
   ]);
 
-  // Ref
-  const outputRef = React.useRef<HTMLDivElement>(null);
-
   React.useEffect(() => {
-    if (outputRef.current) {
-      outputRef.current.scrollTop = outputRef.current.scrollHeight;
-    }
+    setTimeout(() => {
+      if (outputRef.current) {
+        outputRef.current.scrollTop = outputRef.current.scrollHeight;
+      }
+    }, 50);
   }, [history]);
 
   const handleCommand = async (command: string) => {
@@ -49,8 +53,8 @@ const Terminal: React.FC = () => {
   };
 
   return (
-    <div>
-      <div ref={outputRef}>
+    <div ref={outputRef}>
+      <div>
         {history.map((item: CommandHistory, index: number) => (
           <div key={index} className="opacity-90 whitespace-pre">
             <p className="text-[var(--secondary-clr)] inline-block">
