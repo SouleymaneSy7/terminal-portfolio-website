@@ -8,6 +8,7 @@ import {
   projectsCommandOutput,
   sudoCommandOutput,
   themeCommandOutput,
+  timeCommandOutput,
   welcomeCommandOutput,
   whoAmICommandOutput,
 } from "@/constants";
@@ -27,6 +28,9 @@ export const executeCommand = async (command: string): Promise<string[]> => {
 
     case "date":
       return dateCommandOutput;
+
+    case "time":
+      return timeCommandOutput
 
     case "hostname":
       return hostNameCommandOutput;
