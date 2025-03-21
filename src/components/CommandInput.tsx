@@ -3,8 +3,11 @@
 import * as React from "react";
 import { CommandInputPropsType } from "@/types";
 
-const CommandInput: React.FC<CommandInputPropsType> = ({ onCommandType, input, setInput }) => {
-
+const CommandInput: React.FC<CommandInputPropsType> = ({
+  onCommandType,
+  input,
+  setInput,
+}) => {
   const commandInputRef = React.useRef<HTMLInputElement>(null);
 
   // Focus when terminal is mount
@@ -42,23 +45,21 @@ const CommandInput: React.FC<CommandInputPropsType> = ({ onCommandType, input, s
   return (
     <div className="flex items-baseline gap-2 flex-wrap">
       <div>
-        <p className="text-[var(--secondary-clr)] inline-block">
-          <span className="text-[var(--primary-clr)]">guest</span>@
-          <span className="text-[var(--tertiary-clr)]">
-            souleymane-sy-portfolio
-          </span>
+        <p className="text-secondary-clr inline-block">
+          <span className="text-primary-clr">guest</span>@
+          <span className="text-tertiary-clr">souleymane-sy-portfolio</span>
         </p>
-        <span className="text-[var(--secondary-clr)]">:~$</span>
+        <span className="text-secondary-clr">:~$</span>
       </div>
 
       <form onSubmit={handleCommandSubmit} className="flex-grow">
         <input
-          ref={commandInputRef}
+          autoFocus
           type="text"
           value={input}
+          ref={commandInputRef}
           onChange={handleChange}
-          autoFocus
-          className="w-full h-full outline-none border-none text-[var(--secondary-clr)] font-semibold"
+          className="w-full h-full outline-none border-none text-secondary-clr font-semi-bold"
         />
       </form>
     </div>

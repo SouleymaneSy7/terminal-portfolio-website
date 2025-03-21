@@ -51,15 +51,15 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
     <div>
       <div>
         {history.map((item: CommandHistory, index: number) => (
-          <div key={index} className="opacity-90 whitespace-pre">
-            <p className="text-[var(--secondary-clr)] inline-block">
-              <span className="text-[var(--primary-clr)]">guest</span>@
-              <span className="text-[var(--tertiary-clr)]">
+          <div key={index} className="opacity-85 whitespace-pre">
+            <p className="text-secondary-clr inline-block">
+              <span className="text-primary-clr">guest</span>@
+              <span className="text-tertiary-clr">
                 souleymane-sy-portfolio
               </span>
             </p>
-            <span className="text-[var(--secondary-clr)]">:~$</span>
-            <span className="text-[var(--secondary-clr)]"> {item.command}</span>
+            <span className="text-secondary-clr">:~$</span>
+            <span className="text-secondary-clr"> {item.command}</span>
             <br />
             <CommandOutput
               outputLines={item.output}
