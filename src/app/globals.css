@@ -40,15 +40,30 @@
   border-radius: 0.9375rem;
 }
 
-body {
-  background: var(--background-clr);
-  color: var(--text-clr);
-  font-family: var(--font-fira-code);
-  font-size: var(--body-font-size);
-  font-weight: var(--fw-semi-bold);
-  line-height: 1.5;
+@theme {
+  --color-background-clr: var(--background-clr);
+  --color-foreground-clr: var(--foreground-clr);
+  --color-text-clr: var(--text-clr);
+  --color-primary-clr: var(--primary-clr);
+  --color-secondary-clr: var(--secondary-clr);
+  --color-tertiary-clr: var(--tertiary-clr);
+
+  --font-weight-regular: var(--fw-regular);
+  --font-weight-medium: var(--fw-medium);
+  --font-weight-semi-bold: var(--fw-semi-bold);
+  --font-weight-bold: var(--fw-bold);
+
+  --font-fira-code: var(--font-fira-code);
+  --text-fs-body: var(--body-font-size);
+  --leading-base: 1.5;
 }
 
-.terminal-container * + * {
-  margin-block-start: 0.25rem;
+body {
+  @apply bg-background-clr text-text-clr font-fira-code text-fs-body font-semi-bold leading-base;
+}
+
+@layer utilities {
+  .terminal-container * + * {
+    margin-block-start: 0.25rem;
+  }
 }
