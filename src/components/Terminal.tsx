@@ -6,10 +6,15 @@ import CommandInput from "./CommandInput";
 import CommandOutput from "./CommandOutput";
 
 import { executeCommand } from "@/utils/command";
-import { CommandHistory, CommandHistoryTypes, TerminalPropsTypes } from "@/types";
+import {
+  CommandHistory,
+  CommandHistoryTypes,
+  TerminalPropsTypes,
+} from "@/types";
 
 const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
   const [input, setInput] = React.useState("");
+  const [animationIsComplete, setAnimationIsComplete] = React.useState(false);
   const [history, setHistory] = React.useState<CommandHistoryTypes>([
     {
       command: "welcome",
@@ -31,12 +36,6 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
       ],
     },
   ]);
-
-  React.useEffect(() => {
-    if (containerRef && containerRef.current) {
-      containerRef.current.scrollTo(0, containerRef.current.scrollHeight);
-    }
-  }, [history]);
 
   const handleCommand = async (command: string) => {
     const output = await executeCommand(command);
@@ -62,16 +61,22 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
             <span className="text-[var(--secondary-clr)]">:~$</span>
             <span className="text-[var(--secondary-clr)]"> {item.command}</span>
             <br />
-            <CommandOutput outputLines={item.output} />
+            <CommandOutput
+              outputLines={item.output}
+              setAnimationIsComplete={setAnimationIsComplete}
+              containerRef={containerRef}
+            />
           </div>
         ))}
       </div>
 
-      <CommandInput
-        onCommandType={handleCommand}
-        input={input}
-        setInput={setInput}
-      />
+      {animationIsComplete && (
+        <CommandInput
+          onCommandType={handleCommand}
+          input={input}
+          setInput={setInput}
+        />
+      )}
     </div>
   );
 };
