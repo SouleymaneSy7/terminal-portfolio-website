@@ -1,3 +1,5 @@
+import * as React from "react";
+
 export type CommandHistory = {
   command: string;
   output: string[];
@@ -25,4 +27,7 @@ export type CommandInputPropsType = {
 
 export type CommandOutputPropsType = {
   outputLines: string[];
+  speed?: number;
+  setAnimationIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  containerRef: React.RefObject<HTMLDivElement | null>;
 };
