@@ -40,23 +40,30 @@ bun dev
 Type `help` in the terminal interface to see available commands. Here are some basic commands:
 
 - `about` - Learn more about me
-- `projects` - View my projects.
-- `date` - Display current date and time in various formats
-- `whoami` - Display current user information
-- `sudo` - Try to gain administrative privileges (with a surprise!)
-- `welcome` - Show the welcome message and available commands
-- `exit` - Close the terminal session
+- `clear` - Clear the terminal screen
+- `date` - Display current date
+- `exit` - Close terminal session
+- `help` - Show available commands
+- `hostname` - Display system hostname
+- `neofetch` - Display system info
+- `projects` - View my portfolio projects
+- `sudo` - Try to gain admin access
+- `theme` - Change terminal theme
+- `time` - Show current time
+- `welcome` - Show welcome message
+- `whoami` - Show current user info
 
 ## 🔄 Current Development Status
 
 - [x] Basic terminal interface
 - [x] Core command functionality
 - [x] Mobile responsiveness
+- [x] Basic animations and transitions
+- [x] Custom typing animations and effects
 - [ ] Command history navigation
-- [ ] Basic animations and transitions
 - [ ] Complete project showcase
-- [ ] Advanced features and animations
 - [ ] Command auto-completion
+- [ ] Advanced features and animations
 - [ ] Easter eggs and hidden features
 - [ ] Persistent storage for settings
 - [ ] Multiple themes support
@@ -79,4 +86,4 @@ Connect with me to discuss web development, collaboration opportunities, or just
 
 ---
 
-⚡️ **Note**: This README will be updated as the project evolves.
+> ⚡️ **Note**: This README will be updated as the project evolves.
