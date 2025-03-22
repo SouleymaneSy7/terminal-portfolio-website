@@ -5,12 +5,13 @@ import * as React from "react";
 import CommandInput from "./CommandInput";
 import CommandOutput from "./CommandOutput";
 
-import { executeCommand } from "@/utils/command";
 import {
   CommandHistory,
   CommandHistoryTypes,
   TerminalPropsTypes,
 } from "@/types";
+import { executeCommand } from "@/utils/command";
+import { welcomeCommandOutput } from "@/constants";
 
 const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
   const [input, setInput] = React.useState("");
@@ -18,22 +19,7 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
   const [history, setHistory] = React.useState<CommandHistoryTypes>([
     {
       command: "welcome",
-      output: [
-        " ",
-        `
-░██████╗░█████╗░██╗░░░██╗██╗░░░░░███████╗██╗░░░██╗███╗░░░███╗░█████╗░███╗░░██╗███████╗  ░██████╗██╗░░░██╗
-██╔════╝██╔══██╗██║░░░██║██║░░░░░██╔════╝╚██╗░██╔╝████╗░████║██╔══██╗████╗░██║██╔════╝  ██╔════╝╚██╗░██╔╝
-╚█████╗░██║░░██║██║░░░██║██║░░░░░█████╗░░░╚████╔╝░██╔████╔██║███████║██╔██╗██║█████╗░░  ╚█████╗░░╚████╔╝░
-░╚═══██╗██║░░██║██║░░░██║██║░░░░░██╔══╝░░░░╚██╔╝░░██║╚██╔╝██║██╔══██║██║╚████║██╔══╝░░  ░╚═══██╗░░╚██╔╝░░
-██████╔╝╚█████╔╝╚██████╔╝███████╗███████╗░░░██║░░░██║░╚═╝░██║██║░░██║██║░╚███║███████╗  ██████╔╝░░░██║░░░
-╚═════╝░░╚════╝░░╚═════╝░╚══════╝╚══════╝░░░╚═╝░░░╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚══╝╚══════╝  ╚═════╝░░░░╚═╝░░░
-        `.trim(),
-        " ",
-        "--------------------------------",
-        "Welcome on my terminal portfolio.",
-        "-------------------------------------",
-        "Type 'help' to see available commands.",
-      ],
+      output: welcomeCommandOutput,
     },
   ]);
 
@@ -54,9 +40,7 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
           <div key={index} className="opacity-85 whitespace-pre">
             <p className="text-secondary-clr inline-block">
               <span className="text-primary-clr">guest</span>@
-              <span className="text-tertiary-clr">
-                souleymane-sy-portfolio
-              </span>
+              <span className="text-tertiary-clr">souleymane-sy-portfolio</span>
             </p>
             <span className="text-secondary-clr">:~$</span>
             <span className="text-secondary-clr"> {item.command}</span>
@@ -70,13 +54,13 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
         ))}
       </div>
 
-      {animationIsComplete && (
+      {animationIsComplete === true ? (
         <CommandInput
           onCommandType={handleCommand}
           input={input}
           setInput={setInput}
         />
-      )}
+      ) : null}
     </div>
   );
 };
