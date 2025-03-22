@@ -23,16 +23,22 @@
 
 * {
   scroll-behavior: smooth;
-  scroll-padding-top: 3.75rem;
+  scroll-padding: 3.75rem;
+  scroll-margin: 1rem;
 }
 
 *::-webkit-scrollbar {
-  width: 0.375rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  scroll-margin: 1rem;
+}
+
+*::-webkit-scrollbar-corner {
+  background: var(--foreground-clr);
 }
 
 *::-webkit-scrollbar-track {
-  background: transparent;
-  margin: 0.5rem;
+  background: var(--foreground-clr);
 }
 
 *::-webkit-scrollbar-thumb {
