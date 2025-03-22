@@ -11,7 +11,7 @@ const ASCII_NAME = `
 
 export const helpCommandOutput = [
   "Here are all the available commands:",
-  "   ",
+  " ",
   "about       - Learn more about me and my background.",
   "clear       - Clear the terminal screen.",
   "date        - Display current date.",
@@ -27,7 +27,28 @@ export const helpCommandOutput = [
   "whoami      - Show current user identity.",
 ];
 
-export const aboutMeCommandOutput = ["About Me..."];
+export const aboutMeCommandOutput = [
+  "👋 Hey There, I'm Souleymane Sy!",
+  " ",
+  "I'm a passionate self-taught web developer with over three years of experience in crafting digital solutions.",
+  "My journey into web development began with curiosity and has evolved into a deep commitment to creating",
+  "exceptional web experiences.",
+  " ",
+  "Throughout my self-learning journey, I've developed expertise in a wide range of technologies including",
+  "HTML, CSS, JavaScript, TypeScript, React, Vue.js, Next.js, Sass, and TailwindCSS.",
+  "Each of these tools has become an integral part of my development arsenal,",
+  "allowing me to build robust and scalable applications.",
+  " ",
+  "What truly excites me about web development is the perfect blend of creativity and technical problem-solving.",
+  "I believe in writing clean, maintainable code that not only works efficiently but is also easily understood by others.",
+  " ",
+  "Every project I undertake is an opportunity to push boundaries and implement innovative solutions.",
+  "I'm constantly learning and staying updated with the latest web technologies and best practices",
+  "to deliver the best possible results.",
+  " ",
+  "I'm always eager to take on new challenges and contribute to meaningful projects",
+  "that make a difference in the digital world.",
+];
 
 export const dateCommandOutput = [getDate()];
 
@@ -61,5 +82,4 @@ export const welcomeCommandOutput = [
   "Welcome on my terminal portfolio.",
   "-------------------------------------",
   "Type 'help' to see available commands.",
-  " ",
 ];
