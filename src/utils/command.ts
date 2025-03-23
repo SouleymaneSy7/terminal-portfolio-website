@@ -12,8 +12,11 @@ import {
   welcomeCommandOutput,
   whoAmICommandOutput,
 } from "@/constants";
+import { CommandHistoryOutput } from "@/types";
 
-export const executeCommand = async (command: string): Promise<string[]> => {
+export const executeCommand = async (
+  command: string
+): Promise<CommandHistoryOutput> => {
   const [cmd] = command.toLowerCase().split(" ");
 
   switch (cmd) {
@@ -30,7 +33,7 @@ export const executeCommand = async (command: string): Promise<string[]> => {
       return dateCommandOutput;
 
     case "time":
-      return timeCommandOutput
+      return timeCommandOutput;
 
     case "hostname":
       return hostNameCommandOutput;
@@ -58,8 +61,14 @@ export const executeCommand = async (command: string): Promise<string[]> => {
 
     default:
       return [
-        `"${cmd}" : command not found.`,
-        "Type 'help' to see the list of available commands.",
+        {
+          id: crypto.randomUUID(),
+          type: "text",
+          content: [
+            `"${cmd}" : command not found.`,
+            "Type 'help' to see the list of available commands.",
+          ],
+        },
       ];
   }
 };
