@@ -1,6 +1,5 @@
 import * as React from "react";
 
-
 export type CommandHistoryOutput = {
   id: string;
   type: "text" | "link" | "html";
@@ -33,11 +32,8 @@ export type CommandInputPropsType = {
 };
 
 export type CommandOutputPropsType = {
-  outputLines: {
-    id: string;
-    type: "text" | "link" | "html";
-    content: string[];
-  }[];
+  outputLines: string[];
+  outputTypes: "text" | "link" | "html";
   speed?: number;
   setAnimationIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
   containerRef: React.RefObject<HTMLDivElement | null>;
