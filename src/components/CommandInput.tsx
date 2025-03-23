@@ -10,7 +10,6 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
 }) => {
   const commandInputRef = React.useRef<HTMLInputElement>(null);
 
-  // Focus when terminal is mount
   React.useEffect(() => {
     focusTerminalInput();
   }, []);
@@ -21,7 +20,6 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
     }
   };
 
-  // Focus when terminal is clicked
   React.useEffect(() => {
     document.addEventListener("click", focusTerminalInput);
     return () => {
@@ -29,7 +27,6 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
     };
   }, [commandInputRef]);
 
-  // Handle Input Change
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInput(event.target.value);
   };
@@ -57,6 +54,7 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
           <input
             id="command-input"
             autoFocus
+            autoComplete="off"
             type="text"
             value={input}
             ref={commandInputRef}
