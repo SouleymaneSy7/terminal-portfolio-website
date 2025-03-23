@@ -1,6 +1,9 @@
 "use client";
 
 import * as React from "react";
+
+import DOMPurify from "dompurify";
+
 import { CommandOutputPropsType } from "@/types";
 
 const CommandOutput: React.FC<CommandOutputPropsType> = ({
@@ -71,11 +74,15 @@ const CommandOutput: React.FC<CommandOutputPropsType> = ({
     return (
       <React.Fragment>
         {displayText.map((text, index) => {
+          const cleanText = DOMPurify.sanitize(text, {
+            USE_PROFILES: { html: true },
+          });
+
           return (
             <div
               key={index}
               className="terminal-ouput"
-              dangerouslySetInnerHTML={{ __html: text }}
+              dangerouslySetInnerHTML={{ __html: cleanText }}
             />
           );
         })}
