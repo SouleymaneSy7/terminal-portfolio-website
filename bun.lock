@@ -4,6 +4,7 @@
     "": {
       "name": "terminal-portfolio-website",
       "dependencies": {
+        "detect.js": "^2.2.3",
         "dompurify": "^3.2.4",
         "next": "15.2.3",
         "react": "^19.0.0",
@@ -309,6 +310,8 @@
     "define-properties": ["define-properties@1.2.1", "", { "dependencies": { "define-data-property": "^1.0.1", "has-property-descriptors": "^1.0.0", "object-keys": "^1.1.1" } }, "sha512-8QmQKqEASLd5nx0U1B1okLElbUuuttJ/AnYmRXbbbGDWh6uS208EjD4Xqq/I9wK7u0v6O08XhTWnt5XtEbR6Dg=="],
 
     "detect-libc": ["detect-libc@2.0.3", "", {}, "sha512-bwy0MGW55bG41VqxxypOsdSdGqLwXPI/focwgTYCFMbdUiBAxLg9CFzG08sz2aqzknwiX7Hkl0bQENjg8iLByw=="],
+
+    "detect.js": ["detect.js@2.2.3", "", {}, "sha512-awS0dy7wPpzoF20kZPjg2yI1RONXXdq/hbA2CJ8BMsO2I1CSm4NdlVEI1YaRh20Xyxoaki/V4aV+mVAldT9aQA=="],
 
     "doctrine": ["doctrine@2.1.0", "", { "dependencies": { "esutils": "^2.0.2" } }, "sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw=="],
 
