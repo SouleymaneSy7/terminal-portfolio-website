@@ -53,14 +53,17 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
       </div>
 
       <form onSubmit={handleCommandSubmit} className="flex-grow">
-        <input
-          autoFocus
-          type="text"
-          value={input}
-          ref={commandInputRef}
-          onChange={handleChange}
-          className="w-full h-full outline-none border-none text-secondary-clr font-semi-bold"
-        />
+        <label htmlFor="command-input">
+          <input
+            id="command-input"
+            autoFocus
+            type="text"
+            value={input}
+            ref={commandInputRef}
+            onChange={handleChange}
+            className="w-full h-full outline-none border-none text-secondary-clr font-semi-bold"
+          />
+        </label>
       </form>
     </div>
   );
