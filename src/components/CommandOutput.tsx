@@ -4,18 +4,13 @@ import * as React from "react";
 import { CommandOutputPropsType } from "@/types";
 
 const CommandOutput: React.FC<CommandOutputPropsType> = ({
-  speed = 100,
+  speed,
   outputLines,
+  outputTypes,
   containerRef,
   setAnimationIsComplete,
 }) => {
-  const [displayText, setDisplayText] = React.useState<
-    {
-      id: string;
-      type: "text" | "link" | "html";
-      content: string[];
-    }[]
-  >([]);
+  const [displayText, setDisplayText] = React.useState<string[]>([]);
   const [currentIndex, setCurrrentIndex] = React.useState(0);
   const [isComplete, setIsComplete] = React.useState(false);
 
@@ -37,15 +32,10 @@ const CommandOutput: React.FC<CommandOutputPropsType> = ({
     setAnimationIsComplete(false);
 
     if (currentIndex < outputLines.length) {
-      const currentId = outputLines[currentIndex].id;
-      const currentType = outputLines[currentIndex].type;
-      const currentWord = outputLines[currentIndex].content;
+      const currentWord = outputLines[currentIndex];
 
       const timeout = setTimeout(() => {
-        setDisplayText((prevState) => [
-          ...prevState,
-          { id: currentId, type: currentType, content: currentWord },
-        ]);
+        setDisplayText((prevState) => [...prevState, currentWord]);
         setCurrrentIndex((prevState) => prevState + 1);
       }, speed);
 
@@ -65,37 +55,49 @@ const CommandOutput: React.FC<CommandOutputPropsType> = ({
     setAnimationIsComplete,
   ]);
 
-  return (
-    <div>
-      {displayText.map((item) => {
-        if (item.type === "text") {
+  if (outputTypes === "text") {
+    return (
+      <React.Fragment>
+        {displayText.map((text, index) => {
           return (
-            <div key={item.id} className="terminal-ouput">
-              {item.content.map((text, index) => {
-                return <p key={index}>{text}</p>;
-              })}
+            <div key={index} className="terminal-output">
+              <p key={index}>{text}</p>
             </div>
           );
-        } else if (item.type === "html") {
+        })}
+      </React.Fragment>
+    );
+  } else if (outputTypes === "html") {
+    return (
+      <React.Fragment>
+        {displayText.map((text, index) => {
           return (
             <div
-              key={item.id}
+              key={index}
               className="terminal-ouput"
-              dangerouslySetInnerHTML={{ __html: item.content }}
+              dangerouslySetInnerHTML={{ __html: text }}
             />
           );
-        } else if (item.type === "link") {
+        })}
+      </React.Fragment>
+    );
+  } else if (outputTypes === "link") {
+    return (
+      <React.Fragment>
+        {displayText.map((text, index) => {
           return (
-            <div className="terminal-ouput" key={item.id}>
-              <a href={item.content[0]} target="_blank" rel="noreferrer">
-                {item.content[1]}
+            <div className="terminal-ouput" key={index}>
+              <a href={text[0]} target="_blank" rel="noreferrer">
+                {text[1]}
               </a>
             </div>
           );
-        }
-      })}
-    </div>
-  );
+        })}
+      </React.Fragment>
+    );
+  }
+
+  return null;
 };
 
 export default CommandOutput;

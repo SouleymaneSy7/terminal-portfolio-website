@@ -30,7 +30,7 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
       setHistory([]);
     } else {
       setHistory((prevState) => [
-        ...prevState,   
+        ...prevState,
         {
           command,
           output: commandOutput.map(({ id, type, content }) => ({
@@ -56,9 +56,11 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
             <span className="text-secondary-clr"> {item.command}</span>
             <br />
             <CommandOutput
-              outputLines={item.output}
-              setAnimationIsComplete={setAnimationIsComplete}
+              speed={100}
               containerRef={containerRef}
+              outputTypes={item.output[0].type}
+              outputLines={item.output[0].content}
+              setAnimationIsComplete={setAnimationIsComplete}
             />
           </div>
         ))}
@@ -66,9 +68,9 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
 
       {animationIsComplete === true ? (
         <CommandInput
-          onCommandType={handleCommand}
           input={input}
           setInput={setInput}
+          onCommandType={handleCommand}
         />
       ) : null}
     </div>
