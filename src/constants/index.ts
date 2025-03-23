@@ -81,6 +81,8 @@ export const aboutMeCommandOutput = [
       " ",
       "I'm always eager to take on new challenges and contribute to meaningful projects",
       "that make a difference in the digital world.",
+      " ",
+      "Type 'projects' to see my work!",
     ],
   },
 ];
@@ -120,7 +122,12 @@ export const exitCommandOutput = [
   {
     id: crypto.randomUUID(),
     type: "text" as const,
-    content: ["Please close the tab to exit."],
+    content: [
+      "Goodbye! 👋",
+      "Thank you for visiting my terminal portfolio.",
+      "You can close this tab or window to exit.",
+      "Feel free to come back anytime!",
+    ],
   },
 ];
 
@@ -136,7 +143,7 @@ export const themeCommandOutput = [
   {
     id: crypto.randomUUID(),
     type: "text" as const,
-    content: ["Theme changing feature coming soon..."],
+    content: ["Theme changing (feature coming soon...)"],
   },
 ];
 
@@ -144,7 +151,25 @@ export const neofetchCommandOutput = [
   {
     id: crypto.randomUUID(),
     type: "text" as const,
-    content: ["System information feature coming soon..."],
+    content: [
+      "                    .                       guest@souleymane-sy-portfolio",
+      "                   .:.                      -------------------------------",
+      "                  .:::.                     OS: Browser",
+      "                 .:::::.                    Host: Vercel Platform",
+      "             ***.:::::::.***                Kernel: Latest V8 Engine",
+      "        *******.:::::::::.*******           Shell: NextJS Terminal v1.0",
+      "      ********.:::::::::::.********         DE: Next.js 15.2.3",
+      "     ********.:::::::::::::.********        Theme: Dark Mode (Monokai Pro Theme)",
+      "     *******.::::::'***`::::.*******        ",
+      "     ******.::::'*********`::.******        Technologies:",
+      "      ****.:::'*************`:.****         • Framework: Next.js 15, React 19, ",
+      "        *.::'*****************`.*           • Language: TypeScript",
+      "        .:'  ***************    .           • Styling: TailwindCSS V4",
+      "       .                                    • Package Manager: Bun",
+      "                                            • Version Control: Git",
+      "                                            • Deployment: Vercel",
+      "                                            • Linting: ESLint, Prettier",
+    ],
   },
 ];
 
