@@ -24,12 +24,22 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
   ]);
 
   const handleCommand = async (command: string) => {
-    const output = await executeCommand(command);
+    const commandOutput = await executeCommand(command);
 
     if (input.trim().toLowerCase() === "clear") {
       setHistory([]);
     } else {
-      setHistory((prevState) => [...prevState, { command, output }]);
+      setHistory((prevState) => [
+        ...prevState,   
+        {
+          command,
+          output: commandOutput.map(({ id, type, content }) => ({
+            id: id,
+            type: type as "text" | "link" | "html",
+            content: content,
+          })),
+        },
+      ]);
     }
   };
 
