@@ -41,27 +41,29 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
 
   return (
     <div className="flex items-baseline gap-2 flex-wrap">
-      <div>
-        <p className="text-secondary-clr inline-block">
-          <span className="text-primary-clr">guest</span>@
-          <span className="text-tertiary-clr">souleymane-sy-portfolio</span>
-        </p>
-        <span className="text-secondary-clr">:~$</span>
-      </div>
+      <label htmlFor="command-input">
+        <div>
+          <p className="text-secondary-clr inline-block">
+            <span className="text-primary-clr">guest</span>@
+            <span className="text-tertiary-clr">souleymane-sy-portfolio</span>
+          </p>
+          <span className="text-secondary-clr">:~$</span>
+        </div>
+      </label>
 
       <form onSubmit={handleCommandSubmit} className="flex-grow">
-        <label htmlFor="command-input">
-          <input
-            id="command-input"
-            autoFocus
-            autoComplete="off"
-            type="text"
-            value={input}
-            ref={commandInputRef}
-            onChange={handleChange}
-            className="w-full h-full outline-none border-none text-secondary-clr font-semi-bold"
-          />
-        </label>
+        <input
+          id="command-input"
+          autoFocus
+          autoComplete="off"
+          autoCapitalize="off"
+          autoCorrect="off"
+          type="text"
+          value={input}
+          ref={commandInputRef}
+          onChange={handleChange}
+          className="w-full h-full outline-none border-none text-secondary-clr font-semi-bold"
+        />
       </form>
     </div>
   );
