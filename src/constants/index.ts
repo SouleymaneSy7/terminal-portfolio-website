@@ -1,4 +1,12 @@
 import { getDate, getTime } from "@/utils/date";
+import packageJson from "../../package.json";
+
+const packages = Object.keys(packageJson.dependencies);
+
+const resolutionWidth = global.window && window.screen.availWidth;
+const resolutionHeight = global.window && window.screen.availHeight;
+
+const resolution = `${resolutionWidth}x${resolutionHeight}`;
 
 const ASCII_NAME = `
 ░██████╗░█████╗░██╗░░░██╗██╗░░░░░███████╗██╗░░░██╗███╗░░░███╗░█████╗░███╗░░██╗███████╗  ░██████╗██╗░░░██╗
@@ -41,10 +49,10 @@ export const helpCommandOutput = [
       "exit        - Exit the terminal (close tab).",
       "help        - List all available commands with descriptions.",
       "hostname    - Show the system hostname.",
-      "neofetch    - Display system and user information(Currently working on it...).",
+      "neofetch    - Display system and user information.",
       "projects    - Browse my projects.",
       "sudo        - Try to gain admin privileges (Easter egg).",
-      "theme       - Change the terminal color theme.",
+      "theme       - Change the terminal color theme (Coming soon...).",
       "time        - Display current time.",
       "welcome     - Display the welcome message and banner.",
       "whoami      - Show current user identity.",
@@ -82,7 +90,7 @@ export const aboutMeCommandOutput = [
       "I'm always eager to take on new challenges and contribute to meaningful projects",
       "that make a difference in the digital world.",
       " ",
-      "Type 'projects' to see my work!",
+      "Type 'projects' to explore my work!",
     ],
   },
 ];
@@ -165,12 +173,18 @@ export const neofetchCommandOutput = [
       "        *******.:::::::::.*******           Shell: NextJS Terminal v1.0",
       "      ********.:::::::::::.********         DE: Next.js 15.2.3",
       "     ********.:::::::::::::.********        Theme: Dark Mode (Monokai Pro Theme)",
-      "     *******.::::::'***`::::.*******        ",
-      "     ******.::::'*********`::.******        Technologies:",
-      "      ****.:::'*************`:.****         • Framework: Next.js 15, React 19, ",
-      "        *.::'*****************`.*           • Language: TypeScript",
-      "        .:'  ***************    .           • Styling: TailwindCSS V4",
-      "       .                                    • Package Manager: Bun",
+      "     *******.::::::'***`::::.*******        Resolution: " + resolution,
+      "     ******.::::'*********`::.******        Packages: " +
+        (packages.length + 1) +
+        " (Dependencies)," +
+        (packages.length + 1) +
+        " (Dev Dependencies)",
+      "      ****.:::'*************`:.****         ",
+      "        *.::'*****************`.*           Technologies:",
+      "        .:'  ***************    .           • Framework: Next.js 15, React 19, ",
+      "       .                                    • Language: TypeScript",
+      "                                            • Styling: TailwindCSS V4",
+      "                                            • Package Manager: Bun",
       "                                            • Version Control: Git",
       "                                            • Deployment: Vercel",
       "                                            • Linting: ESLint, Prettier",
