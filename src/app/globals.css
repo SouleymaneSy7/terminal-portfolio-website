@@ -68,6 +68,10 @@ body {
   @apply bg-background-clr text-text-clr font-fira-code text-fs-body font-semi-bold leading-base;
 }
 
+a {
+  @apply text-secondary-clr inline-block underline hover:text-primary-clr transition-colors;
+}
+
 @layer utilities {
   .terminal-container * + * {
     margin-block-start: 0.25rem;
