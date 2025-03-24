@@ -134,8 +134,13 @@ export const exitCommandOutput = [
 export const projectsCommandOutput = [
   {
     id: crypto.randomUUID(),
-    type: "text" as const,
-    content: ["Here are some of my projects:"],
+    type: "html" as const,
+    content: [
+      `<div class="flex items-baseline">
+        <p>Find all of my projects: </p>
+        <a href="https://github.com/souleymanesy7" className="text-primary-clr hover:text-secondary-clr" target="_blank" rel="noreferrer">Here</a>
+      </div>`,
+    ],
   },
 ];
 
@@ -154,7 +159,7 @@ export const neofetchCommandOutput = [
     content: [
       "                    .                       guest@souleymane-sy-portfolio",
       "                   .:.                      -------------------------------",
-      "                  .:::.                     OS: Browser",
+      `                  .:::.                     OS:  Browser`,
       "                 .:::::.                    Host: Vercel Platform",
       "             ***.:::::::.***                Kernel: Latest V8 Engine",
       "        *******.:::::::::.*******           Shell: NextJS Terminal v1.0",
