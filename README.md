@@ -1,5 +1,7 @@
 # Terminal Portfolio Website 🖥️
 
+![Preview](./preview/preview.png)
+
 > ⚠️ **Note**: This project is currently under active development and construction. Features and documentation may change frequently.
 
 ## Overview
@@ -60,10 +62,10 @@ Type `help` in the terminal interface to see available commands. Here are some b
 - [x] Mobile responsiveness
 - [x] Basic animations and transitions
 - [x] Custom typing animations and effects
+- [x] Advanced features and animations
 - [ ] Command history navigation
 - [ ] Complete project showcase
 - [ ] Command auto-completion
-- [ ] Advanced features and animations
 - [ ] Easter eggs and hidden features
 - [ ] Persistent storage for settings
 - [ ] Multiple themes support
