@@ -144,10 +144,80 @@ export const projectsCommandOutput = [
     id: crypto.randomUUID(),
     type: "html" as const,
     content: [
-      `<div class="flex items-baseline">
-        <p>Find all of my projects: </p>
-        <a href="https://github.com/souleymanesy7" className="text-primary-clr hover:text-secondary-clr" target="_blank" rel="noreferrer">Here</a>
-      </div>`,
+      `<div class="space-y-6 whitespace-normal px-2 py-3">
+        <h2 class="text-2xl font-bold text-primary-clr">
+          Conakry Website Challenge
+        </h2>
+
+        <p>
+          This project was created as part of a contest organized by
+          <a
+            href="https://discord.gg/9WryX5zs"
+            class="text-tertiary-clr underline"
+          >
+            Le Repaire du Web
+          </a>
+          (Discord channel run by YouTuber
+          <a
+            href="https://www.youtube.com/@EcoleduWeb"
+            class="text-tertiary-clr underline"
+          >
+            Enzo Ustariz
+          </a>) with the theme of creating a website for a city. I chose to highlight
+          Conakry, the capital of Guinea and my hometown. <br />
+        </p>
+
+        <p>
+          <strong class="text-secondary-clr">Ranking obtained</strong>: 🥉 3rd
+          place among a dozen participants.
+        </p>
+
+        <p>
+          The website is a single-page application (SPA) that provides information
+          about Conakry, including its history, culture, and attractions. It
+          features a responsive design, ensuring a seamless user experience across
+          devices.
+        </p>
+
+        <div>
+          <h3 class=" font-semibold mb-2">Technologies Used:</h3>
+          <div>
+            <span class="text-tertiary-clr">React</span>
+            <span class="text-tertiary-clr">TypeScript</span>
+            <span class="text-tertiary-clr">Sass</span>
+            <span class="text-tertiary-clr">Vite</span>
+          </div>
+        </div>
+
+        <p>
+          The project was developed using React and TypeScript, with a focus on
+          clean code and best practices. I utilized Vite as the build tool for its
+          fast development experience and efficient bundling. The styling was done
+          using Sass, allowing for modular and maintainable CSS. The website is
+          hosted on Vercel, making it easily accessible to users.
+        </p>
+
+        <p>
+          You can view the project live on:
+          <a
+            href="https://conakry-website-challenge-z4t7.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-tertiary-clr underline"
+          >
+            conakry-website-challenge-z4t7.vercel.app
+          </a> <br />
+          And check the source code on:
+          <a
+            href="https://github.com/SouleymaneSy7/conakry-website-challenge"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-tertiary-clr underline"
+          >
+            GitHub
+          </a>
+        </p>
+    </div>`,
     ],
   },
 ];
