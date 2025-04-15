@@ -47,7 +47,7 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
     <div>
       <div>
         {history.map((item: CommandHistory, index: number) => (
-          <div key={index} className="opacity-85 whitespace-pre">
+          <div key={index} className="opacity-85">
             <p className="text-secondary-clr inline-block">
               <span className="text-primary-clr">guest</span>@
               <span className="text-tertiary-clr">souleymane-sy-portfolio</span>
