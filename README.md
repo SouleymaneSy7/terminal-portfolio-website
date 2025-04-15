@@ -6,20 +6,45 @@
 
 ## Overview
 
-A portfolio website designed to mimic a terminal interface, providing a distinctive and interactive way to showcase my work and skills.
+A modern terminal-style portfolio website that offers an immersive command-line experience. Built with Next.js and TypeScript, it provides an interactive way to explore my projects, skills, and background through familiar terminal commands and ASCII-based interfaces.
 
 ## 🌟 Features
 
-- Terminal-like interface
-- Interactive command system
-- Custom commands and easter eggs
+- Real terminal emulation with command processing
+- Interactive command-line interface with custom prompt
+- Responsive design that works on desktop and mobile
+- Command history navigation (up/down arrows)
+- Tab completion for commands and arguments
+- Custom ASCII art and animations
+- Multiple built-in commands and utilities
+- Configurable themes and appearance
+- Easter eggs and hidden features
+- Persistent settings and preferences
 
 ## 🛠️ Technologies Used
 
-- Next.js
-- Typescript
-- TailwindCSS v4
-- Bun
+### Core Technologies
+
+- [Next.js](https://nextjs.org/) - React framework for production.
+- [TypeScript](https://www.typescriptlang.org/) - JavaScript with syntax for types.
+- [TailwindCSS](https://tailwindcss.com/) - Utility-first CSS framework.
+- [Bun](https://bun.sh/) - Modern JavaScript runtime and package manager.
+
+### Additional Dependencies
+
+- [detect.js](https://github.com/darcyclarke/Detect.js/) - User-Agent detection library.
+- [DOMPurify](https://github.com/cure53/DOMPurify) - XSS sanitizer for HTML and MathML.
+- [ESLint](https://eslint.org/) - Code linting tool.
+- [PostCSS](https://postcss.org/) - CSS transformation tool.
+
+These technologies enable:
+
+- Server-side rendering and static site generation
+- Type-safe development
+- Modern styling with utility classes
+- Secure DOM manipulation
+- Browser and device detection
+- Code quality maintenance
 
 ## 🚀 Installation
 
@@ -41,19 +66,19 @@ bun dev
 
 Type `help` in the terminal interface to see available commands. Here are some basic commands:
 
-- `about` - Learn more about me
-- `clear` - Clear the terminal screen
-- `date` - Display current date
-- `exit` - Close terminal session
-- `help` - Show available commands
-- `hostname` - Display system hostname
-- `neofetch` - Display system info
-- `projects` - View my portfolio projects
-- `sudo` - Try to gain admin access
-- `theme` - Change terminal theme
-- `time` - Show current time
-- `welcome` - Show welcome message
-- `whoami` - Show current user info
+- `about` - Learn more about me.
+- `clear` - Clear the terminal screen.
+- `date` - Display current date.
+- `exit` - Close terminal session.
+- `help` - Show available commands.
+- `hostname` - Display system hostname.
+- `neofetch` - Display system info.
+- `projects` - View my portfolio projects.
+- `sudo` - Try to gain admin access.
+- `theme` - Change terminal theme.
+- `time` - Show current time.
+- `welcome` - Show welcome message.
+- `whoami` - Show current user info.
 
 ## 🔄 Current Development Status
 
