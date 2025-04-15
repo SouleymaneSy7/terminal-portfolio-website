@@ -63,7 +63,7 @@ const CommandOutput: React.FC<CommandOutputPropsType> = ({
       <React.Fragment>
         {displayText.map((text, index) => {
           return (
-            <div key={index} className="terminal-output">
+            <div key={index} className="terminal-output  whitespace-pre">
               <p key={index}>{text}</p>
             </div>
           );
@@ -74,6 +74,27 @@ const CommandOutput: React.FC<CommandOutputPropsType> = ({
     return (
       <React.Fragment>
         {displayText.map((text, index) => {
+          DOMPurify.addHook("afterSanitizeAttributes", function (node) {
+            if ("target" in node) {
+              node.setAttribute("target", "_blank");
+            }
+
+            if ("rel" in node && node.getAttribute("rel") !== "noreferrer") {
+              node.setAttribute("rel", "noopener noreferrer");
+            }
+
+            if ("rel" in node) {
+              node.setAttribute("rel", "noreferrer");
+            }
+
+            if (
+              !node.hasAttribute("target") &&
+              (node.hasAttribute("xlink:href") || node.hasAttribute("href"))
+            ) {
+              node.setAttribute("xlink:show", "new");
+            }
+          });
+
           const cleanText = DOMPurify.sanitize(text, {
             USE_PROFILES: { html: true },
           });
@@ -81,7 +102,7 @@ const CommandOutput: React.FC<CommandOutputPropsType> = ({
           return (
             <div
               key={index}
-              className="terminal-ouput"
+              className="terminal-ouput space-y-6"
               dangerouslySetInnerHTML={{ __html: cleanText }}
             />
           );
