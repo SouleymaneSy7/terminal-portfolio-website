@@ -145,7 +145,7 @@ export const projectsCommandOutput = [
     type: "html" as const,
     content: [
       `<div class="space-y-6 whitespace-normal px-2 py-3">
-        <h2 class="text-2xl font-bold text-primary-clr">
+        <h2 class="text-fs-title font-bold text-primary-clr">
           Conakry Website Challenge
         </h2>
 
@@ -153,14 +153,12 @@ export const projectsCommandOutput = [
           This project was created as part of a contest organized by
           <a
             href="https://discord.gg/9WryX5zs"
-            class="text-tertiary-clr underline"
           >
             Le Repaire du Web
           </a>
           (Discord channel run by YouTuber
           <a
             href="https://www.youtube.com/@EcoleduWeb"
-            class="text-tertiary-clr underline"
           >
             Enzo Ustariz
           </a>) with the theme of creating a website for a city. I chose to highlight
@@ -180,7 +178,7 @@ export const projectsCommandOutput = [
         </p>
 
         <div>
-          <h3 class=" font-semibold mb-2">Technologies Used:</h3>
+          <h3 class="text-fs-subtitle font-semi-bold mb-2">Technologies Used:</h3>
           <div>
             <span class="text-tertiary-clr">React</span>
             <span class="text-tertiary-clr">TypeScript</span>
@@ -203,7 +201,6 @@ export const projectsCommandOutput = [
             href="https://conakry-website-challenge-z4t7.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-tertiary-clr underline"
           >
             conakry-website-challenge-z4t7.vercel.app
           </a> <br />
@@ -212,7 +209,6 @@ export const projectsCommandOutput = [
             href="https://github.com/SouleymaneSy7/conakry-website-challenge"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-tertiary-clr underline"
           >
             GitHub
           </a>
