@@ -59,33 +59,37 @@ export const helpCommandOutput = [
     content: [
       " ",
       "Available Commands:",
-      "═════════════════════",
+      "---------------------",
       " ",
       "Navigation & System:",
-      "  clear     - Clear the terminal screen",
-      "  exit      - Exit the terminal (close tab)",
-      "  help      - Show this help message",
-      "  hostname  - Display system hostname",
-      "  neofetch  - Show detailed system information",
-      "  theme     - Change terminal theme (Coming soon...)",
+      " ",
+      "  clear     - Clear the terminal screen.",
+      "  exit      - Exit the terminal (close tab).",
+      "  help      - List all available commands with descriptions.",
+      "  hostname  - Display the system hostname.",
+      "  neofetch  - Display system and user information.",
+      "  theme     - Change the terminal color theme (Coming soon...).",
       " ",
       "Information:",
-      "  about     - View my professional background and skills",
-      "  date      - Show current date",
-      "  time      - Show current time",
-      "  whoami    - Display current user",
-      "  projects  - Browse my portfolio projects",
+      " ",
+      "  about     - Learn more about me and my background.",
+      "  date      - Display current date.",
+      "  time      - Display current time.",
+      "  whoami    - Display current user identity.",
+      "  projects  - Browse my portfolio projects.",
       " ",
       "Fun:",
+      " ",
       "  sudo      - Attempt to gain admin access (Try it!)",
-      "  welcome   - Display welcome banner",
+      "  welcome   - Display the welcome message and banner.",
       " ",
       "Keyboard Shortcuts:",
-      "  [Enter]       → Execute command",
-      "  [Tab]         → Autocomplete commands",
-      "  [↑][↓]        → Navigate command history",
       " ",
-      "Type any command to begin!",
+      "  [Enter]       → Execute command.",
+      "  [Tab]         → Autocomplete commands.",
+      "  [↑][↓]        → Navigate command history.",
+      " ",
+      "Type any command to get started!",
     ],
   },
 ];
@@ -174,8 +178,8 @@ export const projectsCommandOutput = [
     id: crypto.randomUUID(),
     type: "html" as const,
     content: [
-      `<div class="space-y-6 whitespace-normal px-2 py-3">
-        <h2 class="text-fs-title font-bold text-primary-clr">
+      `<div class="space-y-3 whitespace-normal py-3">
+        <h2 class="text-fs-subtitle font-bold text-primary-clr">
           Conakry Website Challenge
         </h2>
 
@@ -243,6 +247,218 @@ export const projectsCommandOutput = [
             GitHub
           </a>
         </p>
+    </div>`,
+      `<div class="space-y-3 whitespace-normal py-3">
+      <h2 class="text-fs-subtitle font-bold text-primary-clr">
+        Dictionary Web App
+      </h2>
+
+      <p>
+        This project is a dictionary web app that allows users to search for
+        words and view their definitions. The app provides a simple and
+        intuitive interface for users to explore the meanings of various words.
+        It is designed to be fast and responsive, ensuring a smooth user
+        experience. The app fetches data from an external API, providing
+        accurate and up-to-date information about words and their meanings.
+      </p>
+
+      <div>
+        <h3 class="text-fs-subtitle font-semi-bold mb-2">
+          Technologies Used:
+        </h3>
+        <div>
+          <span class="text-tertiary-clr">Vue.js</span>
+          <span class="text-tertiary-clr">Composition-API</span>
+          <span class="text-tertiary-clr">TailwindCSS</span>
+          <span class="text-tertiary-clr">Axios</span>
+        </div>
+      </div>
+
+      <p>
+        The project was developed using Vue.js, a progressive JavaScript
+        framework, and Tailwind CSS, a utility-first CSS framework. It utilizes
+        the Composition API for better organization and reusability of code. The
+        app fetches data from an external API using Axios, a promise-based HTTP
+        client for the browser and Node.js.
+      </p>
+      
+      <p>
+        The app is designed to be user-friendly and visually appealing, with a
+        focus on providing a smooth experience for users. The responsive design
+        ensures that the app looks great on both mobile and desktop devices.
+      </p>
+
+      <div>
+        <h3 class="text-fs-subtitle font-semi-bold mb-2">Key Features:</h3>
+        <ul class="list-disc pl-5">
+          <li>Responsive design for mobile and desktop devices.</li>
+          <li>Dynamic content loading using Axios.</li>
+          <li>Interactive user interface with Vue.js.</li>
+        </ul>
+      </div>
+
+      <p>
+        You can view the project live on:
+        <a
+          href="https://dictionary-web-app-seven-olive.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          dictionary-web-app-seven-olive.vercel.app
+        </a>
+        <br />
+        And check the source code on:
+        <a
+          href="https://github.com/SouleymaneSy7/dictionary-web-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>
+      </p>
+    </div>`,
+      `<div class="space-y-3 whitespace-normal py-3">
+      <h2 class="text-fs-subtitle font-bold text-primary-clr">
+        Password Generator
+      </h2>
+
+      <p>
+        The Password Generator is a web application that generates secure
+        passwords based on user-defined criteria. Users can specify the length
+        of the password and choose whether to include uppercase and special characters. The
+        application provides a simple and intuitive interface for generating and
+        copying passwords.
+      </p>
+
+      <div>
+        <h3 class="text-fs-subtitle font-semi-bold mb-2">
+          Technologies Used:
+        </h3>
+        <div>
+          <span class="text-tertiary-clr">Vue.js</span>
+          <span class="text-tertiary-clr">Composition-API</span>
+          <span class="text-tertiary-clr">Sass</span>
+        </div>
+      </div>
+
+      <p>
+        The project was developed using Vue.js and the Composition API, with a
+        focus on clean code and best practices. The styling was done using Sass,
+        allowing for modular and maintainable CSS. The application is hosted on
+        Vercel, making it easily accessible to users.
+      </p>
+
+      <div>
+        <h3 class="text-fs-subtitle font-semi-bold mb-2">Features:</h3>
+        <ul class="list-disc pl-8">
+          <li>Customizable password length.</li>
+          <li>Option to include/exclude uppercase letters.</li>
+          <li>Option to include/exclude special characters.</li>
+          <li>Real-time password generation.</li>
+          <li>Responsive design for mobile and desktop.</li>
+          <li>Copy to clipboard functionality.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-fs-subtitle font-semi-bold mb-2">How to Use:</h3>
+        <ol class="list-decimal pl-11">
+          <li>Select the desired password length.</li>
+          <li>Choose whether to include uppercase letters.</li>
+          <li>Choose whether to include special characters.</li>
+          <li>Click the "Generate Password" button.</li>
+          <li>Copy the generated password to your clipboard.</li>
+        </ol>
+      </div>
+
+      <p>
+        You can view the project live on:
+        <a
+          href="https://vue-js-password-generator.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          vue-js-password-generator.vercel.app
+        </a>
+        <br />
+        And check the source code on:
+        <a
+          href="https://github.com/SouleymaneSy7/vue-js-password-generator"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>
+      </p>
+    </div>`,
+      `<div class="space-y-3 whitespace-normal py-3">
+      <h2 class="text-fs-subtitle font-bold text-primary-clr">
+        Github User Search
+      </h2>
+
+      <p>
+        This is a simple application that allows you to search for Github users
+        and view their profile information. It uses the Github API to fetch user
+        data and display it in a user-friendly interface. It allows you to search for users by their username, and displays their profile information, including their name, bio, location,
+        and number of followers. The application is designed to be simple and easy to use, with a clean
+        and modern interface.
+      </p>
+
+      <div>
+        <h3 class="text-fs-subtitle font-semi-bold mb-2">
+          Technologies Used:
+        </h3>
+        <div>
+          <span class="text-tertiary-clr">React</span>
+          <span class="text-tertiary-clr">Typescript</span>
+          <span class="text-tertiary-clr">Axios</span>
+          <span class="text-tertiary-clr">Sass</span>
+        </div>
+      </div>
+
+      <p>
+        The application is built using React and Typescript, and uses Axios for
+        making API requests. The user interface is styled with Sass, and the
+        application is responsive and works well on both desktop and mobile
+        devices. There is a theme toggler that allows you to switch between
+        light and dark modes, and the application is designed to be accessible
+        and easy to use for all users. It is a great example of how to use these
+        technologies to build a simple application that can be used to search
+        for and view user information.
+      </p>
+
+      <div>
+        <h3 class="text-fs-subtitle font-semi-bold mb-2">Key Features:</h3>
+        <ul class="list-disc pl-8">
+          <li>Search for Github users by username.</li>
+          <li>View user profile information.</li>
+          <li>Real-time search functionality.</li>
+          <li>Dark/Light theme toggle with persistent settings</li>
+          <li>Accessible UI components</li>
+          <li>Responsive design for mobile and desktop.</li>
+          <li>Error handling and loading states</li>
+        </ul>
+      </div>
+
+      <p>
+        You can view the project live on:
+        <a
+          href="https://github-user-search-app-self.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          github-user-search-app-self.vercel.app
+        </a>
+        <br />
+        And check the source code on:
+        <a
+          href="https://github.com/SouleymaneSy7/github-user-search-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>
+      </p>
     </div>`,
     ],
   },
