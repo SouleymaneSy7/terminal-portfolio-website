@@ -25,6 +25,11 @@
   border-radius: 0.9375rem;
 }
 
+*::selection {
+  color: var(--color-text-clr);
+  background-color: var(--color-secondary-clr);
+}
+
 @theme {
   --color-background-clr: oklch(0.24 0.0229 280.84);
   --color-foreground-clr: oklch(0.29 0.0293 278.86);
