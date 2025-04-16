@@ -1,14 +1,25 @@
-# Terminal Portfolio Website 🖥️
+# Terminal Portfolio Website
 
 ![Preview](./preview/preview.png)
 
 > ⚠️ **Note**: This project is currently under active development and construction. Features and documentation may change frequently.
 
+## Table of contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Technologies](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Current Development Status](#current-development-status)
+- [Design & Functionality Inspiration](#design--functionality-inspiration)
+- [Author & Contacts](#author--contacts)
+
 ## Overview
 
 A modern terminal-style portfolio website that offers an immersive command-line experience. Built with Next.js and TypeScript, it provides an interactive way to explore my projects, skills, and background through familiar terminal commands and ASCII-based interfaces.
 
-## 🌟 Features
+## Features
 
 - Real terminal emulation with command processing
 - Interactive command-line interface with custom prompt
@@ -18,7 +29,7 @@ A modern terminal-style portfolio website that offers an immersive command-line 
 - Custom ASCII art and animations
 - Multiple built-in commands and utilities
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 ### Core Technologies
 
@@ -69,7 +80,7 @@ A modern terminal-style portfolio website that offers an immersive command-line 
   - Consistent code style enforcement.
   - Comprehensive linting rules.
 
-## 🚀 Installation
+## Installation
 
 ```bash
 # Clone the repository
@@ -85,7 +96,7 @@ bun install
 bun dev
 ```
 
-## 🎯 Usage
+## Usage
 
 Type `help` in the terminal interface to see available commands. Here are some basic commands:
 
@@ -103,7 +114,7 @@ Type `help` in the terminal interface to see available commands. Here are some b
 - `welcome` - Show welcome message.
 - `whoami` - Show current user info.
 
-## 🔄 Current Development Status
+## Current Development Status
 
 - [x] Basic terminal interface
 - [x] Core command functionality
@@ -118,14 +129,14 @@ Type `help` in the terminal interface to see available commands. Here are some b
 - [ ] Easter eggs and hidden features
 - [ ] Multiple themes support
 
-## 🎨 Design & Functionality Inspiration
+## Design & Functionality Inspiration
 
 This project draws inspiration from these amazing developers and their work:
 
 - [M4tt72's Terminal](https://term.m4tt72.com/) - Clean terminal design and functionality.
 - [Forrest's Portfolio](https://fkcodes.com/) - Creative terminal-based portfolio implementation.
 
-## 👤 Author & Contact
+## Author & Contacts
 
 - [GitHub](https://github.com/SouleymaneSy7) - Check out my Github & projects.
 - [Frontend Mentor](https://www.frontendmentor.io/profile/SouleymaneSy7) - See my frontend challenges.
