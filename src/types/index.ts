@@ -26,9 +26,11 @@ export type TerminalPropsTypes = {
 };
 
 export type CommandInputPropsType = {
-  onCommandType: (command: string) => void;
   input: string;
   setInput: React.Dispatch<React.SetStateAction<string>>;
+  onArrowUp: () => string;
+  onArrowDown: () => string;
+  onCommandType: (command: string) => void;
 };
 
 export type CommandOutputPropsType = {
