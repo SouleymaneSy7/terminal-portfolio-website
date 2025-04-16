@@ -16,6 +16,7 @@ import { welcomeCommandOutput } from "@/constants";
 const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
   const [input, setInput] = React.useState("");
   const [animationIsComplete, setAnimationIsComplete] = React.useState(false);
+  const [commandIndex, setCommandIndex] = React.useState(-1);
   const [history, setHistory] = React.useState<CommandHistoryTypes>([
     {
       command: "welcome",
@@ -41,6 +42,27 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
         },
       ]);
     }
+    setCommandIndex(-1);
+  };
+
+  const handleArrowUp = () => {
+    if (commandIndex < history.length - 1) {
+      setCommandIndex(commandIndex + 1);
+      return history[history.length - 1 - commandIndex].command;
+    }
+
+    return "";
+  };
+
+  const handleArrowDown = () => {
+    if (commandIndex > 0) {
+      setCommandIndex(commandIndex - 1);
+      return history[history.length - 1 - commandIndex].command;
+    } else if (commandIndex === 0) {
+      setCommandIndex(-1);
+      return "";
+    }
+    return "";
   };
 
   return (
@@ -55,6 +77,7 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
             <span className="text-secondary-clr">:~$</span>
             <span className="text-secondary-clr"> {item.command}</span>
             <br />
+            
             <CommandOutput
               speed={100}
               containerRef={containerRef}
@@ -71,6 +94,8 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
           input={input}
           setInput={setInput}
           onCommandType={handleCommand}
+          onArrowUp={handleArrowUp}
+          onArrowDown={handleArrowDown}
         />
       ) : null}
     </div>
