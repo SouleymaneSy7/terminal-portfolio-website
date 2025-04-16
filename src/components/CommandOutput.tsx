@@ -102,7 +102,7 @@ const CommandOutput: React.FC<CommandOutputPropsType> = ({
           return (
             <div
               key={index}
-              className="terminal-ouput space-y-6"
+              className="terminal-ouput space-y-8"
               dangerouslySetInnerHTML={{ __html: cleanText }}
             />
           );
