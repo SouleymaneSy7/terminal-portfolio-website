@@ -12,8 +12,8 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [Current Development Status](#current-development-status)
-- [Design & Functionality Inspiration](#design--functionality-inspiration)
-- [Author & Contacts](#author--contacts)
+- [Design & Functionality Inspiration](#design-and-functionality-inspiration)
+- [Author](#author)
 
 ## Overview
 
@@ -129,14 +129,14 @@ Type `help` in the terminal interface to see available commands. Here are some b
 - [ ] Easter eggs and hidden features
 - [ ] Multiple themes support
 
-## Design & Functionality Inspiration
+## Design And Functionality Inspiration
 
 This project draws inspiration from these amazing developers and their work:
 
 - [M4tt72's Terminal](https://term.m4tt72.com/) - Clean terminal design and functionality.
 - [Forrest's Portfolio](https://fkcodes.com/) - Creative terminal-based portfolio implementation.
 
-## Author & Contacts
+## Author
 
 - [GitHub](https://github.com/SouleymaneSy7) - Check out my Github & projects.
 - [Frontend Mentor](https://www.frontendmentor.io/profile/SouleymaneSy7) - See my frontend challenges.
