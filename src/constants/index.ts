@@ -36,6 +36,22 @@ const ASCII_ART_ASTRONAUT = `
 ⠀⠀⠀⠀⠀⠀⠀⠈⠛⠻⠿⠿⠿⠿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 `.trim();
 
+export const commands = [
+  "about",
+  "clear",
+  "date",
+  "exit",
+  "help",
+  "hostname",
+  "neofetch",
+  "projects",
+  "sudo",
+  "theme",
+  "time",
+  "welcome",
+  "whoami",
+];
+
 export const helpCommandOutput = [
   {
     id: crypto.randomUUID(),
