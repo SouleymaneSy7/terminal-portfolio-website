@@ -1,12 +1,16 @@
 "use client";
 
 import * as React from "react";
+
+import { commands } from "@/constants";
 import { CommandInputPropsType } from "@/types";
 
 const CommandInput: React.FC<CommandInputPropsType> = ({
-  onCommandType,
   input,
   setInput,
+  onArrowUp,
+  onArrowDown,
+  onCommandType,
 }) => {
   const commandInputRef = React.useRef<HTMLInputElement>(null);
 
@@ -39,6 +43,36 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
     }
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "ArrowUp") {
+      event.preventDefault();
+
+      const command = onArrowUp();
+      if (command) {
+        setInput(command);
+      }
+    } else if (event.key === "ArrowDown") {
+      event.preventDefault();
+
+      const command = onArrowDown();
+      setInput(command);
+    }
+
+    if (event.key === "Tab") {
+      event.preventDefault();
+
+      const inputWords = input.split(" ");
+      const lastWord = inputWords[inputWords.length - 1];
+
+      if (inputWords.length === 1) {
+        const matches = commands.filter((cmd) => cmd.startsWith(lastWord));
+        if (matches.length === 1) {
+          setInput(matches[0]);
+        }
+      }
+    }
+  };
+
   return (
     <div className="flex items-baseline gap-2 flex-wrap">
       <label htmlFor="command-input">
@@ -62,6 +96,7 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
           value={input}
           ref={commandInputRef}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
           className="w-full h-full outline-none border-none text-secondary-clr font-semi-bold"
         />
       </form>
