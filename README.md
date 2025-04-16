@@ -17,9 +17,6 @@ A modern terminal-style portfolio website that offers an immersive command-line 
 - Tab completion for commands and arguments
 - Custom ASCII art and animations
 - Multiple built-in commands and utilities
-- Configurable themes and appearance
-- Easter eggs and hidden features
-- Persistent settings and preferences
 
 ## 🛠️ Technologies Used
 
@@ -36,15 +33,41 @@ A modern terminal-style portfolio website that offers an immersive command-line 
 - [DOMPurify](https://github.com/cure53/DOMPurify) - XSS sanitizer for HTML and MathML.
 - [ESLint](https://eslint.org/) - Code linting tool.
 - [PostCSS](https://postcss.org/) - CSS transformation tool.
+- [Prettier](https://prettier.io/) - Code formatting tool.
+- [ascii-silhouettify](https://meatfighter.com/ascii-silhouettify/) - Generate custom ASCII art from any image.
 
-These technologies enable:
+### These technologies enable
 
-- Server-side rendering and static site generation
-- Type-safe development
-- Modern styling with utility classes
-- Secure DOM manipulation
-- Browser and device detection
-- Code quality maintenance
+- **Server-side Rendering & Static Generation:**
+
+  - Optimized page loads and SEO performance.
+  - Pre-rendered content for faster initial loads.
+
+- **Type-Safe Development:**
+
+  - Robust code with TypeScript integration.
+  - Early error detection and better IDE support.
+
+- **Modern Styling Architecture:**
+
+  - Responsive layouts with TailwindCSS.
+  - Maintainable and scalable CSS structure.
+
+- **Enhanced Security:**
+
+  - XSS protection with DOMPurify.
+  - Sanitized user inputs and content rendering.
+
+- **Cross-Platform Compatibility:**
+
+  - Intelligent browser detection.
+  - Adaptive features based on device capabilities.
+
+- **Development Excellence:**
+
+  - Automated code formatting.
+  - Consistent code style enforcement.
+  - Comprehensive linting rules.
 
 ## 🚀 Installation
 
@@ -88,11 +111,11 @@ Type `help` in the terminal interface to see available commands. Here are some b
 - [x] Basic animations and transitions
 - [x] Custom typing animations and effects
 - [x] Advanced features and animations
-- [ ] Command history navigation
+- [x] Command history navigation
+- [x] Command auto-completion
 - [ ] Complete project showcase
-- [ ] Command auto-completion
-- [ ] Easter eggs and hidden features
 - [ ] Persistent storage for settings
+- [ ] Easter eggs and hidden features
 - [ ] Multiple themes support
 
 ## 🎨 Design & Functionality Inspiration
