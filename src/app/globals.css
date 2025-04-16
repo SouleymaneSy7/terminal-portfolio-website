@@ -1,26 +1,5 @@
 @import "tailwindcss";
 
-:root {
-  /* Font Weight */
-  --fw-regular: 400;
-  --fw-medium: 500;
-  --fw-semi-bold: 600;
-  --fw-bold: 700;
-
-  /* Font Size */
-  --fs-14-16: clamp(0.875rem, 0.8393rem + 0.1786vw, 1rem);
-  --body-font-size: var(--fs-14-16);
-
-  /* Colors */
-  /* Monokai Pro Theme Colors */
-  --background-clr: #1e1f2b;
-  --foreground-clr: #282a3a;
-  --text-clr: #eaf2f1;
-  --primary-clr: #ff657a;
-  --secondary-clr: #ff9b5e;
-  --tertiary-clr: #9cd1bb;
-}
-
 * {
   scroll-behavior: smooth;
   scroll-padding: 3.75rem;
@@ -34,33 +13,36 @@
 }
 
 *::-webkit-scrollbar-corner {
-  background: var(--foreground-clr);
+  background: var(--color-foreground-clr);
 }
 
 *::-webkit-scrollbar-track {
-  background: var(--foreground-clr);
+  background: var(--color-foreground-clr);
 }
 
 *::-webkit-scrollbar-thumb {
-  background: var(--tertiary-clr);
+  background: var(--color-tertiary-clr);
   border-radius: 0.9375rem;
 }
 
 @theme {
-  --color-background-clr: var(--background-clr);
-  --color-foreground-clr: var(--foreground-clr);
-  --color-text-clr: var(--text-clr);
-  --color-primary-clr: var(--primary-clr);
-  --color-secondary-clr: var(--secondary-clr);
-  --color-tertiary-clr: var(--tertiary-clr);
+  --color-background-clr: oklch(0.24 0.0229 280.84);
+  --color-foreground-clr: oklch(0.29 0.0293 278.86);
+  --color-text-clr: oklch(0.95 0.0086 188.11);
+  --color-primary-clr: oklch(0.71 0.1874 15.11);
+  --color-secondary-clr: oklch(0.78 0.1421 50.78);
+  --color-tertiary-clr: oklch(0.82 0.0632 167.34);
 
-  --font-weight-regular: var(--fw-regular);
-  --font-weight-medium: var(--fw-medium);
-  --font-weight-semi-bold: var(--fw-semi-bold);
-  --font-weight-bold: var(--fw-bold);
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semi-bold: 600;
+  --font-weight-bold: 700;
+
+  --text-fs-body: clamp(0.875rem, 0.8393rem + 0.1786vw, 1rem);
+  --text-fs-subtitle: clamp(1.125rem, 1.0893rem + 0.1786vw, 1.25rem);
+  --text-fs-title: clamp(1.25rem, 1.1786rem + 0.3571vw, 1.5rem);
 
   --font-fira-code: var(--font-fira-code);
-  --text-fs-body: var(--body-font-size);
   --leading-base: 1.5;
 }
 
