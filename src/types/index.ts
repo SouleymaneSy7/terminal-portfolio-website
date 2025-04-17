@@ -31,6 +31,7 @@ export type CommandInputPropsType = {
   onArrowUp: () => string;
   onArrowDown: () => string;
   onCommandType: (command: string) => void;
+  onClearTerminal: () => void;
 };
 
 export type CommandOutputPropsType = {
