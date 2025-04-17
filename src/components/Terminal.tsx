@@ -45,6 +45,10 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
     setCommandIndex(-1);
   };
 
+  const handleClearTerminal = () => {
+    setHistory([]);
+  };
+
   const handleArrowUp = () => {
     if (commandIndex < history.length - 1) {
       const newCommandIndex = commandIndex + 1;
@@ -85,7 +89,7 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
             </p>
             <span className="text-secondary-clr">:~$</span>
             <span className="text-secondary-clr"> {item.command}</span>
-            
+
             <br />
 
             <CommandOutput
@@ -106,6 +110,7 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
           onCommandType={handleCommand}
           onArrowUp={handleArrowUp}
           onArrowDown={handleArrowDown}
+          onClearTerminal={handleClearTerminal}
         />
       ) : null}
     </div>
