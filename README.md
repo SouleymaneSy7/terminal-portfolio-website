@@ -124,7 +124,7 @@ Type `help` in the terminal interface to see available commands. Here are some b
 - [x] Advanced features and animations
 - [x] Command history navigation
 - [x] Command auto-completion
-- [ ] Complete project showcase
+- [x] Complete project showcase
 - [ ] Persistent storage for settings
 - [ ] Easter eggs and hidden features
 - [ ] Multiple themes support
