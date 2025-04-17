@@ -11,6 +11,7 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
   onArrowUp,
   onArrowDown,
   onCommandType,
+  onClearTerminal,
 }) => {
   const commandInputRef = React.useRef<HTMLInputElement>(null);
 
@@ -44,6 +45,12 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.ctrlKey && event.key.toLowerCase() === "l") {
+      event.preventDefault();
+
+      onClearTerminal();
+    }
+
     if (event.key === "ArrowUp") {
       event.preventDefault();
 
