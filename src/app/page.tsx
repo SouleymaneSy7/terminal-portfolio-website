@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <main className="w-full h-screen overflow-hidden p-4 lg:p-5">
       <div
-        className="terminal-container | w-full h-full overflow-y-scroll border-2 border-primary-clr rounded-md bg-foreground-clr p-2 lg:p-4"
+        className="terminal-container | w-full max-w-[1920px] h-full overflow-y-scroll border-2 border-primary-clr rounded-md bg-foreground-clr p-2 mx-auto lg:p-4"
         ref={containerRef}
       >
         <Terminal containerRef={containerRef} />
