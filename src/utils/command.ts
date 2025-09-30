@@ -13,11 +13,10 @@ import {
   welcomeCommandOutput,
   whoAmICommandOutput,
 } from "@/constants";
-import { CommandHistoryOutput } from "@/types";
+// import { CommandHistoryOutput } from "@/types";
+import { jokeService } from "./services/joke.service";
 
-export const executeCommand = async (
-  command: string,
-): Promise<CommandHistoryOutput> => {
+export const executeCommand = async (command: string) => {
   const [cmd] = command.toLowerCase().split(" ");
 
   switch (cmd) {
@@ -35,6 +34,23 @@ export const executeCommand = async (
 
     case "time":
       return timeCommandOutput;
+
+    case "joke":
+      const joke = await jokeService.getRandomJoke();
+
+      if (joke && joke.type === "twopart") {
+        return {
+          id: crypto.randomUUID(),
+          type: "text" as const,
+          content: [`${joke.setup}`, `${joke.delivery}`],
+        };
+      }
+
+      return {
+        id: crypto.randomUUID(),
+        type: "text" as const,
+        content: ["Could not fetch a joke."],
+      };
 
     case "hostname":
       return hostNameCommandOutput;

@@ -43,6 +43,7 @@ export const commands = [
   "exit",
   "help",
   "hostname",
+  "joke",
   "neofetch",
   "projects",
   "repo",
