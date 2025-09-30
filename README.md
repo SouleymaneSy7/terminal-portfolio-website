@@ -50,32 +50,26 @@ A modern terminal-style portfolio website that offers an immersive command-line 
 ### These technologies enable
 
 - **Server-side Rendering & Static Generation:**
-
   - Optimized page loads and SEO performance.
   - Pre-rendered content for faster initial loads.
 
 - **Type-Safe Development:**
-
   - Robust code with TypeScript integration.
   - Early error detection and better IDE support.
 
 - **Modern Styling Architecture:**
-
   - Responsive layouts with TailwindCSS.
   - Maintainable and scalable CSS structure.
 
 - **Enhanced Security:**
-
   - XSS protection with DOMPurify.
   - Sanitized user inputs and content rendering.
 
 - **Cross-Platform Compatibility:**
-
   - Intelligent browser detection.
   - Adaptive features based on device capabilities.
 
 - **Development Excellence:**
-
   - Automated code formatting.
   - Consistent code style enforcement.
   - Comprehensive linting rules.
@@ -108,6 +102,7 @@ Type `help` in the terminal interface to see available commands. Here are some b
 - `hostname` - Display system hostname.
 - `neofetch` - Display system info.
 - `projects` - View my portfolio projects.
+- `repo` - View source code and project details.
 - `sudo` - Try to gain admin access.
 - `theme` - Change terminal theme.
 - `time` - Show current time.
