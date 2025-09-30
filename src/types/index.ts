@@ -41,3 +41,36 @@ export type CommandOutputPropsType = {
   setAnimationIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
   containerRef: React.RefObject<HTMLDivElement | null>;
 };
+
+export interface JokeResponseType {
+  error: boolean;
+  category: string;
+  type: string;
+  setup: string;
+  delivery: string;
+  flags: {
+    nsfw: boolean;
+    religious: boolean;
+    political: boolean;
+    racist: boolean;
+    sexist: boolean;
+    explicit: boolean;
+  };
+  id: number;
+  safe: boolean;
+  lang: string;
+}
+
+export type QuoteResponseType = Array<{
+  _id: string;
+  // The quotation text
+  content: string;
+  // The full name of the author
+  author: string;
+  // The `slug` of the quote author
+  authorSlug: string;
+  // The length of quote (number of characters)
+  length: number;
+  // An array of tag names for this quote
+  tags: string[];
+}>;
