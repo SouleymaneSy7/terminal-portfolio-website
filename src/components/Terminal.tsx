@@ -27,6 +27,10 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
   const handleCommand = async (command: string) => {
     const commandOutput = await executeCommand(command);
 
+    const normalizedOutput = Array.isArray(commandOutput)
+      ? commandOutput
+      : [commandOutput];
+
     if (input.trim().toLowerCase() === "clear") {
       setHistory([]);
     } else {
@@ -34,10 +38,10 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
         ...prevState,
         {
           command,
-          output: commandOutput.map(({ id, type, content }) => ({
-            id: id,
+          output: normalizedOutput.map(({ id, type, content }) => ({
+            id,
             type: type as "text" | "link" | "html",
-            content: content,
+            content,
           })),
         },
       ]);
