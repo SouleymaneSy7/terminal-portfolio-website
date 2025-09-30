@@ -1,5 +1,5 @@
-import { getDate, getTime } from "@/utils/date";
 import packageJson from "../../package.json";
+import { getDate, getTime } from "@/utils/date";
 
 const packages = Object.keys(packageJson.dependencies);
 
@@ -45,6 +45,7 @@ export const commands = [
   "hostname",
   "neofetch",
   "projects",
+  "repo",
   "sudo",
   "theme",
   "time",
@@ -77,6 +78,7 @@ export const helpCommandOutput = [
       "  time      - Display current time.",
       "  whoami    - Display current user identity.",
       "  projects  - Browse my portfolio projects.",
+      "  repo      - View source code and project details.",
       " ",
       "Fun:",
       " ",
@@ -138,6 +140,35 @@ export const dateCommandOutput = [
   },
 ];
 
+export const repoCommandOutput = [
+  {
+    id: crypto.randomUUID(),
+    type: "html" as const,
+    content: [
+      `
+      <div class="space-y-3 whitespace-normal py-3">
+        <p>
+          The complete source code for this terminal portfolio is 
+          publicly available on GitHub:
+        </p>
+
+        <a
+          href="https://github.com/SouleymaneSy7/terminal-portfolio-website"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          https://github.com/souleymanesy7/terminal-portfolio-website
+        </a>
+
+        <p>Star this project if you like it!</p>
+        <p>Feel free to fork and customize for your own use</p>
+        <p>Made with ❤️ by Souleymane Sy</p>
+      </div>
+     `,
+    ],
+  },
+];
+
 export const timeCommandOutput = [
   {
     id: crypto.randomUUID(),
@@ -153,6 +184,7 @@ export const hostNameCommandOutput = [
     content: ["souleymane-sy-portfolio"],
   },
 ];
+
 export const whoAmICommandOutput = [
   {
     id: crypto.randomUUID(),

@@ -6,6 +6,7 @@ import {
   hostNameCommandOutput,
   neofetchCommandOutput,
   projectsCommandOutput,
+  repoCommandOutput,
   sudoCommandOutput,
   themeCommandOutput,
   timeCommandOutput,
@@ -15,7 +16,7 @@ import {
 import { CommandHistoryOutput } from "@/types";
 
 export const executeCommand = async (
-  command: string
+  command: string,
 ): Promise<CommandHistoryOutput> => {
   const [cmd] = command.toLowerCase().split(" ");
 
@@ -52,6 +53,9 @@ export const executeCommand = async (
 
     case "neofetch":
       return neofetchCommandOutput;
+
+    case "repo":
+      return repoCommandOutput;
 
     case "sudo":
       return sudoCommandOutput;
