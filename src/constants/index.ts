@@ -41,6 +41,7 @@ export const commands = [
   "clear",
   "date",
   "exit",
+  "email",
   "help",
   "hostname",
   "joke",
@@ -83,6 +84,7 @@ export const helpCommandOutput = [
       "  projects  - Browse my portfolio projects.",
       "  repo      - View source code and project details.",
       "  weather   - Get current weather for a given city (Example: weather Paris)",
+      "  email     - Display my email address with a fun message.",
       " ",
       "Fun:",
       " ",
@@ -672,3 +674,21 @@ export const weatherUsageOutput = () => ({
     "  weather New York",
   ],
 });
+
+export const emailCommandOutput = [
+  {
+    id: crypto.randomUUID(),
+    type: "html" as const,
+    content: [
+      `
+      <div class="space-y-2 py-2">
+        <p>You can reach me at:</p>
+        <a href="mailto:souleymanesydeveloppers@gmail.com" target="_blank" rel="noreferrer">
+          souleymanesydeveloppers@gmail.com
+        </a>
+        <p>Write me a message — just to say hi or make a new friend.</p>
+      </div>
+ `,
+    ],
+  },
+];

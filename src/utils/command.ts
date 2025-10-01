@@ -2,6 +2,7 @@ import {
   aboutMeCommandOutput,
   createWeatherOutput,
   dateCommandOutput,
+  emailCommandOutput,
   exitCommandOutput,
   helpCommandOutput,
   hostNameCommandOutput,
@@ -82,6 +83,9 @@ export const executeCommand = async (command: string) => {
 
     case "exit":
       return exitCommandOutput;
+
+    case "email":
+      return emailCommandOutput;
 
     case "projects":
       return projectsCommandOutput;
