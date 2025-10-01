@@ -31,12 +31,21 @@
 }
 
 @theme {
-  --color-background-clr: oklch(0.24 0.0229 280.84);
-  --color-foreground-clr: oklch(0.29 0.0293 278.86);
-  --color-text-clr: oklch(0.95 0.0086 188.11);
-  --color-primary-clr: oklch(0.71 0.1874 15.11);
-  --color-secondary-clr: oklch(0.78 0.1421 50.78);
-  --color-tertiary-clr: oklch(0.82 0.0632 167.34);
+  /* Monokai Theme Colors */
+  /* --color-background-clr: oklch(0.24 0.0229 280.84); */
+  /* --color-foreground-clr: oklch(0.29 0.0293 278.86); */
+  /* --color-text-clr: oklch(0.95 0.0086 188.11); */
+  /* --color-primary-clr: oklch(0.71 0.1874 15.11); */
+  /* --color-secondary-clr: oklch(0.78 0.1421 50.78); */
+  /* --color-tertiary-clr: oklch(0.82 0.0632 167.34); */
+
+  /* Catpuccin Theme Colors */
+  --color-background-clr: oklch(0.2155 0.0254 284.06);
+  --color-foreground-clr: oklch(0.2788 0.0353 276.94);
+  --color-text-clr: oklch(0.8787 0.0426 272.28);
+  --color-primary-clr: oklch(0.7906 0.0965 228.65);
+  --color-secondary-clr: oklch(0.7556 0.1297 2.76);
+  --color-tertiary-clr: oklch(0.8577 0.1092 142.72);
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
