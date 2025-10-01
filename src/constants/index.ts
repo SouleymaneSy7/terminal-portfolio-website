@@ -215,7 +215,80 @@ export const projectsCommandOutput = [
     id: crypto.randomUUID(),
     type: "html" as const,
     content: [
-      `<div class="space-y-3 whitespace-normal py-3">
+      `
+      <div class="space-y-3 whitespace-normal py-3">
+        <h2 class="text-fs-subtitle font-bold text-primary-clr">
+          Fyrre Magazine
+        </h2>
+
+        <p>
+          Fyrre - A modern digital magazine, blog and podcast platform built with Next.js, React, MDX, Typescript and TailwindCSS. Delivering an immersive reading experience with an elegant interface, optimized performance, and responsive design. Perfect for digital content.
+        </p>
+
+        <p>
+          The website showcases editorial content in an elegant and immersive way, featuring a clean, minimalist design with a focus on typography and visual storytelling. It presents articles, magazine covers, and author profiles in a sophisticated layout that emphasizes readability and user engagement.
+        </p>
+
+        <div>
+          <h3 class="text-fs-subtitle font-semi-bold mb-2">
+            Technologies Used:
+          </h3>
+          <div>
+            <span class="text-tertiary-clr">Next.js</span>
+            <span class="text-tertiary-clr">React</span>
+            <span class="text-tertiary-clr">MDX</span>
+            <span class="text-tertiary-clr">TypeScript</span>
+            <span class="text-tertiary-clr">Tailwind CSS</span>
+          </div>
+        </div>
+
+        <p>
+          The project was built using Next.js for server-side rendering and optimal performance, React for building interactive UI components, MDX for writing content with embedded components, TypeScript for type-safe development, and Tailwind CSS for modern, utility-first styling. The website utilizes Next.js Image optimization for fast loading times and improved user experience. The responsive design ensures perfect display on mobile, tablet, and desktop devices.
+        </p>
+
+        <div>
+          <h3 class="text-fs-subtitle font-semi-bold mb-2">Key Features:</h3>
+          <ul class="list-disc pl-8">
+            <li>Modern magazine-style layout with editorial focus</li>
+            <li>MDX-powered content management for rich text and components</li>
+            <li>Optimized image loading with Next.js Image component</li>
+            <li>Responsive design for all screen sizes</li>
+            <li>Clean typography and minimalist aesthetic</li>
+            <li>Author profiles and article showcase</li>
+            <li>Smooth page transitions and animations</li>
+            <li>SEO-optimized with meta tags and structured data</li>
+            <li>Blog and podcast platform integration</li>
+          </ul>
+        </div>
+
+        <p>
+          The website provides an immersive reading experience with articles like "Hope Dies Last" that explore deep, reflective topics. Each article is presented with beautiful imagery and thoughtful design that enhances the content, making it perfect for digital magazines, blogs, and podcast platforms.
+        </p>
+
+        <p>
+          You can view the project live on:
+          
+          <a
+            href="https://fyrre-magazine-website.netlify.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            fyrre-magazine-website.netlify.app
+          </a>
+          <br />
+          And check the source code on:
+          
+          <a
+            href="https://github.com/SouleymaneSy7/fyrre-magazine-website"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+        </p>
+      </div>
+
+      <div class="space-y-3 whitespace-normal py-3">
         <h2 class="text-fs-subtitle font-bold text-primary-clr">
           Conakry Website Challenge
         </h2>
