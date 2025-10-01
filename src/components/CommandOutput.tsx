@@ -8,7 +8,7 @@ import { CommandOutputPropsType } from "@/types";
 
 const CommandOutput: React.FC<CommandOutputPropsType> = ({
   speed,
-  outputLines,
+  outputLines = [],
   outputTypes,
   containerRef,
   setAnimationIsComplete,
@@ -31,6 +31,11 @@ const CommandOutput: React.FC<CommandOutputPropsType> = ({
   }, [displayText]);
 
   React.useEffect(() => {
+    if (!Array.isArray(outputLines) || outputLines.length === 0) {
+      handleComplete();
+      return;
+    }
+
     if (isComplete) return;
     setAnimationIsComplete(false);
 
