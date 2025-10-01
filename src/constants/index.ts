@@ -52,6 +52,7 @@ export const commands = [
   "theme",
   "time",
   "welcome",
+  "weather",
   "whoami",
 ];
 
@@ -81,6 +82,7 @@ export const helpCommandOutput = [
       "  whoami    - Display current user identity.",
       "  projects  - Browse my portfolio projects.",
       "  repo      - View source code and project details.",
+      "  weather   - Get current weather for a given city (Example: weather Paris)",
       " ",
       "Fun:",
       " ",
@@ -641,3 +643,32 @@ export const welcomeCommandOutput = [
     ],
   },
 ];
+
+export const createWeatherOutput = (weather: string) => ({
+  id: crypto.randomUUID(),
+  type: "text" as const,
+  content: weather.split("\n"),
+});
+
+export const weatherErrorOutput = (city: string, errorMessage?: string) => ({
+  id: crypto.randomUUID(),
+  type: "text" as const,
+  content: [
+    `Error: Could not fetch weather for "${city}"`,
+    errorMessage || "Please check the city name and try again.",
+    "",
+    "Tip: Try with major cities (e.g., Paris, London, Tokyo)",
+  ],
+});
+
+export const weatherUsageOutput = () => ({
+  id: crypto.randomUUID(),
+  type: "text" as const,
+  content: [
+    "Usage: weather <city>",
+    "",
+    "Examples:",
+    "  weather Paris",
+    "  weather New York",
+  ],
+});

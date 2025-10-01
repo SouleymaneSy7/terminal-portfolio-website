@@ -1,5 +1,6 @@
 import {
   aboutMeCommandOutput,
+  createWeatherOutput,
   dateCommandOutput,
   exitCommandOutput,
   helpCommandOutput,
@@ -10,14 +11,18 @@ import {
   sudoCommandOutput,
   themeCommandOutput,
   timeCommandOutput,
+  weatherErrorOutput,
+  weatherUsageOutput,
   welcomeCommandOutput,
   whoAmICommandOutput,
 } from "@/constants";
 import { jokeService } from "@/services/joke.service";
 import { quoteService } from "@/services/quote.service";
+import { weatherService } from "@/services/weather.service";
 
 export const executeCommand = async (command: string) => {
-  const [cmd] = command.toLowerCase().split(" ");
+  const parts = command.trim().split(" ");
+  const cmd = parts[0].toLowerCase();
 
   switch (cmd) {
     case "help":
@@ -92,6 +97,21 @@ export const executeCommand = async (command: string) => {
 
     case "sudo":
       return sudoCommandOutput;
+
+    case "weather":
+      const city = parts.slice(1).join(" ").trim();
+
+      if (!city) {
+        return weatherUsageOutput();
+      }
+
+      try {
+        const weather = await weatherService.getWeather(city);
+        return createWeatherOutput(weather);
+      } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : undefined;
+        return weatherErrorOutput(city, errorMessage);
+      }
 
     case "welcome":
       return welcomeCommandOutput;
