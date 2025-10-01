@@ -13,8 +13,8 @@ import {
   welcomeCommandOutput,
   whoAmICommandOutput,
 } from "@/constants";
-import { jokeService } from "./services/joke.service";
-import { quoteService } from "./services/quote.service";
+import { jokeService } from "@/services/joke.service";
+import { quoteService } from "@/services/quote.service";
 
 export const executeCommand = async (command: string) => {
   const [cmd] = command.toLowerCase().split(" ");

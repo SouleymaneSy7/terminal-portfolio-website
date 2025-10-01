@@ -1,5 +1,5 @@
-import { JokeResponseType } from "@/types";
 import axios from "axios";
+import { JokeResponseType } from "@/types";
 
 const JOKE_API_URL = "https://v2.jokeapi.dev/joke";
 
