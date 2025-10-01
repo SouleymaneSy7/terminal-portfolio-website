@@ -13,8 +13,8 @@ import {
   welcomeCommandOutput,
   whoAmICommandOutput,
 } from "@/constants";
-// import { CommandHistoryOutput } from "@/types";
 import { jokeService } from "./services/joke.service";
+import { quoteService } from "./services/quote.service";
 
 export const executeCommand = async (command: string) => {
   const [cmd] = command.toLowerCase().split(" ");
@@ -51,6 +51,23 @@ export const executeCommand = async (command: string) => {
         type: "text" as const,
         content: ["Could not fetch a joke."],
       };
+
+    case "quote":
+      const quote = await quoteService.getRandomQuote();
+
+      if (quote) {
+        return {
+          id: crypto.randomUUID(),
+          type: "text" as const,
+          content: [`"${quote.slip.advice}"`],
+        };
+      } else {
+        return {
+          id: crypto.randomUUID(),
+          type: "text" as const,
+          content: ["Could not fetch a quote. Retry later..."],
+        };
+      }
 
     case "hostname":
       return hostNameCommandOutput;
