@@ -295,7 +295,7 @@ export const projectsCommandOutput = [
             target="_blank"
             rel="noopener noreferrer"
           >
-            GitHub
+            github.com/SouleymaneSy7/fyrre-magazine-website
           </a>
         </p>
       </div>`,
@@ -366,7 +366,7 @@ export const projectsCommandOutput = [
             target="_blank"
             rel="noopener noreferrer"
           >
-            GitHub
+            github.com/SouleymaneSy7/conakry-website-challenge
           </a>
         </p>
     </div>`,
@@ -435,7 +435,7 @@ export const projectsCommandOutput = [
           target="_blank"
           rel="noopener noreferrer"
         >
-          GitHub
+          github.com/SouleymaneSy7/dictionary-web-app
         </a>
       </p>
     </div>`,
@@ -509,7 +509,7 @@ export const projectsCommandOutput = [
           target="_blank"
           rel="noopener noreferrer"
         >
-          GitHub
+          github.com/SouleymaneSy7/vue-js-password-generator
         </a>
       </p>
     </div>`,
@@ -578,7 +578,7 @@ export const projectsCommandOutput = [
           target="_blank"
           rel="noopener noreferrer"
         >
-          GitHub
+          github.com/SouleymaneSy7/github-user-search-app
         </a>
       </p>
     </div>`,
