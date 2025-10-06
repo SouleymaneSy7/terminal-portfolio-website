@@ -205,7 +205,19 @@ export const whoAmICommandOutput = [
   {
     id: crypto.randomUUID(),
     type: "text" as const,
-    content: ["guest"],
+    content: [
+      "> Identifying user...",
+      "root@system",
+      " ",
+      "...Nah, I'm just messing with you! 😄",
+      " ",
+      "Looks like you're exploring my terminal portfolio!",
+      "This is a web-based terminal interface showcasing my skills, projects, and experience.",
+      " ",
+      "Type 'about' to learn more about me.",
+      "Type 'projects' to see what I've built.",
+      "Type 'help' to see available commands.",
+    ],
   },
 ];
 
