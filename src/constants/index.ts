@@ -169,8 +169,16 @@ export const repoCommandOutput = [
         </a>
 
         <p>Star this project if you like it!</p>
-        <p>Feel free to fork and customize for your own use</p>
-        <p>Made with ❤️ by Souleymane Sy</p>
+        <p>Feel free to fork and customize for your own use.</p>
+        <p>Made with ❤️ by
+          <a
+            href="https://github.com/SouleymaneSy7"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Souleymane Sy
+          </a>
+        </p>
       </div>
      `,
     ],
@@ -290,9 +298,9 @@ export const projectsCommandOutput = [
             GitHub
           </a>
         </p>
-      </div>
+      </div>`,
 
-      <div class="space-y-3 whitespace-normal py-3">
+      `<div class="space-y-3 whitespace-normal py-3">
         <h2 class="text-fs-subtitle font-bold text-primary-clr">
           Conakry Website Challenge
         </h2>
