@@ -28,20 +28,23 @@ A modern terminal-style portfolio website that offers an immersive command-line 
 - Tab completion for commands and arguments
 - Custom ASCII art and animations
 - Multiple built-in commands and utilities
+- Real-time API integrations for jokes, quotes, and weather data
+- Interactive games and fun features
 
 ## Technologies Used
 
 ### Core Technologies
 
-- [Next.js](https://nextjs.org/) - React framework for production.
+- [Next.js 15.2.3](https://nextjs.org/) - React framework for production.
+- [React 19](https://react.dev/) - JavaScript library for building user interfaces.
 - [TypeScript](https://www.typescriptlang.org/) - JavaScript with syntax for types.
-- [TailwindCSS](https://tailwindcss.com/) - Utility-first CSS framework.
+- [TailwindCSS V4](https://tailwindcss.com/) - Utility-first CSS framework.
 - [Bun](https://bun.sh/) - Modern JavaScript runtime and package manager.
 
 ### Additional Dependencies
 
-- [detect.js](https://github.com/darcyclarke/Detect.js/) - User-Agent detection library.
 - [DOMPurify](https://github.com/cure53/DOMPurify) - XSS sanitizer for HTML and MathML.
+- [Axios](https://axios-http.com/) - Promise-based HTTP client for API requests.
 - [ESLint](https://eslint.org/) - Code linting tool.
 - [PostCSS](https://postcss.org/) - CSS transformation tool.
 - [Prettier](https://prettier.io/) - Code formatting tool.
@@ -58,16 +61,12 @@ A modern terminal-style portfolio website that offers an immersive command-line 
   - Early error detection and better IDE support.
 
 - **Modern Styling Architecture:**
-  - Responsive layouts with TailwindCSS.
+  - Responsive layouts with TailwindCSS V4.
   - Maintainable and scalable CSS structure.
 
 - **Enhanced Security:**
   - XSS protection with DOMPurify.
   - Sanitized user inputs and content rendering.
-
-- **Cross-Platform Compatibility:**
-  - Intelligent browser detection.
-  - Adaptive features based on device capabilities.
 
 - **Development Excellence:**
   - Automated code formatting.
@@ -92,22 +91,49 @@ bun dev
 
 ## Usage
 
-Type `help` in the terminal interface to see available commands. Here are some basic commands:
+Type `help` in the terminal interface to see available commands. Here are all the available commands:
 
-- `about` - Learn more about me.
-- `clear` - Clear the terminal screen.
-- `date` - Display current date.
-- `exit` - Close terminal session.
-- `help` - Show available commands.
-- `hostname` - Display system hostname.
-- `neofetch` - Display system info.
-- `projects` - View my portfolio projects.
-- `repo` - View source code and project details.
-- `sudo` - Try to gain admin access.
-- `theme` - Change terminal theme.
-- `time` - Show current time.
-- `welcome` - Show welcome message.
-- `whoami` - Show current user info.
+### Navigation & System Commands
+
+- `clear` - Clear the terminal screen
+- `exit` - Exit the terminal (close tab)
+- `help` - List all available commands with descriptions
+- `hostname` - Display the system hostname
+- `neofetch` - Display system and user information in a stylized format
+- `theme` - Change the terminal color theme (Coming soon...)
+- `welcome` - Display the welcome message and banner
+
+### Information Commands
+
+- `about` - Learn more about me and my background
+- `whoami` - Display current user identity
+- `date` - Display current date
+- `time` - Display current time
+- `projects` - Browse my portfolio projects
+- `repo` - View this project source code and details
+- `email` - Display my email address with a fun message
+
+### Utility Commands
+
+- `weather [city]` - Get current weather information for any city (fetched from API)
+  - Example: `weather Paris`
+
+### Fun & Interactive Commands
+
+- `cowsay [message]` - Make a cow say your message with ASCII art
+  - Example: `cowsay Hello World!`
+- `rps [rock|paper|scissors]` - Play a rock-paper-scissors game against the terminal
+  - Example: `rps rock`
+- `joke` - Get a random programming joke (fetched from API)
+- `quote` - Get an inspiring or funny quote (fetched from API)
+- `sudo` - Attempt to gain admin access (just for fun!)
+
+### Keyboard Shortcuts
+
+- `[Tab]` - Autocomplete commands
+- `[↑] [↓]` - Navigate the command history
+- `[Enter]` - Execute command
+- `[CTRL + L]` - Clear the terminal screen
 
 ## Current Development Status
 
@@ -120,6 +146,9 @@ Type `help` in the terminal interface to see available commands. Here are some b
 - [x] Command history navigation
 - [x] Command auto-completion
 - [x] Complete project showcase
+- [x] API integrations (jokes, quotes, weather)
+- [x] Interactive games (rock-paper-scissors)
+- [x] ASCII art features (cowsay, welcome banner, neofetch)
 - [ ] Persistent storage for settings
 - [ ] Easter eggs and hidden features
 - [ ] Multiple themes support
@@ -138,7 +167,7 @@ This project draws inspiration from these amazing developers and their work:
 - [Dev Challenges](https://devchallenges.io/profile/534cd213-3165-4c16-bdcf-058e1f468da0) - View my coding solutions.
 - [Twitter](https://twitter.com/Souleymanesy43) - Follow me for updates.
 
-Connect with me to discuss web development, collaboration opportunities, or just to say hi! 👋
+Connect with me to discuss web development, collaboration opportunities, or just to say hi!
 
 ---
 
