@@ -32,6 +32,38 @@ export const executeCommand = async (command: string) => {
     case "clear":
       return [];
 
+    case "cowsay":
+      const message = parts.slice(1).join(" ").trim();
+
+      if (!message) {
+        return {
+          id: crypto.randomUUID(),
+          type: "text" as const,
+          content: ["Usage: cowsay [message]", "Example: cowsay Hello World!"],
+        };
+      }
+
+      const borderLength = message.length + 2;
+      const topBorder = " " + "_".repeat(borderLength);
+      const bottomBorder = " " + "-".repeat(borderLength);
+
+      const cowMessage = [
+        `${topBorder}`,
+        `< ${message} >`,
+        `${bottomBorder}`,
+        "        \\   ^__^",
+        "         \\  (oo)\\_______",
+        "            (__)\\       )\\/\\",
+        "                ||----w |",
+        "                ||     ||",
+      ];
+
+      return {
+        id: crypto.randomUUID(),
+        type: "text" as const,
+        content: cowMessage,
+      };
+
     case "about":
       return aboutMeCommandOutput;
 
