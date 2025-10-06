@@ -50,6 +50,7 @@ export const commands = [
   "projects",
   "quote",
   "repo",
+  "rps",
   "sudo",
   "theme",
   "time",
@@ -83,17 +84,18 @@ export const helpCommandOutput = [
       "  time      - Display current time.",
       "  whoami    - Display current user identity.",
       "  projects  - Browse my portfolio projects.",
-      "  repo      - View source code and project details.",
-      "  weather   - Get current weather for a given city (Example: weather Paris)",
+      "  repo      - View this project source code and details.",
+      "  weather   - Get current weather information for a given city (Example: weather Paris)",
       "  email     - Display my email address with a fun message.",
       " ",
       "Fun:",
       " ",
-      "  sudo      - Attempt to gain admin access (Try it!).",
-      "  welcome   - Display the welcome message and banner.",
+      "  cowsay    - Make a cow say your message with ASCII art! (Try: cowsay Mooo!)",
       "  joke      - Get a random programming joke.",
       "  quote     - Get an inspiring or funny quote.",
-      "  cowsay    - Display a message with an ASCII art cow (Example: cowsay Hello).",
+      "  rps       - Face off in a thrilling rock-paper-scissors game against the terminal! (Usage: rps [rock|paper|scissors])",
+      "  sudo      - Attempt to gain admin access (Try it!).",
+      "  welcome   - Display the welcome message and banner.",
       " ",
       "Keyboard Shortcuts:",
       " ",
@@ -123,7 +125,7 @@ export const aboutMeCommandOutput = [
       "exceptional web experiences.",
       " ",
       "Throughout my self-learning journey, I've developed expertise in a wide range of technologies including",
-      "HTML, CSS, JavaScript, TypeScript, React, Vue.js, Next.js, Sass, and TailwindCSS.",
+      "HTML, CSS, JavaScript, TypeScript, React.js, Vue.js, Next.js, Sass, TailwindCSS, GSAP, Framer-Motion...",
       "Each of these tools has become an integral part of my development arsenal,",
       "allowing me to build robust and scalable applications.",
       " ",
@@ -714,3 +716,48 @@ export const emailCommandOutput = [
     ],
   },
 ];
+
+export const rspCommand = (userInput: string) => {
+  const choices = ["rock", "paper", "scissors"];
+  const userChoice = userInput.toLocaleLowerCase().trim().split(" ")[0];
+
+  if (!choices.includes(userChoice)) {
+    return [
+      {
+        id: crypto.randomUUID(),
+        type: "text" as const,
+        content: [
+          "Oops! You gotta pick 'rock', 'paper', or 'scissors'! Try again, like this: rps rock",
+        ],
+      },
+    ];
+  }
+
+  const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+  let result;
+
+  if (userChoice === computerChoice) {
+    result = "It's a tie! We're too good at this!";
+  } else if (
+    (userChoice === "rock" && computerChoice === "scissors") ||
+    (userChoice === "paper" && computerChoice === "rock") ||
+    (userChoice === "scissors" && computerChoice === "paper")
+  ) {
+    result = "You win! Nice move, champ! 🏆";
+  } else {
+    result = "Oof, I win! Better luck next time!";
+  }
+
+  return [
+    {
+      id: crypto.randomUUID(),
+      type: "text" as const,
+      content: [
+        `You chose: ${userChoice}`,
+        `I chose: ${computerChoice}`,
+        result,
+        "Play again? Just type 'rps' followed by your choice!",
+      ],
+    },
+  ];
+};

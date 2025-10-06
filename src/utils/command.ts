@@ -9,6 +9,7 @@ import {
   neofetchCommandOutput,
   projectsCommandOutput,
   repoCommandOutput,
+  rspCommand,
   sudoCommandOutput,
   themeCommandOutput,
   timeCommandOutput,
@@ -31,6 +32,26 @@ export const executeCommand = async (command: string) => {
 
     case "clear":
       return [];
+
+    case "rps":
+      const userChoice = parts.slice(1).join(" ").trim();
+
+      if (!userChoice) {
+        return [
+          {
+            id: crypto.randomUUID(),
+            type: "text" as const,
+            content: [
+              "Pick 'rock', 'paper', or 'scissors' to battle it out!",
+              "Usage: rps [rock|paper|scissors]",
+              "Example: rps rock",
+              "C'mon, let's throw some shapes!",
+            ],
+          },
+        ];
+      }
+
+      return rspCommand(userChoice);
 
     case "cowsay":
       const message = parts.slice(1).join(" ").trim();
