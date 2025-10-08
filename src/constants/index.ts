@@ -770,66 +770,61 @@ export const contactCommandOutput = [
     type: "html" as const,
     content: [
       `
-      <div class="space-y-3 py-3">
-        <div class="pt-4">
+      <div class="space-y-3">
+        <div class="pt-2">
           <p class="pb-3">Connect with me across the web:</p>
           
           <div class="space-y-2">
-            <div class="flex items-start">
-              <span class="text-secondary-clr min-w-[120px]">Email:</span>
+            <div>
+              <span class="text-tertiary-clr">Email:</span>
               <a 
                 href="mailto:souleymanesydeveloppers@gmail.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                class="hover:text-primary-clr transition-colors"
               >
                 souleymanesydeveloppers@gmail.com
               </a>
             </div>
             
-            <div class="flex items-start">
-              <span class="text-secondary-clr min-w-[120px]">GitHub:</span>
+            <div>
+              <span class="text-tertiary-clr">GitHub:</span>
               <a 
                 href="https://github.com/SouleymaneSy7" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                class="hover:text-primary-clr transition-colors"
               >
                 github.com/SouleymaneSy7
               </a>
             </div>
             
-            <div class="flex items-start">
-              <span class="text-secondary-clr min-w-[120px]">Twitter/X:</span>
+            <div>
+              <span class="text-tertiary-clr">Twitter/X:</span>
               <a 
                 href="https://twitter.com/Souleymanesy43" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                class="hover:text-primary-clr transition-colors"
               >
                 twitter.com/Souleymanesy43
               </a>
             </div>
             
-            <div class="flex items-start">
-              <span class="text-secondary-clr min-w-[120px]">Frontend Mentor:</span>
+            <div>
+              <span class="text-tertiary-clr">Frontend Mentor:</span>
               <a 
                 href="https://www.frontendmentor.io/profile/SouleymaneSy7" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                class="hover:text-primary-clr transition-colors"
               >
                 frontendmentor.io/profile/SouleymaneSy7
               </a>
             </div>
             
-            <div class="flex items-start">
-              <span class="text-secondary-clr min-w-[120px]">Dev Challenges:</span>
+            <div>
+              <span class="text-tertiary-clr">Dev Challenges:</span>
               <a 
                 href="https://devchallenges.io/profile/534cd213-3165-4c16-bdcf-058e1f468da0" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                class="hover:text-primary-clr transition-colors"
               >
                 devchallenges.io/profile/SouleymaneSy7
               </a>
