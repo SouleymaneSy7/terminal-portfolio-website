@@ -1,5 +1,6 @@
 import {
   aboutMeCommandOutput,
+  contactCommandOutput,
   createWeatherOutput,
   dateCommandOutput,
   emailCommandOutput,
@@ -32,6 +33,9 @@ export const executeCommand = async (command: string) => {
 
     case "clear":
       return [];
+
+    case "contact":
+      return contactCommandOutput;
 
     case "rps":
       const userChoice = parts.slice(1).join(" ").trim();

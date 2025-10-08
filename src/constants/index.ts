@@ -40,6 +40,7 @@ export const commands = [
   "about",
   "clear",
   "cowsay",
+  "contact",
   "date",
   "exit",
   "email",
@@ -80,6 +81,7 @@ export const helpCommandOutput = [
       "Information:",
       " ",
       "  about     - Learn more about me and my background.",
+      "  contact   - View my social media and contact information",
       "  date      - Display current date.",
       "  time      - Display current time.",
       "  whoami    - Display current user identity.",
@@ -761,3 +763,85 @@ export const rspCommand = (userInput: string) => {
     },
   ];
 };
+
+export const contactCommandOutput = [
+  {
+    id: crypto.randomUUID(),
+    type: "html" as const,
+    content: [
+      `
+      <div class="space-y-3 py-3">
+        <div class="pt-4">
+          <p class="pb-3">Connect with me across the web:</p>
+          
+          <div class="space-y-2">
+            <div class="flex items-start">
+              <span class="text-secondary-clr min-w-[120px]">Email:</span>
+              <a 
+                href="mailto:souleymanesydeveloppers@gmail.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="hover:text-primary-clr transition-colors"
+              >
+                souleymanesydeveloppers@gmail.com
+              </a>
+            </div>
+            
+            <div class="flex items-start">
+              <span class="text-secondary-clr min-w-[120px]">GitHub:</span>
+              <a 
+                href="https://github.com/SouleymaneSy7" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="hover:text-primary-clr transition-colors"
+              >
+                github.com/SouleymaneSy7
+              </a>
+            </div>
+            
+            <div class="flex items-start">
+              <span class="text-secondary-clr min-w-[120px]">Twitter/X:</span>
+              <a 
+                href="https://twitter.com/Souleymanesy43" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="hover:text-primary-clr transition-colors"
+              >
+                twitter.com/Souleymanesy43
+              </a>
+            </div>
+            
+            <div class="flex items-start">
+              <span class="text-secondary-clr min-w-[120px]">Frontend Mentor:</span>
+              <a 
+                href="https://www.frontendmentor.io/profile/SouleymaneSy7" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="hover:text-primary-clr transition-colors"
+              >
+                frontendmentor.io/profile/SouleymaneSy7
+              </a>
+            </div>
+            
+            <div class="flex items-start">
+              <span class="text-secondary-clr min-w-[120px]">Dev Challenges:</span>
+              <a 
+                href="https://devchallenges.io/profile/534cd213-3165-4c16-bdcf-058e1f468da0" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="hover:text-primary-clr transition-colors"
+              >
+                devchallenges.io/profile/SouleymaneSy7
+              </a>
+            </div>
+          </div>
+          
+          <p class="pt-4">
+            Feel free to reach out for collaborations, questions, or just to say hi!
+          </p>
+        </div>
+      </div>
+      `,
+    ],
+  },
+];
