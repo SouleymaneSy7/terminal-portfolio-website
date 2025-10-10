@@ -69,3 +69,25 @@ export interface AdviceSlip {
 export interface QuoteResponseType {
   slip: AdviceSlip;
 }
+
+export interface QuizQuestionType {
+  question: string;
+  options: string[];
+  answer: number;
+  correctMsg: string;
+  wrongMsg: string;
+  explanation?: string;
+}
+
+export interface GameStateType {
+  currentQuestion: QuizQuestionType | null;
+  score: number;
+  questionsAnswered: number;
+  askedQuestions: number[];
+}
+
+export interface QuizCommandResponseType {
+  id: string;
+  type: "text";
+  content: string[];
+}

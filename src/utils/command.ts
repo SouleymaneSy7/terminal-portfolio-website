@@ -19,6 +19,7 @@ import {
   welcomeCommandOutput,
   whoAmICommandOutput,
 } from "@/constants";
+import { handleGameCommand } from "@/commands/quiz-game-command";
 import { jokeService } from "@/services/joke.service";
 import { quoteService } from "@/services/quote.service";
 import { weatherService } from "@/services/weather.service";
@@ -56,6 +57,11 @@ export const executeCommand = async (command: string) => {
       }
 
       return rspCommand(userChoice);
+
+    case "game":
+      const gameArgs = parts.slice(1);
+
+      return handleGameCommand(gameArgs);
 
     case "cowsay":
       const message = parts.slice(1).join(" ").trim();
