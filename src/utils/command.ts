@@ -4,9 +4,7 @@ import {
   createWeatherOutput,
   emailCommandOutput,
   exitCommandOutput,
-  getDateCommandOutput,
-  getTimeCommandOutput,
-  helpCommandOutput,
+  handleGameCommand,
   hostNameCommandOutput,
   neofetchCommandOutput,
   projectsCommandOutput,
@@ -18,8 +16,12 @@ import {
   weatherUsageOutput,
   welcomeCommandOutput,
   whoAmICommandOutput,
+} from "@/commands";
+import {
+  getDateCommandOutput,
+  getTimeCommandOutput,
+  helpCommandOutput,
 } from "@/constants";
-import { handleGameCommand } from "@/commands/quiz-game-command";
 import { jokeService } from "@/services/joke.service";
 import { quoteService } from "@/services/quote.service";
 import { weatherService } from "@/services/weather.service";
