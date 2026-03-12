@@ -2,9 +2,10 @@ import {
   aboutMeCommandOutput,
   contactCommandOutput,
   createWeatherOutput,
-  dateCommandOutput,
   emailCommandOutput,
   exitCommandOutput,
+  getDateCommandOutput,
+  getTimeCommandOutput,
   helpCommandOutput,
   hostNameCommandOutput,
   neofetchCommandOutput,
@@ -13,7 +14,6 @@ import {
   rspCommand,
   sudoCommandOutput,
   themeCommandOutput,
-  timeCommandOutput,
   weatherErrorOutput,
   weatherUsageOutput,
   welcomeCommandOutput,
@@ -99,10 +99,10 @@ export const executeCommand = async (command: string) => {
       return aboutMeCommandOutput;
 
     case "date":
-      return dateCommandOutput;
+      return getDateCommandOutput();
 
     case "time":
-      return timeCommandOutput;
+      return getTimeCommandOutput();
 
     case "joke":
       const joke = await jokeService.getRandomJoke();
