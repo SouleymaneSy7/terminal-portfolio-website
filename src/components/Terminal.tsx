@@ -96,13 +96,18 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
 
             <br />
 
-            <CommandOutput
-              speed={100}
-              containerRef={containerRef}
-              outputTypes={item.output[0].type}
-              outputLines={item.output[0].content}
-              setAnimationIsComplete={setAnimationIsComplete}
-            />
+            {item.output.map((block, i) => {
+              return (
+                <CommandOutput
+                  key={i}
+                  speed={100}
+                  containerRef={containerRef}
+                  outputTypes={block.type}
+                  outputLines={block.content}
+                  setAnimationIsComplete={setAnimationIsComplete}
+                />
+              );
+            })}
           </div>
         ))}
       </div>
