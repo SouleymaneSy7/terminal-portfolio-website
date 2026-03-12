@@ -1,0 +1,62 @@
+const ASCII_ART_ASTRONAUT = `
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣤⣤⣤⣤⣶⣦⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⡿⠛⠉⠙⠛⠛⠛⠛⠻⢿⣿⣷⣤⡀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⠋⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⠈⢻⣿⣿⡄⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⣸⣿⡏⠀⠀⠀⣠⣶⣾⣿⣿⣿⠿⠿⠿⢿⣿⣿⣿⣄⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⣿⣿⠁⠀⠀⢰⣿⣿⣯⠁⠀⠀⠀⠀⠀⠀⠀⠈⠙⢿⣷⡄⠀
+⠀⠀⣀⣤⣴⣶⣶⣿⡟⠀⠀⠀⢸⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣷⠀
+⠀⢰⣿⡟⠋⠉⣹⣿⡇⠀⠀⠀⠘⣿⣿⣿⣿⣷⣦⣤⣤⣤⣶⣶⣶⣶⣿⣿⣿⠀
+⠀⣸⣿⡇⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠉⠻⠿⣿⣿⣿⣿⡿⠿⠿⠛⢻⣿⡇⠀⠀
+⠀⣿⣿⠁⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣧⠀⠀
+⠀⢿⣿⡆⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡇⠀⠀
+⠀⠸⣿⣧⡀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⠃⠀⠀
+⠀⠀⠛⢿⣿⣿⣿⣿⣇⠀⠀⠀⠀⠀⣰⣿⣿⣷⣶⣶⣶⣶⠶⠀⢠⣿⣿⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀⣿⣿⡇⠀⣽⣿⡏⠁⠀⠀⢸⣿⡇⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀⣿⣿⡇⠀⢹⣿⡆⠀⠀⠀⣸⣿⠇⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢿⣿⣦⣄⣀⣠⣴⣿⣿⠁⠀⠈⠻⣿⣿⣿⣿⡿⠏⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠈⠛⠻⠿⠿⠿⠿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+`.trim();
+
+export const aboutMeCommandOutput = [
+  {
+    id: crypto.randomUUID(),
+    type: "text" as const,
+    content: [
+      " ",
+      " ",
+      "👋 Hey, I'm Souleymane Sy!",
+      " ",
+      "Self-taught frontend web developer, based in Coyah, Guinea-Conakry.",
+      "Since 2022, I've been learning web development online — no school,",
+      "no bootcamp, just YouTube, curiosity and a whole lot of practice.",
+      " ",
+      "It all started with HTML and CSS, then JavaScript came along.",
+      "That first programming language took me 8 months to truly get comfortable with.",
+      "It was tough, but I kept going.",
+      " ",
+      "I then learned Vue.js, Sass, TypeScript, and React in 2024",
+      "with Josh W. Comeau's 'Joy of React' course — one of the best",
+      "courses I've ever taken. GSAP and Framer Motion followed,",
+      "because web animation is what brings an interface to life.",
+      " ",
+      "In late 2024, I entered Enzo Ustariz's challenge with a website",
+      "for my hometown Conakry — and I landed 3rd place. 🏆",
+      "That moment confirmed that my sacrifices were paying off.",
+      " ",
+      "In 2025, I went deep into Next.js, then landed an internship",
+      "at DevelopersHub Corporation — 6 weeks remote, certified",
+      "with exceptional distinction.",
+      " ",
+      "My current stack:",
+      "HTML · CSS · Sass · JavaScript · TypeScript · React · Next.js",
+      "Vue.js · Tailwind CSS · GSAP · Framer Motion · Git · GitHub · Bun",
+      " ",
+      "What drives me? Building interfaces that make sense, move well,",
+      "and stand the test of time. Coming from a country where tech resources",
+      "are scarce, I learned to find solutions with what's available.",
+      "And that shapes a very different kind of developer.",
+      " ",
+      "Type 'projects' to explore my work!",
+    ],
+  },
+];
