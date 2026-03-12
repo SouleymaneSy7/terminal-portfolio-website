@@ -9,6 +9,7 @@ import {
   neofetchCommandOutput,
   projectsCommandOutput,
   repoCommandOutput,
+  resumeCommandOutput,
   rspCommand,
   sudoCommandOutput,
   themeCommandOutput,
@@ -148,6 +149,9 @@ export const executeCommand = async (command: string) => {
 
     case "exit":
       return exitCommandOutput;
+
+    case "resume":
+      return resumeCommandOutput;
 
     case "email":
       return emailCommandOutput;
