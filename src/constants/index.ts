@@ -9,12 +9,12 @@ const resolutionHeight = global.window && window.screen.availHeight;
 const resolution = `${resolutionWidth}x${resolutionHeight}`;
 
 const ASCII_NAME = `
-░██████╗░█████╗░██╗░░░██╗██╗░░░░░███████╗██╗░░░██╗███╗░░░███╗░█████╗░███╗░░██╗███████╗  ░██████╗██╗░░░██╗
-██╔════╝██╔══██╗██║░░░██║██║░░░░░██╔════╝╚██╗░██╔╝████╗░████║██╔══██╗████╗░██║██╔════╝  ██╔════╝╚██╗░██╔╝
-╚█████╗░██║░░██║██║░░░██║██║░░░░░█████╗░░░╚████╔╝░██╔████╔██║███████║██╔██╗██║█████╗░░  ╚█████╗░░╚████╔╝░
-░╚═══██╗██║░░██║██║░░░██║██║░░░░░██╔══╝░░░░╚██╔╝░░██║╚██╔╝██║██╔══██║██║╚████║██╔══╝░░  ░╚═══██╗░░╚██╔╝░░
-██████╔╝╚█████╔╝╚██████╔╝███████╗███████╗░░░██║░░░██║░╚═╝░██║██║░░██║██║░╚███║███████╗  ██████╔╝░░░██║░░░
-╚═════╝░░╚════╝░░╚═════╝░╚══════╝╚══════╝░░░╚═╝░░░╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚══╝╚══════╝  ╚═════╝░░░░╚═╝░░░
+░██████╗░█████╗░██╗░░░██╗██╗░░░░░███████╗██╗░░░██╗███╗░░░███╗░█████╗░███╗░░██╗███████╗  ░██████╗██╗░░░██╗
+██╔════╝██╔══██╗██║░░░██║██║░░░░░██╔════╝╚██╗░██╔╝████╗░████║██╔══██╗████╗░██║██╔════╝  ██╔════╝╚██╗░██╔╝
+╚█████╗░██║░░██║██║░░░██║██║░░░░░█████╗░░░╚████╔╝░██╔████╔██║███████║██╔██╗██║█████╗░░  ╚█████╗░░╚████╔╝░
+░╚═══██╗██║░░██║██║░░░██║██║░░░░░██╔══╝░░░░╚██╔╝░░██║╚██╔╝██║██╔══██║██║╚████║██╔══╝░░  ░╚═══██╗░░╚██╔╝░░
+██████╔╝╚█████╔╝╚██████╔╝███████╗███████╗░░░██║░░░██║░╚═╝░██║██║░░██║██║░╚███║███████╗  ██████╔╝░░░██║░░░
+╚═════╝░░╚════╝░░╚═════╝░╚══════╝╚══════╝░░░╚═╝░░░╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚══╝╚══════╝  ╚═════╝░░░░╚═╝░░░
         `.trim();
 
 const ASCII_ART_ASTRONAUT = `
@@ -35,6 +35,10 @@ const ASCII_ART_ASTRONAUT = `
 ⠀⠀⠀⠀⠀⠀⠀⢿⣿⣦⣄⣀⣠⣴⣿⣿⠁⠀⠈⠻⣿⣿⣿⣿⡿⠏⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠈⠛⠻⠿⠿⠿⠿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 `.trim();
+
+// ============================================
+// COMMANDS LIST
+// ============================================
 
 export const commands = [
   "about",
@@ -61,6 +65,10 @@ export const commands = [
   "whoami",
 ];
 
+// ============================================
+// HELP
+// ============================================
+
 export const helpCommandOutput = [
   {
     id: crypto.randomUUID(),
@@ -75,31 +83,31 @@ export const helpCommandOutput = [
       "  clear     - Clear the terminal screen.",
       "  exit      - Exit the terminal (close tab).",
       "  help      - List all available commands with descriptions.",
-      "  hostname  - Display the system hostname.",
-      "  neofetch  - Display system and user information.",
-      "  theme     - Change the terminal color theme (Coming soon...).",
+      "  hostname  - Display system information.",
+      "  neofetch  - Display a Linux-style system summary.",
+      "  theme     - Change the terminal color theme (coming soon...).",
       " ",
       "Information:",
       " ",
-      "  about     - Learn more about me and my background.",
-      "  contact   - View my social media and contact information",
+      "  about     - My story, my journey and my tech stack.",
+      "  contact   - My social networks and contact details.",
       "  date      - Display current date.",
       "  time      - Display current time.",
-      "  whoami    - Display current user identity.",
-      "  projects  - Browse my portfolio projects.",
-      "  repo      - View this project source code and details.",
-      "  weather   - Get current weather information for a given city (Example: weather Paris)",
-      "  email     - Display my email address with a fun message.",
+      "  whoami    - Who is behind this terminal?",
+      "  projects  - Browse my most notable projects.",
+      "  repo      - View this portfolio's source code.",
+      "  weather   - Get real-time weather for a city. (Example: weather Conakry)",
+      "  email     - Display my email address.",
       " ",
       "Fun:",
       " ",
-      "  cowsay    - Make a cow say your message with ASCII art! (Try: cowsay Mooo!)",
-      "  game      - Test your skills in a thrilling Frontend Quiz Challenge! (Try: game)",
+      "  cowsay    - Make a cow say your message in ASCII! (Try: cowsay Hello!)",
+      "  game      - Interactive Frontend Quiz — test your knowledge! (Try: game)",
       "  joke      - Get a random programming joke.",
       "  quote     - Get an inspiring or funny quote.",
-      "  rps       - Face off in a thrilling rock-paper-scissors game against the terminal! (Usage: rps [rock|paper|scissors])",
-      "  sudo      - Attempt to gain admin access (Try it!).",
-      "  welcome   - Display the welcome message and banner.",
+      "  rps       - Rock-paper-scissors against the terminal! (Usage: rps [rock|paper|scissors])",
+      "  sudo      - Attempt to gain root access... (Good luck 😄)",
+      "  welcome   - Display the welcome message again.",
       " ",
       "Keyboard Shortcuts:",
       " ",
@@ -113,6 +121,10 @@ export const helpCommandOutput = [
   },
 ];
 
+// ============================================
+// ABOUT
+// ============================================
+
 export const aboutMeCommandOutput = [
   {
     id: crypto.randomUUID(),
@@ -122,39 +134,56 @@ export const aboutMeCommandOutput = [
       ASCII_ART_ASTRONAUT,
       " ",
       " ",
-      "👋 Hey There, I'm Souleymane Sy!",
+      "👋 Hey, I'm Souleymane Sy!",
       " ",
-      "I'm a passionate self-taught web developer with over three years of experience in crafting digital solutions.",
-      "My journey into web development began with curiosity and has evolved into a deep commitment to creating",
-      "exceptional web experiences.",
+      "Self-taught frontend web developer, based in Coyah, Guinea-Conakry.",
+      "Since 2022, I've been learning web development online — no school,",
+      "no bootcamp, just YouTube, curiosity and a whole lot of practice.",
       " ",
-      "Throughout my self-learning journey, I've developed expertise in a wide range of technologies including",
-      "HTML, CSS, JavaScript, TypeScript, React.js, Vue.js, Next.js, Sass, TailwindCSS, GSAP, Framer-Motion...",
-      "Each of these tools has become an integral part of my development arsenal,",
-      "allowing me to build robust and scalable applications.",
+      "It all started with HTML and CSS, then JavaScript came along.",
+      "That first programming language took me 8 months to truly get comfortable with.",
+      "It was tough, but I kept going.",
       " ",
-      "What truly excites me about web development is the perfect blend of creativity and technical problem-solving.",
-      "I believe in writing clean, maintainable code that not only works efficiently but is also easily understood by others.",
+      "I then learned Vue.js, Sass, TypeScript, and React in 2024",
+      "with Josh W. Comeau's 'Joy of React' course — one of the best",
+      "courses I've ever taken. GSAP and Framer Motion followed,",
+      "because web animation is what brings an interface to life.",
       " ",
-      "Every project I undertake is an opportunity to push boundaries and implement innovative solutions.",
-      "I'm constantly learning and staying updated with the latest web technologies and best practices",
-      "to deliver the best possible results.",
+      "In late 2024, I entered Enzo Ustariz's challenge with a website",
+      "for my hometown Conakry — and I landed 3rd place. 🏆",
+      "That moment confirmed that my sacrifices were paying off.",
       " ",
-      "I'm always eager to take on new challenges and contribute to meaningful projects",
-      "that make a difference in the digital world.",
+      "In 2025, I went deep into Next.js, then landed an internship",
+      "at DevelopersHub Corporation — 6 weeks remote, certified",
+      "with exceptional distinction.",
+      " ",
+      "My current stack:",
+      "HTML · CSS · Sass · JavaScript · TypeScript · React · Next.js",
+      "Vue.js · Tailwind CSS · GSAP · Framer Motion · Git · GitHub · Bun",
+      " ",
+      "What drives me? Building interfaces that make sense, move well,",
+      "and stand the test of time. Coming from a country where tech resources",
+      "are scarce, I learned to find solutions with what's available.",
+      "And that shapes a very different kind of developer.",
       " ",
       "Type 'projects' to explore my work!",
     ],
   },
 ];
 
-export const dateCommandOutput = [
-  {
-    id: crypto.randomUUID(),
-    type: "text" as const,
-    content: [getDate()],
-  },
-];
+// ============================================
+// DATE & TIME
+// ============================================
+
+export const getDateCommandOutput = () => {
+  return [
+    {
+      id: crypto.randomUUID(),
+      type: "text" as const,
+      content: [getDate()],
+    },
+  ];
+};
 
 export const repoCommandOutput = [
   {
@@ -164,7 +193,7 @@ export const repoCommandOutput = [
       `
       <div class="space-y-3 whitespace-normal py-3">
         <p>
-          The complete source code for this terminal portfolio is 
+          The complete source code for this terminal portfolio is
           publicly available on GitHub:
         </p>
 
@@ -173,11 +202,19 @@ export const repoCommandOutput = [
           target="_blank"
           rel="noopener noreferrer"
         >
-          https://github.com/souleymanesy7/terminal-portfolio-website
+          github.com/SouleymaneSy7/terminal-portfolio-website
         </a>
 
-        <p>Star this project if you like it!</p>
-        <p>Feel free to fork and customize for your own use.</p>
+        <p>
+          Built with Next.js 15, React 19, TypeScript and Tailwind CSS v4.
+          Runtime: Bun. Color theme: Catppuccin Macchiato.
+        </p>
+
+        <p>
+          If you like this project, a ⭐ on GitHub is always appreciated.
+          Feel free to fork it and adapt it to your own style.
+        </p>
+
         <p>Made with ❤️ by
           <a
             href="https://github.com/SouleymaneSy7"
@@ -186,6 +223,7 @@ export const repoCommandOutput = [
           >
             Souleymane Sy
           </a>
+          — self-taught developer from Coyah, Guinea-Conakry.
         </p>
       </div>
      `,
@@ -193,21 +231,38 @@ export const repoCommandOutput = [
   },
 ];
 
-export const timeCommandOutput = [
-  {
-    id: crypto.randomUUID(),
-    type: "text" as const,
-    content: [getTime()],
-  },
-];
+export const getTimeCommandOutput = () => {
+  return [
+    {
+      id: crypto.randomUUID(),
+      type: "text" as const,
+      content: [getTime()],
+    },
+  ];
+};
+
+// ============================================
+// HOSTNAME
+// ============================================
 
 export const hostNameCommandOutput = [
   {
     id: crypto.randomUUID(),
     type: "text" as const,
-    content: ["souleymane-sy-portfolio"],
+    content: [
+      "souleymane-sy-portfolio",
+      " ",
+      "Hostname  →  souleymane-sy-portfolio",
+      "Owner     →  Souleymane Sy",
+      "Location  →  Coyah, Guinea-Conakry 🇬🇳",
+      "Uptime    →  Online since 2025, no interruptions.",
+    ],
   },
 ];
+
+// ============================================
+// WHOAMI
+// ============================================
 
 export const whoAmICommandOutput = [
   {
@@ -217,17 +272,26 @@ export const whoAmICommandOutput = [
       "> Identifying user...",
       "root@system",
       " ",
-      "...Nah, I'm just messing with you! 😄",
+      "...Just kidding! 😄",
       " ",
-      "Looks like you're exploring my terminal portfolio!",
-      "This is a web-based terminal interface showcasing my skills, projects, and experience.",
+      "You're exploring the terminal portfolio of Souleymane Sy —",
+      "self-taught frontend web developer since 2022.",
+      "Based in Coyah, Guinea-Conakry. React / Next.js / TypeScript specialist.",
       " ",
-      "Type 'about' to learn more about me.",
+      "89+ repos on GitHub. 50+ Frontend Mentor challenges.",
+      "3rd place — Enzo Ustariz Web Contest 2024. 🏆",
+      "Certified with exceptional distinction — DevelopersHub Corporation. ⭐",
+      " ",
+      "Type 'about' for my full story.",
       "Type 'projects' to see what I've built.",
-      "Type 'help' to see available commands.",
+      "Type 'help' to see all available commands.",
     ],
   },
 ];
+
+// ============================================
+// EXIT
+// ============================================
 
 export const exitCommandOutput = [
   {
@@ -236,11 +300,19 @@ export const exitCommandOutput = [
     content: [
       "Goodbye! 👋",
       "Thank you for visiting my terminal portfolio.",
-      "You can close this tab or window to exit.",
-      "Feel free to come back anytime!",
+      "You can close this tab to exit.",
+      " ",
+      "Have a project idea or an opportunity?",
+      "Reach out: souleymanesycodes@gmail.com",
+      " ",
+      "See you around.",
     ],
   },
 ];
+
+// ============================================
+// PROJECTS
+// ============================================
 
 export const projectsCommandOutput = [
   {
@@ -254,11 +326,10 @@ export const projectsCommandOutput = [
         </h2>
 
         <p>
-          Fyrre - A modern digital magazine, blog and podcast platform built with Next.js, React, MDX, Typescript and TailwindCSS. Delivering an immersive reading experience with an elegant interface, optimized performance, and responsive design. Perfect for digital content.
-        </p>
-
-        <p>
-          The website showcases editorial content in an elegant and immersive way, featuring a clean, minimalist design with a focus on typography and visual storytelling. It presents articles, magazine covers, and author profiles in a sophisticated layout that emphasizes readability and user engagement.
+          My most ambitious project to date. Fyrre is a full-featured digital magazine website,
+          designed for an immersive and elegant reading experience.
+          Articles, covers, author profiles — everything is crafted to balance
+          performance and editorial aesthetics.
         </p>
 
         <div>
@@ -271,35 +342,30 @@ export const projectsCommandOutput = [
             <span class="text-tertiary-clr">MDX</span>
             <span class="text-tertiary-clr">TypeScript</span>
             <span class="text-tertiary-clr">Tailwind CSS</span>
+            <span class="text-tertiary-clr">Resend</span>
           </div>
         </div>
 
         <p>
-          The project was built using Next.js for server-side rendering and optimal performance, React for building interactive UI components, MDX for writing content with embedded components, TypeScript for type-safe development, and Tailwind CSS for modern, utility-first styling. The website utilizes Next.js Image optimization for fast loading times and improved user experience. The responsive design ensures perfect display on mobile, tablet, and desktop devices.
+          Built with Next.js for SSR and SEO optimization, MDX for rich content management,
+          and Resend for the integrated newsletter. Result: a 95+ Lighthouse score
+          and a 40% reduction in initial load time.
         </p>
 
         <div>
-          <h3 class="text-fs-subtitle font-semi-bold mb-2">Key Features:</h3>
+          <h3 class="text-fs-subtitle font-semi-bold mb-2">Key Highlights:</h3>
           <ul class="list-disc pl-8">
-            <li>Modern magazine-style layout with editorial focus</li>
-            <li>MDX-powered content management for rich text and components</li>
-            <li>Optimized image loading with Next.js Image component</li>
-            <li>Responsive design for all screen sizes</li>
-            <li>Clean typography and minimalist aesthetic</li>
-            <li>Author profiles and article showcase</li>
-            <li>Smooth page transitions and animations</li>
-            <li>SEO-optimized with meta tags and structured data</li>
-            <li>Blog and podcast platform integration</li>
+            <li>95+ Lighthouse performance score</li>
+            <li>40% reduction in initial load time</li>
+            <li>MDX content with embedded React components</li>
+            <li>Fully functional newsletter via Resend</li>
+            <li>Responsive, mobile-first design</li>
+            <li>SEO-optimized with structured metadata</li>
           </ul>
         </div>
 
         <p>
-          The website provides an immersive reading experience with articles like "Hope Dies Last" that explore deep, reflective topics. Each article is presented with beautiful imagery and thoughtful design that enhances the content, making it perfect for digital magazines, blogs, and podcast platforms.
-        </p>
-
-        <p>
-          You can view the project live on:
-          
+          View the project live at:
           <a
             href="https://fyrre-magazine-website.netlify.app/"
             target="_blank"
@@ -309,7 +375,6 @@ export const projectsCommandOutput = [
           </a>
           <br />
           And check the source code on:
-          
           <a
             href="https://github.com/SouleymaneSy7/fyrre-magazine-website"
             target="_blank"
@@ -322,35 +387,27 @@ export const projectsCommandOutput = [
 
       `<div class="space-y-3 whitespace-normal py-3">
         <h2 class="text-fs-subtitle font-bold text-primary-clr">
-          Conakry Website Challenge
+          Conakry Tourism Website 🏆
         </h2>
 
         <p>
-          This project was created as part of a contest organized by
-          <a
-            href="https://discord.gg/9WryX5zs"
-          >
-            Le Repaire du Web
-          </a>
+          This project was built for a challenge organized by
+          <a href="https://discord.gg/9WryX5zs">Le Repaire du Web</a>
           (Discord channel run by YouTuber
-          <a
-            href="https://www.youtube.com/@EcoleduWeb"
-          >
-            Enzo Ustariz
-          </a>) with the theme of creating a website for a city. I chose to highlight
-          Conakry, the capital of Guinea and my hometown. <br />
+          <a href="https://www.youtube.com/@EcoleduWeb">Enzo Ustariz</a>),
+          on the theme of creating a tourism website for a city.
+          I chose Conakry — the capital of Guinea and my hometown. 🇬🇳
         </p>
 
         <p>
-          <strong class="text-secondary-clr">Ranking obtained</strong>: 🥉 3rd
-          place among a dozen participants.
+          <strong class="text-secondary-clr">Ranking achieved</strong>: 🥉 3rd place among 20+ participants.
+          A moment I'm truly proud of, after two weeks of intense work.
         </p>
 
         <p>
-          The website is a single-page application (SPA) that provides information
-          about Conakry, including its history, culture, and attractions. It
-          features a responsive design, ensuring a seamless user experience across
-          devices.
+          The site showcases Conakry's history, culture and attractions
+          with advanced animations, smooth scrolling and an immersive design.
+          This is the project that taught me the most about web animation and visual storytelling.
         </p>
 
         <div>
@@ -359,27 +416,21 @@ export const projectsCommandOutput = [
             <span class="text-tertiary-clr">React</span>
             <span class="text-tertiary-clr">TypeScript</span>
             <span class="text-tertiary-clr">Sass</span>
+            <span class="text-tertiary-clr">GSAP</span>
             <span class="text-tertiary-clr">Vite</span>
           </div>
         </div>
 
         <p>
-          The project was developed using React and TypeScript, with a focus on
-          clean code and best practices. I utilized Vite as the build tool for its
-          fast development experience and efficient bundling. The styling was done
-          using Sass, allowing for modular and maintainable CSS. The website is
-          hosted on Vercel, making it easily accessible to users.
-        </p>
-
-        <p>
-          You can view the project live on:
+          View the project live at:
           <a
             href="https://conakry-website-challenge-z4t7.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
           >
             conakry-website-challenge-z4t7.vercel.app
-          </a> <br />
+          </a>
+          <br />
           And check the source code on:
           <a
             href="https://github.com/SouleymaneSy7/conakry-website-challenge"
@@ -390,18 +441,17 @@ export const projectsCommandOutput = [
           </a>
         </p>
     </div>`,
+
       `<div class="space-y-3 whitespace-normal py-3">
       <h2 class="text-fs-subtitle font-bold text-primary-clr">
         Dictionary Web App
       </h2>
 
       <p>
-        This project is a dictionary web app that allows users to search for
-        words and view their definitions. The app provides a simple and
-        intuitive interface for users to explore the meanings of various words.
-        It is designed to be fast and responsive, ensuring a smooth user
-        experience. The app fetches data from an external API, providing
-        accurate and up-to-date information about words and their meanings.
+        A web dictionary application that lets you search any word and get
+        its definition, phonetics and usage examples.
+        My first serious project with Vue.js — the one that convinced me
+        the Composition API was a real step forward.
       </p>
 
       <div>
@@ -410,37 +460,28 @@ export const projectsCommandOutput = [
         </h3>
         <div>
           <span class="text-tertiary-clr">Vue.js</span>
-          <span class="text-tertiary-clr">Composition-API</span>
+          <span class="text-tertiary-clr">Composition API</span>
           <span class="text-tertiary-clr">TailwindCSS</span>
           <span class="text-tertiary-clr">Axios</span>
         </div>
       </div>
 
       <p>
-        The project was developed using Vue.js, a progressive JavaScript
-        framework, and Tailwind CSS, a utility-first CSS framework. It utilizes
-        the Composition API for better organization and reusability of code. The
-        app fetches data from an external API using Axios, a promise-based HTTP
-        client for the browser and Node.js.
-      </p>
-      
-      <p>
-        The app is designed to be user-friendly and visually appealing, with a
-        focus on providing a smooth experience for users. The responsive design
-        ensures that the app looks great on both mobile and desktop devices.
+        Built with Vue.js and the Composition API for modular code organization,
+        Axios for API calls, and Tailwind CSS for a clean, responsive design.
       </p>
 
       <div>
-        <h3 class="text-fs-subtitle font-semi-bold mb-2">Key Features:</h3>
+        <h3 class="text-fs-subtitle font-semi-bold mb-2">Features:</h3>
         <ul class="list-disc pl-5">
-          <li>Responsive design for mobile and desktop devices.</li>
-          <li>Dynamic content loading using Axios.</li>
-          <li>Interactive user interface with Vue.js.</li>
+          <li>Real-time word search via external API.</li>
+          <li>Displays definitions, phonetics and usage examples.</li>
+          <li>Responsive design for mobile and desktop.</li>
         </ul>
       </div>
 
       <p>
-        You can view the project live on:
+        View the project live at:
         <a
           href="https://dictionary-web-app-seven-olive.vercel.app/"
           target="_blank"
@@ -459,17 +500,17 @@ export const projectsCommandOutput = [
         </a>
       </p>
     </div>`,
+
       `<div class="space-y-3 whitespace-normal py-3">
       <h2 class="text-fs-subtitle font-bold text-primary-clr">
         Password Generator
       </h2>
 
       <p>
-        The Password Generator is a web application that generates secure
-        passwords based on user-defined criteria. Users can specify the length
-        of the password and choose whether to include uppercase and special characters. The
-        application provides a simple and intuitive interface for generating and
-        copying passwords.
+        A secure password generator with customizable options:
+        length, uppercase letters, special characters. Simple, fast and effective.
+        A project I built to deepen my mastery of Vue.js
+        and the reactivity of the Composition API.
       </p>
 
       <div>
@@ -478,43 +519,25 @@ export const projectsCommandOutput = [
         </h3>
         <div>
           <span class="text-tertiary-clr">Vue.js</span>
-          <span class="text-tertiary-clr">Composition-API</span>
+          <span class="text-tertiary-clr">Composition API</span>
           <span class="text-tertiary-clr">Sass</span>
         </div>
       </div>
-
-      <p>
-        The project was developed using Vue.js and the Composition API, with a
-        focus on clean code and best practices. The styling was done using Sass,
-        allowing for modular and maintainable CSS. The application is hosted on
-        Vercel, making it easily accessible to users.
-      </p>
 
       <div>
         <h3 class="text-fs-subtitle font-semi-bold mb-2">Features:</h3>
         <ul class="list-disc pl-8">
           <li>Customizable password length.</li>
-          <li>Option to include/exclude uppercase letters.</li>
-          <li>Option to include/exclude special characters.</li>
+          <li>Toggle uppercase / lowercase letters.</li>
+          <li>Toggle special characters.</li>
           <li>Real-time password generation.</li>
-          <li>Responsive design for mobile and desktop.</li>
-          <li>Copy to clipboard functionality.</li>
+          <li>One-click copy to clipboard.</li>
+          <li>Responsive design.</li>
         </ul>
       </div>
 
-      <div>
-        <h3 class="text-fs-subtitle font-semi-bold mb-2">How to Use:</h3>
-        <ol class="list-decimal pl-11">
-          <li>Select the desired password length.</li>
-          <li>Choose whether to include uppercase letters.</li>
-          <li>Choose whether to include special characters.</li>
-          <li>Click the "Generate Password" button.</li>
-          <li>Copy the generated password to your clipboard.</li>
-        </ol>
-      </div>
-
       <p>
-        You can view the project live on:
+        View the project live at:
         <a
           href="https://vue-js-password-generator.vercel.app/"
           target="_blank"
@@ -533,17 +556,16 @@ export const projectsCommandOutput = [
         </a>
       </p>
     </div>`,
+
       `<div class="space-y-3 whitespace-normal py-3">
       <h2 class="text-fs-subtitle font-bold text-primary-clr">
-        Github User Search
+        GitHub User Search
       </h2>
 
       <p>
-        This is a simple application that allows you to search for Github users
-        and view their profile information. It uses the Github API to fetch user
-        data and display it in a user-friendly interface. It allows you to search for users by their username, and displays their profile information, including their name, bio, location,
-        and number of followers. The application is designed to be simple and easy to use, with a clean
-        and modern interface.
+        A GitHub profile search tool. Enter any username and get their stats,
+        repos, followers and info in real time via the GitHub API.
+        A Frontend Mentor challenge I paid particular attention to.
       </p>
 
       <div>
@@ -552,38 +574,25 @@ export const projectsCommandOutput = [
         </h3>
         <div>
           <span class="text-tertiary-clr">React</span>
-          <span class="text-tertiary-clr">Typescript</span>
+          <span class="text-tertiary-clr">TypeScript</span>
           <span class="text-tertiary-clr">Axios</span>
           <span class="text-tertiary-clr">Sass</span>
         </div>
       </div>
 
-      <p>
-        The application is built using React and Typescript, and uses Axios for
-        making API requests. The user interface is styled with Sass, and the
-        application is responsive and works well on both desktop and mobile
-        devices. There is a theme toggler that allows you to switch between
-        light and dark modes, and the application is designed to be accessible
-        and easy to use for all users. It is a great example of how to use these
-        technologies to build a simple application that can be used to search
-        for and view user information.
-      </p>
-
       <div>
         <h3 class="text-fs-subtitle font-semi-bold mb-2">Key Features:</h3>
         <ul class="list-disc pl-8">
-          <li>Search for Github users by username.</li>
-          <li>View user profile information.</li>
-          <li>Real-time search functionality.</li>
-          <li>Dark/Light theme toggle with persistent settings</li>
-          <li>Accessible UI components</li>
-          <li>Responsive design for mobile and desktop.</li>
-          <li>Error handling and loading states</li>
+          <li>Search GitHub profiles by username.</li>
+          <li>Display stats: repos, followers, following.</li>
+          <li>Light / dark theme toggle with persistence.</li>
+          <li>Error handling and loading states.</li>
+          <li>Accessible and responsive UI components.</li>
         </ul>
       </div>
 
       <p>
-        You can view the project live on:
+        View the project live at:
         <a
           href="https://github-user-search-app-self.vercel.app/"
           target="_blank"
@@ -606,13 +615,30 @@ export const projectsCommandOutput = [
   },
 ];
 
+// ============================================
+// THEME
+// ============================================
+
 export const themeCommandOutput = [
   {
     id: crypto.randomUUID(),
     type: "text" as const,
-    content: ["Theme changing (feature coming soon...)"],
+    content: [
+      "Available themes:",
+      " ",
+      "  [active] Catppuccin Macchiato  →  the current choice, elegant and easy on the eyes",
+      "  [soon]   Monokai               →  the timeless classic",
+      "  [soon]   Tokyo Night           →  for late-night coding sessions",
+      "  [soon]   Dracula               →  dark and mysterious",
+      " ",
+      "⚠ Theme switching is currently under development. Check back soon!",
+    ],
   },
 ];
+
+// ============================================
+// NEOFETCH
+// ============================================
 
 export const neofetchCommandOutput = [
   {
@@ -621,41 +647,59 @@ export const neofetchCommandOutput = [
     content: [
       "                    .                       guest@souleymane-sy-portfolio",
       "                   .:.                      -------------------------------",
-      `                  .:::.                     OS:  Browser`,
+      `                  .:::.                     OS:  SyOS v2025.1 (Coyah Linux) 🇬🇳`,
       "                 .:::::.                    Host: Vercel Platform",
-      "             ***.:::::::.***                Kernel: Latest V8 Engine",
-      "        *******.:::::::::.*******           Shell: NextJS Terminal v1.0",
-      "      ********.:::::::::::.********         DE: Next.js 15.2.3",
-      "     ********.:::::::::::::.********        Theme: Dark Mode (Monokai Pro Theme)",
+      "             ***.:::::::.***                Kernel: Next.js 16 · React 19",
+      "        *******.:::::::::.*******           Shell: TypeScript 5.x",
+      "      ********.:::::::::::.********         DE: Terminal Portfolio v1.0",
+      "     ********.:::::::::::::.********        Theme: Catppuccin Macchiato 🎨",
       "     *******.::::::'***`::::.*******        Resolution: " + resolution,
       "     ******.::::'*********`::.******        Packages: " +
         (packages.length + 1) +
-        " (Dependencies)," +
+        " (Dependencies), " +
         (packages.length + 1) +
         " (Dev Dependencies)",
       "      ****.:::'*************`:.****         ",
-      "        *.::'*****************`.*           Technologies:",
-      "        .:'  ***************    .           • Framework: Next.js 15, React 19, ",
-      "       .                                    • Language: TypeScript",
-      "                                            • Styling: TailwindCSS V4",
-      "                                            • Package Manager: Bun",
-      "                                            • Version Control: Git",
-      "                                            • Deployment: Vercel",
-      "                                            • Linting: ESLint, Prettier",
+      "        *.::'*****************`.*           Stack:",
+      "        .:'  ***************    .           • React · Next.js · Vue.js",
+      "       .                                    • TypeScript · Tailwind CSS v4",
+      "                                            • GSAP · Framer Motion",
+      "                                            • Git · GitHub · Bun · Vercel",
+      "                                            ",
+      "                                            Journey:",
+      "                                            • Self-taught since 2022",
+      "                                            • 89+ GitHub repos",
+      "                                            • 50+ Frontend Mentor challenges",
+      "                                            • 🏆 Enzo Ustariz 2024 — Top 3",
+      "                                            • ⭐ DevelopersHub Corp — Certified",
+      "                                            • 📍 Coyah, Guinea-Conakry",
     ],
   },
 ];
+
+// ============================================
+// SUDO
+// ============================================
 
 export const sudoCommandOutput = [
   {
     id: crypto.randomUUID(),
     type: "text" as const,
     content: [
-      "Access Denied: You're not the admin of this website",
-      "Please contact the administrator for access.",
+      "[sudo] Password for guest:",
+      " ",
+      "Access Denied. ❌",
+      " ",
+      "Did you really think that would work? 😄",
+      "The superpowers here are CSS and TypeScript.",
+      "You don't need root access to build great things.",
     ],
   },
 ];
+
+// ============================================
+// WELCOME
+// ============================================
 
 export const welcomeCommandOutput = [
   {
@@ -666,13 +710,18 @@ export const welcomeCommandOutput = [
       ASCII_NAME,
       " ",
       " ",
-      "--------------------------------",
-      "Welcome to my terminal portfolio",
-      "-------------------------------------",
-      "Type 'help' to see available commands.",
+      "──────────────────────────────────",
+      "  Welcome to my terminal portfolio",
+      "─────────────────────────────────────────",
+      "Type 'help' to see all available commands.",
+      "Type 'about' to learn more about me.",
     ],
   },
 ];
+
+// ============================================
+// WEATHER
+// ============================================
 
 export const createWeatherOutput = (weather: string) => ({
   id: crypto.randomUUID(),
@@ -687,7 +736,7 @@ export const weatherErrorOutput = (city: string, errorMessage?: string) => ({
     `Error: Could not fetch weather for "${city}"`,
     errorMessage || "Please check the city name and try again.",
     "",
-    "Tip: Try with major cities (e.g., Paris, London, Tokyo)",
+    "Tip: Try with major cities (e.g., Conakry, Paris, New York, Tokyo)",
   ],
 });
 
@@ -698,10 +747,15 @@ export const weatherUsageOutput = () => ({
     "Usage: weather <city>",
     "",
     "Examples:",
+    "  weather Conakry",
+    "  weather Coyah",
     "  weather Paris",
-    "  weather New York",
   ],
 });
+
+// ============================================
+// EMAIL
+// ============================================
 
 export const emailCommandOutput = [
   {
@@ -711,15 +765,19 @@ export const emailCommandOutput = [
       `
       <div class="space-y-2 py-2">
         <p>You can reach me at:</p>
-        <a href="mailto:souleymanesydeveloppers@gmail.com" target="_blank" rel="noreferrer">
-          souleymanesydeveloppers@gmail.com
+        <a href="mailto:souleymanesycodes@gmail.com" target="_blank" rel="noreferrer">
+          souleymanesycodes@gmail.com
         </a>
-        <p>Write me a message — just to say hi or make a new friend.</p>
+        <p>An opportunity, a collaboration, or just saying hi — write to me. I always reply.</p>
       </div>
  `,
     ],
   },
 ];
+
+// ============================================
+// RPS (Rock Paper Scissors)
+// ============================================
 
 export const rspCommand = (userInput: string) => {
   const choices = ["rock", "paper", "scissors"];
@@ -730,26 +788,24 @@ export const rspCommand = (userInput: string) => {
       {
         id: crypto.randomUUID(),
         type: "text" as const,
-        content: [
-          "Oops! You gotta pick 'rock', 'paper', or 'scissors'! Try again, like this: rps rock",
-        ],
+        content: ["Pick 'rock', 'paper' or 'scissors'! Example: rps rock"],
       },
     ];
   }
 
-  const computerChoice = choices[Math.floor(Math.random() * choices.length)];
   let result;
+  const computerChoice = choices[Math.floor(Math.random() * choices.length)];
 
   if (userChoice === computerChoice) {
-    result = "It's a tie! We're too good at this!";
+    result = "It's a tie! We think alike. 🤝";
   } else if (
     (userChoice === "rock" && computerChoice === "scissors") ||
     (userChoice === "paper" && computerChoice === "rock") ||
     (userChoice === "scissors" && computerChoice === "paper")
   ) {
-    result = "You win! Nice move, champ! 🏆";
+    result = "You win! Well played, champion! 🏆";
   } else {
-    result = "Oof, I win! Better luck next time!";
+    result = "I win! The terminal is merciless. 😄 Try again!";
   }
 
   return [
@@ -760,11 +816,15 @@ export const rspCommand = (userInput: string) => {
         `You chose: ${userChoice}`,
         `I chose: ${computerChoice}`,
         result,
-        "Play again? Just type 'rps' followed by your choice!",
+        "Play again? Type 'rps' followed by your choice!",
       ],
     },
   ];
 };
+
+// ============================================
+// CONTACT
+// ============================================
 
 export const contactCommandOutput = [
   {
@@ -774,17 +834,17 @@ export const contactCommandOutput = [
       `
       <div class="space-y-3">
         <div class="pt-2">
-          <p class="pb-3">Connect with me across the web:</p>
+          <p class="pb-3">Find me across the web:</p>
           
           <div class="space-y-2">
             <div>
               <span class="text-tertiary-clr">Email:</span>
               <a 
-                href="mailto:souleymanesydeveloppers@gmail.com" 
+                href="mailto:souleymanesycodes@gmail.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
               >
-                souleymanesydeveloppers@gmail.com
+                souleymanesycodes@gmail.com
               </a>
             </div>
             
@@ -798,9 +858,20 @@ export const contactCommandOutput = [
                 github.com/SouleymaneSy7
               </a>
             </div>
+
+            <div>
+              <span class="text-tertiary-clr">LinkedIn:</span>
+              <a 
+                href="https://linkedin.com/in/souleymanesy7" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                linkedin.com/in/souleymanesy7
+              </a>
+            </div>
             
             <div>
-              <span class="text-tertiary-clr">Twitter/X:</span>
+              <span class="text-tertiary-clr">Twitter / X:</span>
               <a 
                 href="https://twitter.com/Souleymanesy43" 
                 target="_blank" 
@@ -834,7 +905,8 @@ export const contactCommandOutput = [
           </div>
           
           <p class="pt-4">
-            Feel free to reach out for collaborations, questions, or just to say hi!
+            Available for freelance, collaboration, internship or remote position.
+            Feel free to reach out — I always reply.
           </p>
         </div>
       </div>
