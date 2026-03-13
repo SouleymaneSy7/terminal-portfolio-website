@@ -1,10 +1,9 @@
 import * as React from "react";
 
-export type CommandHistoryOutput = {
-  id: string;
-  type: "text" | "link" | "html";
-  content: string[];
-}[];
+export type CommandHistoryOutput = (
+  | { id: string; type: "text" | "html"; content: string[] }
+  | { id: string; type: "link"; content: string[][] }
+)[];
 
 export type CommandHistory = {
   command: string;
@@ -35,7 +34,7 @@ export type CommandInputPropsType = {
 };
 
 export type CommandOutputPropsType = {
-  outputLines: string[];
+  outputLines: string[] | string[][];
   outputTypes: "text" | "link" | "html";
   speed?: number;
   setAnimationIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
