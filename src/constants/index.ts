@@ -63,7 +63,7 @@ export const helpCommandOutput = [
       "  whoami    - Who is behind this terminal?",
       "  projects  - Browse my most notable projects.",
       "  repo      - View this portfolio's source code.",
-      "  resume    - Display my resume / CV.",
+      "  resume    - View or download my resume in French or English (PDF).",
       "  weather   - Get real-time weather for a city. (Example: weather Conakry)",
       "  email     - Display my email address.",
       " ",
