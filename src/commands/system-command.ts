@@ -97,12 +97,12 @@ export const neofetchCommandOutput = [
     content: [
       "                    .                       guest@souleymane-sy-portfolio",
       "                   .:.                      -------------------------------",
-      `                  .:::.                     OS:  SyOS v2025.1 (Coyah Linux) 🇬🇳`,
+      `                  .:::.                     OS:  SyOS v2025.1`,
       "                 .:::::.                    Host: Vercel Platform",
       "             ***.:::::::.***                Kernel: Next.js 16 · React 19",
       "        *******.:::::::::.*******           Shell: TypeScript 5.x",
       "      ********.:::::::::::.********         DE: Terminal Portfolio v1.0",
-      "     ********.:::::::::::::.********        Theme: Catppuccin Macchiato 🎨",
+      "     ********.:::::::::::::.********        Theme: Catppuccin Macchiato",
       "     *******.::::::'***`::::.*******        Resolution: " + resolution,
       "     ******.::::'*********`::.******        Packages: " +
         (packages.length + 1) +
@@ -121,8 +121,8 @@ export const neofetchCommandOutput = [
       "                                            • 89+ GitHub repos",
       "                                            • 50+ Frontend Mentor challenges",
       "                                            • 🏆 Enzo Ustariz 2024 — Top 3",
-      "                                            • ⭐ DevelopersHub Corp — Certified",
-      "                                            • 📍 Coyah, Guinea-Conakry",
+      "                                            • DevelopersHub Corp — Certified",
+      "                                            • Coyah, Guinea-Conakry",
     ],
   },
 ];
@@ -134,7 +134,7 @@ export const sudoCommandOutput = [
     content: [
       "[sudo] Password for guest:",
       " ",
-      "Access Denied. ❌",
+      "Access Denied.",
       " ",
       "Did you really think that would work? 😄",
       "The superpowers here are CSS and TypeScript.",

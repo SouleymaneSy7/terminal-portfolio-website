@@ -116,7 +116,7 @@ export const projectsCommandOutput = [
           (Discord channel run by YouTuber
           <a href="https://www.youtube.com/@EcoleduWeb">Enzo Ustariz</a>),
           on the theme of creating a tourism website for a city.
-          I chose Conakry — the capital of Guinea and my hometown. 🇬🇳
+          I chose Conakry — the capital of Guinea and my hometown.
         </p>
         <p>
           <strong class="text-secondary-clr">Ranking achieved</strong>: 🥉 3rd place among 20+ participants.
