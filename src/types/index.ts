@@ -36,9 +36,7 @@ export type CommandInputPropsType = {
 export type CommandOutputPropsType = {
   outputLines: string[] | string[][];
   outputTypes: "text" | "link" | "html";
-  speed?: number;
-  setAnimationIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
-  containerRef: React.RefObject<HTMLDivElement | null>;
+  onComplete?: () => void;
 };
 
 export interface JokeResponseType {
