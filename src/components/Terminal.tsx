@@ -7,6 +7,7 @@ import CommandOutput from "./CommandOutput";
 
 import {
   CommandHistory,
+  CommandHistoryOutput,
   CommandHistoryTypes,
   TerminalPropsTypes,
 } from "@/types";
@@ -31,7 +32,7 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
       ? commandOutput
       : [commandOutput];
 
-    if (input.trim().toLowerCase() === "clear") {
+    if (command.trim().toLowerCase() === "clear") {
       setHistory([]);
     } else {
       setHistory((prevState) => [
@@ -40,12 +41,13 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
           command,
           output: normalizedOutput.map(({ id, type, content }) => ({
             id,
-            type: type as "text" | "link" | "html",
+            type,
             content,
-          })),
+          })) as CommandHistoryOutput,
         },
       ]);
     }
+
     setCommandIndex(-1);
   };
 
@@ -85,31 +87,43 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
   return (
     <div>
       <div>
-        {history.map((item: CommandHistory, index: number) => (
-          <div key={index} className="opacity-85">
-            <p className="text-secondary-clr inline-block">
-              <span className="text-primary-clr">guest</span>@
-              <span className="text-tertiary-clr">souleymane-sy-portfolio</span>
-            </p>
-            <span className="text-secondary-clr">:~$</span>
-            <span className="text-secondary-clr"> {item.command}</span>
+        {history.map((item: CommandHistory, index: number) => {
+          const isLastEntry = index === history.length - 1;
 
-            <br />
+          return (
+            <div key={index} className="opacity-85">
+              <p className="text-secondary-clr inline-block">
+                <span className="text-primary-clr">guest</span>@
+                <span className="text-tertiary-clr">
+                  souleymane-sy-portfolio
+                </span>
+              </p>
+              <span className="text-secondary-clr">:~$</span>
+              <span className="text-secondary-clr"> {item.command}</span>
 
-            {item.output.map((block, i) => {
-              return (
-                <CommandOutput
-                  key={i}
-                  speed={100}
-                  containerRef={containerRef}
-                  outputTypes={block.type}
-                  outputLines={block.content}
-                  setAnimationIsComplete={setAnimationIsComplete}
-                />
-              );
-            })}
-          </div>
-        ))}
+              <br />
+
+              {item.output.map((block, i) => {
+                const isLastBlock = i === item.output.length - 1;
+
+                const handleAnimationComplete =
+                  isLastEntry && isLastBlock
+                    ? setAnimationIsComplete
+                    : () => {};
+
+                return (
+                  <CommandOutput
+                    key={i}
+                    containerRef={containerRef}
+                    outputTypes={block.type}
+                    outputLines={block.content}
+                    setAnimationIsComplete={handleAnimationComplete}
+                  />
+                );
+              })}
+            </div>
+          );
+        })}
       </div>
 
       {animationIsComplete === true ? (
