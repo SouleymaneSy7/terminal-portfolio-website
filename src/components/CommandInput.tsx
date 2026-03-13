@@ -92,7 +92,7 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
         </div>
       </label>
 
-      <form onSubmit={handleCommandSubmit} className="flex-grow">
+      <form onSubmit={handleCommandSubmit} className="grow">
         <input
           id="command-input"
           autoFocus
