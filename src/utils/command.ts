@@ -41,7 +41,7 @@ export const executeCommand = async (command: string) => {
     case "contact":
       return contactCommandOutput;
 
-    case "rps":
+    case "rps": {
       const userChoice = parts.slice(1).join(" ").trim();
 
       if (!userChoice) {
@@ -60,13 +60,14 @@ export const executeCommand = async (command: string) => {
       }
 
       return rspCommand(userChoice);
+    }
 
-    case "game":
+    case "game": {
       const gameArgs = parts.slice(1);
-
       return handleGameCommand(gameArgs);
+    }
 
-    case "cowsay":
+    case "cowsay": {
       const message = parts.slice(1).join(" ").trim();
 
       if (!message) {
@@ -97,6 +98,7 @@ export const executeCommand = async (command: string) => {
         type: "text" as const,
         content: cowMessage,
       };
+    }
 
     case "about":
       return aboutMeCommandOutput;
@@ -107,7 +109,7 @@ export const executeCommand = async (command: string) => {
     case "time":
       return getTimeCommandOutput();
 
-    case "joke":
+    case "joke": {
       const joke = await jokeService.getRandomJoke();
 
       if (joke && joke.type === "twopart") {
@@ -123,8 +125,9 @@ export const executeCommand = async (command: string) => {
         type: "text" as const,
         content: ["Could not fetch a joke."],
       };
+    }
 
-    case "quote":
+    case "quote": {
       const quote = await quoteService.getRandomQuote();
 
       if (quote) {
@@ -133,13 +136,14 @@ export const executeCommand = async (command: string) => {
           type: "text" as const,
           content: [`"${quote.slip.advice}"`],
         };
-      } else {
-        return {
-          id: crypto.randomUUID(),
-          type: "text" as const,
-          content: ["Could not fetch a quote. Retry later..."],
-        };
       }
+
+      return {
+        id: crypto.randomUUID(),
+        type: "text" as const,
+        content: ["Could not fetch a quote. Retry later..."],
+      };
+    }
 
     case "hostname":
       return hostNameCommandOutput;
@@ -171,7 +175,7 @@ export const executeCommand = async (command: string) => {
     case "sudo":
       return sudoCommandOutput;
 
-    case "weather":
+    case "weather": {
       const city = parts.slice(1).join(" ").trim();
 
       if (!city) {
@@ -185,6 +189,7 @@ export const executeCommand = async (command: string) => {
         const errorMessage = error instanceof Error ? error.message : undefined;
         return weatherErrorOutput(city, errorMessage);
       }
+    }
 
     case "welcome":
       return welcomeCommandOutput;
@@ -193,7 +198,7 @@ export const executeCommand = async (command: string) => {
       return [
         {
           id: crypto.randomUUID(),
-          type: "text",
+          type: "text" as const,
           content: [
             `"${cmd}" : command not found.`,
             "Type 'help' to see the list of available commands.",
