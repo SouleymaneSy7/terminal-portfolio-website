@@ -47,6 +47,9 @@
   --color-secondary-clr: oklch(0.7556 0.1297 2.76);
   --color-tertiary-clr: oklch(0.8577 0.1092 142.72);
 
+  --font-*: initial;
+  --font-fira-code: var(--font-fira-code);
+
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semi-bold: 600;
@@ -55,10 +58,19 @@
   --text-fs-body: clamp(0.875rem, 0.8393rem + 0.1786vw, 1rem);
   --text-fs-subtitle: clamp(1.125rem, 1.0893rem + 0.1786vw, 1.25rem);
   --text-fs-title: clamp(1.25rem, 1.1786rem + 0.3571vw, 1.5rem);
-
-  --font-*: initial;
-  --font-fira-code: var(--font-fira-code);
   --leading-base: 1.5;
+
+  --animate-pulse-live: pulse-live 1500ms ease-in-out infinite;
+
+  @keyframes pulse-live {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.2;
+    }
+  }
 }
 
 body {
