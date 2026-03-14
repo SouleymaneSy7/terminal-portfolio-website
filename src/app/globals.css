@@ -7,8 +7,8 @@
 }
 
 *::-webkit-scrollbar {
-  width: 0.5rem;
-  height: 0.5rem;
+  width: 0.25rem;
+  height: 0.25rem;
   scroll-margin: 1rem;
 }
 
@@ -56,12 +56,13 @@
   --text-fs-subtitle: clamp(1.125rem, 1.0893rem + 0.1786vw, 1.25rem);
   --text-fs-title: clamp(1.25rem, 1.1786rem + 0.3571vw, 1.5rem);
 
-  --font-fira-code: var(--font-fira-code);
+  --font-*: initial;
+  --font-main: var(--font-fira-code);
   --leading-base: 1.5;
 }
 
 body {
-  @apply bg-background-clr text-text-clr font-fira-code text-fs-body font-semi-bold leading-base;
+  @apply bg-background-clr text-text-clr font-main text-fs-body font-semi-bold leading-base;
 }
 
 a {
