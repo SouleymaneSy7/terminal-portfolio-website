@@ -1,10 +1,10 @@
 "use client";
 
 import * as React from "react";
+import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 
 import CommandInput from "./CommandInput";
-import CommandOutput from "./CommandOutput";
 import LoadingIndicator from "./ui/loading-indicator";
 
 import {
@@ -16,6 +16,8 @@ import {
 import { executeCommand } from "@/utils/command";
 import { welcomeCommandOutput } from "@/constants";
 import TerminalPrompt from "./TerminalPrompt";
+
+const CommandOutput = dynamic(() => import("./CommandOutput"), { ssr: false });
 
 const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
   const [input, setInput] = React.useState("");
