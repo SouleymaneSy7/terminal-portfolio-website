@@ -87,6 +87,6 @@ export interface GameStateType {
 
 export interface QuizCommandResponseType {
   id: string;
-  type: "text";
+  type: "text" | "html";
   content: string[];
 }
