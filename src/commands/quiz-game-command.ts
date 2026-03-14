@@ -1,8 +1,4 @@
-import {
-  QuizQuestionType,
-  GameStateType,
-  QuizCommandResponseType,
-} from "@/types";
+import { QuizQuestionType, GameStateType } from "@/types";
 
 // ============================================
 // CONSTANTS
@@ -491,10 +487,18 @@ let gameState: GameStateType = {
 // HELPER FUNCTIONS
 // ============================================
 
-const createResponse = (content: string[]): QuizCommandResponseType => ({
+//   id: crypto.randomUUID(),
+//   type: "text",
+//   content,
+// });
+
+// Helper HTML — pour les réponses avec les commandes stylisées
+const createHtmlResponse = (
+  html: string,
+): { id: string; type: "html"; content: string[] } => ({
   id: crypto.randomUUID(),
-  type: "text",
-  content,
+  type: "html",
+  content: [html],
 });
 
 const calculateAccuracy = (): number => {
@@ -542,87 +546,133 @@ const resetGame = (): void => {
 // COMMAND HANDLERS
 // ============================================
 
-const showStats = (): QuizCommandResponseType => {
+const showStats = () => {
   const accuracy = calculateAccuracy();
   const rank = getRank(accuracy);
 
-  return createResponse([
-    " ",
-    ASCII.STATS,
-    " ",
-    "═══════════════════════════════════════════",
-    "           QUIZ PERFORMANCE",
-    "═══════════════════════════════════════════",
-    " ",
-    `  Questions Solved    │  ${gameState.questionsAnswered}`,
-    `  Correct Answers     │  ${gameState.score}`,
-    `  Accuracy            │  ${accuracy}%`,
-    `  Current Rank        │  ${rank.name}`,
-    " ",
-    ...(rank.art ? [rank.art, ""] : []),
-    "═══════════════════════════════════════════",
-    " ",
-    '→ Type "game" to continue your journey',
-    '→ Type "game reset" to start fresh',
-    " ",
-  ]);
+  return createHtmlResponse(
+    `<div class="space-y-3">
+
+      <div class="space-y-0.5">
+        <p> </p>
+        <pre class="text-primary-clr leading-snug select-none">${ASCII.STATS}</pre>
+        <p> </p>
+        <p>═══════════════════════════════════════════</p>
+        <p>           QUIZ PERFORMANCE</p>
+        <p>═══════════════════════════════════════════</p>
+        <p> </p>
+        <p>  Questions Solved    │  ${gameState.questionsAnswered}</p>
+        <p>  Correct Answers     │  ${gameState.score}</p>
+        <p>  Accuracy            │  ${calculateAccuracy()}%</p>
+        <p>  Current Rank        │  ${rank.name}</p>
+        <p> </p>
+        ${rank.art ? `<pre class="text-primary-clr leading-snug select-none">${rank.art}</pre>` : ""}
+        <p>═══════════════════════════════════════════</p>
+      </div>
+
+      <div class="space-y-0.5">
+        <p>
+          <span class="text-tertiary-clr">→</span> Type
+          <span> "</span><span class="text-tertiary-clr font-bold">game</span><span>"</span>
+          to continue your journey
+        </p>
+        <p>
+          <span class="text-tertiary-clr">→</span> Type
+          <span> "</span><span class="text-tertiary-clr font-bold">game reset</span><span>"</span>
+          to start fresh
+        </p>
+      </div>
+
+    </div>`,
+  );
 };
 
-const handleReset = (): QuizCommandResponseType => {
+const handleReset = () => {
   resetGame();
-  return createResponse([
-    " ",
-    "✓ Progress wiped clean",
-    "✓ Statistics reset to zero",
-    " ",
-    "→ Ready for a fresh start?",
-    '→ Type "game" to begin',
-    " ",
-  ]);
+  return createHtmlResponse(
+    `<div class="space-y-3 py-1">
+
+      <div class="space-y-1">
+        <p> </p>
+        <p>✓ Progress wiped clean</p>
+        <p>✓ Statistics reset to zero</p>
+      </div>
+
+      <div class="space-y-0.5">
+        <p><span class="text-tertiary-clr">→</span> Ready for a fresh start?</p>
+        <p>
+          <span class="text-tertiary-clr">→</span> Type
+          <span> "</span><span class="text-tertiary-clr font-bold">game</span><span>"</span>
+          to begin
+        </p>
+      </div>
+
+    </div>`,
+  );
 };
 
-const showHelp = (): QuizCommandResponseType => {
-  return createResponse([
-    " ",
-    "═══════════════════════════════════════════",
-    "          QUIZ COMMAND GUIDE",
-    "═══════════════════════════════════════════",
-    " ",
-    "  game             →  Load new question",
-    "  game [1-3]       →  Submit your answer",
-    "  game stats       →  View performance",
-    "  game reset       →  Clear all progress",
-    "  game help        →  Show this guide",
-    "",
-    "═══════════════════════════════════════════",
-    " ",
-    "EXAMPLE WORKFLOW:",
-    "  $ game",
-    "  [Question appears...]",
-    "  $ game 2",
-    "  [Answer evaluated]",
-    "",
-  ]);
+const showHelp = () => {
+  return createHtmlResponse(
+    `<div class="space-y-3 py-1">
+
+      <div class="space-y-1">
+        <p> </p>
+        <p>═══════════════════════════════════════════</p>
+        <p>          QUIZ COMMAND GUIDE</p>
+        <p>═══════════════════════════════════════════</p>
+        <p> </p>
+        <p>  <span class="text-tertiary-clr font-bold">game</span>             →  Load new question</p>
+        <p>  <span class="text-tertiary-clr font-bold">game [1-3]</span>       →  Submit your answer</p>
+        <p>  <span class="text-tertiary-clr font-bold">game stats</span>       →  View performance</p>
+        <p>  <span class="text-tertiary-clr font-bold">game reset</span>       →  Clear all progress</p>
+        <p>  <span class="text-tertiary-clr font-bold">game help</span>        →  Show this guide</p>
+        <p> </p>
+        <p>═══════════════════════════════════════════</p>
+        <p> </p>
+        <p>EXAMPLE WORKFLOW:</p>
+        <p>  $ game</p>
+        <p>  [Question appears...]</p>
+        <p>  $ game 2</p>
+        <p>  [Answer evaluated]</p>
+        <p> </p>
+      </div>
+
+    </div>`,
+  );
 };
 
-const handleAnswer = (answer: number): QuizCommandResponseType => {
+const handleAnswer = (answer: number) => {
   if (!gameState.currentQuestion) {
-    return createResponse([
-      " ",
-      "⚠ No active question",
-      '→ Type "game" to start',
-      " ",
-    ]);
+    return createHtmlResponse(
+      `<div class="space-y-3 py-1">
+        <p> </p>
+        <p>⚠ No active question</p>
+        <div class="space-y-0.5">
+          <p>
+            <span class="text-tertiary-clr">→</span> Type
+            <span> "</span><span class="text-tertiary-clr font-bold">game</span><span>"</span>
+            to start
+          </p>
+        </div>
+      </div>`,
+    );
   }
 
   if (isNaN(answer) || answer < 1 || answer > 3) {
-    return createResponse([
-      " ",
-      "⚠ Invalid input detected",
-      "→ Please enter 1, 2, or 3",
-      " ",
-      "Type 'game [number]' to answer",
-    ]);
+    return createHtmlResponse(
+      `<div class="space-y-3 py-1">
+        <p> </p>
+        <p>⚠ Invalid input detected</p>
+        <div class="space-y-0.5">
+          <p><span class="text-tertiary-clr">→</span> Please enter 1, 2, or 3</p>
+          <p>
+            <span class="text-tertiary-clr">→</span> Type
+            <span> "</span><span class="text-tertiary-clr font-bold">game [number]</span><span>"</span>
+            to answer
+          </p>
+        </div>
+      </div>`,
+    );
   }
 
   const isCorrect = answer === gameState.currentQuestion.answer;
@@ -635,59 +685,89 @@ const handleAnswer = (answer: number): QuizCommandResponseType => {
   const resultMsg = isCorrect
     ? gameState.currentQuestion.correctMsg
     : gameState.currentQuestion.wrongMsg;
+  const explanation = gameState.currentQuestion.explanation || "";
 
-  const response = createResponse([
-    " ",
-    resultArt,
-    " ",
-    "═══════════════════════════════════════════",
-    resultMsg,
-    "═══════════════════════════════════════════",
-    " ",
-    gameState.currentQuestion.explanation || "",
-    " ",
-    `Score: ${gameState.score}/${gameState.questionsAnswered} | Accuracy: ${accuracy}%`,
-    " ",
-    '→ Type "game" for next challenge',
-    '→ Type "game stats" for detailed breakdown',
-    " ",
-  ]);
+  const response = createHtmlResponse(
+    `<div class="space-y-3 py-1">
+
+      <div class="space-y-1">
+        <p> </p>
+        <pre class="text-primary-clr leading-snug select-none">${resultArt}</pre>
+        <p> </p>
+        <p>═══════════════════════════════════════════</p>
+        <p>${resultMsg}</p>
+        <p>═══════════════════════════════════════════</p>
+        <p> </p>
+        <p>${explanation}</p>
+        <p> </p>
+        <p>Score: ${gameState.score}/${gameState.questionsAnswered} | Accuracy: ${accuracy}%</p>
+      </div>
+
+      <div class="space-y-0.5">
+        <p>
+          <span class="text-tertiary-clr">→</span> Type
+          <span> "</span><span class="text-tertiary-clr font-bold">game</span><span>"</span>
+          for next challenge
+        </p>
+        <p>
+          <span class="text-tertiary-clr">→</span> Type
+          <span> "</span><span class="text-tertiary-clr font-bold">game stats</span><span>"</span>
+          for detailed breakdown
+        </p>
+      </div>
+
+    </div>`,
+  );
 
   gameState.currentQuestion = null;
   return response;
 };
 
-const showQuestion = (): QuizCommandResponseType => {
+const showQuestion = () => {
   const question = getRandomQuestion();
   gameState.currentQuestion = question;
 
-  return createResponse([
-    " ",
-    ASCII.QUIZ,
-    " ",
-    "═══════════════════════════════════════════",
-    "        FRONTEND QUIZ CHALLENGE",
-    "═══════════════════════════════════════════",
-    " ",
-    `Question ${gameState.questionsAnswered + 1}:`,
-    " ",
-    question.question,
-    " ",
-    ...question.options,
-    " ",
-    "═══════════════════════════════════════════",
-    " ",
-    '→ Type "game [1-3]" to answer',
-    '→ Type "game help" for commands',
-    " ",
-  ]);
+  return createHtmlResponse(
+    `<div class="space-y-3 py-1">
+
+      <div class="space-y-1">
+        <p> </p>
+        <pre class="text-primary-clr leading-snug select-none">${ASCII.QUIZ}</pre>
+        <p>═══════════════════════════════════════════</p>
+        <p>        FRONTEND QUIZ CHALLENGE</p>
+        <p>═══════════════════════════════════════════</p>
+        <p> </p>
+        <p>Question ${gameState.questionsAnswered + 1}:</p>
+        <p> </p>
+        <p>${question.question}</p>
+        <p> </p>
+        ${question.options.map((o) => `<p>${o}</p>`).join("\n        ")}
+        <p> </p>
+        <p>═══════════════════════════════════════════</p>
+      </div>
+
+      <div class="space-y-0.5">
+        <p>
+          <span class="text-tertiary-clr">→</span> Type
+          <span> "</span><span class="text-tertiary-clr font-bold">game [1-3]</span><span>"</span>
+          to answer
+        </p>
+        <p>
+          <span class="text-tertiary-clr">→</span> Type
+          <span> "</span><span class="text-tertiary-clr font-bold">game help</span><span>"</span>
+          for commands
+        </p>
+      </div>
+
+    </div>`,
+  );
 };
 
 // ============================================
 // MAIN COMMAND HANDLER
 // ============================================
 
-export const handleGameCommand = (args: string[]): QuizCommandResponseType => {
+export const handleGameCommand = (args: string[]) => {
   const subCommand = args[0]?.toLowerCase();
 
   switch (subCommand) {
