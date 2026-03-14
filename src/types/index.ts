@@ -3,6 +3,7 @@ import * as React from "react";
 export type CommandHistoryOutput = (
   | { id: string; type: "text" | "html"; content: string[] }
   | { id: string; type: "link"; content: string[][] }
+  | { id: string; type: "component"; component: React.ReactNode }
 )[];
 
 export type CommandHistory = {
@@ -34,8 +35,9 @@ export type CommandInputPropsType = {
 };
 
 export type CommandOutputPropsType = {
-  outputLines: string[] | string[][];
-  outputTypes: "text" | "link" | "html";
+  outputLines?: string[] | string[][];
+  outputTypes: "text" | "link" | "html" | "component";
+  component?: React.ReactNode;
   onComplete?: () => void;
 };
 

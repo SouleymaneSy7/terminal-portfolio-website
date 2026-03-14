@@ -47,12 +47,18 @@ const lineVariants: Variants = {
 const CommandOutput: React.FC<CommandOutputPropsType> = ({
   outputLines = [],
   outputTypes,
+  component,
   onComplete,
 }) => {
   React.useEffect(() => {
     if (!onComplete) return;
 
-    const lineCount = outputLines.length;
+    if (outputTypes === "component") {
+      const timer = setTimeout(onComplete, 50);
+      return () => clearTimeout(timer);
+    }
+
+    const lineCount = (outputLines as string[]).length;
     const totalMs =
       lineCount > 0
         ? ((lineCount - 1) * STAGGER + LINE_DURATION) * 1000 + 50
@@ -62,7 +68,7 @@ const CommandOutput: React.FC<CommandOutputPropsType> = ({
     return () => clearTimeout(timer);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [outputLines.length]);
+  }, [outputLines.length, outputTypes]);
 
   if (outputTypes === "text") {
     return (
@@ -128,6 +134,10 @@ const CommandOutput: React.FC<CommandOutputPropsType> = ({
         ))}
       </motion.div>
     );
+  }
+
+  if (outputTypes === "component") {
+    return <React.Fragment>{component}</React.Fragment>;
   }
 
   return null;

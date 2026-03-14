@@ -1,4 +1,5 @@
-import { getDate, getTime } from "@/utils/date";
+import * as React from "react";
+import LiveClock from "@/components/LiveClock";
 
 export * from "@/commands";
 
@@ -80,8 +81,8 @@ export const helpCommandOutput = [
       " ",
       "  about     - My story, my journey and my tech stack.",
       "  contact   - My social networks and contact details.",
-      "  date      - Display current date.",
-      "  time      - Display current time.",
+      "  date      - Display a live clock with date, time and timezone.",
+      "  time      - Alias for date — same live clock.",
       "  whoami    - Who is behind this terminal?",
       "  projects  - Browse my most notable projects.",
       "  repo      - View this portfolio's source code.",
@@ -115,22 +116,18 @@ export const helpCommandOutput = [
 // DATE & TIME
 // ============================================
 
-export const getDateCommandOutput = () => {
-  return [
-    {
-      id: crypto.randomUUID(),
-      type: "html" as const,
-      content: getDate(),
-    },
-  ];
-};
+export const getDateCommandOutput = () => [
+  {
+    id: crypto.randomUUID(),
+    type: "component" as const,
+    component: React.createElement(LiveClock),
+  },
+];
 
-export const getTimeCommandOutput = () => {
-  return [
-    {
-      id: crypto.randomUUID(),
-      type: "html" as const,
-      content: getTime(),
-    },
-  ];
-};
+export const getTimeCommandOutput = () => [
+  {
+    id: crypto.randomUUID(),
+    type: "component" as const,
+    component: React.createElement(LiveClock),
+  },
+];

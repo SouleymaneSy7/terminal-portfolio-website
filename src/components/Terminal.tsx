@@ -24,7 +24,6 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
   const [isLoading, setIsLoading] = React.useState(false);
 
   const currentCommandId = React.useRef(0);
-
   const safetyTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const clearSafetyTimer = () => {
@@ -83,11 +82,7 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
         ...prevState,
         {
           command,
-          output: normalizedOutput.map(({ id, type, content }) => ({
-            id,
-            type,
-            content,
-          })) as CommandHistoryOutput,
+          output: normalizedOutput as CommandHistoryOutput,
         },
       ]);
     } catch {
@@ -178,7 +173,10 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
                     <CommandOutput
                       key={i}
                       outputTypes={block.type}
-                      outputLines={block.content}
+                      outputLines={"content" in block ? block.content : []}
+                      component={
+                        "component" in block ? block.component : undefined
+                      }
                       onComplete={handleComplete}
                     />
                   );
