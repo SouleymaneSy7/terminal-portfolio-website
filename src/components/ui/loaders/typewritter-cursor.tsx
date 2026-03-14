@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
+import TerminalPrompt from "@/components/TerminalPrompt";
 
 interface TypewriterCursorProps {
   label?: string;
@@ -65,11 +66,8 @@ const TypewriterCursor = ({
       exit={{ opacity: 0 }}
       transition={{ duration: 0.15 }}
     >
-      <p className="text-secondary-clr">
-        <span className="text-primary-clr">guest</span>@
-        <span className="text-tertiary-clr">souleymane-sy-portfolio</span>
-        <span>:~$</span>
-      </p>
+      <TerminalPrompt />
+
       <div className="flex items-center py-1">
         <span className="text-primary-clr opacity-70">&gt;&nbsp;</span>
         <span className="text-secondary-clr">{displayed}</span>

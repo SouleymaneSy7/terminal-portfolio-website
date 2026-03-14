@@ -15,6 +15,7 @@ import {
 } from "@/types";
 import { executeCommand } from "@/utils/command";
 import { welcomeCommandOutput } from "@/constants";
+import TerminalPrompt from "./TerminalPrompt";
 
 const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
   const [input, setInput] = React.useState("");
@@ -161,13 +162,7 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
                 animate={{ opacity: 0.85, y: 0 }}
                 transition={{ duration: 0.18, ease: "easeOut" }}
               >
-                <p className="text-secondary-clr inline-block">
-                  <span className="text-primary-clr">guest</span>@
-                  <span className="text-tertiary-clr">
-                    souleymane-sy-portfolio
-                  </span>
-                </p>
-                <span className="text-secondary-clr">:~$</span>
+                <TerminalPrompt />
                 <span className="text-secondary-clr"> {item.command}</span>
 
                 <br />

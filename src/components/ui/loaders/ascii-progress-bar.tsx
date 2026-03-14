@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
+import TerminalPrompt from "@/components/TerminalPrompt";
 
 const BAR_WIDTH = 20;
 
@@ -42,11 +43,7 @@ const AsciiProgressBar = ({ label = "processing" }: AsciiProgressBarProps) => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.15 }}
     >
-      <p className="text-secondary-clr">
-        <span className="text-primary-clr">guest</span>@
-        <span className="text-tertiary-clr">souleymane-sy-portfolio</span>
-        <span>:~$</span>
-      </p>
+      <TerminalPrompt />
 
       <div className="flex items-center gap-2 py-1">
         <span className="text-secondary-clr opacity-70">{label}</span>

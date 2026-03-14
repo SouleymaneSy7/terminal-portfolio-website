@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 
 import { commands } from "@/constants";
 import { CommandInputPropsType } from "@/types";
+import TerminalPrompt from "./TerminalPrompt";
 
 const CommandInput: React.FC<CommandInputPropsType> = ({
   input,
@@ -80,14 +81,7 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
   return (
     <div className="flex items-baseline gap-2 flex-wrap">
       <label htmlFor="command-input">
-        <div>
-          <p className="text-secondary-clr inline-block">
-            <span className="text-primary-clr">guest</span>@
-            <span className="text-tertiary-clr">souleymane-sy-portfolio</span>
-          </p>
-
-          <span className="text-secondary-clr">:~$</span>
-        </div>
+        <TerminalPrompt />
       </label>
 
       <div className="grow flex items-center relative">

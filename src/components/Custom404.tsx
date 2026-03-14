@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 
 import { ASCII_404, ASCII_ERROR } from "@/constants";
+import TerminalPrompt from "./TerminalPrompt";
 
 const containerVariants: Variants = {
   hidden: {},
@@ -35,11 +36,7 @@ const Custom404 = () => {
         animate="visible"
       >
         <motion.div variants={itemVariants}>
-          <p className="text-secondary-clr inline-block">
-            <span className="text-primary-clr">guest</span>@
-            <span className="text-tertiary-clr">souleymane-sy-portfolio</span>
-          </p>
-          <span className="text-secondary-clr">:~$ </span>
+          <TerminalPrompt />
           <span className="text-secondary-clr">404 - error page not found</span>
         </motion.div>
 
