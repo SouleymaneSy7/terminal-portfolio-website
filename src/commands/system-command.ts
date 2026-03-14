@@ -1,6 +1,7 @@
 import packageJson from "../../package.json";
 
 const packages = Object.keys(packageJson.dependencies);
+const packagesDevs = Object.keys(packageJson.devDependencies);
 
 const resolutionWidth = global.window && window.screen.availWidth;
 const resolutionHeight = global.window && window.screen.availHeight;
@@ -14,6 +15,21 @@ const ASCII_NAME = `
 ██████╔╝╚█████╔╝╚██████╔╝███████╗███████╗░░░██║░░░██║░╚═╝░██║██║░░██║██║░╚███║███████╗  ██████╔╝░░░██║░░░
 ╚═════╝░░╚════╝░░╚═════╝░╚══════╝╚══════╝░░░╚═╝░░░╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚══╝╚══════╝  ╚═════╝░░░░╚═╝░░░
         `.trim();
+
+const NEOFETCH_ASCII = `                    .
+                   .:.
+                  .:::.
+                 .:::::.
+             ***.:::::::.***
+        *******.:::::::::.*******
+      ********.:::::::::::.********
+     ********.:::::::::::::.********
+     *******.::::::'***\`::::.*******
+     ******.::::'*********\`::.*****
+      ****.:::'*************\`:.****
+        *.::'*****************\`.*
+        .:'  ***************    .
+       .`;
 
 export const welcomeCommandOutput = [
   {
@@ -93,36 +109,71 @@ export const themeCommandOutput = [
 export const neofetchCommandOutput = [
   {
     id: crypto.randomUUID(),
-    type: "text" as const,
+    type: "html" as const,
     content: [
-      "                    .                       guest@souleymane-sy-portfolio",
-      "                   .:.                      -------------------------------",
-      `                  .:::.                     OS:  SyOS v2025.1`,
-      "                 .:::::.                    Host: Vercel Platform",
-      "             ***.:::::::.***                Kernel: Next.js 16 · React 19",
-      "        *******.:::::::::.*******           Shell: TypeScript 5.x",
-      "      ********.:::::::::::.********         DE: Terminal Portfolio v1.0",
-      "     ********.:::::::::::::.********        Theme: Catppuccin Macchiato",
-      "     *******.::::::'***`::::.*******        Resolution: " + resolution,
-      "     ******.::::'*********`::.******        Packages: " +
-        (packages.length + 1) +
-        " (Dependencies), " +
-        (packages.length + 1) +
-        " (Dev Dependencies)",
-      "      ****.:::'*************`:.****         ",
-      "        *.::'*****************`.*           Stack:",
-      "        .:'  ***************    .           • React · Next.js · Vue.js",
-      "       .                                    • TypeScript · Tailwind CSS v4",
-      "                                            • GSAP · Framer Motion",
-      "                                            • Git · GitHub · Bun · Vercel",
-      "                                            ",
-      "                                            Journey:",
-      "                                            • Self-taught since 2022",
-      "                                            • 89+ GitHub repos",
-      "                                            • 50+ Frontend Mentor challenges",
-      "                                            • 🏆 Enzo Ustariz 2024 — Top 3",
-      "                                            • DevelopersHub Corp — Certified",
-      "                                            • Coyah, Guinea-Conakry",
+      `<div class="py-2">
+  <div class="flex gap-4 md:gap-20 items-start flex-nowrap">
+
+    <pre class="text-primary-clr shrink-0 m-0 leading-snug select-none">${NEOFETCH_ASCII}</pre>
+
+    <div class="space-y-3">
+      <div class="space-y-0.5">
+        <p>
+          <span class="text-primary-clr font-bold">guest</span><span class="text-secondary-clr">@</span><span class="text-tertiary-clr font-bold">souleymane-sy-portfolio</span>
+        </p>
+        <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
+      </div>
+
+      <div class="space-y-0.5">
+        <p><span class="text-secondary-clr">OS:          </span>  Portfolio OS v2025.1</p>
+        <p><span class="text-secondary-clr">Host:        </span>  Vercel Platform</p>
+        <p><span class="text-secondary-clr">Kernel:      </span>  Next.js 16 · React 19</p>
+        <p><span class="text-secondary-clr">Shell:       </span>  TypeScript 5.x</p>
+        <p><span class="text-secondary-clr">DE:          </span>  Terminal Portfolio v1.0</p>
+        <p><span class="text-secondary-clr">Theme:       </span>  Catppuccin Macchiato</p>
+        <p><span class="text-secondary-clr">Font:        </span>  Fira Code</p>
+        <p><span class="text-secondary-clr">Resolution:  </span>  ${resolution}</p>
+        <p><span class="text-secondary-clr">Uptime:      </span>  Online since 2025, no interruptions</p>
+        <p><span class="text-secondary-clr">Packages:    </span>  ${packages.length + 1} (Dependencies) · ${packagesDevs.length + 1} (Dev Dependencies)</p>
+      </div>
+
+
+      <div class="space-y-0.5">
+        <p class="pt-1"><span class="text-tertiary-clr font-bold">Stack: </span></p>
+        <p><span class="text-tertiary-clr"> •</span>  React · Next.js · Vue.js</p>
+        <p><span class="text-tertiary-clr"> •</span>  TypeScript · Tailwind CSS v4</p>
+        <p><span class="text-tertiary-clr"> •</span>  GSAP · Framer Motion</p>
+        <p><span class="text-tertiary-clr"> •</span>  Git · GitHub · Bun · Vercel</p>
+      </div>
+
+
+      <div class="space-y-0.5">
+        <p class="pt-1"><span class="text-tertiary-clr font-bold">Journey: </span></p>
+        <p><span class="text-tertiary-clr"> •</span>  Self-taught since 2022</p>
+        <p><span class="text-tertiary-clr"> •</span>  89+ GitHub repos</p>
+        <p><span class="text-tertiary-clr"> •</span>  50+ Frontend Mentor challenges</p>
+        <p><span class="text-tertiary-clr"> •</span>  🏆 Enzo Ustariz 2024 — Top 3</p>
+        <p><span class="text-tertiary-clr"> •</span>  DevelopersHub Corp — Certified</p>
+        <p><span class="text-tertiary-clr"> •</span>  Coyah, Guinea-Conakry 🇬🇳</p>
+      </div>
+
+      <div class="space-y-0.5" aria-hidden="true">
+        <div class="flex gap-0.5 items-baseline leading-none">
+          <span class="text-primary-clr">████</span>
+          <span class="text-secondary-clr">████</span>
+          <span class="text-tertiary-clr">████</span>
+          <span class="text-text-clr">████</span>
+        </div>
+        <div class="flex gap-0.5 items-baseline leading-none">
+          <span class="text-primary-clr opacity-40">████</span>
+          <span class="text-secondary-clr opacity-40">████</span>
+          <span class="text-tertiary-clr opacity-40">████</span>
+          <span class="text-text-clr opacity-40">████</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>`,
     ],
   },
 ];
