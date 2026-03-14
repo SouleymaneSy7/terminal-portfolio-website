@@ -38,17 +38,47 @@ const NEOFETCH_ASCII = `                    .
 export const welcomeCommandOutput = [
   {
     id: crypto.randomUUID(),
-    type: "text" as const,
+    type: "html" as const,
     content: [
-      " ",
-      ASCII_NAME,
-      " ",
-      " ",
-      "──────────────────────────────────",
-      "  Welcome to my terminal portfolio",
-      "─────────────────────────────────────────",
-      "Type 'about' to learn more about me.",
-      "Type 'help' to see all available commands.",
+      `<div class="space-y-3 py-1">
+
+        <pre class="text-primary-clr leading-snug select-none">${ASCII_NAME}</pre>
+
+        <div class="space-y-0.5">
+          <p>──────────────────────────────────</p>
+          <p>
+            <span>  </span>
+            <span class="font-bold">Welcome to my terminal portfolio</span>
+          </p>
+          <p>─────────────────────────────────────────</p>
+        </div>
+
+        <div class="space-y-0.5">
+          <p>
+            Type
+            <span> '</span><span class="text-tertiary-clr font-bold">about</span><span>'</span>
+            to learn more about me.
+          </p>
+          <p>
+            Type
+            <span> '</span><span class="text-tertiary-clr font-bold">help</span><span>'</span>
+            to see all available commands.
+          </p>
+        </div>
+
+        <div class="space-y-0.5">
+          <p>─────────────────────────────────────────────</p>
+          <p>
+            <span class="text-secondary-clr">#</span>
+            This terminal runs best on a real keyboard.
+          </p>
+          <p>
+            <span class="text-secondary-clr">#</span>
+            Mobile works, but desktop is home. <span class="text-primary-clr">⌨</span>
+          </p>
+        </div>
+
+      </div>`,
     ],
   },
 ];
@@ -71,24 +101,42 @@ export const hostNameCommandOutput = [
 export const whoAmICommandOutput = [
   {
     id: crypto.randomUUID(),
-    type: "text" as const,
+    type: "html" as const,
     content: [
-      "> Identifying user...",
-      "root@system",
-      " ",
-      "...Just kidding! 😄",
-      " ",
-      "You're exploring the terminal portfolio of Souleymane Sy —",
-      "self-taught frontend web developer since 2022.",
-      "Based in Coyah, Guinea-Conakry. React / Next.js / TypeScript specialist.",
-      " ",
-      "89+ repos on GitHub. 50+ Frontend Mentor challenges.",
-      "3rd place — Enzo Ustariz Web Contest 2024. 🏆",
-      "Certified with exceptional distinction — DevelopersHub Corporation. ⭐",
-      " ",
-      "Type 'about' for my full story.",
-      "Type 'projects' to see what I've built.",
-      "Type 'help' to see all available commands.",
+      `<div class="space-y-3 py-1">
+        <div class="space-y-1">
+          <p>&gt; Identifying user...</p>
+          <p>root@system</p>
+          <p> </p>
+          <p>...Just kidding! 😄</p>
+          <p> </p>
+          <p>You're exploring the terminal portfolio of Souleymane Sy —</p>
+          <p>self-taught frontend web developer since 2022.</p>
+          <p>Based in Coyah, Guinea-Conakry. React / Next.js / TypeScript specialist.</p>
+          <p> </p>
+          <p>89+ repos on GitHub. 50+ Frontend Mentor challenges.</p>
+          <p>3rd place — Enzo Ustariz Web Contest 2024. 🏆</p>
+          <p>Certified with exceptional distinction — DevelopersHub Corporation. ⭐</p>
+        </div>
+
+        <div class="space-y-0.5">
+          <p>
+            Type
+            <span> '</span><span class="text-tertiary-clr font-bold">about</span><span>'</span>
+            for my full story.
+          </p>
+          <p>
+            Type
+            <span> '</span><span class="text-tertiary-clr font-bold">projects</span><span>'</span>
+            to see what I've built.
+          </p>
+          <p>
+            Type
+            <span> '</span><span class="text-tertiary-clr font-bold">help</span><span>'</span>
+            to see all available commands.
+          </p>
+        </div>
+      </div>`,
     ],
   },
 ];
