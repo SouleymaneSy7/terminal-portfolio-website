@@ -119,8 +119,8 @@ export const getDateCommandOutput = () => {
   return [
     {
       id: crypto.randomUUID(),
-      type: "text" as const,
-      content: [getDate()],
+      type: "html" as const,
+      content: getDate(),
     },
   ];
 };
@@ -129,8 +129,8 @@ export const getTimeCommandOutput = () => {
   return [
     {
       id: crypto.randomUUID(),
-      type: "text" as const,
-      content: [getTime()],
+      type: "html" as const,
+      content: getTime(),
     },
   ];
 };
