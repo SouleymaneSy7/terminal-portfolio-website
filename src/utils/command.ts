@@ -6,7 +6,7 @@ import {
   exitCommandOutput,
   handleGameCommand,
   hostNameCommandOutput,
-  neofetchCommandOutput,
+  getNeofetchCommandOutput,
   projectsCommandOutput,
   repoCommandOutput,
   resumeCommandOutput,
@@ -64,18 +64,23 @@ export const executeCommand = async (command: string) => {
 
     case "game": {
       const gameArgs = parts.slice(1);
-      return handleGameCommand(gameArgs);
+      return [handleGameCommand(gameArgs)];
     }
 
     case "cowsay": {
       const message = parts.slice(1).join(" ").trim();
 
       if (!message) {
-        return {
-          id: crypto.randomUUID(),
-          type: "text" as const,
-          content: ["Usage: cowsay [message]", "Example: cowsay Hello World!"],
-        };
+        return [
+          {
+            id: crypto.randomUUID(),
+            type: "text" as const,
+            content: [
+              "Usage: cowsay [message]",
+              "Example: cowsay Hello World!",
+            ],
+          },
+        ];
       }
 
       const borderLength = message.length + 2;
@@ -93,11 +98,13 @@ export const executeCommand = async (command: string) => {
         "                ||     ||",
       ];
 
-      return {
-        id: crypto.randomUUID(),
-        type: "text" as const,
-        content: cowMessage,
-      };
+      return [
+        {
+          id: crypto.randomUUID(),
+          type: "text" as const,
+          content: cowMessage,
+        },
+      ];
     }
 
     case "about":
@@ -113,36 +120,44 @@ export const executeCommand = async (command: string) => {
       const joke = await jokeService.getRandomJoke();
 
       if (joke && joke.type === "twopart") {
-        return {
-          id: crypto.randomUUID(),
-          type: "text" as const,
-          content: [`${joke.setup}`, `${joke.delivery}`],
-        };
+        return [
+          {
+            id: crypto.randomUUID(),
+            type: "text" as const,
+            content: [`${joke.setup}`, `${joke.delivery}`],
+          },
+        ];
       }
 
-      return {
-        id: crypto.randomUUID(),
-        type: "text" as const,
-        content: ["Could not fetch a joke."],
-      };
+      return [
+        {
+          id: crypto.randomUUID(),
+          type: "text" as const,
+          content: ["Could not fetch a joke."],
+        },
+      ];
     }
 
     case "quote": {
       const quote = await quoteService.getRandomQuote();
 
       if (quote) {
-        return {
-          id: crypto.randomUUID(),
-          type: "text" as const,
-          content: [`"${quote.slip.advice}"`],
-        };
+        return [
+          {
+            id: crypto.randomUUID(),
+            type: "text" as const,
+            content: [`"${quote.slip.advice}"`],
+          },
+        ];
       }
 
-      return {
-        id: crypto.randomUUID(),
-        type: "text" as const,
-        content: ["Could not fetch a quote. Retry later..."],
-      };
+      return [
+        {
+          id: crypto.randomUUID(),
+          type: "text" as const,
+          content: ["Could not fetch a quote. Retry later..."],
+        },
+      ];
     }
 
     case "hostname":
@@ -167,7 +182,7 @@ export const executeCommand = async (command: string) => {
       return themeCommandOutput;
 
     case "neofetch":
-      return neofetchCommandOutput;
+      return getNeofetchCommandOutput();
 
     case "repo":
       return repoCommandOutput;
