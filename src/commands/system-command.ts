@@ -3,9 +3,13 @@ import packageJson from "../../package.json";
 const packages = Object.keys(packageJson.dependencies);
 const packagesDevs = Object.keys(packageJson.devDependencies);
 
-const resolutionWidth = global.window && window.screen.availWidth;
-const resolutionHeight = global.window && window.screen.availHeight;
-const resolution = `${resolutionWidth}x${resolutionHeight}`;
+const getResolution = (): string => {
+  if (typeof window === "undefined") return "N/A";
+  const resolutionWidth = global.window && window.screen.availWidth;
+  const resolutionHeight = global.window && window.screen.availHeight;
+
+  return `${resolutionWidth}x${resolutionHeight}`;
+};
 
 const ASCII_NAME = `
 ░██████╗░█████╗░██╗░░░██╗██╗░░░░░███████╗██╗░░░██╗███╗░░░███╗░█████╗░███╗░░██╗███████╗  ░██████╗██╗░░░██╗
@@ -106,7 +110,7 @@ export const themeCommandOutput = [
   },
 ];
 
-export const neofetchCommandOutput = [
+export const getNeofetchCommandOutput = () => [
   {
     id: crypto.randomUUID(),
     type: "html" as const,
@@ -132,7 +136,7 @@ export const neofetchCommandOutput = [
         <p><span class="text-secondary-clr">DE:          </span>  Terminal Portfolio v1.0</p>
         <p><span class="text-secondary-clr">Theme:       </span>  Catppuccin Macchiato</p>
         <p><span class="text-secondary-clr">Font:        </span>  Fira Code</p>
-        <p><span class="text-secondary-clr">Resolution:  </span>  ${resolution}</p>
+        <p><span class="text-secondary-clr">Resolution:  </span>  ${getResolution()}</p>
         <p><span class="text-secondary-clr">Uptime:      </span>  Online since 2025, no interruptions</p>
         <p><span class="text-secondary-clr">Packages:    </span>  ${packages.length + 1} (Dependencies) · ${packagesDevs.length + 1} (Dev Dependencies)</p>
       </div>
