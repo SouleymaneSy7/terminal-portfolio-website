@@ -57,12 +57,12 @@
   --text-fs-title: clamp(1.25rem, 1.1786rem + 0.3571vw, 1.5rem);
 
   --font-*: initial;
-  --font-main: var(--font-fira-code);
+  --font-fira-code: var(--font-fira-code);
   --leading-base: 1.5;
 }
 
 body {
-  @apply bg-background-clr text-text-clr font-main text-fs-body font-semi-bold leading-base;
+  @apply bg-background-clr text-text-clr font-fira-code text-fs-body font-semi-bold leading-base;
 }
 
 a {
