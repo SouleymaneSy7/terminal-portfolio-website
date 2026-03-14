@@ -47,12 +47,25 @@ export const rspCommand = (userInput: string) => {
   return [
     {
       id: crypto.randomUUID(),
-      type: "text" as const,
+      type: "html" as const,
       content: [
-        `You chose: ${userChoice}`,
-        `I chose: ${computerChoice}`,
-        result,
-        "Play again? Type 'rps' followed by your choice!",
+        `<div class="space-y-3 py-1">
+
+          <div class="space-y-1">
+            <p>You chose: ${userChoice}</p>
+            <p>I chose: ${computerChoice}</p>
+            <p>${result}</p>
+          </div>
+
+          <div class="space-y-0.5">
+            <p>
+              Play again? Type
+              <span> '</span><span class="text-tertiary-clr font-bold">rps</span><span>'</span>
+              followed by your choice!
+            </p>
+          </div>
+
+        </div>`,
       ],
     },
   ];
