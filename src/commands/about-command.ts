@@ -3,7 +3,6 @@ export const aboutMeCommandOutput = [
     id: crypto.randomUUID(),
     type: "text" as const,
     content: [
-      " ",
       "👋 Hey, I'm Souleymane Sy!",
       " ",
       "Self-taught frontend web developer, based in Coyah, Guinea-Conakry.",
