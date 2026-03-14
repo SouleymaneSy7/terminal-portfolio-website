@@ -104,19 +104,25 @@ export const whoAmICommandOutput = [
     type: "html" as const,
     content: [
       `<div class="space-y-3 py-1">
-        <div class="space-y-1">
-          <p>&gt; Identifying user...</p>
-          <p>root@system</p>
-          <p> </p>
-          <p>...Just kidding! 😄</p>
-          <p> </p>
-          <p>You're exploring the terminal portfolio of Souleymane Sy —</p>
-          <p>self-taught frontend web developer since 2022.</p>
-          <p>Based in Coyah, Guinea-Conakry. React / Next.js / TypeScript specialist.</p>
-          <p> </p>
-          <p>89+ repos on GitHub. 50+ Frontend Mentor challenges.</p>
-          <p>3rd place — Enzo Ustariz Web Contest 2024. 🏆</p>
-          <p>Certified with exceptional distinction — DevelopersHub Corporation. ⭐</p>
+        <div class="space-y-3">
+          <div>
+            <p>&gt; Identifying user...</p>
+            <p>root@system</p>
+            <p> </p>
+
+          </div>
+
+          <div>
+            <p>...Just kidding! 😄</p>
+            <p> </p>
+            <p>You're exploring the terminal portfolio of Souleymane Sy —</p>
+            <p>self-taught frontend web developer since 2022.</p>
+            <p>Based in Coyah, Guinea-Conakry. React / Next.js / TypeScript specialist.</p>
+            <p> </p>
+            <p>89+ repos on GitHub. 50+ Frontend Mentor challenges.</p>
+            <p>3rd place — Enzo Ustariz Web Contest 2024. 🏆</p>
+            <p>Certified with exceptional distinction — DevelopersHub Corporation. ⭐</p>
+          </div>
         </div>
 
         <div class="space-y-0.5">
