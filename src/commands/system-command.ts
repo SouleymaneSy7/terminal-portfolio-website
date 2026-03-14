@@ -74,7 +74,7 @@ export const welcomeCommandOutput = [
           </p>
           <p>
             <span class="text-secondary-clr">#</span>
-            Mobile works, but desktop is home. <span class="text-primary-clr">⌨</span>
+            Mobile works, but desktop is home. <span class="text-primary-clr text-fs-title">⌨</span>
           </p>
         </div>
 
