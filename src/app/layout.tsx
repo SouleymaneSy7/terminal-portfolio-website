@@ -57,10 +57,76 @@ const FiraCode = localFont({
   fallback: ["monospace"],
 });
 
+const SITE_URL = "https://terminal-portfolio-website-xi.vercel.app";
+const SITE_TITLE = "Souleymane Sy | Frontend Developer Terminal Portfolio";
+const SITE_DESCRIPTION =
+  "Terminal-style portfolio of Souleymane Sy — self-taught frontend developer from Guinea-Conakry. Specializing in React, Next.js and TypeScript. Explore my projects, skills and journey through an interactive terminal interface.";
+
 export const metadata: Metadata = {
-  title: "Souleymane Sy | terminal portfolio",
-  description:
-    "A terminal like portfolio website for the developper 'Souleymane Sy', Made with Next.js, Typescript and Tailwind CSS",
+  title: {
+    default: SITE_TITLE,
+    template: `%s | Souleymane Sy`,
+  },
+  description: SITE_DESCRIPTION,
+  keywords: [
+    "Souleymane Sy",
+    "frontend developer",
+    "web developer",
+    "React developer",
+    "Next.js developer",
+    "TypeScript",
+    "portfolio",
+    "terminal portfolio",
+    "Guinea-Conakry",
+    "self-taught developer",
+    "JavaScript",
+    "Tailwind CSS",
+    "GSAP",
+    "Framer Motion",
+  ],
+  authors: [{ name: "Souleymane Sy", url: SITE_URL }],
+  creator: "Souleymane Sy",
+  alternates: {
+    canonical: SITE_URL,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: SITE_URL,
+    siteName: "Souleymane Sy Terminal Portfolio",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [
+      {
+        url: `${SITE_URL}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "Souleymane Sy — Frontend Developer Terminal Portfolio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@Souleymanesy43",
+    creator: "@Souleymanesy43",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [`${SITE_URL}/og-image.png`],
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
