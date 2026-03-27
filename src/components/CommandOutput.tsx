@@ -1,19 +1,23 @@
 "use client";
 
 import * as React from "react";
-import { motion, Variants } from "framer-motion";
 import DOMPurify from "dompurify";
+import { motion, Variants } from "framer-motion";
 
 import { CommandOutputPropsType } from "@/types";
 
-if (typeof window !== "undefined") {
-  DOMPurify.addHook("afterSanitizeAttributes", function (node) {
-    if ("target" in node) {
+let domPurifyInitialized = false;
+
+function initDOMPurify() {
+  if (typeof window === "undefined" || domPurifyInitialized) return;
+  domPurifyInitialized = true;
+
+  DOMPurify.addHook("afterSanitizeAttributes", (node) => {
+    if (node.tagName === "A") {
       node.setAttribute("target", "_blank");
-    }
-    if ("rel" in node) {
       node.setAttribute("rel", "noopener noreferrer");
     }
+
     if (
       !node.hasAttribute("target") &&
       (node.hasAttribute("xlink:href") || node.hasAttribute("href"))
@@ -51,6 +55,10 @@ const CommandOutput: React.FC<CommandOutputPropsType> = ({
   onComplete,
 }) => {
   React.useEffect(() => {
+    initDOMPurify();
+  }, []);
+
+  React.useEffect(() => {
     if (!onComplete) return;
 
     if (outputTypes === "component") {
@@ -66,8 +74,6 @@ const CommandOutput: React.FC<CommandOutputPropsType> = ({
 
     const timer = setTimeout(onComplete, totalMs);
     return () => clearTimeout(timer);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [outputLines.length, outputTypes]);
 
   if (outputTypes === "text") {
