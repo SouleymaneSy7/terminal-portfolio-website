@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import CommandInput from "./CommandInput";
 import LoadingIndicator from "./ui/loading-indicator";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 import {
   CommandHistory,
@@ -14,10 +15,41 @@ import {
   TerminalPropsTypes,
 } from "@/types";
 import { executeCommand } from "@/utils/command";
-import { welcomeCommandOutput } from "@/constants";
+import { welcomeCommandOutput } from "@/commands";
 import TerminalPrompt from "./TerminalPrompt";
 
 const CommandOutput = dynamic(() => import("./CommandOutput"), { ssr: false });
+
+const STORAGE_KEY = "terminal:command-history";
+const MAX_HISTORY = 50;
+
+type SerializableBlock =
+  | { id: string; type: "text"; content: string[] }
+  | { id: string; type: "html"; content: string[] }
+  | { id: string; type: "link"; content: string[][] };
+
+type SerializableEntry = {
+  command: string;
+  output: SerializableBlock[];
+};
+
+type SerializableHistory = SerializableEntry[];
+
+function toSerializable(entry: CommandHistory): SerializableEntry {
+  return {
+    command: entry.command,
+    output: entry.output.filter(
+      (block): block is SerializableBlock => block.type !== "component",
+    ),
+  };
+}
+
+function getWelcomeEntry(): CommandHistory {
+  return {
+    command: "welcome",
+    output: welcomeCommandOutput as CommandHistoryOutput,
+  };
+}
 
 const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
   const [input, setInput] = React.useState("");
@@ -28,18 +60,46 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
   const currentCommandId = React.useRef(0);
   const safetyTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const clearSafetyTimer = () => {
-    if (safetyTimer.current) {
-      clearTimeout(safetyTimer.current);
-      safetyTimer.current = null;
-    }
-  };
-  const [history, setHistory] = React.useState<CommandHistoryTypes>([
-    {
-      command: "welcome",
-      output: welcomeCommandOutput,
-    },
+  const [savedHistory, setSavedHistory, , isHydrated] =
+    useLocalStorage<SerializableHistory>(STORAGE_KEY, []);
+
+  const [history, setHistory] = React.useState<CommandHistoryTypes>(() => [
+    getWelcomeEntry(),
   ]);
+
+  const hasLoadedFromStorage = React.useRef(false);
+
+  React.useEffect(() => {
+    if (!isHydrated || hasLoadedFromStorage.current) return;
+    hasLoadedFromStorage.current = true;
+
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+
+    if (raw === null) {
+      return;
+    }
+
+    if (savedHistory.length > 0) {
+      setHistory(savedHistory as CommandHistoryTypes);
+    } else {
+      setHistory([]);
+      setInputReady(true);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isHydrated]);
+
+  React.useEffect(() => {
+    if (!isHydrated || !hasLoadedFromStorage.current) return;
+
+    const serializable = history
+      .map(toSerializable)
+      .filter((entry) => entry.output.length > 0)
+      .slice(-MAX_HISTORY);
+
+    setSavedHistory(serializable);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [history, isHydrated]);
 
   React.useEffect(() => {
     if (containerRef?.current) {
@@ -50,9 +110,17 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
     }
   }, [history, containerRef]);
 
+  const clearSafetyTimer = () => {
+    if (safetyTimer.current) {
+      clearTimeout(safetyTimer.current);
+      safetyTimer.current = null;
+    }
+  };
+
   const handleCommand = async (command: string) => {
     if (command.trim().toLowerCase() === "clear") {
       setHistory([]);
+      setSavedHistory([]);
       setInputReady(true);
       setCommandIndex(-1);
       return;
@@ -115,6 +183,7 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
 
   const handleClearTerminal = () => {
     setHistory([]);
+    setSavedHistory([]);
     setInputReady(true);
   };
 
@@ -146,8 +215,14 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
   };
 
   return (
-    <div>
-      <div>
+    <div role="application" aria-label="Terminal portfolio de Souleymane Sy">
+      <div
+        role="log"
+        aria-live="polite"
+        aria-label="Terminal output"
+        aria-relevant="additions"
+        aria-atomic="false"
+      >
         <AnimatePresence>
           {history.map((item: CommandHistory, index: number) => {
             const isLastEntry = index === history.length - 1;
@@ -193,6 +268,9 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
         {isLoading && (
           <motion.div
             key="loading"
+            role="status"
+            aria-live="polite"
+            aria-label="Processing command..."
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
