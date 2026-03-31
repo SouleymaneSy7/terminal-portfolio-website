@@ -15,8 +15,8 @@ import {
   TerminalPropsTypes,
 } from "@/types";
 import { executeCommand } from "@/utils/command";
-import { welcomeCommandOutput } from "@/commands";
 import TerminalPrompt from "./TerminalPrompt";
+import { getWelcomeCommandOutput } from "@/commands";
 
 const CommandOutput = dynamic(() => import("./CommandOutput"), { ssr: false });
 
@@ -47,7 +47,7 @@ function toSerializable(entry: CommandHistory): SerializableEntry {
 function getWelcomeEntry(): CommandHistory {
   return {
     command: "welcome",
-    output: welcomeCommandOutput as CommandHistoryOutput,
+    output: getWelcomeCommandOutput() as CommandHistoryOutput,
   };
 }
 

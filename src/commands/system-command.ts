@@ -35,7 +35,7 @@ const NEOFETCH_ASCII = `                    .
         .:'  ***************    .
        .`;
 
-export const welcomeCommandOutput = [
+export const getWelcomeCommandOutput = () => [
   {
     id: crypto.randomUUID(),
     type: "html" as const,
@@ -83,7 +83,7 @@ export const welcomeCommandOutput = [
   },
 ];
 
-export const hostNameCommandOutput = [
+export const getHostNameCommandOutput = () => [
   {
     id: crypto.randomUUID(),
     type: "text" as const,
@@ -98,7 +98,7 @@ export const hostNameCommandOutput = [
   },
 ];
 
-export const whoAmICommandOutput = [
+export const getWhoAmICommandOutput = () => [
   {
     id: crypto.randomUUID(),
     type: "html" as const,
@@ -147,7 +147,7 @@ export const whoAmICommandOutput = [
   },
 ];
 
-export const themeCommandOutput = [
+export const getThemeCommandOutput = () => [
   {
     id: crypto.randomUUID(),
     type: "text" as const,
@@ -236,7 +236,7 @@ export const getNeofetchCommandOutput = () => [
   },
 ];
 
-export const sudoCommandOutput = [
+export const getSudoCommandOutput = () => [
   {
     id: crypto.randomUUID(),
     type: "text" as const,

@@ -1,4 +1,4 @@
-export const resumeCommandOutput = [
+export const getResumeCommandOutput = () => [
   {
     id: crypto.randomUUID(),
     type: "html" as const,
@@ -27,9 +27,6 @@ export const resumeCommandOutput = [
               </div>
             </div>
           </div>
-
-
-
 
           <div class="space-y-1">
             <p class="text-secondary-clr font-bold">🇫🇷 Version Française</p>

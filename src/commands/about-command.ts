@@ -1,4 +1,4 @@
-export const aboutMeCommandOutput = [
+export const getAboutMeCommandOutput = () => [
   {
     id: crypto.randomUUID(),
     type: "html" as const,

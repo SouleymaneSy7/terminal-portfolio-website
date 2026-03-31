@@ -1,27 +1,27 @@
 import {
-  aboutMeCommandOutput,
-  contactCommandOutput,
+  getAboutMeCommandOutput,
+  getContactCommandOutput,
   createWeatherOutput,
-  emailCommandOutput,
-  exitCommandOutput,
+  getEmailCommandOutput,
+  getExitCommandOutput,
   handleGameCommand,
-  hostNameCommandOutput,
+  getHostNameCommandOutput,
   getNeofetchCommandOutput,
-  projectsCommandOutput,
-  repoCommandOutput,
-  resumeCommandOutput,
+  getProjectsCommandOutput,
+  getRepoCommandOutput,
+  getResumeCommandOutput,
   rspCommand,
-  sudoCommandOutput,
-  themeCommandOutput,
+  getSudoCommandOutput,
+  getThemeCommandOutput,
   weatherErrorOutput,
   weatherUsageOutput,
-  welcomeCommandOutput,
-  whoAmICommandOutput,
+  getWelcomeCommandOutput,
+  getWhoAmICommandOutput,
 } from "@/commands";
 import {
   getDateCommandOutput,
   getTimeCommandOutput,
-  helpCommandOutput,
+  getHelpCommandOutput,
 } from "@/constants";
 import { jokeService } from "@/services/joke.service";
 import { quoteService } from "@/services/quote.service";
@@ -33,13 +33,13 @@ export const executeCommand = async (command: string) => {
 
   switch (cmd) {
     case "help":
-      return helpCommandOutput;
+      return getHelpCommandOutput();
 
     case "clear":
       return [];
 
     case "contact":
-      return contactCommandOutput;
+      return getContactCommandOutput();
 
     case "rps": {
       const userChoice = parts.slice(1).join(" ").trim();
@@ -48,12 +48,20 @@ export const executeCommand = async (command: string) => {
         return [
           {
             id: crypto.randomUUID(),
-            type: "text" as const,
+            type: "html" as const,
             content: [
-              "Pick 'rock', 'paper', or 'scissors' to battle it out!",
-              "Usage: rps [rock|paper|scissors]",
-              "Example: rps rock",
-              "C'mon, let's throw some shapes!",
+              `<div class="space-y-3 py-1">
+                <div class="space-y-1">
+                  <p>Pick <span class="text-tertiary-clr">rock</span>, <span class="text-tertiary-clr">paper</span> or <span class="text-tertiary-clr">scissors</span> to battle it out!</p>
+                </div>
+                <div class="space-y-0.5">
+                  <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
+                  <p>
+                    Example: Type
+                    <span> '</span><span class="text-tertiary-clr font-bold">rps rock</span><span>'</span>
+                  </p>
+                </div>
+              </div>`,
             ],
           },
         ];
@@ -74,10 +82,20 @@ export const executeCommand = async (command: string) => {
         return [
           {
             id: crypto.randomUUID(),
-            type: "text" as const,
+            type: "html" as const,
             content: [
-              "Usage: cowsay [message]",
-              "Example: cowsay Hello World!",
+              `<div class="space-y-3 py-1">
+                <div class="space-y-1">
+                  <p>Make a cow say something!</p>
+                </div>
+                <div class="space-y-0.5">
+                  <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
+                  <p>
+                    Example: Type
+                    <span> '</span><span class="text-tertiary-clr font-bold">cowsay Hello World!</span><span>'</span>
+                  </p>
+                </div>
+              </div>`,
             ],
           },
         ];
@@ -87,28 +105,26 @@ export const executeCommand = async (command: string) => {
       const topBorder = " " + "_".repeat(borderLength);
       const bottomBorder = " " + "-".repeat(borderLength);
 
-      const cowMessage = [
-        `${topBorder}`,
-        `< ${message} >`,
-        `${bottomBorder}`,
-        "        \\   ^__^",
-        "         \\  (oo)\\_______",
-        "            (__)\\       )\\/\\",
-        "                ||----w |",
-        "                ||     ||",
-      ];
-
       return [
         {
           id: crypto.randomUUID(),
           type: "text" as const,
-          content: cowMessage,
+          content: [
+            topBorder,
+            `< ${message} >`,
+            bottomBorder,
+            "        \\   ^__^",
+            "         \\  (oo)\\_______",
+            "            (__)\\       )\\/\\",
+            "                ||----w |",
+            "                ||     ||",
+          ],
         },
       ];
     }
 
     case "about":
-      return aboutMeCommandOutput;
+      return getAboutMeCommandOutput();
 
     case "date":
       return getDateCommandOutput();
@@ -123,8 +139,24 @@ export const executeCommand = async (command: string) => {
         return [
           {
             id: crypto.randomUUID(),
-            type: "text" as const,
-            content: [`${joke.setup}`, `${joke.delivery}`],
+            type: "html" as const,
+            content: [
+              `<div class="space-y-3 py-1">
+                <div class="space-y-1">
+                  <p>${joke.setup}</p>
+                  <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
+                  <p class="text-secondary-clr font-bold">${joke.delivery}</p>
+                </div>
+                <div class="space-y-0.5">
+                  <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
+                  <p>
+                    Type
+                    <span> '</span><span class="text-tertiary-clr font-bold">joke</span><span>'</span>
+                    for another one.
+                  </p>
+                </div>
+              </div>`,
+            ],
           },
         ];
       }
@@ -132,8 +164,12 @@ export const executeCommand = async (command: string) => {
       return [
         {
           id: crypto.randomUUID(),
-          type: "text" as const,
-          content: ["Could not fetch a joke."],
+          type: "html" as const,
+          content: [
+            `<div class="space-y-1 py-1">
+              <p><span class="text-secondary-clr">⚠</span>  Could not fetch a joke. Try again later.</p>
+            </div>`,
+          ],
         },
       ];
     }
@@ -145,8 +181,23 @@ export const executeCommand = async (command: string) => {
         return [
           {
             id: crypto.randomUUID(),
-            type: "text" as const,
-            content: [`"${quote.slip.advice}"`],
+            type: "html" as const,
+            content: [
+              `<div class="space-y-3 py-1">
+                <div class="space-y-1">
+                  <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
+                  <p class="text-secondary-clr">"${quote.slip.advice}"</p>
+                  <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
+                </div>
+                <div class="space-y-0.5">
+                  <p>
+                    Type
+                    <span> '</span><span class="text-tertiary-clr font-bold">quote</span><span>'</span>
+                    for another one.
+                  </p>
+                </div>
+              </div>`,
+            ],
           },
         ];
       }
@@ -154,41 +205,45 @@ export const executeCommand = async (command: string) => {
       return [
         {
           id: crypto.randomUUID(),
-          type: "text" as const,
-          content: ["Could not fetch a quote. Retry later..."],
+          type: "html" as const,
+          content: [
+            `<div class="space-y-1 py-1">
+              <p><span class="text-secondary-clr">⚠</span>  Could not fetch a quote. Try again later.</p>
+            </div>`,
+          ],
         },
       ];
     }
 
     case "hostname":
-      return hostNameCommandOutput;
+      return getHostNameCommandOutput();
 
     case "whoami":
-      return whoAmICommandOutput;
+      return getWhoAmICommandOutput();
 
     case "exit":
-      return exitCommandOutput;
+      return getExitCommandOutput();
 
     case "resume":
-      return resumeCommandOutput;
+      return getResumeCommandOutput();
 
     case "email":
-      return emailCommandOutput;
+      return getEmailCommandOutput();
 
     case "projects":
-      return projectsCommandOutput;
+      return getProjectsCommandOutput();
 
     case "theme":
-      return themeCommandOutput;
+      return getThemeCommandOutput();
 
     case "neofetch":
       return getNeofetchCommandOutput();
 
     case "repo":
-      return repoCommandOutput;
+      return getRepoCommandOutput();
 
     case "sudo":
-      return sudoCommandOutput;
+      return getSudoCommandOutput();
 
     case "weather": {
       const city = parts.slice(1).join(" ").trim();
@@ -207,16 +262,27 @@ export const executeCommand = async (command: string) => {
     }
 
     case "welcome":
-      return welcomeCommandOutput;
+      return getWelcomeCommandOutput();
 
     default:
       return [
         {
           id: crypto.randomUUID(),
-          type: "text" as const,
+          type: "html" as const,
           content: [
-            `"${cmd}" : command not found.`,
-            "Type 'help' to see the list of available commands.",
+            `<div class="space-y-3 py-1">
+              <div class="space-y-1">
+                <p><span class="text-secondary-clr">'${cmd}'</span>  command not found.</p>
+              </div>
+              <div class="space-y-0.5">
+                <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
+                <p>
+                  Type
+                  <span> '</span><span class="text-tertiary-clr font-bold">help</span><span>'</span>
+                  to see all available commands.
+                </p>
+              </div>
+            </div>`,
           ],
         },
       ];

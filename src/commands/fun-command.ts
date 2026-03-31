@@ -1,4 +1,4 @@
-export const exitCommandOutput = [
+export const getExitCommandOutput = () => [
   {
     id: crypto.randomUUID(),
     type: "text" as const,

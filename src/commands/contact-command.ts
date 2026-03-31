@@ -1,4 +1,4 @@
-export const emailCommandOutput = [
+export const getEmailCommandOutput = () => [
   {
     id: crypto.randomUUID(),
     type: "html" as const,
@@ -16,7 +16,7 @@ export const emailCommandOutput = [
   },
 ];
 
-export const contactCommandOutput = [
+export const getContactCommandOutput = () => [
   {
     id: crypto.randomUUID(),
     type: "html" as const,

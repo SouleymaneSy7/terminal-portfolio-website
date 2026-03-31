@@ -59,7 +59,7 @@ export const commands = [
 // HELP
 // ============================================
 
-export const helpCommandOutput = [
+export const getHelpCommandOutput = () => [
   {
     id: crypto.randomUUID(),
     type: "text" as const,

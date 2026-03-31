@@ -1,4 +1,4 @@
-export const repoCommandOutput = [
+export const getRepoCommandOutput = () => [
   {
     id: crypto.randomUUID(),
     type: "html" as const,
@@ -40,7 +40,7 @@ export const repoCommandOutput = [
   },
 ];
 
-export const projectsCommandOutput = [
+export const getProjectsCommandOutput = () => [
   {
     id: crypto.randomUUID(),
     type: "html" as const,
