@@ -7,6 +7,9 @@ import { commands } from "@/constants";
 import { CommandInputPropsType } from "@/types";
 import TerminalPrompt from "./TerminalPrompt";
 
+const INTERACTIVE_SELECTOR =
+  'a, button, [role="button"], input, textarea, select, [tabindex]';
+
 const CommandInput: React.FC<CommandInputPropsType> = ({
   input,
   setInput,
@@ -19,22 +22,21 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
   const [isFocused, setIsFocused] = React.useState(true);
 
   React.useEffect(() => {
-    focusTerminalInput();
+    commandInputRef.current?.focus();
   }, []);
 
-  const focusTerminalInput = () => {
-    if (commandInputRef.current) {
-      commandInputRef.current.focus();
-    }
-  };
-
   React.useEffect(() => {
-    document.addEventListener("click", focusTerminalInput);
-    return () => {
-      document.removeEventListener("click", focusTerminalInput);
+    const handleDocumentClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest(INTERACTIVE_SELECTOR)) return;
+      commandInputRef.current?.focus();
     };
-  }, [commandInputRef]);
 
+    document.addEventListener("click", handleDocumentClick);
+    return () => {
+      document.removeEventListener("click", handleDocumentClick);
+    };
+  }, []);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInput(event.target.value);
   };
@@ -55,7 +57,6 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
 
     if (event.key === "ArrowUp") {
       event.preventDefault();
-
       const command = onArrowUp();
       if (command) setInput(command);
     } else if (event.key === "ArrowDown") {
@@ -99,6 +100,7 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
             onKeyDown={handleKeyDown}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
+            aria-label="Enter terminal command"
             className="w-full h-full outline-none border-none text-secondary-clr font-semi-bold"
             style={{ caretColor: "transparent" }}
           />
@@ -106,10 +108,8 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
 
         {isFocused && (
           <motion.span
-            className="inline-block w-2 h-full bg-secondary-clr absolute top-2 -translate-y-1/2   pointer-events-none"
-            style={{
-              left: `calc(${input.length}ch)`,
-            }}
+            className="inline-block w-2 h-full bg-secondary-clr absolute top-2 -translate-y-1/2 pointer-events-none"
+            style={{ left: `calc(${input.length}ch)` }}
             animate={{ opacity: [1, 0, 1] }}
             transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
           />
