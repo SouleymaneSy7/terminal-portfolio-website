@@ -6,3 +6,4 @@ export * from "./quiz-game-command";
 export * from "./resume-command";
 export * from "./system-command";
 export * from "./weather-command";
+export * from "./theme-command";

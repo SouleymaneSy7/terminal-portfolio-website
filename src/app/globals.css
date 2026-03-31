@@ -42,15 +42,7 @@
 }
 
 @theme {
-  /* Monokai Theme Colors */
-  /* --color-background-clr: oklch(0.24 0.0229 280.84); */
-  /* --color-foreground-clr: oklch(0.29 0.0293 278.86); */
-  /* --color-text-clr: oklch(0.95 0.0086 188.11); */
-  /* --color-primary-clr: oklch(0.71 0.1874 15.11); */
-  /* --color-secondary-clr: oklch(0.78 0.1421 50.78); */
-  /* --color-tertiary-clr: oklch(0.82 0.0632 167.34); */
-
-  /* Catpuccin Theme Colors */
+  /* Catpuccin Theme Colors — default */
   --color-background-clr: oklch(0.2155 0.0254 284.06);
   --color-foreground-clr: oklch(0.2788 0.0353 276.94);
   --color-text-clr: oklch(0.8787 0.0426 272.28);
@@ -96,4 +88,60 @@ a {
   .terminal-container * + * {
     margin-block-start: 0.25rem;
   }
+}
+
+/* ─────────────────────────────────────────────
+   THEME OVERRIDES
+   Override CSS custom properties per theme.
+   html[data-theme] has specificity (0,1,1)
+   which beats :root (0,1,0) — no !important needed.
+   ───────────────────────────────────────────── */
+
+html[data-theme="monokai"] {
+  --color-background-clr: oklch(0.24 0.0229 280.84);
+  --color-foreground-clr: oklch(0.29 0.0293 278.86);
+  --color-text-clr: oklch(0.95 0.0086 188.11);
+  --color-primary-clr: oklch(0.71 0.1874 15.11);
+  --color-secondary-clr: oklch(0.78 0.1421 50.78);
+  --color-tertiary-clr: oklch(0.82 0.0632 167.34);
+}
+
+html[data-theme="tokyo-night"] {
+  --color-background-clr: oklch(0.158 0.021 265);
+  --color-foreground-clr: oklch(0.196 0.018 265);
+  --color-text-clr: oklch(0.728 0.052 268);
+  --color-primary-clr: oklch(0.675 0.136 256);
+  --color-secondary-clr: oklch(0.655 0.172 8);
+  --color-tertiary-clr: oklch(0.782 0.143 137);
+}
+
+html[data-theme="dracula"] {
+  --color-background-clr: oklch(0.203 0.022 277);
+  --color-foreground-clr: oklch(0.175 0.018 277);
+  --color-text-clr: oklch(0.968 0.004 106);
+  --color-primary-clr: oklch(0.717 0.152 298);
+  --color-secondary-clr: oklch(0.718 0.178 341);
+  --color-tertiary-clr: oklch(0.879 0.182 145);
+}
+
+/* ─────────────────────────────────────────────
+   FONT SWITCHING
+   The Next.js localFont() variables (--font-fira-code,
+   --font-jetbrains-mono, --font-cascadia-code) are
+   injected as CSS custom properties on <body> via
+   className. Targeting `html[data-font] body` resolves
+   the var() in the context of body where they exist.
+   Specificity (0,1,2) beats body rule's (0,0,1).
+   ───────────────────────────────────────────── */
+
+html[data-font="fira"] body {
+  font-family: var(--font-fira-code);
+}
+
+html[data-font="jetbrains"] body {
+  font-family: var(--font-jetbrains-mono);
+}
+
+html[data-font="cascadia"] body {
+  font-family: var(--font-cascadia-code);
 }

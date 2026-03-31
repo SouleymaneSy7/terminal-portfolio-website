@@ -1,9 +1,20 @@
-export const getRepoCommandOutput = () => [
-  {
-    id: crypto.randomUUID(),
-    type: "html" as const,
-    content: [
-      `
+import {
+  getThemeLabel,
+  getCurrentTheme,
+  getFontLabel,
+  getCurrentFont,
+} from "./theme-command";
+
+export const getRepoCommandOutput = () => {
+  const themeLabel = getThemeLabel(getCurrentTheme());
+  const fontLabel = getFontLabel(getCurrentFont());
+
+  return [
+    {
+      id: crypto.randomUUID(),
+      type: "html" as const,
+      content: [
+        `
       <div class="space-y-3 whitespace-normal py-3">
         <p>
           The complete source code for this terminal portfolio is
@@ -17,8 +28,10 @@ export const getRepoCommandOutput = () => [
           github.com/SouleymaneSy7/terminal-portfolio-website
         </a>
         <p>
-          Built with Next.js 15, React 19, TypeScript and Tailwind CSS v4.
-          Runtime: Bun. Color theme: Catppuccin Macchiato.
+          Built with Next.js 16, React 19, TypeScript and Tailwind CSS v4.
+          Runtime: Bun.
+          Color theme: ${themeLabel}.
+          Font theme: ${fontLabel}.
         </p>
         <p>
           If you like this project, a ⭐ on GitHub is always appreciated.
@@ -36,9 +49,10 @@ export const getRepoCommandOutput = () => [
         </p>
       </div>
      `,
-    ],
-  },
-];
+      ],
+    },
+  ];
+};
 
 export const getProjectsCommandOutput = () => [
   {

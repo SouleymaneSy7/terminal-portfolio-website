@@ -1,14 +1,17 @@
 import packageJson from "../../package.json";
+import {
+  getCurrentTheme,
+  getCurrentFont,
+  getThemeLabel,
+  getFontLabel,
+} from "./theme-command";
 
 const packages = Object.keys(packageJson.dependencies);
 const packagesDevs = Object.keys(packageJson.devDependencies);
 
 const getResolution = (): string => {
   if (typeof window === "undefined") return "N/A";
-  const resolutionWidth = global.window && window.screen.availWidth;
-  const resolutionHeight = global.window && window.screen.availHeight;
-
-  return `${resolutionWidth}x${resolutionHeight}`;
+  return `${window.screen.availWidth}x${window.screen.availHeight}`;
 };
 
 const ASCII_NAME = `
@@ -147,29 +150,17 @@ export const getWhoAmICommandOutput = () => [
   },
 ];
 
-export const getThemeCommandOutput = () => [
-  {
-    id: crypto.randomUUID(),
-    type: "text" as const,
-    content: [
-      "Available themes:",
-      " ",
-      "  [active] Catppuccin Macchiato  →  the current choice, elegant and easy on the eyes",
-      "  [soon]   Monokai               →  the timeless classic",
-      "  [soon]   Tokyo Night           →  for late-night coding sessions",
-      "  [soon]   Dracula               →  dark and mysterious",
-      " ",
-      "⚠ Theme switching is currently under development. Check back soon!",
-    ],
-  },
-];
+export const getNeofetchCommandOutput = () => {
+  // Read current theme and font from DOM at call time (always client-side)
+  const themeLabel = getThemeLabel(getCurrentTheme());
+  const fontLabel = getFontLabel(getCurrentFont());
 
-export const getNeofetchCommandOutput = () => [
-  {
-    id: crypto.randomUUID(),
-    type: "html" as const,
-    content: [
-      `<div class="py-2">
+  return [
+    {
+      id: crypto.randomUUID(),
+      type: "html" as const,
+      content: [
+        `<div class="py-2">
   <div class="flex gap-4 md:gap-20 items-start flex-nowrap">
 
     <pre class="text-primary-clr shrink-0 m-0 leading-snug select-none">${NEOFETCH_ASCII}</pre>
@@ -188,11 +179,11 @@ export const getNeofetchCommandOutput = () => [
         <p><span class="text-secondary-clr">Kernel:      </span>  Next.js 16 · React 19</p>
         <p><span class="text-secondary-clr">Shell:       </span>  TypeScript 5.x</p>
         <p><span class="text-secondary-clr">DE:          </span>  Terminal Portfolio v1.0</p>
-        <p><span class="text-secondary-clr">Theme:       </span>  Catppuccin Macchiato</p>
-        <p><span class="text-secondary-clr">Font:        </span>  Fira Code</p>
+        <p><span class="text-secondary-clr">Theme:       </span>  ${themeLabel}</p>
+        <p><span class="text-secondary-clr">Font:        </span>  ${fontLabel}</p>
         <p><span class="text-secondary-clr">Resolution:  </span>  ${getResolution()}</p>
         <p><span class="text-secondary-clr">Uptime:      </span>  Online since 2025, no interruptions</p>
-        <p><span class="text-secondary-clr">Packages:    </span>  ${packages.length + 1} (Dependencies) · ${packagesDevs.length + 1} (Dev Dependencies)</p>
+        <p><span class="text-secondary-clr">Packages:    </span>  ${packages.length} (Dependencies) · ${packagesDevs.length} (Dev Dependencies)</p>
       </div>
 
 
@@ -232,9 +223,10 @@ export const getNeofetchCommandOutput = () => [
     </div>
   </div>
 </div>`,
-    ],
-  },
-];
+      ],
+    },
+  ];
+};
 
 export const getSudoCommandOutput = () => [
   {

@@ -12,12 +12,21 @@ import {
   getResumeCommandOutput,
   rspCommand,
   getSudoCommandOutput,
-  getThemeCommandOutput,
   weatherErrorOutput,
   weatherUsageOutput,
   getWelcomeCommandOutput,
   getWhoAmICommandOutput,
+  // Theme & font
+  THEMES,
+  FONTS,
+  getThemeListOutput,
+  getThemeSwitchOutput,
+  getThemeInvalidOutput,
+  getFontListOutput,
+  getFontSwitchOutput,
+  getFontInvalidOutput,
 } from "@/commands";
+import type { ThemeKey, FontKey } from "@/commands";
 import {
   getDateCommandOutput,
   getTimeCommandOutput,
@@ -40,6 +49,36 @@ export const executeCommand = async (command: string) => {
 
     case "contact":
       return getContactCommandOutput();
+
+    // ──────────────────────────────────────
+    // THEME
+    // ──────────────────────────────────────
+    case "theme": {
+      const themeName = parts.slice(1).join(" ").trim().toLowerCase();
+
+      if (!themeName) return getThemeListOutput();
+
+      if (themeName in THEMES) {
+        return getThemeSwitchOutput(themeName as ThemeKey);
+      }
+
+      return getThemeInvalidOutput(themeName);
+    }
+
+    // ──────────────────────────────────────
+    // TYPEFACE
+    // ──────────────────────────────────────
+    case "typeface": {
+      const fontName = parts.slice(1).join("").trim().toLowerCase();
+
+      if (!fontName) return getFontListOutput();
+
+      if (fontName in FONTS) {
+        return getFontSwitchOutput(fontName as FontKey);
+      }
+
+      return getFontInvalidOutput(fontName);
+    }
 
     case "rps": {
       const userChoice = parts.slice(1).join(" ").trim();
@@ -232,9 +271,6 @@ export const executeCommand = async (command: string) => {
 
     case "projects":
       return getProjectsCommandOutput();
-
-    case "theme":
-      return getThemeCommandOutput();
 
     case "neofetch":
       return getNeofetchCommandOutput();

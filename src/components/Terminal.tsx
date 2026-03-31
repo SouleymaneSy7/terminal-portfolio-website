@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import CommandInput from "./CommandInput";
 import LoadingIndicator from "./ui/loading-indicator";
 import useLocalStorage from "@/hooks/useLocalStorage";
+import { initThemeAndFont } from "@/commands";
 
 import {
   CommandHistory,
@@ -68,6 +69,10 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
   ]);
 
   const hasLoadedFromStorage = React.useRef(false);
+
+  React.useEffect(() => {
+    initThemeAndFont();
+  }, []);
 
   React.useEffect(() => {
     if (!isHydrated || hasLoadedFromStorage.current) return;
