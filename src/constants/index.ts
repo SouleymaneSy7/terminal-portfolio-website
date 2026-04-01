@@ -3,9 +3,9 @@ import LiveClock from "@/components/LiveClock";
 
 export * from "@/commands";
 
-// ============================================
-//  ASCII ART
-// ============================================
+// ─────────────────────────────────────────────────────────────────
+// ASCII ART
+// ─────────────────────────────────────────────────────────────────
 
 export const ASCII_404 = `
 ░░██╗██╗░█████╗░░░██╗██╗
@@ -25,18 +25,18 @@ export const ASCII_ERROR = `
 ╚══════╝╚═╝░░╚═╝╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝
 `.trim();
 
-// ============================================
-// COMMANDS LIST
-// ============================================
+// ─────────────────────────────────────────────────────────────────
+// COMMANDS LIST  (tab completion)
+// ─────────────────────────────────────────────────────────────────
 
 export const commands = [
   "about",
   "clear",
-  "cowsay",
   "contact",
+  "cowsay",
   "date",
-  "exit",
   "email",
+  "exit",
   "game",
   "help",
   "hostname",
@@ -51,72 +51,89 @@ export const commands = [
   "theme",
   "time",
   "typeface",
-  "welcome",
   "weather",
+  "welcome",
   "whoami",
 ];
 
-// ============================================
+// ─────────────────────────────────────────────────────────────────
 // HELP
-// ============================================
+// ─────────────────────────────────────────────────────────────────
 
 export const getHelpCommandOutput = () => [
   {
     id: crypto.randomUUID(),
-    type: "text" as const,
+    type: "html" as const,
     content: [
-      " ",
-      "Available Commands:",
-      "---------------------",
-      " ",
-      "Navigation & System:",
-      " ",
-      "  clear     - Clear the terminal screen.",
-      "  exit      - Exit the terminal (close tab).",
-      "  help      - List all available commands with descriptions.",
-      "  hostname  - Display system information.",
-      "  neofetch  - Display a Linux-style system summary.",
-      "  theme     - Switch color theme. (Usage: theme <name>)",
-      "  typeface  - Switch terminal font. (Usage: typeface <name>)",
-      " ",
-      "Information:",
-      " ",
-      "  about     - My story, my journey and my tech stack.",
-      "  contact   - My social networks and contact details.",
-      "  date      - Display a live clock with date, time and timezone.",
-      "  time      - Alias for date — same live clock.",
-      "  whoami    - Who is behind this terminal?",
-      "  projects  - Browse my most notable projects.",
-      "  repo      - View this portfolio's source code.",
-      "  resume    - View or download my resume in French or English (PDF).",
-      "  weather   - Get real-time weather for a city. (Example: weather Conakry)",
-      "  email     - Display my email address.",
-      " ",
-      "Fun:",
-      " ",
-      "  cowsay    - Make a cow say your message in ASCII! (Try: cowsay Hello!)",
-      "  game      - Interactive Frontend Quiz — test your knowledge! (Try: game)",
-      "  joke      - Get a random programming joke.",
-      "  quote     - Get an inspiring or funny quote.",
-      "  rps       - Rock-paper-scissors against the terminal! (Usage: rps [rock|paper|scissors])",
-      "  sudo      - Attempt to gain root access... (Good luck 😄)",
-      "  welcome   - Display the welcome message again.",
-      " ",
-      "Keyboard Shortcuts:",
-      " ",
-      "  [Tab]         → Autocomplete commands.",
-      "  [↑] [↓]       → Navigate the command history.",
-      "  [Enter]       → Execute command.",
-      "  [CTRL + L]    → Clear the terminal screen.",
-      " ",
-      "Type any command to get started!",
+      `<div class="space-y-t-section py-t-outer">
+
+        <div class="space-y-t-group">
+          <p class="font-bold">Available commands:</p>
+          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────</p>
+        </div>
+
+        <div class="space-y-t-group">
+          <p class="text-secondary-clr font-bold">Navigation & System</p>
+          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+
+          <p><span class="text-tertiary-clr font-bold">clear     </span> - Clear the terminal screen.</p>
+          <p><span class="text-tertiary-clr font-bold">exit      </span> - Exit the terminal (close tab).</p>
+          <p><span class="text-tertiary-clr font-bold">help      </span> - List all available commands.</p>
+          <p><span class="text-tertiary-clr font-bold">hostname  </span> - Display system information.</p>
+          <p><span class="text-tertiary-clr font-bold">neofetch  </span> - Linux-style system summary.</p>
+          <p><span class="text-tertiary-clr font-bold">theme     </span> - Switch color theme.  <span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">theme &lt;name&gt;</span></p>
+          <p><span class="text-tertiary-clr font-bold">typeface  </span> - Switch terminal font. <span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">typeface &lt;name&gt;</span></p>
+        </div>
+
+        <div class="space-y-t-group">
+          <p class="text-secondary-clr font-bold">Information</p>
+          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+          <p><span class="text-tertiary-clr font-bold">about     </span> - My story, journey and tech stack.</p>
+          <p><span class="text-tertiary-clr font-bold">contact   </span> - Social networks and contact details.</p>
+          <p><span class="text-tertiary-clr font-bold">date      </span> - Live clock with date, time and timezone.</p>
+          <p><span class="text-tertiary-clr font-bold">time      </span> - Alias for date — same live clock.</p>
+          <p><span class="text-tertiary-clr font-bold">email     </span> - Display my email address.</p>
+          <p><span class="text-tertiary-clr font-bold">projects  </span> - Browse my most notable projects.</p>
+          <p><span class="text-tertiary-clr font-bold">repo      </span> - This portfolio's source code.</p>
+          <p><span class="text-tertiary-clr font-bold">resume    </span> - View / download my CV (FR & EN).</p>
+          <p><span class="text-tertiary-clr font-bold">weather   </span> - Real-time weather. <span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">weather &lt;city&gt;</span></p>
+          <p><span class="text-tertiary-clr font-bold">whoami    </span> - Who is behind this terminal?</p>
+        </div>
+
+        <div class="space-y-t-group">
+          <p class="text-secondary-clr font-bold">Fun & Games</p>
+          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+          <p><span class="text-tertiary-clr font-bold">cowsay    </span> - ASCII cow says your message. <span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">cowsay &lt;msg&gt;</span></p>
+          <p><span class="text-tertiary-clr font-bold">game      </span> - Frontend Quiz — test your knowledge.</p>
+          <p><span class="text-tertiary-clr font-bold">joke      </span> - Random programming joke.</p>
+          <p><span class="text-tertiary-clr font-bold">quote     </span> - Inspiring or funny quote.</p>
+          <p><span class="text-tertiary-clr font-bold">rps       </span> - Rock-paper-scissors. <span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">rps [rock|paper|scissors]</span></p>
+          <p><span class="text-tertiary-clr font-bold">sudo      </span> - Attempt to gain root access... 😄</p>
+          <p><span class="text-tertiary-clr font-bold">welcome   </span> - Display the welcome message again.</p>
+        </div>
+
+        <div class="space-y-t-group">
+          <p class="text-secondary-clr font-bold">Keyboard Shortcuts</p>
+          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+          <p><span class="text-tertiary-clr font-bold">[Tab]      </span> - Autocomplete commands.</p>
+          <p><span class="text-tertiary-clr font-bold">[↑] [↓]    </span> - Navigate command history.</p>
+          <p><span class="text-tertiary-clr font-bold">[Enter]    </span> - Execute command.</p>
+          <p><span class="text-tertiary-clr font-bold">[CTRL + L] </span> - Clear the terminal screen.</p>
+        </div>
+
+        <div class="space-y-t-footer">
+          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+          <p>Type any command to get started!</p>
+        </div>
+
+      </div>`,
     ],
   },
 ];
 
-// ============================================
+// ─────────────────────────────────────────────────────────────────
 // DATE & TIME
-// ============================================
+// ─────────────────────────────────────────────────────────────────
 
 export const getDateCommandOutput = () => [
   {
