@@ -122,13 +122,18 @@ export const getThemeListOutput = () => {
   )
     .map(([key, theme]) => {
       const isActive = key === current;
-      const labelCol = theme.label.padEnd(26);
+      const label = theme.label.padEnd(26);
+      const description = theme.description;
+      const nameClass = isActive
+        ? "text-secondary-clr font-bold"
+        : "text-tertiary-clr";
       const activeTag = isActive
-        ? `  <span class="text-tertiary-clr font-bold">← active</span>`
+        ? `  <span class="text-secondary-clr font-bold"> ← active</span>`
         : "";
 
       return `<p>
-        <span class="${isActive ? "text-tertiary-clr font-bold" : "text-secondary-clr"}">${labelCol}</span><span class="text-text-clr">${theme.description}. </span>${activeTag}
+        <span class="${nameClass}">${label}</span>
+        <span class="text-text-clr">- ${description}</span>${activeTag}
       </p>`;
     })
     .join("");
@@ -138,22 +143,22 @@ export const getThemeListOutput = () => {
       id: crypto.randomUUID(),
       type: "html" as const,
       content: [
-        `<div class="space-y-3 py-1">
-          <div class="space-y-1">
+        `<div class="space-y-t-section py-t-outer">
+ 
+          <div class="space-y-t-group">
             <p class="text-secondary-clr font-bold">Available Themes</p>
-            <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
-            <p> </p>
+            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
             ${rows}
-            <p> </p>
-            <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
           </div>
-          <div class="space-y-0.5">
+ 
+          <div class="space-y-t-footer">
+            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
             <p>
-              Type
-              <span> '</span><span class="text-tertiary-clr font-bold">theme &lt;name&gt;</span><span>'</span>
+              Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">theme &lt;name&gt;</span><span aria-hidden="true">'</span>
               to switch.
             </p>
           </div>
+ 
         </div>`,
       ],
     },
@@ -169,18 +174,17 @@ export const getThemeSwitchOutput = (theme: ThemeKey) => {
       id: crypto.randomUUID(),
       type: "html" as const,
       content: [
-        `<div class="space-y-3 py-1">
-          <div class="space-y-1">
-            <p class="text-tertiary-clr font-bold">✓  Theme switched → ${label}</p>
-            <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
-            <p class="text-text-clr">${description}</p>
-            <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
-            <p class="text-text-clr">Preference saved.</p>
+        `<div class="space-y-t-section py-t-outer">
+          <div class="space-y-t-group">
+            <p class="text-tertiary-clr font-bold">✓  Theme switched <span aria-hidden="true">→</span> ${label}</p>
+            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+            <p>${description}</p>
+            <p>Preference saved.</p>
           </div>
-          <div class="space-y-0.5">
+          <div class="space-y-t-footer">
+            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
             <p>
-              Type
-              <span> '</span><span class="text-tertiary-clr font-bold">theme</span><span>'</span>
+              Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">theme</span><span aria-hidden="true">'</span>
               to see all themes.
             </p>
           </div>
@@ -195,16 +199,16 @@ export const getThemeInvalidOutput = (name: string) => [
     id: crypto.randomUUID(),
     type: "html" as const,
     content: [
-      `<div class="space-y-3 py-1">
-        <div class="space-y-1">
-          <p><span class="text-secondary-clr">⚠</span>  Unknown theme: <span class="text-tertiary-clr">"${name}"</span></p>
-          <p class="text-text-clr">Available: catppuccin · monokai · tokyo-night · dracula</p>
+      `<div class="space-y-t-section py-t-outer">
+        <div class="space-y-t-group">
+          <p><span aria-hidden="true" class="text-secondary-clr">⚠</span>  Unknown theme: <span class="text-tertiary-clr">"${name}"</span></p>
+          <p>Available: <span class="text-secondary-clr font-bold">catppuccin · monokai · tokyo-night · dracula</span></p>
         </div>
-        <div class="space-y-0.5">
-          <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
+
+        <div class="space-y-t-footer">
+          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
           <p>
-            Type
-            <span> '</span><span class="text-tertiary-clr font-bold">theme</span><span>'</span>
+            Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">theme</span><span aria-hidden="true">'</span>
             to see all available themes.
           </p>
         </div>
@@ -223,13 +227,18 @@ export const getFontListOutput = () => {
   const rows = (Object.entries(FONTS) as [FontKey, (typeof FONTS)[FontKey]][])
     .map(([key, font]) => {
       const isActive = key === current;
-      const labelCol = font.label.padEnd(20);
+      const label = font.label.padEnd(20);
+      const description = font.description;
+      const nameClass = isActive
+        ? "text-secondary-clr font-bold"
+        : "text-tertiary-clr";
       const activeTag = isActive
-        ? `<span class="text-tertiary-clr font-bold">← active</span>`
+        ? `<span class="text-secondary-clr font-bold"> ← active</span>`
         : "";
 
       return `<p>
-        <span class="${isActive ? "text-tertiary-clr font-bold" : "text-secondary-clr"}">${labelCol}</span><span class="text-text-clr">${font.description}. </span>${activeTag}
+        <span class="${nameClass}">${label}</span>
+        <span class="text-text-clr">- ${description}</span>${activeTag}
       </p>`;
     })
     .join("");
@@ -239,22 +248,22 @@ export const getFontListOutput = () => {
       id: crypto.randomUUID(),
       type: "html" as const,
       content: [
-        `<div class="space-y-3 py-1">
-          <div class="space-y-1">
+        `<div class="space-y-t-section py-t-outer">
+ 
+          <div class="space-y-t-group">
             <p class="text-secondary-clr font-bold">Available Fonts</p>
-            <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
-            <p> </p>
+            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
             ${rows}
-            <p> </p>
-            <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
           </div>
-          <div class="space-y-0.5">
+ 
+          <div class="space-y-t-footer">
+            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
             <p>
-              Type
-              <span> '</span><span class="text-tertiary-clr font-bold">typeface &lt;name&gt;</span><span>'</span>
+              Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">typeface &lt;name&gt;</span><span aria-hidden="true">'</span>
               to switch.
             </p>
           </div>
+ 
         </div>`,
       ],
     },
@@ -270,18 +279,17 @@ export const getFontSwitchOutput = (font: FontKey) => {
       id: crypto.randomUUID(),
       type: "html" as const,
       content: [
-        `<div class="space-y-3 py-1">
-          <div class="space-y-1">
-            <p class="text-tertiary-clr font-bold">✓  Font switched → ${label}</p>
-            <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
-            <p class="text-text-clr">${description}</p>
-            <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
-            <p class="text-text-clr">Preference saved. All text updated.</p>
+        `<div class="space-y-t-section py-t-outer">
+          <div class="space-y-t-group">
+            <p class="text-tertiary-clr font-bold">✓  Font switched <span aria-hidden="true">→</span> ${label}</p>
+            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+            <p>${description}</p>
+            <p>Preference saved. All text updated instantly.</p>
           </div>
-          <div class="space-y-0.5">
+          <div class="space-y-t-footer">
+            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
             <p>
-              Type
-              <span> '</span><span class="text-tertiary-clr font-bold">typeface</span><span>'</span>
+              Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">typeface</span><span aria-hidden="true">'</span>
               to see all fonts.
             </p>
           </div>
@@ -296,16 +304,15 @@ export const getFontInvalidOutput = (name: string) => [
     id: crypto.randomUUID(),
     type: "html" as const,
     content: [
-      `<div class="space-y-3 py-1">
-        <div class="space-y-1">
-          <p><span class="text-secondary-clr">⚠</span>  Unknown font: <span class="text-tertiary-clr">"${name}"</span></p>
-          <p class="text-text-clr">Available: fira · jetbrains · cascadia</p>
+      `<div class="space-y-t-section py-t-outer">
+        <div class="space-y-t-group">
+          <p><span aria-hidden="true" class="text-secondary-clr">⚠</span>  Unknown font: <span class="text-tertiary-clr">"${name}"</span></p>
+          <p>Available: <span class="text-secondary-clr font-bold">fira · jetbrains · cascadia</span></p>
         </div>
-        <div class="space-y-0.5">
-          <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
+        <div class="space-y-t-footer">
+          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
           <p>
-            Type
-            <span> '</span><span class="text-tertiary-clr font-bold">typeface</span><span>'</span>
+            Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">typeface</span><span aria-hidden="true">'</span>
             to see all available fonts.
           </p>
         </div>
