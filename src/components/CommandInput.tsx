@@ -93,6 +93,7 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
             autoComplete="off"
             autoCapitalize="off"
             autoCorrect="off"
+            spellCheck="false"
             type="text"
             value={input}
             ref={commandInputRef}
