@@ -3,52 +3,48 @@ export const getExitCommandOutput = () => [
     id: crypto.randomUUID(),
     type: "html" as const,
     content: [
-      `<div class="space-y-3 py-1">
-        <div class="space-y-1">
-          <p>Goodbye! 👋</p>
+      `<div class="space-y-t-section py-t-outer">
+
+        <div class="space-y-t-group">
+          <p class="text-secondary-clr font-bold">Goodbye! 👋</p>
+          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
           <p>Thank you for visiting my terminal portfolio.</p>
           <p>You can close this tab to exit.</p>
-        </div>
-
-        <div class="space-y-1">
           <p>Have a project idea or an opportunity?</p>
           <p>
-            <span>Reach out: </span>
-            <span class="text-tertiary-clr">→</span>
+            <span aria-hidden="true" class="text-tertiary-clr">→</span>
             <a href="mailto:souleymanesycodes@gmail.com" target="_blank" rel="noopener noreferrer">
               souleymanesycodes@gmail.com
             </a>
           </p>
-        </div>
-
-        <div class="space-y-0.5">
           <p>See you around. 🌍</p>
         </div>
+
       </div>`,
     ],
   },
 ];
 
 export const rspCommand = (userInput: string) => {
-  const choices = ["rock", "paper", "scissors"];
+  const choices = ["rock", "paper", "scissors"] as const;
   const userChoice = userInput.toLocaleLowerCase().trim().split(" ")[0];
 
-  if (!choices.includes(userChoice)) {
+  if (!choices.includes(userChoice as (typeof choices)[number])) {
     return [
       {
         id: crypto.randomUUID(),
         type: "html" as const,
         content: [
-          `<div class="space-y-3 py-1">
-            <div class="space-y-1">
-              <p><span class="text-secondary-clr">⚠</span>  Invalid choice.</p>
+          `<div class="space-y-t-section py-t-outer">
+            <div class="space-y-t-group">
+              <p><span aria-hidden="true" class="text-secondary-clr">⚠</span> Invalid choice.</p>
               <p>Pick <span class="text-tertiary-clr">rock</span>, <span class="text-tertiary-clr">paper</span> or <span class="text-tertiary-clr">scissors</span>.</p>
             </div>
-            <div class="space-y-0.5">
-              <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
+
+            <div class="space-y-t-footer">
+              <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
               <p>
-                Example: Type
-                <span> '</span><span class="text-tertiary-clr font-bold">rps rock</span><span>'</span>
+                <span class="text-secondary-clr font-bold">Example:</span> Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">rps rock</span><span aria-hidden="true">'</span>
               </p>
             </div>
           </div>`,
@@ -82,21 +78,20 @@ export const rspCommand = (userInput: string) => {
       id: crypto.randomUUID(),
       type: "html" as const,
       content: [
-        `<div class="space-y-3 py-1">
+        `<div class="space-y-t-section py-t-outer">
 
-          <div class="space-y-1">
+          <div class="space-y-t-group">
             <p><span class="text-secondary-clr">You  →</span>  ${userChoice}</p>
             <p><span class="text-secondary-clr">Me   →</span>  ${computerChoice}</p>
-            <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
+            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
             <p class="${resultColor} font-bold">${result}</p>
           </div>
 
-          <div class="space-y-0.5">
-            <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
+          <div class="space-y-t-footer">
+            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
             <p>
-              Play again? Type
-              <span> '</span><span class="text-tertiary-clr font-bold">rps</span><span>'</span>
-              followed by your choice!
+              Play again? Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">rps</span><span aria-hidden="true">'</span>
+              followed by your choice.
             </p>
           </div>
 
