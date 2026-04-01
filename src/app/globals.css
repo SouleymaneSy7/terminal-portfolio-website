@@ -1,21 +1,67 @@
 @import "tailwindcss";
 
-* {
-  scroll-behavior: smooth;
-  scroll-padding: 3.75rem;
-  scroll-margin: 1rem;
+@theme {
+  /* ── Theme — Catppuccin Macchiato (default) ── */
+  --color-background-clr: oklch(0.2155 0.0254 284.06);
+  --color-foreground-clr: oklch(0.2788 0.0353 276.94);
+  --color-text-clr: oklch(0.8787 0.0426 272.28);
+  --color-primary-clr: oklch(0.7906 0.0965 228.65);
+  --color-secondary-clr: oklch(0.7556 0.1297 2.76);
+  --color-tertiary-clr: oklch(0.8577 0.1092 142.72);
+
+  /* ── Fonts ── */
+  --font-*: initial;
+  --font-fira-code: var(--font-fira-code);
+  --font-jetbrains-mono: var(--font-jetbrains-mono);
+  --font-cascadia-code: var(--font-cascadia-code);
+
+  /* ── Font weights ── */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semi-bold: 600;
+  --font-weight-bold: 700;
+
+  /* ── Font sizes ── */
+  --text-fs-body: clamp(0.875rem, 0.8393rem + 0.1786vw, 1rem);
+  --text-fs-subtitle: clamp(1.125rem, 1.0893rem + 0.1786vw, 1.25rem);
+  --text-fs-title: clamp(1.25rem, 1.1786rem + 0.3571vw, 1.5rem);
+  --leading-base: 1.5;
+
+  /* ── Spacing ── */
+  --spacing-t-outer: 0.25rem;
+  --spacing-t-section: 0.75rem;
+  --spacing-t-group: 0.25rem;
+  --spacing-t-footer: 0.125rem;
+
+  /* ── Opacity ── */
+  --opacity-sep: 0.3;
+
+  /* ── Animations ── */
+  --animate-pulse-live: pulse-live 1500ms ease-in-out infinite;
+
+  @keyframes pulse-live {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.2;
+    }
+  }
+}
+
+@layer utilities {
+  .terminal-container * + * {
+    margin-block-start: 0.25rem;
+  }
 }
 
 *::-webkit-scrollbar {
   width: 0.25rem;
   height: 0.25rem;
-  scroll-margin: 1rem;
 }
 
-*::-webkit-scrollbar-corner {
-  background: var(--color-foreground-clr);
-}
-
+*::-webkit-scrollbar-corner,
 *::-webkit-scrollbar-track {
   background: var(--color-foreground-clr);
 }
@@ -30,73 +76,7 @@
   background-color: var(--color-secondary-clr);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-@theme {
-  /* Catpuccin Theme Colors — default */
-  --color-background-clr: oklch(0.2155 0.0254 284.06);
-  --color-foreground-clr: oklch(0.2788 0.0353 276.94);
-  --color-text-clr: oklch(0.8787 0.0426 272.28);
-  --color-primary-clr: oklch(0.7906 0.0965 228.65);
-  --color-secondary-clr: oklch(0.7556 0.1297 2.76);
-  --color-tertiary-clr: oklch(0.8577 0.1092 142.72);
-
-  --font-*: initial;
-  --font-fira-code: var(--font-fira-code);
-
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-semi-bold: 600;
-  --font-weight-bold: 700;
-
-  --text-fs-body: clamp(0.875rem, 0.8393rem + 0.1786vw, 1rem);
-  --text-fs-subtitle: clamp(1.125rem, 1.0893rem + 0.1786vw, 1.25rem);
-  --text-fs-title: clamp(1.25rem, 1.1786rem + 0.3571vw, 1.5rem);
-  --leading-base: 1.5;
-
-  --animate-pulse-live: pulse-live 1500ms ease-in-out infinite;
-
-  @keyframes pulse-live {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.2;
-    }
-  }
-}
-
-body {
-  @apply bg-background-clr text-text-clr font-fira-code text-fs-body font-semi-bold leading-base;
-}
-
-a {
-  @apply text-secondary-clr inline-block underline hover:bg-primary-clr hover:text-text-clr transition-all px-0.5;
-}
-
-@layer utilities {
-  .terminal-container * + * {
-    margin-block-start: 0.25rem;
-  }
-}
-
-/* ─────────────────────────────────────────────
-   THEME OVERRIDES
-   Override CSS custom properties per theme.
-   html[data-theme] has specificity (0,1,1)
-   which beats :root (0,1,0) — no !important needed.
-   ───────────────────────────────────────────── */
-
+/* ── Theme — Monokai ── */
 html[data-theme="monokai"] {
   --color-background-clr: oklch(0.24 0.0229 280.84);
   --color-foreground-clr: oklch(0.29 0.0293 278.86);
@@ -106,6 +86,7 @@ html[data-theme="monokai"] {
   --color-tertiary-clr: oklch(0.82 0.0632 167.34);
 }
 
+/* ── Theme — Tokyo Night ── */
 html[data-theme="tokyo-night"] {
   --color-background-clr: oklch(0.158 0.021 265);
   --color-foreground-clr: oklch(0.196 0.018 265);
@@ -115,6 +96,7 @@ html[data-theme="tokyo-night"] {
   --color-tertiary-clr: oklch(0.782 0.143 137);
 }
 
+/* ── Theme — Dracula ── */
 html[data-theme="dracula"] {
   --color-background-clr: oklch(0.203 0.022 277);
   --color-foreground-clr: oklch(0.175 0.018 277);
@@ -123,16 +105,6 @@ html[data-theme="dracula"] {
   --color-secondary-clr: oklch(0.718 0.178 341);
   --color-tertiary-clr: oklch(0.879 0.182 145);
 }
-
-/* ─────────────────────────────────────────────
-   FONT SWITCHING
-   The Next.js localFont() variables (--font-fira-code,
-   --font-jetbrains-mono, --font-cascadia-code) are
-   injected as CSS custom properties on <body> via
-   className. Targeting `html[data-font] body` resolves
-   the var() in the context of body where they exist.
-   Specificity (0,1,2) beats body rule's (0,0,1).
-   ───────────────────────────────────────────── */
 
 html[data-font="fira"] body {
   font-family: var(--font-fira-code);
@@ -144,4 +116,29 @@ html[data-font="jetbrains"] body {
 
 html[data-font="cascadia"] body {
   font-family: var(--font-cascadia-code);
+}
+
+body {
+  @apply bg-background-clr text-text-clr font-fira-code text-fs-body font-semi-bold leading-base;
+}
+
+a {
+  @apply text-secondary-clr inline-block underline
+         hover:bg-primary-clr hover:text-text-clr
+         transition-all duration-150 px-0.5;
+}
+
+a:focus-visible {
+  @apply outline-2 outline-offset-2 outline-primary-clr rounded-sm;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
