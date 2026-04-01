@@ -119,7 +119,7 @@ html[data-font="cascadia"] body {
 }
 
 body {
-  @apply bg-background-clr text-text-clr font-fira-code text-fs-body font-semi-bold leading-base;
+  @apply bg-background-clr text-text-clr font-cascadia-code text-fs-body font-semi-bold leading-base;
 }
 
 a {
