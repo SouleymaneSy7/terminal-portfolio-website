@@ -39,14 +39,14 @@ export const weatherUsageOutput = () => [
           <p class="text-secondary-clr font-bold">Weather</p>
           <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
           <p>Get real-time weather for any city.</p>
-          <p><span class="text-secondary-clr">Usage:</span>  weather &lt;city&gt;</p>
+          <p><span class="text-secondary-clr">Usage:</span>  <span class="text-tertiary-clr">weather &lt;city&gt;</span></p>
         </div>
 
         <div class="space-y-t-group">
           <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  weather Conakry</p>
-          <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  weather Coyah</p>
-          <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  weather Paris</p>
+          <p  class="text-tertiary-clr"><span aria-hidden="true"> •</span>  weather Conakry</p>
+          <p class="text-tertiary-clr"><span aria-hidden="true"> •</span>  weather Coyah</p>
+          <p class="text-tertiary-clr"><span aria-hidden="true"> •</span>  weather Paris</p>
         </div>
 
       </div>`,
