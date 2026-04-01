@@ -73,6 +73,7 @@ export const getWelcomeCommandOutput = () => [
           <p>
             <span aria-hidden="true" class="text-secondary-clr">#</span>
             Mobile works, but desktop is home.
+            <span class="text-primary-clr shrink-0 text-fs-subtitle">⌨</span>
           </p>
         </div>
 
