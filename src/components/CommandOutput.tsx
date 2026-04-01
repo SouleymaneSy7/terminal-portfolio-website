@@ -110,7 +110,7 @@ const CommandOutput: React.FC<CommandOutputPropsType> = ({
           return (
             <motion.div
               key={index}
-              className="terminal-output space-y-8"
+              className="terminal-output lg:pt-t-section lg:pl-t-section"
               variants={lineVariants}
               dangerouslySetInnerHTML={{ __html: cleanText }}
             />
