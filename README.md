@@ -134,42 +134,195 @@ The `neofetch` command always reflects the currently active theme and font.
 
 ---
 
+### Theme Previews
+
+<details>
+<summary><strong>Catppuccin Macchiato</strong> — default</summary>
+<br>
+
+![Catppuccin Macchiato theme preview](./preview/themes/theme-catppuccin.png)
+
+Soothing pastel palette with a deep blue-purple background. The default theme — easy on the eyes during long sessions. Every shade is carefully calibrated to feel calm and readable.
+
+</details>
+
+<details>
+<summary><strong>Monokai</strong></summary>
+<br>
+
+![Monokai theme preview](./preview/themes/theme-monokai.png)
+
+The timeless classic. Warm dark background with vibrant yellow, orange and green accents — instantly recognizable to any developer who has spent time in Sublime Text.
+
+</details>
+
+<details>
+<summary><strong>Tokyo Night</strong></summary>
+<br>
+
+![Tokyo Night theme preview](./preview/themes/theme-tokyo-night.png)
+
+Deep blue-black background with soft blue and red accents. Inspired by the neon glow of the Tokyo skyline at night — made for late-night coding sessions.
+
+</details>
+
+<details>
+<summary><strong>Dracula</strong></summary>
+<br>
+
+![Dracula theme preview](./preview/themes/theme-dracula.png)
+
+Dark and mysterious. Purple primary, pink secondary, mint tertiary on a near-black background. One of the most iconic dark themes in existence.
+
+</details>
+
+---
+
 ## Design System
 
-All command outputs share a unified visual language defined in `globals.css`.
+All visual output across every command is driven by a single source of truth in `src/app/globals.css`. Changing a token once propagates to every command output automatically — no hunting through individual command files.
 
 ### CSS Tokens (in `@theme`)
 
-```css
-/* Spacing — controls every command output */
---spacing-t-outer: 0.25rem; /* py on each output block     */
---spacing-t-section: 0.75rem; /* gap between major sections  */
---spacing-t-group: 0.25rem; /* gap between lines in groups */
---spacing-t-footer: 0.125rem; /* gap between hint lines      */
+#### Colors
 
-/* Opacity — separator lines only */
---opacity-sep: 0.3; /* ──── decorative separators  */
+Six semantic color roles cover every UI element in the terminal. All themes override these same six variables — swapping a theme only requires changing these six values.
+
+```css
+/* ── Catppuccin Macchiato — default ── */
+/* Overridden per theme via html[data-theme] selectors */
+
+--color-background-clr: oklch(
+  0.2155 0.0254 284.06
+); /* Page background                  */
+--color-foreground-clr: oklch(
+  0.2788 0.0353 276.94
+); /* Terminal panel surface            */
+--color-text-clr: oklch(
+  0.8787 0.0426 272.28
+); /* All body text                     */
+--color-primary-clr: oklch(
+  0.7906 0.0965 228.65
+); /* ASCII art, strong accent, borders */
+--color-secondary-clr: oklch(
+  0.7556 0.1297 2.76
+); /* Keys, labels, warnings ⚠          */
+--color-tertiary-clr: oklch(
+  0.8577 0.1092 142.72
+); /* Commands, bullets •, success ✓    */
 ```
 
-Edit a token once → it applies across every command output automatically.
+#### Typography — Font Families
+
+Three monospace fonts are pre-loaded and switchable at runtime via the `typeface` command. All three fonts are loaded in `layout.tsx` using `next/font/local` for optimal performance.
+
+```css
+--font-fira-code: var(--font-fira-code); /* Active when data-font="fira"      */
+--font-jetbrains-mono: var(
+  --font-jetbrains-mono
+); /* Active when data-font="jetbrains" */
+--font-cascadia-code: var(
+  --font-cascadia-code
+); /* Active when data-font="cascadia"  */
+```
+
+#### Typography — Weights & Sizes
+
+```css
+/* ── Font weights ── */
+--font-weight-regular: 400;
+--font-weight-semi-bold: 600; /* Default body weight                          */
+--font-weight-bold: 700; /* Section headers, command names, strong accent */
+
+/* ── Fluid font sizes — scale smoothly between breakpoints ── */
+--text-fs-body: clamp(0.875rem, 0.8393rem + 0.1786vw, 1rem); /* 14px → 16px */
+--text-fs-subtitle: clamp(
+  1.125rem,
+  1.0893rem + 0.1786vw,
+  1.25rem
+); /* 18px → 20px */
+--text-fs-title: clamp(1.25rem, 1.1786rem + 0.3571vw, 1.5rem); /* 20px → 24px */
+
+/* ── Line height ── */
+--leading-base: 1.5;
+```
+
+#### Spacing — Terminal Command Outputs
+
+These four tokens control the rhythm of every command output. Edit once here and all outputs update instantly.
+
+```css
+--spacing-t-outer: 0.25rem; /* py — vertical padding on each output block  */
+--spacing-t-section: 0.75rem; /* space-y — gap between major content sections */
+--spacing-t-group: 0.25rem; /* space-y — gap between lines in a group       */
+--spacing-t-footer: 0.125rem; /* space-y — gap between hint / footer lines    */
+```
+
+#### Opacity
+
+```css
+/* Strictly reserved for decorative separator lines ──── only.
+   All other visual hierarchy is achieved through color roles,
+   not opacity. This is intentional — one token, one purpose.  */
+--opacity-sep: 0.3;
+```
 
 ### Color Roles
 
-| Class                       | Role                               |
-| --------------------------- | ---------------------------------- |
-| `text-primary-clr`          | ASCII art, strong accent, headings |
-| `text-secondary-clr`        | Keys, labels, warnings             |
-| `text-tertiary-clr`         | Commands, bullets, success states  |
-| `text-text-clr`             | Body text                          |
-| `text-text-clr opacity-sep` | Separator lines `────` only        |
+Each color token has a strict semantic role. Following this table keeps all command outputs visually consistent.
 
-### Accessibility
+| Token                              | Tailwind class              | Role                                                     |
+| ---------------------------------- | --------------------------- | -------------------------------------------------------- |
+| `--color-primary-clr`              | `text-primary-clr`          | ASCII art, neofetch heading, strong accent, border color |
+| `--color-secondary-clr`            | `text-secondary-clr`        | Key labels in kv-rows, section headers, warning `⚠` icon |
+| `--color-tertiary-clr`             | `text-tertiary-clr`         | Command names in hints, bullet points `•`, success `✓`   |
+| `--color-text-clr`                 | `text-text-clr`             | All regular body text                                    |
+| `--color-text-clr` + `opacity-sep` | `text-text-clr opacity-sep` | Separator lines `────` — and nothing else                |
+| `--color-foreground-clr`           | `bg-foreground-clr`         | Terminal panel surface                                   |
+| `--color-background-clr`           | `bg-background-clr`         | Page background                                          |
 
-- All ASCII art blocks carry `aria-hidden="true"` — screen readers skip decorative characters
-- All decorative separators (`────`), bullets (`•`), arrows (`→`) and quote marks carry `aria-hidden="true"`
-- Terminal output area uses `role="log"` with `aria-live="polite"`
-- All links include `rel="noopener noreferrer"` and proper `target="_blank"`
-- `:focus-visible` styles on all interactive elements
+### Spacing Classes
+
+Tailwind generates utility classes directly from the spacing tokens, making the design system truly token-driven.
+
+| Tailwind class      | Token                 | Applied on                           |
+| ------------------- | --------------------- | ------------------------------------ |
+| `py-t-outer`        | `--spacing-t-outer`   | Root `<div>` of every command output |
+| `space-y-t-section` | `--spacing-t-section` | Between major content sections       |
+| `space-y-t-group`   | `--spacing-t-group`   | Between lines within a related group |
+| `space-y-t-footer`  | `--spacing-t-footer`  | Between hint and footer lines        |
+
+### Theme Switching — How the CSS Works
+
+Theme overrides use attribute selectors on `<html>`. The specificity of `html[data-theme]` (`0,1,1`) beats `:root` (`0,1,0`) without needing `!important`. Font switching uses `html[data-font] body` (`0,1,2`) which beats the base `body` rule (`0,0,1`).
+
+```css
+/* All six color tokens are overridden — nothing else changes */
+html[data-theme="dracula"] {
+  --color-background-clr: oklch(0.203 0.022 277);
+  --color-foreground-clr: oklch(0.175 0.018 277);
+  --color-text-clr: oklch(0.968 0.004 106);
+  --color-primary-clr: oklch(0.717 0.152 298);
+  --color-secondary-clr: oklch(0.718 0.178 341);
+  --color-tertiary-clr: oklch(0.879 0.182 145);
+}
+
+/* Font override — CSS var resolves in the context of body
+   where Next.js injects the font variable as a className  */
+html[data-font="jetbrains"] body {
+  font-family: var(--font-jetbrains-mono);
+}
+```
+
+### Accessibility Practices
+
+- All ASCII art blocks carry `aria-hidden="true"` — screen readers skip decorative characters entirely
+- All decorative separators `────`, bullets `•`, arrows `→` and syntactic quote marks `'` carry `aria-hidden="true"`
+- Terminal output uses `role="log"` with `aria-live="polite"`, `aria-relevant="additions"` and `aria-atomic="false"`
+- The terminal wrapper uses `role="application"` with a descriptive `aria-label`
+- All external links include `rel="noopener noreferrer"` and `target="_blank"`
+- `:focus-visible` styles on all interactive elements (links, buttons, input)
+- Full `prefers-reduced-motion` support — CSS transitions and Framer Motion animations are disabled
 
 ---
 
