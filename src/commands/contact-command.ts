@@ -3,15 +3,27 @@ export const getEmailCommandOutput = () => [
     id: crypto.randomUUID(),
     type: "html" as const,
     content: [
-      `
-      <div class="space-y-2 py-2">
-        <p>You can reach me at:</p>
-        <a href="mailto:souleymanesycodes@gmail.com" target="_blank" rel="noreferrer">
-          souleymanesycodes@gmail.com
-        </a>
-        <p>An opportunity, a collaboration, or just saying hi — write to me. I always reply.</p>
-      </div>
- `,
+      `<div class="space-y-t-section py-t-outer">
+
+        <div class="space-y-t-group">
+          <p class="text-secondary-clr font-bold">Email</p>
+          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+          <p>You can reach me at:</p>
+          <a href="mailto:souleymanesycodes@gmail.com" target="_blank" rel="noopener noreferrer">
+            souleymanesycodes@gmail.com
+          </a>
+          <p>An opportunity, a collaboration, or just saying hi — write to me. I always reply.</p>
+        </div>
+
+        <div class="space-y-t-footer">
+          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+          <p>
+            Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">contact</span><span aria-hidden="true">'</span>
+            to see all my social links.
+          </p>
+        </div>
+
+      </div>`,
     ],
   },
 ];
@@ -21,86 +33,59 @@ export const getContactCommandOutput = () => [
     id: crypto.randomUUID(),
     type: "html" as const,
     content: [
-      `
-      <div class="space-y-3">
-        <div class="pt-2">
-          <p class="pb-3">Find me across the web:</p>
-          
-          <div class="space-y-2">
-            <div>
-              <span class="text-tertiary-clr">Email:</span>
-              <a 
-                href="mailto:souleymanesycodes@gmail.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                souleymanesycodes@gmail.com
-              </a>
-            </div>
-            
-            <div>
-              <span class="text-tertiary-clr">GitHub:</span>
-              <a 
-                href="https://github.com/SouleymaneSy7" 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                github.com/SouleymaneSy7
-              </a>
-            </div>
+      `<div class="space-y-t-section py-t-outer">
 
-            <div>
-              <span class="text-tertiary-clr">LinkedIn:</span>
-              <a 
-                href="https://linkedin.com/in/souleymanesy7" 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                linkedin.com/in/souleymanesy7
-              </a>
-            </div>
-            
-            <div>
-              <span class="text-tertiary-clr">Twitter / X:</span>
-              <a 
-                href="https://twitter.com/Souleymanesy43" 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                twitter.com/Souleymanesy43
-              </a>
-            </div>
-            
-            <div>
-              <span class="text-tertiary-clr">Frontend Mentor:</span>
-              <a 
-                href="https://www.frontendmentor.io/profile/SouleymaneSy7" 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                frontendmentor.io/profile/SouleymaneSy7
-              </a>
-            </div>
-            
-            <div>
-              <span class="text-tertiary-clr">Dev Challenges:</span>
-              <a 
-                href="https://devchallenges.io/profile/534cd213-3165-4c16-bdcf-058e1f468da0" 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                devchallenges.io/profile/SouleymaneSy7
-              </a>
-            </div>
+        <div class="space-y-t-group">
+          <p class="text-secondary-clr font-bold">Find me across the web</p>
+          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+          <div>
+            <span class="text-secondary-clr">Email          </span>
+            <a href="mailto:souleymanesycodes@gmail.com" target="_blank" rel="noopener noreferrer">
+              souleymanesycodes@gmail.com
+            </a>
           </div>
-          
-          <p class="pt-4">
-            Available for freelance, collaboration, internship or remote position.
-            Feel free to reach out — I always reply.
+          <div>
+            <span class="text-secondary-clr">GitHub         </span>
+            <a href="https://github.com/SouleymaneSy7" target="_blank" rel="noopener noreferrer">
+              github.com/SouleymaneSy7
+            </a>
+          </div>
+          <div>
+            <span class="text-secondary-clr">LinkedIn       </span>
+            <a href="https://linkedin.com/in/souleymanesy7" target="_blank" rel="noopener noreferrer">
+              linkedin.com/in/souleymanesy7
+            </a>
+          </div>
+          <div>
+            <span class="text-secondary-clr">Twitter / X    </span>
+            <a href="https://twitter.com/Souleymanesy43" target="_blank" rel="noopener noreferrer">
+              twitter.com/Souleymanesy43
+            </a>
+          </div>
+          <div>
+            <span class="text-secondary-clr">Frontend Mentor</span>
+            <a href="https://www.frontendmentor.io/profile/SouleymaneSy7" target="_blank" rel="noopener noreferrer">
+              frontendmentor.io/profile/SouleymaneSy7
+            </a>
+          </div>
+          <div>
+            <span class="text-secondary-clr">Dev Challenges </span>
+            <a href="https://devchallenges.io/profile/534cd213-3165-4c16-bdcf-058e1f468da0" target="_blank" rel="noopener noreferrer">
+              devchallenges.io/profile/SouleymaneSy7
+            </a>
+          </div>
+          <p>Available for freelance, collaboration, internship or remote position. I always reply.</p>
+        </div>
+
+        <div class="space-y-t-footer">
+          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+          <p>
+            Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">resume</span><span aria-hidden="true">'</span>
+            to view or download my CV.
           </p>
         </div>
-      </div>
-      `,
+
+      </div>`,
     ],
   },
 ];
