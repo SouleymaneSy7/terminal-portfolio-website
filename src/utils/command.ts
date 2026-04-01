@@ -16,7 +16,6 @@ import {
   weatherUsageOutput,
   getWelcomeCommandOutput,
   getWhoAmICommandOutput,
-  // Theme & font
   THEMES,
   FONTS,
   getThemeListOutput,
@@ -50,9 +49,6 @@ export const executeCommand = async (command: string) => {
     case "contact":
       return getContactCommandOutput();
 
-    // ──────────────────────────────────────
-    // THEME
-    // ──────────────────────────────────────
     case "theme": {
       const themeName = parts.slice(1).join(" ").trim().toLowerCase();
 
@@ -65,9 +61,6 @@ export const executeCommand = async (command: string) => {
       return getThemeInvalidOutput(themeName);
     }
 
-    // ──────────────────────────────────────
-    // TYPEFACE
-    // ──────────────────────────────────────
     case "typeface": {
       const fontName = parts.slice(1).join("").trim().toLowerCase();
 
@@ -89,17 +82,18 @@ export const executeCommand = async (command: string) => {
             id: crypto.randomUUID(),
             type: "html" as const,
             content: [
-              `<div class="space-y-3 py-1">
-                <div class="space-y-1">
+              `<div class="space-y-t-section py-t-outer">
+                <div class="space-y-t-group">
+
                   <p>Pick <span class="text-tertiary-clr">rock</span>, <span class="text-tertiary-clr">paper</span> or <span class="text-tertiary-clr">scissors</span> to battle it out!</p>
                 </div>
-                <div class="space-y-0.5">
-                  <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
-                  <p>
-                    Example: Type
-                    <span> '</span><span class="text-tertiary-clr font-bold">rps rock</span><span>'</span>
-                  </p>
-                </div>
+               <div class="space-y-t-footer">
+              <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+              <p>
+                <span class="text-secondary-clr font-bold">Example:</span> Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">rps rock</span><span aria-hidden="true">'</span>
+              </p>
+            </div>
+
               </div>`,
             ],
           },
@@ -123,14 +117,16 @@ export const executeCommand = async (command: string) => {
             id: crypto.randomUUID(),
             type: "html" as const,
             content: [
-              `<div class="space-y-3 py-1">
-                <div class="space-y-1">
+              `<div class="space-y-t-section py-t-outer">
+                <div class="space-y-t-group">
                   <p>Make a cow say something!</p>
                 </div>
-                <div class="space-y-0.5">
-                  <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
+
+                <div class="space-y-t-footer">
+                  <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+
                   <p>
-                    Example: Type
+                    <span class="text-secondary-clr font-bold">Example:</span> Type
                     <span> '</span><span class="text-tertiary-clr font-bold">cowsay Hello World!</span><span>'</span>
                   </p>
                 </div>
@@ -180,14 +176,15 @@ export const executeCommand = async (command: string) => {
             id: crypto.randomUUID(),
             type: "html" as const,
             content: [
-              `<div class="space-y-3 py-1">
-                <div class="space-y-1">
+              `<div class="space-y-t-section py-t-outer">
+                <div class="space-y-t-group">
                   <p>${joke.setup}</p>
-                  <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
+                  <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
                   <p class="text-secondary-clr font-bold">${joke.delivery}</p>
                 </div>
-                <div class="space-y-0.5">
-                  <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
+
+                <div class="space-y-t-footer">
+                  <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
                   <p>
                     Type
                     <span> '</span><span class="text-tertiary-clr font-bold">joke</span><span>'</span>
@@ -205,7 +202,7 @@ export const executeCommand = async (command: string) => {
           id: crypto.randomUUID(),
           type: "html" as const,
           content: [
-            `<div class="space-y-1 py-1">
+            `<div class="space-y-t-section py-t-outer">
               <p><span class="text-secondary-clr">⚠</span>  Could not fetch a joke. Try again later.</p>
             </div>`,
           ],
@@ -222,13 +219,15 @@ export const executeCommand = async (command: string) => {
             id: crypto.randomUUID(),
             type: "html" as const,
             content: [
-              `<div class="space-y-3 py-1">
-                <div class="space-y-1">
-                  <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
+              `<div class="space-y-t-section py-t-outer">
+                <div class="space-y-t-group">
+
+                  <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
                   <p class="text-secondary-clr">"${quote.slip.advice}"</p>
-                  <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
+                  <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
                 </div>
-                <div class="space-y-0.5">
+
+                <div class="space-y-t-footer">
                   <p>
                     Type
                     <span> '</span><span class="text-tertiary-clr font-bold">quote</span><span>'</span>
@@ -246,7 +245,7 @@ export const executeCommand = async (command: string) => {
           id: crypto.randomUUID(),
           type: "html" as const,
           content: [
-            `<div class="space-y-1 py-1">
+            `<div class="space-y-t-section py-t-outer">
               <p><span class="text-secondary-clr">⚠</span>  Could not fetch a quote. Try again later.</p>
             </div>`,
           ],
@@ -306,17 +305,17 @@ export const executeCommand = async (command: string) => {
           id: crypto.randomUUID(),
           type: "html" as const,
           content: [
-            `<div class="space-y-3 py-1">
-              <div class="space-y-1">
+            `<div class="space-y-t-section py-t-outer">
+              <div class="space-y-t-group">
                 <p><span class="text-secondary-clr">'${cmd}'</span>  command not found.</p>
               </div>
-              <div class="space-y-0.5">
-                <p class="text-text-clr opacity-30">────────────────────────────────────────</p>
-                <p>
+
+              <div class="space-y-t-footer">
+                 <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>                <p>
                   Type
                   <span> '</span><span class="text-tertiary-clr font-bold">help</span><span>'</span>
                   to see all available commands.
-                </p>
+                 </p>
               </div>
             </div>`,
           ],
