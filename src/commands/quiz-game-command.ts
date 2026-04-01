@@ -4,10 +4,7 @@ import { QuizQuestionType, GameStateType } from "@/types";
 // CONSTANTS
 // ============================================
 
-const POINTS = {
-  CORRECT: 10,
-  WRONG: -5,
-} as const;
+const POINTS = { CORRECT: 10, WRONG: -5 } as const;
 
 const RANKS = {
   LEGEND: { min: 90, name: "LEGEND" },
@@ -85,16 +82,16 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 2,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | HTML is the backbone of web development`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | HTML = Hyper Text Markup Language`,
-    explanation: "→ HTML structures web pages. Every website starts with HTML.",
+    explanation: "HTML structures web pages. Every website starts with HTML.",
   },
   {
     question: "Which CSS property controls text size?",
     options: ["1. font-weight", "2. text-size", "3. font-size"],
     answer: 3,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | You know your CSS properties!`,
-    wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | The correct property is 'font-size'`,
+    wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | The correct property is font-size`,
     explanation:
-      "→ Use font-size to control text dimensions (e.g., font-size: 16px)",
+      "Use font-size to control text dimensions. Example: font-size: 16px",
   },
   {
     question: "Which of these is NOT a JavaScript framework?",
@@ -102,7 +99,8 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 3,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Django is a Python framework`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | Django is for Python, not JavaScript`,
-    explanation: "→ React & Vue = JavaScript | Django = Python web framework",
+    explanation:
+      "React & Vue are JavaScript. Django is a Python web framework.",
   },
   {
     question: "What does 'flex' in flexbox stand for?",
@@ -114,15 +112,15 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Flexbox is your layout superpower`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | Flex = Flexible Box Layout`,
-    explanation: "→ display: flex; is essential for modern responsive layouts",
+    explanation: "display: flex; is essential for modern responsive layouts.",
   },
   {
     question: "Which HTML tag creates the largest heading?",
     options: ["1. <heading>", "2. <h6>", "3. <h1>"],
     answer: 3,
-    correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | <h1> dominates the heading hierarchy`,
-    wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | <h1> is largest, <h6> is smallest`,
-    explanation: "→ Headings range from <h1> (largest) to <h6> (smallest)",
+    correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | h1 dominates the heading hierarchy`,
+    wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | h1 is largest, h6 is smallest`,
+    explanation: "Headings range from h1 (largest) to h6 (smallest).",
   },
   {
     question: "What does API stand for?",
@@ -135,7 +133,7 @@ const quizQuestions: QuizQuestionType[] = [
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | APIs connect systems together`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | API = Application Programming Interface`,
     explanation:
-      "→ APIs enable communication between different software systems",
+      "APIs enable communication between different software systems.",
   },
   {
     question: "What is the correct JavaScript function syntax?",
@@ -146,8 +144,8 @@ const quizQuestions: QuizQuestionType[] = [
     ],
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Perfect function declaration!`,
-    wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | JavaScript uses 'function' keyword`,
-    explanation: "→ Syntax: function name() {} or const name = () => {}",
+    wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | JavaScript uses the function keyword`,
+    explanation: "Syntax: function name() {} or const name = () => {}",
   },
   {
     question: "Which company created React?",
@@ -156,7 +154,7 @@ const quizQuestions: QuizQuestionType[] = [
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | React was born at Facebook in 2013`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | React was developed by Facebook (Meta)`,
     explanation:
-      "→ Jordan Walke created React at Facebook, now used by Instagram",
+      "Jordan Walke created React at Facebook, now used by Instagram.",
   },
   {
     question: "What does CSS stand for?",
@@ -168,7 +166,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | CSS brings style to the web`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | CSS = Cascading Style Sheets`,
-    explanation: "→ CSS styles and beautifies HTML elements",
+    explanation: "CSS styles and beautifies HTML elements.",
   },
   {
     question: "Which symbol creates single-line comments in JavaScript?",
@@ -176,7 +174,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Double slash comments are essential`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | Use // for single-line comments`,
-    explanation: "→ Single line: // | Multi-line: /* comment */",
+    explanation: "Single line: // — Multi-line: /* comment */",
   },
   {
     question: "What is the purpose of Git?",
@@ -188,7 +186,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Git is essential for team collaboration`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | Git tracks code changes, not compilation`,
-    explanation: "→ Git saves project snapshots with commit history",
+    explanation: "Git saves project snapshots with full commit history.",
   },
   {
     question: "Which keyword declares a constant in JavaScript?",
@@ -196,7 +194,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 3,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Constants prevent reassignment`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | Use const for values that won't change`,
-    explanation: "→ const PI = 3.14; creates an immutable binding",
+    explanation: "const PI = 3.14; creates an immutable binding.",
   },
   {
     question: "What does JSON stand for?",
@@ -207,8 +205,8 @@ const quizQuestions: QuizQuestionType[] = [
     ],
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | JSON is the universal data format`,
-    wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | JavaScript Object Notation`,
-    explanation: "→ JSON is lightweight and human-readable data interchange",
+    wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | JSON = JavaScript Object Notation`,
+    explanation: "JSON is lightweight and human-readable data interchange.",
   },
   {
     question: "Which HTTP method retrieves data from a server?",
@@ -216,7 +214,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 2,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | GET is for reading resources`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | GET reads, POST creates, PUT updates`,
-    explanation: "→ GET requests fetch data without modifying it",
+    explanation: "GET requests fetch data without modifying it.",
   },
   {
     question: "What is npm?",
@@ -228,7 +226,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | npm is the JavaScript package registry`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | npm = Node Package Manager`,
-    explanation: "→ npm install downloads and manages project dependencies",
+    explanation: "npm install downloads and manages project dependencies.",
   },
   {
     question: "Which CSS property changes background color?",
@@ -236,7 +234,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 3,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Background styling mastered!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | Use background-color, not bg-color`,
-    explanation: "→ background-color accepts color names, hex, or rgb values",
+    explanation: "background-color accepts color names, hex, or rgb values.",
   },
   {
     question: "What does DOM stand for?",
@@ -247,8 +245,8 @@ const quizQuestions: QuizQuestionType[] = [
     ],
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | The DOM is JavaScript's playground`,
-    wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | Document Object Model represents HTML`,
-    explanation: "→ The DOM is a tree structure of all page elements",
+    wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | DOM = Document Object Model`,
+    explanation: "The DOM is a tree structure of all page elements.",
   },
   {
     question: "Which operator checks for strict equality in JS?",
@@ -256,7 +254,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 2,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Triple equals prevents type coercion`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | === checks value AND type`,
-    explanation: "→ 5 === '5' is false (number vs string)",
+    explanation: "5 === '5' is false — number vs string.",
   },
   {
     question: "What is Webpack used for?",
@@ -268,7 +266,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Webpack optimizes your code`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | Webpack bundles modules, not tests`,
-    explanation: "→ Webpack combines files into optimized production bundles",
+    explanation: "Webpack combines files into optimized production bundles.",
   },
   {
     question: "Which attribute makes an HTML input required?",
@@ -276,7 +274,8 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 2,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Form validation understood!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | The required attribute enforces input`,
-    explanation: "→ <input required> prevents form submission when empty",
+    explanation:
+      "input required prevents form submission when the field is empty.",
   },
   {
     question: "What is TypeScript?",
@@ -288,7 +287,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | TypeScript catches errors early`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | TypeScript = JavaScript + type safety`,
-    explanation: "→ TypeScript compiles to JavaScript with type checking",
+    explanation: "TypeScript compiles to JavaScript with type checking.",
   },
   {
     question: "Which loop iterates over object properties?",
@@ -296,7 +295,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Object iteration mastered!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | for...in for objects, for...of for arrays`,
-    explanation: "→ for...in loops through enumerable property keys",
+    explanation: "for...in loops through enumerable property keys.",
   },
   {
     question: "What does async/await do?",
@@ -308,7 +307,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Async code just got cleaner!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | async/await simplifies promise handling`,
-    explanation: "→ await pauses execution until a promise resolves",
+    explanation: "await pauses execution until a promise resolves.",
   },
   {
     question: "Which CSS unit is relative to the viewport width?",
@@ -316,7 +315,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 2,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Responsive design pro!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | vw = viewport width, vh = viewport height`,
-    explanation: "→ 50vw equals 50% of the browser window width",
+    explanation: "50vw equals 50% of the browser window width.",
   },
   {
     question: "What is REST in web APIs?",
@@ -328,7 +327,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | RESTful architecture understood!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | REST = Representational State Transfer`,
-    explanation: "→ REST uses HTTP methods for stateless API operations",
+    explanation: "REST uses HTTP methods for stateless API operations.",
   },
   {
     question: "Which method adds an element to the end of an array?",
@@ -336,7 +335,8 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 2,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Array manipulation on point!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | Use push() to add to array end`,
-    explanation: "→ push() modifies the original array and returns new length",
+    explanation:
+      "push() modifies the original array and returns the new length.",
   },
   {
     question: "What is localhost typically bound to?",
@@ -344,7 +344,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 2,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Network fundamentals mastered!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | localhost resolves to 127.0.0.1`,
-    explanation: "→ 127.0.0.1 is the loopback address for local development",
+    explanation: "127.0.0.1 is the loopback address for local development.",
   },
   {
     question: "Which CSS property controls element positioning?",
@@ -352,7 +352,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 2,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Layout control mastered!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | position property manages element flow`,
-    explanation: "→ Values: static, relative, absolute, fixed, sticky",
+    explanation: "Values: static, relative, absolute, fixed, sticky.",
   },
   {
     question: "What does CORS stand for?",
@@ -364,7 +364,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Web security understood!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | CORS = Cross-Origin Resource Sharing`,
-    explanation: "→ CORS headers control cross-domain HTTP requests",
+    explanation: "CORS headers control cross-domain HTTP requests.",
   },
   {
     question: "Which hook manages state in React?",
@@ -372,7 +372,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 2,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | React hooks mastered!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | useState creates component state`,
-    explanation: "→ const [state, setState] = useState(initialValue)",
+    explanation: "const [state, setState] = useState(initialValue)",
   },
   {
     question: "What is the default port for HTTP?",
@@ -380,7 +380,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 3,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Network protocols understood!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | HTTP uses port 80, HTTPS uses 443`,
-    explanation: "→ Port 80 is usually omitted from URLs",
+    explanation: "Port 80 is usually omitted from URLs.",
   },
   {
     question: "Which method removes the last element from an array?",
@@ -388,7 +388,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Array methods mastered!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | pop() removes from end, shift() from start`,
-    explanation: "→ pop() returns the removed element",
+    explanation: "pop() returns the removed element.",
   },
   {
     question: "What is Node.js?",
@@ -400,7 +400,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Backend JavaScript understood!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | Node.js runs JavaScript on servers`,
-    explanation: "→ Node.js uses Chrome's V8 engine outside browsers",
+    explanation: "Node.js uses Chrome's V8 engine outside browsers.",
   },
   {
     question: "Which CSS preprocessor uses .scss files?",
@@ -408,7 +408,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 2,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | CSS preprocessing mastered!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | Sass uses .scss or .sass extensions`,
-    explanation: "→ SCSS adds variables, nesting, and mixins to CSS",
+    explanation: "SCSS adds variables, nesting, and mixins to CSS.",
   },
   {
     question: "What does SPA stand for in web development?",
@@ -420,15 +420,15 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Modern web architecture understood!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | SPA = Single Page Application`,
-    explanation: "→ SPAs dynamically update content without page reloads",
+    explanation: "SPAs dynamically update content without page reloads.",
   },
   {
     question: "Which keyword creates a class in JavaScript?",
     options: ["1. function", "2. class", "3. object"],
     answer: 2,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Object-oriented JS mastered!`,
-    wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | Use class keyword for class definitions`,
-    explanation: "→ ES6 introduced class syntax for cleaner OOP",
+    wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | Use the class keyword for class definitions`,
+    explanation: "ES6 introduced class syntax for cleaner OOP.",
   },
   {
     question: "What is MongoDB?",
@@ -440,7 +440,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Database types understood!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | MongoDB is a NoSQL document database`,
-    explanation: "→ MongoDB stores data in flexible JSON-like documents",
+    explanation: "MongoDB stores data in flexible JSON-like documents.",
   },
   {
     question: "Which CSS property controls text alignment?",
@@ -448,7 +448,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 2,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Text styling mastered!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | text-align positions text horizontally`,
-    explanation: "→ Values: left, right, center, justify",
+    explanation: "Values: left, right, center, justify.",
   },
   {
     question: "What is Express.js?",
@@ -460,7 +460,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Backend frameworks understood!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | Express is a minimal Node.js framework`,
-    explanation: "→ Express simplifies building Node.js web servers",
+    explanation: "Express simplifies building Node.js web servers.",
   },
   {
     question: "Which method converts JSON string to object?",
@@ -468,7 +468,7 @@ const quizQuestions: QuizQuestionType[] = [
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Data parsing mastered!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | parse() deserializes, stringify() serializes`,
-    explanation: "→ JSON.parse() converts string to JavaScript object",
+    explanation: "JSON.parse() converts a string to a JavaScript object.",
   },
 ];
 
@@ -484,21 +484,13 @@ let gameState: GameStateType = {
 };
 
 // ============================================
-// HELPER FUNCTIONS
+// HELPERS
 // ============================================
 
-//   id: crypto.randomUUID(),
-//   type: "text",
-//   content,
-// });
-
-// Helper HTML — pour les réponses avec les commandes stylisées
-const createHtmlResponse = (
-  html: string,
-): { id: string; type: "html"; content: string[] } => ({
+const html = (content: string) => ({
   id: crypto.randomUUID(),
-  type: "html",
-  content: [html],
+  type: "html" as const,
+  content: [content],
 });
 
 const calculateAccuracy = (): number => {
@@ -517,20 +509,18 @@ const getRank = (accuracy: number): { name: string; art: string } => {
 };
 
 const getRandomQuestion = (): QuizQuestionType => {
-  let availableQuestions = quizQuestions
-    .map((_, index) => index)
-    .filter((index) => !gameState.askedQuestions.includes(index));
+  let available = quizQuestions
+    .map((_, i) => i)
+    .filter((i) => !gameState.askedQuestions.includes(i));
 
-  if (availableQuestions.length === 0) {
+  if (available.length === 0) {
     gameState.askedQuestions = [];
-    availableQuestions = quizQuestions.map((_, index) => index);
+    available = quizQuestions.map((_, i) => i);
   }
 
-  const randomIndex =
-    availableQuestions[Math.floor(Math.random() * availableQuestions.length)];
-  gameState.askedQuestions.push(randomIndex);
-
-  return quizQuestions[randomIndex];
+  const idx = available[Math.floor(Math.random() * available.length)];
+  gameState.askedQuestions.push(idx);
+  return quizQuestions[idx];
 };
 
 const resetGame = (): void => {
@@ -550,36 +540,30 @@ const showStats = () => {
   const accuracy = calculateAccuracy();
   const rank = getRank(accuracy);
 
-  return createHtmlResponse(
-    `<div class="space-y-3">
+  return html(
+    `<div class="space-y-t-section py-t-outer">
 
-      <div class="space-y-0.5">
-        <p> </p>
-        <pre class="text-primary-clr leading-snug select-none">${ASCII.STATS}</pre>
-        <p> </p>
-        <p>═══════════════════════════════════════════</p>
-        <p>           QUIZ PERFORMANCE</p>
-        <p>═══════════════════════════════════════════</p>
-        <p> </p>
-        <p>  Questions Solved    │  ${gameState.questionsAnswered}</p>
-        <p>  Correct Answers     │  ${gameState.score}</p>
-        <p>  Accuracy            │  ${calculateAccuracy()}%</p>
-        <p>  Current Rank        │  ${rank.name}</p>
-        <p> </p>
-        ${rank.art ? `<pre class="text-primary-clr leading-snug select-none">${rank.art}</pre>` : ""}
-        <p>═══════════════════════════════════════════</p>
+      <div class="space-y-t-group">
+        <pre class="text-primary-clr leading-snug select-none" aria-hidden="true">${ASCII.STATS}</pre>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p class="text-secondary-clr font-bold">  Quiz Performance</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p><span class="text-secondary-clr">Questions Solved </span>  ${gameState.questionsAnswered}</p>
+        <p><span class="text-secondary-clr">Correct Answers  </span>  ${gameState.score}</p>
+        <p><span class="text-secondary-clr">Accuracy         </span>  ${accuracy}%</p>
+        <p><span class="text-secondary-clr">Current Rank     </span>  ${rank.name}</p>
+        ${rank.art ? `<pre class="text-primary-clr leading-snug select-none" aria-hidden="true">${rank.art}</pre>` : ""}
       </div>
 
-      <div class="space-y-0.5">
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
         <p>
-          <span class="text-tertiary-clr">→</span> Type
-          <span> "</span><span class="text-tertiary-clr font-bold">game</span><span>"</span>
-          to continue your journey
+          Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">game</span><span aria-hidden="true">'</span>
+          to continue your journey.
         </p>
         <p>
-          <span class="text-tertiary-clr">→</span> Type
-          <span> "</span><span class="text-tertiary-clr font-bold">game reset</span><span>"</span>
-          to start fresh
+          Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">game reset</span><span aria-hidden="true">'</span>
+          to start fresh.
         </p>
       </div>
 
@@ -589,21 +573,19 @@ const showStats = () => {
 
 const handleReset = () => {
   resetGame();
-  return createHtmlResponse(
-    `<div class="space-y-3 py-1">
+  return html(
+    `<div class="space-y-t-section py-t-outer">
 
-      <div class="space-y-1">
-        <p> </p>
-        <p>✓ Progress wiped clean</p>
-        <p>✓ Statistics reset to zero</p>
+      <div class="space-y-t-group">
+        <p class="text-tertiary-clr font-bold">✓  Progress wiped clean</p>
+        <p class="text-tertiary-clr font-bold">✓  Statistics reset to zero</p>
       </div>
 
-      <div class="space-y-0.5">
-        <p><span class="text-tertiary-clr">→</span> Ready for a fresh start?</p>
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
         <p>
-          <span class="text-tertiary-clr">→</span> Type
-          <span> "</span><span class="text-tertiary-clr font-bold">game</span><span>"</span>
-          to begin
+          Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">game</span><span aria-hidden="true">'</span>
+          to begin a new session.
         </p>
       </div>
 
@@ -611,47 +593,41 @@ const handleReset = () => {
   );
 };
 
-const showHelp = () => {
-  return createHtmlResponse(
-    `<div class="space-y-3 py-1">
+const showHelp = () =>
+  html(
+    `<div class="space-y-t-section py-t-outer">
 
-      <div class="space-y-1">
-        <p> </p>
-        <p>═══════════════════════════════════════════</p>
-        <p>          QUIZ COMMAND GUIDE</p>
-        <p>═══════════════════════════════════════════</p>
-        <p> </p>
-        <p>  <span class="text-tertiary-clr font-bold">game</span>             →  Load new question</p>
-        <p>  <span class="text-tertiary-clr font-bold">game [1-3]</span>       →  Submit your answer</p>
-        <p>  <span class="text-tertiary-clr font-bold">game stats</span>       →  View performance</p>
-        <p>  <span class="text-tertiary-clr font-bold">game reset</span>       →  Clear all progress</p>
-        <p>  <span class="text-tertiary-clr font-bold">game help</span>        →  Show this guide</p>
-        <p> </p>
-        <p>═══════════════════════════════════════════</p>
-        <p> </p>
-        <p>EXAMPLE WORKFLOW:</p>
+      <div class="space-y-t-group">
+        <p class="text-secondary-clr font-bold">Quiz Command Guide</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p><span class="text-tertiary-clr font-bold">game          </span> - Load new question</p>
+        <p><span class="text-tertiary-clr font-bold">game [1-3]    </span> - Submit your answer</p>
+        <p><span class="text-tertiary-clr font-bold">game stats    </span> - View performance</p>
+        <p><span class="text-tertiary-clr font-bold">game reset    </span> - Clear all progress</p>
+        <p><span class="text-tertiary-clr font-bold">game help     </span> - Show this guide</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p>Example workflow:</p>
         <p>  $ game</p>
-        <p>  [Question appears...]</p>
+        <p>  [question appears]</p>
         <p>  $ game 2</p>
-        <p>  [Answer evaluated]</p>
-        <p> </p>
+        <p>  [answer evaluated]</p>
       </div>
 
     </div>`,
   );
-};
 
 const handleAnswer = (answer: number) => {
   if (!gameState.currentQuestion) {
-    return createHtmlResponse(
-      `<div class="space-y-3 py-1">
-        <p> </p>
-        <p>⚠ No active question</p>
-        <div class="space-y-0.5">
+    return html(
+      `<div class="space-y-t-section py-t-outer">
+        <div class="space-y-t-group">
+          <p><span aria-hidden="true" class="text-secondary-clr">⚠</span>  No active question.</p>
+        </div>
+        <div class="space-y-t-footer">
+          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
           <p>
-            <span class="text-tertiary-clr">→</span> Type
-            <span> "</span><span class="text-tertiary-clr font-bold">game</span><span>"</span>
-            to start
+            Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">game</span><span aria-hidden="true">'</span>
+            to start.
           </p>
         </div>
       </div>`,
@@ -659,16 +635,16 @@ const handleAnswer = (answer: number) => {
   }
 
   if (isNaN(answer) || answer < 1 || answer > 3) {
-    return createHtmlResponse(
-      `<div class="space-y-3 py-1">
-        <p> </p>
-        <p>⚠ Invalid input detected</p>
-        <div class="space-y-0.5">
-          <p><span class="text-tertiary-clr">→</span> Please enter 1, 2, or 3</p>
+    return html(
+      `<div class="space-y-t-section py-t-outer">
+        <div class="space-y-t-group">
+          <p><span aria-hidden="true" class="text-secondary-clr">⚠</span>  Invalid input — enter 1, 2, or 3.</p>
+        </div>
+        <div class="space-y-t-footer">
+          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
           <p>
-            <span class="text-tertiary-clr">→</span> Type
-            <span> "</span><span class="text-tertiary-clr font-bold">game [number]</span><span>"</span>
-            to answer
+            Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">game [number]</span><span aria-hidden="true">'</span>
+            to answer.
           </p>
         </div>
       </div>`,
@@ -677,7 +653,6 @@ const handleAnswer = (answer: number) => {
 
   const isCorrect = answer === gameState.currentQuestion.answer;
   gameState.questionsAnswered++;
-
   if (isCorrect) gameState.score++;
 
   const accuracy = calculateAccuracy();
@@ -685,34 +660,31 @@ const handleAnswer = (answer: number) => {
   const resultMsg = isCorrect
     ? gameState.currentQuestion.correctMsg
     : gameState.currentQuestion.wrongMsg;
-  const explanation = gameState.currentQuestion.explanation || "";
+  const resultColor = isCorrect ? "text-tertiary-clr" : "text-secondary-clr";
+  const explanation = gameState.currentQuestion.explanation ?? "";
 
-  const response = createHtmlResponse(
-    `<div class="space-y-3 py-1">
+  const response = html(
+    `<div class="space-y-t-section py-t-outer">
 
-      <div class="space-y-1">
-        <p> </p>
-        <pre class="text-primary-clr leading-snug select-none">${resultArt}</pre>
-        <p> </p>
-        <p>═══════════════════════════════════════════</p>
-        <p>${resultMsg}</p>
-        <p>═══════════════════════════════════════════</p>
-        <p> </p>
+      <div class="space-y-t-group">
+        <pre class="text-primary-clr leading-snug select-none" aria-hidden="true">${resultArt}</pre>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p class="${resultColor} font-bold">${resultMsg}</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
         <p>${explanation}</p>
-        <p> </p>
-        <p>Score: ${gameState.score}/${gameState.questionsAnswered} | Accuracy: ${accuracy}%</p>
+        <p><span class="text-secondary-clr">Score     </span>  ${gameState.score} / ${gameState.questionsAnswered}</p>
+        <p><span class="text-secondary-clr">Accuracy  </span>  ${accuracy}%</p>
       </div>
 
-      <div class="space-y-0.5">
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
         <p>
-          <span class="text-tertiary-clr">→</span> Type
-          <span> "</span><span class="text-tertiary-clr font-bold">game</span><span>"</span>
-          for next challenge
+          Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">game</span><span aria-hidden="true">'</span>
+          for your next challenge.
         </p>
         <p>
-          <span class="text-tertiary-clr">→</span> Type
-          <span> "</span><span class="text-tertiary-clr font-bold">game stats</span><span>"</span>
-          for detailed breakdown
+          Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">game stats</span><span aria-hidden="true">'</span>
+          for a detailed breakdown.
         </p>
       </div>
 
@@ -727,35 +699,28 @@ const showQuestion = () => {
   const question = getRandomQuestion();
   gameState.currentQuestion = question;
 
-  return createHtmlResponse(
-    `<div class="space-y-3 py-1">
+  return html(
+    `<div class="space-y-t-section py-t-outer">
 
-      <div class="space-y-1">
-        <p> </p>
-        <pre class="text-primary-clr leading-snug select-none">${ASCII.QUIZ}</pre>
-        <p>═══════════════════════════════════════════</p>
-        <p>        FRONTEND QUIZ CHALLENGE</p>
-        <p>═══════════════════════════════════════════</p>
-        <p> </p>
+      <div class="space-y-t-group">
+        <pre class="text-primary-clr leading-snug select-none" aria-hidden="true">${ASCII.QUIZ}</pre>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p class="text-secondary-clr font-bold">  Frontend Quiz Challenge</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
         <p>Question ${gameState.questionsAnswered + 1}:</p>
-        <p> </p>
         <p>${question.question}</p>
-        <p> </p>
         ${question.options.map((o) => `<p>${o}</p>`).join("\n        ")}
-        <p> </p>
-        <p>═══════════════════════════════════════════</p>
       </div>
 
-      <div class="space-y-0.5">
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
         <p>
-          <span class="text-tertiary-clr">→</span> Type
-          <span> "</span><span class="text-tertiary-clr font-bold">game [1-3]</span><span>"</span>
-          to answer
+          Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">game [1-3]</span><span aria-hidden="true">'</span>
+          to answer.
         </p>
         <p>
-          <span class="text-tertiary-clr">→</span> Type
-          <span> "</span><span class="text-tertiary-clr font-bold">game help</span><span>"</span>
-          for commands
+          Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">game help</span><span aria-hidden="true">'</span>
+          for all commands.
         </p>
       </div>
 
@@ -768,23 +733,15 @@ const showQuestion = () => {
 // ============================================
 
 export const handleGameCommand = (args: string[]) => {
-  const subCommand = args[0]?.toLowerCase();
+  const sub = args[0]?.toLowerCase();
 
-  switch (subCommand) {
-    case "stats":
-      return showStats();
+  if (sub === "stats") return showStats();
+  if (sub === "reset") return handleReset();
+  if (sub === "help") return showHelp();
 
-    case "reset":
-      return handleReset();
-
-    case "help":
-      return showHelp();
-
-    default:
-      if (args[0] && gameState.currentQuestion) {
-        return handleAnswer(parseInt(args[0]));
-      }
-
-      return showQuestion();
+  if (args[0] && gameState.currentQuestion) {
+    return handleAnswer(parseInt(args[0]));
   }
+
+  return showQuestion();
 };
