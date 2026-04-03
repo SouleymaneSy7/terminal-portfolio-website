@@ -11,18 +11,18 @@
 
   /* ── Fonts ── */
   --font-*: initial;
-  --font-fira-code: var(--font-fira-code);
-  --font-jetbrains-mono: var(--font-jetbrains-mono);
   --font-cascadia-code: var(--font-cascadia-code);
+  --font-fira-code: var(--font-fira-code);
+  --font-geist-mono: var(--font-geist-mono);
+  --font-space-mono: var(--font-space-mono);
+  --font-recursive-casual: var(--font-recursive-casual);
 
   /* ── Font weights ── */
   --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-semi-bold: 600;
   --font-weight-bold: 700;
 
   /* ── Font sizes ── */
-  --text-fs-body: clamp(0.875rem, 0.8393rem + 0.1786vw, 1rem);
+  --text-fs-body: clamp(0.9375rem, 0.9196rem + 0.0893vw, 1rem);
   --text-fs-subtitle: clamp(1.125rem, 1.0893rem + 0.1786vw, 1.25rem);
   --text-fs-title: clamp(1.25rem, 1.1786rem + 0.3571vw, 1.5rem);
   --leading-base: 1.5;
@@ -76,7 +76,41 @@
   background-color: var(--color-secondary-clr);
 }
 
-/* ── Theme — Monokai ── */
+/* ═══════════════════════════════════════════════════
+   THEMES
+   ═══════════════════════════════════════════════════ */
+
+/* ── Catppuccin Latte — light theme ── */
+html[data-theme="catppuccin-latte"] {
+  --color-background-clr: oklch(0.958 0.018 275.37);
+  --color-foreground-clr: oklch(0.933 0.0157 272.11);
+  --color-text-clr: oklch(0.366 0.0348 271.85);
+  --color-primary-clr: oklch(0.5018 0.2373 260.03);
+  --color-secondary-clr: oklch(0.4494 0.2126 18.38);
+  --color-tertiary-clr: oklch(0.581 0.1654 142.2);
+}
+
+/* ── Catppuccin Frappé ── */
+html[data-theme="catppuccin-frappe"] {
+  --color-background-clr: oklch(0.2334 0.0349 276.5);
+  --color-foreground-clr: oklch(0.2083 0.0302 276.57);
+  --color-text-clr: oklch(0.8492 0.0572 275.42);
+  --color-primary-clr: oklch(0.722 0.0979 258.7);
+  --color-secondary-clr: oklch(0.6841 0.1161 11.8);
+  --color-tertiary-clr: oklch(0.8118 0.1029 141.96);
+}
+
+/* ── Catppuccin Mocha ── */
+html[data-theme="catppuccin-mocha"] {
+  --color-background-clr: oklch(0.1635 0.0221 277.27);
+  --color-foreground-clr: oklch(0.1377 0.0189 277.27);
+  --color-text-clr: oklch(0.8597 0.053 274.98);
+  --color-primary-clr: oklch(0.7536 0.1015 257.71);
+  --color-secondary-clr: oklch(0.7346 0.1376 10.12);
+  --color-tertiary-clr: oklch(0.8714 0.0965 142.8);
+}
+
+/* ── Monokai ── */
 html[data-theme="monokai"] {
   --color-background-clr: oklch(0.24 0.0229 280.84);
   --color-foreground-clr: oklch(0.29 0.0293 278.86);
@@ -86,7 +120,7 @@ html[data-theme="monokai"] {
   --color-tertiary-clr: oklch(0.82 0.0632 167.34);
 }
 
-/* ── Theme — Tokyo Night ── */
+/* ── Tokyo Night ── */
 html[data-theme="tokyo-night"] {
   --color-background-clr: oklch(0.158 0.021 265);
   --color-foreground-clr: oklch(0.196 0.018 265);
@@ -96,7 +130,7 @@ html[data-theme="tokyo-night"] {
   --color-tertiary-clr: oklch(0.782 0.143 137);
 }
 
-/* ── Theme — Dracula ── */
+/* ── Dracula ── */
 html[data-theme="dracula"] {
   --color-background-clr: oklch(0.203 0.022 277);
   --color-foreground-clr: oklch(0.175 0.018 277);
@@ -106,20 +140,132 @@ html[data-theme="dracula"] {
   --color-tertiary-clr: oklch(0.879 0.182 145);
 }
 
-html[data-font="fira"] body {
-  font-family: var(--font-fira-code);
+/* ── Nord ── */
+html[data-theme="nord"] {
+  --color-background-clr: oklch(0.243 0.0218 254.76);
+  --color-foreground-clr: oklch(0.2912 0.0265 258.97);
+  --color-text-clr: oklch(0.8854 0.0245 260.24);
+  --color-primary-clr: oklch(0.7555 0.0633 216.1);
+  --color-secondary-clr: oklch(0.5386 0.1128 13.21);
+  --color-tertiary-clr: oklch(0.7432 0.0879 138.92);
 }
 
-html[data-font="jetbrains"] body {
-  font-family: var(--font-jetbrains-mono);
+/* ── Gruvbox Dark ── */
+html[data-theme="gruvbox"] {
+  --color-background-clr: oklch(0.1956 0 0);
+  --color-foreground-clr: oklch(0.256 0.0076 57.56);
+  --color-text-clr: oklch(0.882 0.0502 87.89);
+  --color-primary-clr: oklch(0.693 0.1477 86.48);
+  --color-secondary-clr: oklch(0.6213 0.1681 45.6);
+  --color-tertiary-clr: oklch(0.6085 0.1245 134.65);
 }
+
+/* ── Everforest Dark ── */
+html[data-theme="everforest"] {
+  --color-background-clr: oklch(0.229 0.0255 195.04);
+  --color-foreground-clr: oklch(0.27 0.0308 198.28);
+  --color-text-clr: oklch(0.8113 0.0383 87.41);
+  --color-primary-clr: oklch(0.7235 0.062 196.29);
+  --color-secondary-clr: oklch(0.6657 0.1187 11.9);
+  --color-tertiary-clr: oklch(0.749 0.0966 136.9);
+}
+
+/* ── Rosé Pine ── */
+html[data-theme="rose-pine"] {
+  --color-background-clr: oklch(0.1285 0.035 293.01);
+  --color-foreground-clr: oklch(0.1525 0.0318 288.68);
+  --color-text-clr: oklch(0.8951 0.0391 286.73);
+  --color-primary-clr: oklch(0.4797 0.0812 217.63);
+  --color-secondary-clr: oklch(0.6411 0.1484 349.9);
+  --color-tertiary-clr: oklch(0.7978 0.0546 211.7);
+}
+
+/* ── Solarized Dark ── */
+html[data-theme="solarized-dark"] {
+  --color-background-clr: oklch(0.177 0.0577 210.1);
+  --color-foreground-clr: oklch(0.2251 0.0511 207.2);
+  --color-text-clr: oklch(0.5988 0.0261 208.9);
+  --color-primary-clr: oklch(0.5674 0.1477 248.53);
+  --color-secondary-clr: oklch(0.5248 0.1826 34.78);
+  --color-tertiary-clr: oklch(0.581 0.1521 111.6);
+}
+
+/* ── Oceanic Next ── */
+html[data-theme="oceanic"] {
+  --color-background-clr: oklch(0.1957 0.0457 234.33);
+  --color-foreground-clr: oklch(0.2615 0.032 244.88);
+  --color-text-clr: oklch(0.8478 0.02 252.69);
+  --color-primary-clr: oklch(0.6484 0.0901 250.56);
+  --color-secondary-clr: oklch(0.626 0.1829 13.86);
+  --color-tertiary-clr: oklch(0.7671 0.0868 147.84);
+}
+
+/* ── Cobalt2 ── */
+html[data-theme="cobalt2"] {
+  --color-background-clr: oklch(0.1924 0.0656 232.36);
+  --color-foreground-clr: oklch(0.2537 0.0728 232.36);
+  --color-text-clr: oklch(0.9999 0 0);
+  --color-primary-clr: oklch(0.832 0.1774 87.27);
+  --color-secondary-clr: oklch(0.7638 0.1832 67.38);
+  --color-tertiary-clr: oklch(0.7661 0.2313 134.94);
+}
+
+/* ── GitHub Dark ── */
+html[data-theme="github"] {
+  --color-background-clr: oklch(0.117 0.0109 265.35);
+  --color-foreground-clr: oklch(0.1533 0.014 265.35);
+  --color-text-clr: oklch(0.9281 0.0128 251.74);
+  --color-primary-clr: oklch(0.6823 0.143 253.73);
+  --color-secondary-clr: oklch(0.6073 0.2208 23.71);
+  --color-tertiary-clr: oklch(0.682 0.1676 145.12);
+}
+
+/* ── One Dark ── */
+html[data-theme="one-dark"] {
+  --color-background-clr: oklch(0.2148 0.0196 269.73);
+  --color-foreground-clr: oklch(0.1816 0.0178 265.55);
+  --color-text-clr: oklch(0.7228 0.0225 257.41);
+  --color-primary-clr: oklch(0.7027 0.1128 243.66);
+  --color-secondary-clr: oklch(0.6277 0.1471 11.71);
+  --color-tertiary-clr: oklch(0.7596 0.116 142.78);
+}
+
+/* ── Atom One Dark ── */
+html[data-theme="atom-one-dark"] {
+  --color-background-clr: oklch(0.2148 0.0196 269.73);
+  --color-foreground-clr: oklch(0.1816 0.0178 265.55);
+  --color-text-clr: oklch(0.7228 0.0225 257.41);
+  --color-primary-clr: oklch(0.6196 0.1749 308.67);
+  --color-secondary-clr: oklch(0.6277 0.1471 11.71);
+  --color-tertiary-clr: oklch(0.6872 0.08 207.15);
+}
+
+/* ═══════════════════════════════════════════════════
+   FONTS
+   ═══════════════════════════════════════════════════ */
 
 html[data-font="cascadia"] body {
   font-family: var(--font-cascadia-code);
 }
 
+html[data-font="fira"] body {
+  font-family: var(--font-fira-code);
+}
+
+html[data-font="geist"] body {
+  font-family: var(--font-geist-mono);
+}
+
+html[data-font="space"] body {
+  font-family: var(--font-space-mono);
+}
+
+html[data-font="recursive-casual"] body {
+  font-family: var(--font-recursive-casual);
+}
+
 body {
-  @apply bg-background-clr text-text-clr font-cascadia-code text-fs-body font-semi-bold leading-base;
+  @apply bg-background-clr text-text-clr font-cascadia-code text-fs-body font-regular leading-base;
 }
 
 a {
