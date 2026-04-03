@@ -106,23 +106,24 @@ export const getNeofetchCommandOutput = () => {
       </div>
 
       <div class="space-y-t-group">
-        <p><span class="text-secondary-clr">OS:          </span>  Portfolio OS v2025.1</p>
-        <p><span class="text-secondary-clr">Host:        </span>  Vercel Platform</p>
-        <p><span class="text-secondary-clr">Kernel:      </span>  Next.js 16 · React 19</p>
-        <p><span class="text-secondary-clr">Shell:       </span>  TypeScript 5.x</p>
-        <p><span class="text-secondary-clr">DE:          </span>  Terminal Portfolio v1.0</p>
-        <p><span class="text-secondary-clr">Theme:       </span>  ${themeLabel}</p>
-        <p><span class="text-secondary-clr">Font:        </span>  ${fontLabel}</p>
-        <p><span class="text-secondary-clr">Resolution:  </span>  ${getResolution()}</p>
-        <p><span class="text-secondary-clr">Uptime:      </span>  Online since 2025, no interruptions</p>
-        <p><span class="text-secondary-clr">Packages:    </span>  ${packages.length} (prod) · ${packagesDev.length} (dev)</p>
+        <p><span class="text-secondary-clr font-bold">OS:          </span>  Portfolio OS v2025.1</p>
+        <p><span class="text-secondary-clr font-bold">Host:        </span>  Vercel Platform</p>
+        <p><span class="text-secondary-clr font-bold">Kernel:      </span>  Next.js 16 · React 19</p>
+        <p><span class="text-secondary-clr font-bold">Shell:       </span>  TypeScript 5.x</p>
+        <p><span class="text-secondary-clr font-bold">DE:          </span>  Terminal Portfolio v1.0</p>
+        <p><span class="text-secondary-clr font-bold">Theme:       </span>  ${themeLabel}</p>
+        <p><span class="text-secondary-clr font-bold">Font:        </span>  ${fontLabel}</p>
+        <p><span class="text-secondary-clr font-bold">Resolution:  </span>  ${getResolution()}</p>
+        <p><span class="text-secondary-clr font-bold">Uptime:      </span>  Online since 2025, no interruptions</p>
+        <p><span class="text-secondary-clr font-bold">Packages:    </span>  ${packages.length} (prod) · ${packagesDev.length} (dev)</p>
       </div>
 
       <div class="space-y-t-group">
         <p class="text-tertiary-clr font-bold">Stack</p>
-        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  React · Next.js · Vue.js</p>
+        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  Next.js · React</p>
         <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  TypeScript · Tailwind CSS v4</p>
         <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  GSAP · Framer Motion</p>
+        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  Axios · Date-fns · DOMPurify</p>
         <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  Git · GitHub · Bun · Vercel</p>
       </div>
 
@@ -132,7 +133,7 @@ export const getNeofetchCommandOutput = () => {
         <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  89+ GitHub repos</p>
         <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  50+ Frontend Mentor challenges</p>
         <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  🏆 Enzo Ustariz 2024 — Top 3</p>
-        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  DevelopersHub Corp — Certified</p>
+        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  DevelopersHub Corporation — Certified</p>
         <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  Coyah, Guinea-Conakry 🇬🇳</p>
       </div>
 
