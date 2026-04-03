@@ -14,7 +14,6 @@
   --font-cascadia-code: var(--font-cascadia-code);
   --font-fira-code: var(--font-fira-code);
   --font-geist-mono: var(--font-geist-mono);
-  --font-space-mono: var(--font-space-mono);
   --font-recursive-casual: var(--font-recursive-casual);
 
   /* ── Font weights ── */
@@ -254,10 +253,6 @@ html[data-font="fira"] body {
 
 html[data-font="geist"] body {
   font-family: var(--font-geist-mono);
-}
-
-html[data-font="space"] body {
-  font-family: var(--font-space-mono);
 }
 
 html[data-font="recursive-casual"] body {
