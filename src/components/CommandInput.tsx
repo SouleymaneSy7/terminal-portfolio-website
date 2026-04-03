@@ -8,7 +8,7 @@ import { CommandInputPropsType } from "@/types";
 import TerminalPrompt from "./TerminalPrompt";
 
 const INTERACTIVE_SELECTOR =
-  'a, button, [role="button"], input, textarea, select, [tabindex]';
+  'a[href], button:not([disabled]), input, textarea, select, [role="button"]';
 
 const CommandInput: React.FC<CommandInputPropsType> = ({
   input,
@@ -37,6 +37,7 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
       document.removeEventListener("click", handleDocumentClick);
     };
   }, []);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInput(event.target.value);
   };
@@ -102,7 +103,7 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             aria-label="Enter terminal command"
-            className="w-full h-full outline-none border-none text-secondary-clr font-semi-bold"
+            className="w-full h-full outline-none border-none text-secondary-clr"
             style={{ caretColor: "transparent" }}
           />
         </form>
