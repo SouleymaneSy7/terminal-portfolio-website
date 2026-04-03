@@ -2,25 +2,9 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 
 import "./globals.css";
+import { GeistMono } from "geist/font/mono";
 
-const JetbrainsMono = localFont({
-  src: [
-    {
-      path: "../../public/fonts/jetbrains-mono-regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/jetbrains-mono-semi-bold.woff2",
-      weight: "600",
-      style: "normal",
-    },
-  ],
-  variable: "--font-jetbrains-mono",
-  display: "swap",
-  fallback: ["monospace"],
-});
-
+// ── LOCAL FONTS ───────────────
 const CascadiaCode = localFont({
   src: [
     {
@@ -29,14 +13,15 @@ const CascadiaCode = localFont({
       style: "normal",
     },
     {
-      path: "../../public/fonts/cascadia-code-semi-bold.woff2",
-      weight: "600",
+      path: "../../public/fonts/cascadia-code-bold.woff2",
+      weight: "700",
       style: "normal",
     },
   ],
   variable: "--font-cascadia-code",
   display: "swap",
   fallback: ["monospace"],
+  adjustFontFallback: false,
 });
 
 const FiraCode = localFont({
@@ -47,16 +32,37 @@ const FiraCode = localFont({
       style: "normal",
     },
     {
-      path: "../../public/fonts/fira-code-semi-bold.woff2",
-      weight: "600",
+      path: "../../public/fonts/fira-code-bold.woff2",
+      weight: "700",
       style: "normal",
     },
   ],
   variable: "--font-fira-code",
   display: "swap",
   fallback: ["monospace"],
+  adjustFontFallback: false,
 });
 
+const RecursiveCasual = localFont({
+  src: [
+    {
+      path: "../../public/fonts/recursive-mono-casual-regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/recursive-mono-casual-bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-recursive-casual",
+  display: "swap",
+  fallback: ["monospace"],
+  adjustFontFallback: false,
+});
+
+// ── METADATA ───────────────
 const SITE_URL = "https://terminal-portfolio-website-xi.vercel.app";
 const SITE_TITLE = "Souleymane Sy | Frontend Developer Terminal Portfolio";
 const SITE_DESCRIPTION =
@@ -137,7 +143,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${JetbrainsMono.variable} ${FiraCode.variable} ${CascadiaCode.variable} antialiased`}
+        className={[
+          CascadiaCode.variable,
+          FiraCode.variable,
+          RecursiveCasual.variable,
+          GeistMono.variable,
+          "antialiased",
+        ].join(" ")}
       >
         {children}
       </body>
