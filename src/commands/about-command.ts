@@ -10,7 +10,8 @@ export const getAboutMeCommandOutput = () => [
           <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
           <p>Self-taught frontend web developer, based in Coyah, Guinea-Conakry.</p>
           <p>Since 2022, I've been learning web development online — no school,</p>
-          <p>no bootcamp, just YouTube, curiosity and a whole lot of practice.</p>
+          <p>no bootcamp, just YouTube, online platform (Udemy, FreeCodeCamp, Scrimba...),</p>
+          <p>curiosity and a whole lot of practice.</p>
           <p>It all started with HTML and CSS, then JavaScript came along.</p>
           <p>That first language took me 8 months to truly get comfortable with.</p>
           <p>It was tough, but I kept going.</p>
