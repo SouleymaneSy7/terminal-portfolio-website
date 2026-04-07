@@ -1,6 +1,7 @@
 // ============================================
 // CONFIGURATION
 // ============================================
+
 export const THEMES = {
   // ── Catppuccin family ──────────────────────
   catppuccin: {
@@ -75,6 +76,66 @@ export const THEMES = {
     label: "Atom One Dark",
     description: "Signature purple and cyan accents with bold elegance",
   },
+
+  // ── Material family ───────────────────────
+  "material-default": {
+    label: "Material Default",
+    description: "The original — teal green on deep blue-grey",
+  },
+  "material-lighter": {
+    label: "Material Lighter",
+    description: "Light and airy — the Material light variant",
+  },
+  "material-oceanic": {
+    label: "Material Oceanic",
+    description: "Ocean-blue accent, same classic Material base",
+  },
+  "material-palenight": {
+    label: "Material Palenight",
+    description: "Deep purple background with vivid neon accents",
+  },
+  "material-deep-ocean": {
+    label: "Material Deep Ocean",
+    description: "Near-black depths with electric blue and violet",
+  },
+  "material-high-contrast": {
+    label: "Material High Contrast",
+    description: "Pure black, maximum contrast — nothing distracts",
+  },
+
+  // ── Others ───────────────────────────────
+  "ayu-dark": {
+    label: "Ayu Dark",
+    description: "Dark background, warm amber and orange — minimal and sharp",
+  },
+  "night-owl": {
+    label: "Night Owl",
+    description: "Designed for low-light — cyan primary, yellow highlights",
+  },
+  synthwave: {
+    label: "Synthwave '84",
+    description: "Neon pink and cyan on deep purple — pure retro-futurism",
+  },
+  kanagawa: {
+    label: "Kanagawa",
+    description: "Inspired by the Great Wave — samurai red, ocean blue",
+  },
+  horizon: {
+    label: "Horizon",
+    description: "Warm coral and pink on dark indigo — sunset aesthetic",
+  },
+  poimandres: {
+    label: "Poimandres",
+    description: "Teal and purple on near-black — calm, focused, modern",
+  },
+  vesper: {
+    label: "Vesper",
+    description: "Pure black background, amber gold — minimal and elegant",
+  },
+  "hack-the-box": {
+    label: "Hack The Box",
+    description: "Matrix green on deep navy — for the hacker in you",
+  },
 } as const;
 
 export const FONTS = {
@@ -120,7 +181,7 @@ export const getCurrentTheme = (): ThemeKey => {
 };
 
 export const getCurrentFont = (): FontKey => {
-  if (typeof document === "undefined") return "cascadia"; // changé en cascadia (nouveau default)
+  if (typeof document === "undefined") return "cascadia";
   return (
     (document.documentElement.getAttribute("data-font") as FontKey) ||
     "cascadia"
@@ -177,27 +238,97 @@ export const initThemeAndFont = (): void => {
 export const getThemeListOutput = () => {
   const current = getCurrentTheme();
 
-  const rows = (
-    Object.entries(THEMES) as [ThemeKey, (typeof THEMES)[ThemeKey]][]
-  )
-    .map(([key, theme]) => {
-      const isActive = key === current;
-      const label = theme.label.padEnd(28);
-      const description = theme.description;
+  const groups: { label: string; keys: ThemeKey[] }[] = [
+    {
+      label: "Catppuccin",
+      keys: [
+        "catppuccin",
+        "catppuccin-latte",
+        "catppuccin-frappe",
+        "catppuccin-mocha",
+      ],
+    },
+    {
+      label: "Popular Dark",
+      keys: [
+        "monokai",
+        "tokyo-night",
+        "dracula",
+        "nord",
+        "gruvbox",
+        "everforest",
+        "rose-pine",
+      ],
+    },
+    {
+      label: "Editor Classics",
+      keys: [
+        "solarized-dark",
+        "oceanic",
+        "cobalt2",
+        "github",
+        "one-dark",
+        "atom-one-dark",
+      ],
+    },
+    {
+      label: "Material",
+      keys: [
+        "material-default",
+        "material-lighter",
+        "material-oceanic",
+        "material-palenight",
+        "material-deep-ocean",
+        "material-high-contrast",
+      ],
+    },
+    {
+      label: "Others",
+      keys: [
+        "ayu-dark",
+        "night-owl",
+        "synthwave",
+        "kanagawa",
+        "horizon",
+        "poimandres",
+        "vesper",
+        "hack-the-box",
+      ],
+    },
+  ];
 
-      const nameClass = isActive
-        ? "text-primary-clr font-bold"
-        : "text-tertiary-clr";
-      const activeTag = isActive
-        ? ` <span class="text-primary-clr font-bold"> ← active</span>`
-        : "";
+  const renderGroup = ({
+    label,
+    keys,
+  }: {
+    label: string;
+    keys: ThemeKey[];
+  }) => {
+    const rows = keys
+      .map((key) => {
+        const theme = THEMES[key];
+        const isActive = key === current;
+        const displayLabel = theme.label.padEnd(28);
+        const nameClass = isActive
+          ? "text-primary-clr font-bold"
+          : "text-tertiary-clr";
+        const activeTag = isActive
+          ? ` <span class="text-primary-clr font-bold"> ← active</span>`
+          : "";
 
-      return `<p>
-        <span class="${nameClass}">${label}</span>
-        <span class="text-text-clr">- ${description}.</span>${activeTag}
-      </p>`;
-    })
-    .join("");
+        return `<p>
+          <span class="${nameClass}">${displayLabel}</span>
+          <span class="text-text-clr">- ${theme.description}.</span>${activeTag}
+        </p>`;
+      })
+      .join("");
+
+    return `<div class="space-y-t-group">
+      <p class="text-secondary-clr font-bold">${label}</p>
+      <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+      ${rows}
+    </div>`;
+  };
 
   return [
     {
@@ -205,11 +336,9 @@ export const getThemeListOutput = () => {
       type: "html" as const,
       content: [
         `<div class="space-y-t-section py-t-outer">
-          <div class="space-y-t-group">
-            <p class="text-secondary-clr font-bold">Available Themes</p>
-            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-            ${rows}
-          </div>
+
+          ${groups.map(renderGroup).join("\n")}
+
           <div class="space-y-t-footer">
             <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
             <p>
@@ -217,6 +346,7 @@ export const getThemeListOutput = () => {
               to switch.
             </p>
           </div>
+
         </div>`,
       ],
     },
@@ -236,9 +366,10 @@ export const getThemeSwitchOutput = (theme: ThemeKey) => {
           <div class="space-y-t-group">
             <p class="text-tertiary-clr font-bold">✓ Theme switched <span aria-hidden="true">→</span> ${label}</p>
             <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-            <p>${description}</p>
-            <p>Preference saved.</p>
+            <p>${description}.</p>
+            <p><span class="text-primary-clr font-bold">✓ Preference saved.</span> All text updated instantly.</p>
           </div>
+
           <div class="space-y-t-footer">
             <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
             <p>
@@ -258,10 +389,21 @@ export const getThemeInvalidOutput = (name: string) => [
     type: "html" as const,
     content: [
       `<div class="space-y-t-section py-t-outer">
-        <div class="space-y-t-group">
           <p><span aria-hidden="true" class="text-secondary-clr">⚠</span> Unknown theme: <span class="text-tertiary-clr">"${name}"</span></p>
-          <p>Available: <span class="text-secondary-clr font-bold">catppuccin · catppuccin-latte · catppuccin-frappe · catppuccin-mocha · monokai · tokyo-night · dracula · nord · gruvbox · everforest · rose-pine · solarized-dark · oceanic · cobalt2 · github · one-dark · atom-one-dark</span></p>
-        </div>
+          
+          <div class="space-y-t-group">
+            <p>Available theme:</p>
+            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────</p>
+          </div>
+
+          <div class="space-y-t-group">
+          <p class="text-secondary-clr"><span class="text-primary-clr font-bold">Catppuccin:</span>  catppuccin · catppuccin-latte · catppuccin-frappe · catppuccin-mocha</p>
+          <p class="text-secondary-clr"><span class="text-primary-clr font-bold">Dark:</span>   monokai · tokyo-night · dracula · nord · gruvbox · everforest · rose-pine</p>
+          <p class="text-secondary-clr"><span class="text-primary-clr font-bold">Classics:</span>   solarized-dark · oceanic · cobalt2 · github · one-dark · atom-one-dark</p>
+          <p class="text-secondary-clr"><span class="text-primary-clr font-bold">Material:</span>   material-default · material-lighter · material-oceanic · material-palenight · material-deep-ocean · material-high-contrast</p>
+          <p class="text-secondary-clr"><span class="text-primary-clr font-bold">Others:</span>   ayu-dark · night-owl · synthwave · kanagawa · horizon · poimandres · vesper · hack-the-box</p>
+          </div>
+
         <div class="space-y-t-footer">
           <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
           <p>
@@ -283,9 +425,7 @@ export const getFontListOutput = () => {
   const rows = (Object.entries(FONTS) as [FontKey, (typeof FONTS)[FontKey]][])
     .map(([key, font]) => {
       const isActive = key === current;
-      const label = font.label.padEnd(24);
-      const description = font.description;
-
+      const displayLabel = font.label.padEnd(24);
       const nameClass = isActive
         ? "text-primary-clr font-bold"
         : "text-tertiary-clr";
@@ -294,8 +434,8 @@ export const getFontListOutput = () => {
         : "";
 
       return `<p>
-        <span class="${nameClass}">${label}</span>
-        <span class="text-text-clr">- ${description}.</span>${activeTag}
+        <span class="${nameClass}">${displayLabel}</span>
+        <span class="text-text-clr">- ${font.description}.</span>${activeTag}
       </p>`;
     })
     .join("");
@@ -311,6 +451,7 @@ export const getFontListOutput = () => {
             <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
             ${rows}
           </div>
+
           <div class="space-y-t-footer">
             <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
             <p>
@@ -335,11 +476,12 @@ export const getFontSwitchOutput = (font: FontKey) => {
       content: [
         `<div class="space-y-t-section py-t-outer">
           <div class="space-y-t-group">
-            <p class="text-tertiary-clr font-bold">✓ Font switched <span aria-hidden="true">→</span> ${label}</p>
+            <p class="text-secondary-clr font-bold">✓ Font switched <span aria-hidden="true">→</span> ${label}</p>
             <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-            <p>${description}</p>
-            <p>Preference saved. All text updated instantly.</p>
+            <p>${description}.</p>
+            <p><span class="text-primary-clr font-bold">✓ Preference saved.</span> All text updated instantly.</p>
           </div>
+
           <div class="space-y-t-footer">
             <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
             <p>
@@ -359,10 +501,17 @@ export const getFontInvalidOutput = (name: string) => [
     type: "html" as const,
     content: [
       `<div class="space-y-t-section py-t-outer">
-        <div class="space-y-t-group">
           <p><span aria-hidden="true" class="text-secondary-clr">⚠</span> Unknown font: <span class="text-tertiary-clr">"${name}"</span></p>
-          <p>Available: <span class="text-secondary-clr font-bold">cascadia · fira · geist · recursive-casual</span></p>
-        </div>
+
+          <div class="space-y-t-group">
+            <p>Available font:</p>
+            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────</p>
+          </div>
+
+          <div class="space-y-t-group">
+            <p class="text-secondary-clr font-bold">cascadia · fira · geist · recursive-casual</p>
+          </div>
+
         <div class="space-y-t-footer">
           <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
           <p>
