@@ -38,42 +38,53 @@ export const getContactCommandOutput = () => [
         <div class="space-y-t-group">
           <p class="text-secondary-clr font-bold">Find me across the web</p>
           <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <div>
-            <span class="text-secondary-clr">Email          </span>
+          <p>
+            <span class="text-primary-clr font-bold">Email</span>
+            <span>-</span>
             <a href="mailto:souleymanesycodes@gmail.com" target="_blank" rel="noopener noreferrer">
               souleymanesycodes@gmail.com
             </a>
-          </div>
-          <div>
-            <span class="text-secondary-clr">GitHub         </span>
+          </p>
+
+          <p>
+            <span class="text-primary-clr font-bold">GitHub</span>
+            <span>-</span>
             <a href="https://github.com/SouleymaneSy7" target="_blank" rel="noopener noreferrer">
               github.com/SouleymaneSy7
             </a>
-          </div>
-          <div>
-            <span class="text-secondary-clr">LinkedIn       </span>
+          </p>
+
+          <p>
+            <span class="text-primary-clr font-bold">LinkedIn</span>
+            <span>-</span>
             <a href="https://linkedin.com/in/souleymanesy7" target="_blank" rel="noopener noreferrer">
               linkedin.com/in/souleymanesy7
             </a>
-          </div>
-          <div>
-            <span class="text-secondary-clr">Twitter / X    </span>
+          </p>
+
+          <p>
+            <span class="text-primary-clr font-bold">Twitter / X</span>
+            <span>-</span>
             <a href="https://twitter.com/Souleymanesy43" target="_blank" rel="noopener noreferrer">
               twitter.com/Souleymanesy43
             </a>
-          </div>
-          <div>
-            <span class="text-secondary-clr">Frontend Mentor</span>
+          </p>
+
+          <p>
+            <span class="text-primary-clr font-bold">Frontend Mentor</span>
+            <span>-</span>
             <a href="https://www.frontendmentor.io/profile/SouleymaneSy7" target="_blank" rel="noopener noreferrer">
               frontendmentor.io/profile/SouleymaneSy7
             </a>
-          </div>
-          <div>
-            <span class="text-secondary-clr">Dev Challenges </span>
+          </p>
+
+          <p>
+            <span class="text-primary-clr font-bold">Dev Challenges </span>
+            <span>-</span>
             <a href="https://devchallenges.io/profile/534cd213-3165-4c16-bdcf-058e1f468da0" target="_blank" rel="noopener noreferrer">
               devchallenges.io/profile/SouleymaneSy7
             </a>
-          </div>
+          </p>
           <p>Available for freelance, collaboration, internship or remote position. I always reply.</p>
         </div>
 
