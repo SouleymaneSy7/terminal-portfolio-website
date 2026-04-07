@@ -90,3 +90,5 @@ export interface QuizCommandResponseType {
   type: "text" | "html";
   content: string[];
 }
+
+export type SuggestionGroup = { label: string; items: string[] };
