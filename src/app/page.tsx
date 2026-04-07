@@ -32,16 +32,20 @@ export default function Home() {
       )}
 
       <div
-        className="terminal-container | w-full h-full max-w-480 overflow-y-scroll border-2 border-primary-clr rounded-md bg-foreground-clr p-2 mx-auto lg:p-4"
+        className="w-full h-full max-w-480 mx-auto rounded-md bg-[linear-gradient(45deg,var(--color-foreground-clr),var(--color-primary-clr),var(--color-primary-clr),var(--color-foreground-clr))] p-0.5"
         style={{
           height:
             bannerVisible && bannerHeight > 0
               ? `calc(100% - ${bannerHeight}px)`
               : "100%",
         }}
-        ref={containerRef}
       >
-        <Terminal containerRef={containerRef} />
+        <div
+          className="terminal-container w-full h-full overflow-y-scroll bg-foreground-clr rounded-md p-2 lg:p-4"
+          ref={containerRef}
+        >
+          <Terminal containerRef={containerRef} />
+        </div>
       </div>
     </main>
   );
