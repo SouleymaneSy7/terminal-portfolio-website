@@ -1,5 +1,6 @@
 import * as React from "react";
 import LiveClock from "@/components/LiveClock";
+import { THEMES, FONTS } from "@/commands/theme-command";
 
 export * from "@/commands";
 
@@ -26,9 +27,8 @@ export const ASCII_ERROR = `
 `.trim();
 
 // ─────────────────────────────────────────────────────────────────
-// COMMANDS LIST  (tab completion)
+// COMMANDS LIST  (tab completion — command names)
 // ─────────────────────────────────────────────────────────────────
-
 export const commands = [
   "about",
   "clear",
@@ -57,9 +57,25 @@ export const commands = [
 ];
 
 // ─────────────────────────────────────────────────────────────────
-// HELP
+// COMPLETIONS MAP  (tab completion — arguments per command)
+//
+// Keys are command names.
+// Values are the valid arguments that command accepts.
+// Empty array means the command takes free text (no completions).
 // ─────────────────────────────────────────────────────────────────
 
+export const COMPLETIONS: Record<string, string[]> = {
+  theme: Object.keys(THEMES),
+  typeface: Object.keys(FONTS),
+  rps: ["rock", "paper", "scissors"],
+  game: ["stats", "reset", "help"],
+  cowsay: [],
+  weather: [],
+};
+
+// ─────────────────────────────────────────────────────────────────
+// HELP
+// ─────────────────────────────────────────────────────────────────
 export const getHelpCommandOutput = () => [
   {
     id: crypto.randomUUID(),
@@ -75,7 +91,6 @@ export const getHelpCommandOutput = () => [
         <div class="space-y-t-group">
           <p class="text-secondary-clr font-bold">Navigation & System</p>
           <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-
           <p><span class="text-tertiary-clr font-bold">clear     </span> - Clear the terminal screen.</p>
           <p><span class="text-tertiary-clr font-bold">exit      </span> - Exit the terminal (close tab).</p>
           <p><span class="text-tertiary-clr font-bold">help      </span> - List all available commands.</p>
@@ -115,7 +130,7 @@ export const getHelpCommandOutput = () => [
         <div class="space-y-t-group">
           <p class="text-secondary-clr font-bold">Keyboard Shortcuts</p>
           <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p><span class="text-tertiary-clr font-bold">[Tab]      </span> - Autocomplete commands.</p>
+          <p><span class="text-tertiary-clr font-bold">[Tab]      </span> - Autocomplete commands and arguments.</p>
           <p><span class="text-tertiary-clr font-bold">[↑] [↓]    </span> - Navigate command history.</p>
           <p><span class="text-tertiary-clr font-bold">[Enter]    </span> - Execute command.</p>
           <p><span class="text-tertiary-clr font-bold">[CTRL + L] </span> - Clear the terminal screen.</p>
