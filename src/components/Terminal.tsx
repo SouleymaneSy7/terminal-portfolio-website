@@ -281,7 +281,7 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
           >
-            <LoadingIndicator variant="braille" />
+            <LoadingIndicator variant="braille" label="Processing command" />
           </motion.div>
         )}
 
