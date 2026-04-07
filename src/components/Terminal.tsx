@@ -305,7 +305,7 @@ const Terminal: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
         )}
       </AnimatePresence>
 
-      <div aria-hidden="true" style={{ height: "8rem" }} />
+      <div aria-hidden="true" style={{ height: "12rem" }} />
     </div>
   );
 };
