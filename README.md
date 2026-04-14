@@ -36,19 +36,24 @@ Built from the ground up with Next.js 16, React 19, TypeScript and Tailwind CSS 
 
 ## Features
 
-- **Real terminal emulation** — command parsing, history navigation, tab completion.
-- **Theme switching** — 31 color themes with localStorage persistence.
-- **Font switching** — 4 monospace fonts switchable at runtime.
-- **Smart suggestions** — live completion panel with keyboard navigation as you type.
-- **Tab autocomplete** — complete commands and their arguments (theme names, font names, game subcommands, rps choices).
+- **Real terminal emulation** — command parsing, history navigation (↑↓), tab completion.
+- **31 color themes** — all OKLCH-based with localStorage persistence.
+- **4 monospace fonts** — all loaded via `next/font/local` for zero-CLS font switching.
+- **Smart suggestions panel** — live completion panel with keyboard navigation as you type.
+- **Tab autocomplete** — completes commands and arguments (theme names, font names, game subcommands, rps choices).
 - **Command history** — navigate with arrow keys, persisted across sessions via localStorage.
-- **Loading indicators** — 5 variants (braille spinner, ASCII progress bar, dots, typewriter, rotating).
-- **Live clock** — real-time date, time and timezone display.
-- **API integrations** — live weather, programming jokes, inspirational quotes.
-- **Interactive quiz** — 40-question Frontend quiz with XP system and rank progression.
+- **Loading indicators** — 5 animated variants (braille spinner, ASCII progress bar, dots accumulator, typewriter cursor, rotating spinner).
+- **Live clock** — real-time date, time and timezone display with box-drawing characters.
+- **API integrations** — live weather (wttr.in), programming jokes (JokeAPI), inspirational quotes (Advice Slip API), currency rates (Frankfurter/ECB).
+- **Interactive quiz** — 40-question Frontend quiz with XP system, accuracy tracking and rank progression.
+- **Persistent utilities** — in-terminal note manager, todo list, and code snippet vault — all backed by localStorage.
+- **UUID generator** — v1 (time-based) and v4 (random) with validation.
+- **Currency converter** — real-time rates for 31 currencies via the European Central Bank.
+- **Age calculator** — exact age from any birth date with next-birthday countdown.
+- **curl simulator** — browser-based HTTP client with verbose mode, headers, POST data and Basic Auth.
 - **ASCII art** — cowsay, neofetch banner, welcome screen, quiz results.
-- **Accessibility** — ARIA live regions, aria-hidden on decorative ASCII art, focus management.
-- **Security** — DOMPurify XSS sanitization, strict HTTP security headers.
+- **Accessibility** — ARIA live regions, `aria-hidden` on decorative ASCII art, full focus management.
+- **Security** — DOMPurify XSS sanitization on all HTML output, strict HTTP security headers.
 - **Responsive** — works on mobile with a keyboard, optimized for desktop.
 - **SEO** — full OpenGraph, Twitter Card, sitemap, robots.txt, canonical URL.
 
@@ -63,9 +68,9 @@ Type `help` in the terminal to see the full list. Here's a quick overview:
 | Command        | Description                                                                 |
 | -------------- | --------------------------------------------------------------------------- |
 | `clear`        | Clear the terminal screen                                                   |
-| `exit`         | Exit the terminal (close tab)                                               |
+| `exit`         | Display goodbye message (close the browser tab to actually exit)            |
 | `help`         | List all available commands                                                 |
-| `hostname`     | Display system information                                                  |
+| `hostname`     | Display system hostname and portfolio information                           |
 | `neofetch`     | Linux-style system summary with live theme and font                         |
 | `theme <n>`    | Switch color theme — see [Theme & Font Switching](#theme--font-switching)   |
 | `typeface <n>` | Switch terminal font — see [Theme & Font Switching](#theme--font-switching) |
@@ -79,12 +84,39 @@ Type `help` in the terminal to see the full list. Here's a quick overview:
 | `contact`        | All social networks and contact details           |
 | `date`           | Live clock with date, time and timezone           |
 | `time`           | Alias for `date`                                  |
-| `email`          | Display my email address                          |
+| `email`          | Display my email address with mailto link         |
 | `projects`       | Browse my most notable projects                   |
-| `repo`           | This portfolio's source code                      |
+| `repo`           | This portfolio's source code on GitHub            |
 | `resume`         | View or download my CV in French or English (PDF) |
-| `weather <city>` | Real-time weather for any city                    |
+| `weather <city>` | Real-time weather for any city via wttr.in        |
 | `whoami`         | Who is behind this terminal?                      |
+
+### Utilities
+
+| Command                            | Description                                                  |
+| ---------------------------------- | ------------------------------------------------------------ |
+| `age <date>`                       | Calculate exact age from a birthdate with next-birthday info |
+| `convert <amount> <from> <to>`     | Real-time currency conversion via European Central Bank      |
+| `convert list`                     | List all 31 supported currencies                             |
+| `curl [options] <url>`             | Browser HTTP client — GET, POST, HEAD, verbose mode, auth    |
+| `note`                             | List all saved notes                                         |
+| `note add <text>`                  | Add a note (spaces allowed)                                  |
+| `note rm <id>`                     | Delete a note by its short ID                                |
+| `note edit <id> <text>`            | Update a note                                                |
+| `note clear`                       | Delete all notes                                             |
+| `snippet`                          | List all saved code snippets                                 |
+| `snippet add <name> <lang> <code>` | Save a code snippet                                          |
+| `snippet show <id>`                | Display snippet code                                         |
+| `snippet rm <id>`                  | Delete a snippet                                             |
+| `todo`                             | List all tasks (pending and done)                            |
+| `todo add <text>`                  | Add a new task                                               |
+| `todo done <id>`                   | Mark a task as completed                                     |
+| `todo undone <id>`                 | Mark a task as pending                                       |
+| `todo rm <id>`                     | Delete a task                                                |
+| `uuid`                             | Generate one v4 UUID                                         |
+| `uuid v1 [n]`                      | Generate n time-based v1 UUIDs (max 20)                      |
+| `uuid v4 [n]`                      | Generate n random v4 UUIDs (max 20)                          |
+| `uuid validate <string>`           | Validate a UUID string                                       |
 
 ### Fun & Games
 
@@ -96,10 +128,12 @@ Type `help` in the terminal to see the full list. Here's a quick overview:
 | `game stats`                  | View your performance and current rank                   |
 | `game reset`                  | Clear all progress and start fresh                       |
 | `game help`                   | Show all game commands                                   |
-| `joke`                        | Random programming joke (live API)                       |
-| `quote`                       | Inspiring or funny quote (live API)                      |
+| `joke`                        | Random programming joke (JokeAPI)                        |
+| `quote`                       | Random advice quote (Advice Slip API)                    |
 | `rps <rock\|paper\|scissors>` | Play rock-paper-scissors against the terminal            |
 | `sudo`                        | Attempt to gain root access... 😄                        |
+
+> **Tip:** every command accepts `--help` for detailed usage — e.g. `weather --help`
 
 ### Keyboard Shortcuts
 
@@ -164,6 +198,8 @@ theme hack-the-box              → Hack The Box — matrix green on deep navy
 
 ### Available Fonts (4)
 
+All fonts are bundled locally via `next/font/local` — no external font requests, no layout shift, zero FOUT.
+
 ```
 typeface cascadia          → Cascadia Code (default) — Microsoft's gift to devs
 typeface fira              → Fira Code — stunning ligatures
@@ -178,14 +214,20 @@ The `Tab` key completes both commands and their arguments:
 ```bash
 # Command completion
 th[Tab]             → theme (unique match, completes immediately)
-t[Tab]              → cycles: theme → time → typeface → ...
+t[Tab]              → cycles: theme → time → typeface → todo → ...
 
 # Argument completion
 theme cat[Tab]      → catppuccin (unique match)
 theme [Tab]         → cycles through all 31 theme names
 typeface [Tab]      → cycles through all 4 font names
 rps [Tab]           → rock → paper → scissors
-game [Tab]          → stats → reset → help
+game [Tab]          → stats → reset → help → --help
+note [Tab]          → add → rm → edit → clear → list → help
+todo [Tab]          → add → done → undone → rm → clear → list → help
+snippet [Tab]       → add → show → rm → clear → list → help
+uuid [Tab]          → v1 → v4 → validate → help
+convert [Tab]       → list → help
+curl [Tab]          → --help → -v → -I → -s → -X → -H → -d → -u → -L
 ```
 
 ### Suggestions Panel
@@ -204,7 +246,7 @@ Suggestions ─── 4 matches
 
 Navigate with `↑↓` or `Tab` to cycle. `Esc` dismisses and restores your original input.
 
-For `theme` and `typeface`, suggestions are **grouped by category** — exactly mirroring the `theme` command's own output. The description of the currently highlighted item appears in the header so you know what you're picking before confirming.
+For `theme` and `typeface`, suggestions are **grouped by category** — exactly mirroring the `theme` command's own output. The description of the currently highlighted item appears in the header.
 
 ```
 guest@souleymane-sy-portfolio:~$ theme material_
@@ -550,35 +592,37 @@ All visual output across every command is driven by a single source of truth in 
 --color-tertiary-clr: oklch(...); /* Commands, bullets •, success ✓    */
 ```
 
+All 31 theme overrides use `html[data-theme="<name>"]` attribute selectors at specificity (0,1,1), which beats `:root` (0,1,0) with no `!important` needed. Font switching follows the same pattern at (0,1,2) via `html[data-font="<name>"] body`.
+
 #### Typography
 
 ```css
 --font-weight-regular: 400;
 --font-weight-bold: 700;
 
---text-fs-body: clamp(0.9375rem, 0.9196rem + 0.0893vw, 1rem); /* 15px→16px */
+--text-fs-body: clamp(0.9375rem, 0.9196rem + 0.0893vw, 1rem); /* 15px → 16px */
 --text-fs-subtitle: clamp(
   1.125rem,
   1.0893rem + 0.1786vw,
   1.25rem
-); /* 18px→20px */
---text-fs-title: clamp(1.25rem, 1.1786rem + 0.3571vw, 1.5rem); /* 20px→24px */
+); /* 18px → 20px */
+--text-fs-title: clamp(1.25rem, 1.1786rem + 0.3571vw, 1.5rem); /* 20px → 24px */
 --leading-base: 1.5;
 ```
 
 #### Spacing
 
 ```css
---spacing-t-outer: 0.25rem; /* py — outer padding on each output block  */
---spacing-t-section: 0.75rem; /* space-y — between major sections         */
---spacing-t-group: 0.25rem; /* space-y — between lines in a group       */
---spacing-t-footer: 0.125rem; /* space-y — between hint / footer lines    */
+--spacing-t-outer: 0.25rem; /* py  — outer padding on each output block  */
+--spacing-t-section: 0.75rem; /* space-y — between major sections           */
+--spacing-t-group: 0.25rem; /* space-y — between lines within a group     */
+--spacing-t-footer: 0.125rem; /* space-y — between hint and footer lines    */
 ```
 
 #### Opacity
 
 ```css
---opacity-sep: 0.3; /* ──── separator lines only — nothing else uses opacity */
+--opacity-sep: 0.3; /* separator lines only — nothing else uses opacity */
 ```
 
 ### Color Roles
@@ -602,21 +646,38 @@ All visual output across every command is driven by a single source of truth in 
 | `space-y-t-group`   | `--spacing-t-group`   | Between lines within a related group |
 | `space-y-t-footer`  | `--spacing-t-footer`  | Between hint and footer lines        |
 
-### Theme Switching — How the CSS Works
+### Command Output Convention
 
-```css
-/* Specificity (0,1,1) beats :root (0,1,0) — no !important needed */
-html[data-theme="synthwave"] {
-  --color-background-clr: oklch(0.188 0.0388 295.82);
-  --color-primary-clr: oklch(0.728 0.2412 332.46);
-  /* … six variables, nothing else changes */
-}
+Every command output is a `type: "html"` block wrapping a consistent root structure:
 
-/* Specificity (0,1,2) beats body (0,0,1) */
-html[data-font="fira"] body {
-  font-family: var(--font-fira-code);
-}
+```html
+<div class="space-y-t-section py-t-outer">
+  <!-- Major section -->
+  <div class="space-y-t-group">
+    <p class="text-secondary-clr font-bold">Section Title</p>
+    <p class="text-text-clr opacity-sep" aria-hidden="true">
+      ────────────────────────────────────────
+    </p>
+    <p>
+      Body text using <span class="text-tertiary-clr">accent</span> where
+      relevant.
+    </p>
+  </div>
+
+  <!-- Hint / footer -->
+  <div class="space-y-t-footer">
+    <p class="text-text-clr opacity-sep" aria-hidden="true">
+      ────────────────────────────────────────
+    </p>
+    <p>
+      Type '<span class="text-tertiary-clr font-bold">next-command</span>' to
+      continue.
+    </p>
+  </div>
+</div>
 ```
+
+This structure is applied directly in each command file as plain HTML strings — no helper abstraction — so every command is self-contained and readable without indirection.
 
 ### Accessibility Practices
 
@@ -625,7 +686,7 @@ html[data-font="fira"] body {
 - Terminal output uses `role="log"` with `aria-live="polite"`, `aria-relevant="additions"` and `aria-atomic="false"`
 - The terminal wrapper uses `role="application"` with a descriptive `aria-label`
 - Suggestions panel uses `role="listbox"` / `role="option"` / `aria-activedescendant`
-- All external links include `rel="noopener noreferrer"` and `target="_blank"`
+- All external links include `rel="noopener noreferrer"` and `target="_blank"` (enforced via DOMPurify hook)
 - `:focus-visible` styles on all interactive elements
 - Full `prefers-reduced-motion` support — all CSS transitions and Framer Motion animations disabled
 
@@ -635,25 +696,39 @@ html[data-font="fira"] body {
 
 ### Core
 
-- [Next.js 16](https://nextjs.org/) — React framework, SSR, routing
+- [Next.js 16](https://nextjs.org/) — React framework, SSR, routing, `next/font/local` for zero-CLS font loading
 - [React 19](https://react.dev/) — UI library
-- [TypeScript 5](https://www.typescriptlang.org/) — type safety throughout
-- [Tailwind CSS v4](https://tailwindcss.com/) — utility-first styling with CSS custom properties
+- [TypeScript 6](https://www.typescriptlang.org/) — strict type safety throughout
+- [Tailwind CSS v4](https://tailwindcss.com/) — utility-first styling driven entirely by CSS custom properties in `@theme`
 - [Bun](https://bun.sh/) — runtime and package manager
 
 ### UI & Animation
 
-- [Framer Motion](https://www.framer.com/motion/) — terminal entry animations, staggered output, loading states
+- [Framer Motion 12](https://www.framer.com/motion/) — terminal entry animations, staggered output, loading states, AnimatePresence
+
+### Fonts
+
+- [Cascadia Code](https://github.com/microsoft/cascadia-code) — default, loaded via `next/font/local`
+- [Fira Code](https://github.com/tonsky/FiraCode) — loaded via `next/font/local`
+- [Geist Mono](https://vercel.com/font) — loaded via the `geist` npm package
+- [Recursive Casual Mono](https://www.recursive.design/) — loaded via `next/font/local`
 
 ### Security
 
-- [DOMPurify](https://github.com/cure53/DOMPurify) — XSS sanitization on all HTML command outputs
-- Strict HTTP headers — `X-Frame-Options`, `HSTS`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`
+- [DOMPurify](https://github.com/cure53/DOMPurify) — XSS sanitization on all HTML command outputs; custom hook enforces `target="_blank"` and `rel="noopener noreferrer"` on every link post-sanitization
+- Strict HTTP headers — `X-Frame-Options: DENY`, `HSTS`, `X-Content-Type-Options: nosniff`, `Referrer-Policy`, `Permissions-Policy`, `X-XSS-Protection`
 
 ### Data & APIs
 
-- [Axios](https://axios-http.com/) — HTTP client for weather, jokes, quotes APIs
-- [date-fns](https://date-fns.org/) — date formatting for the live clock
+| Library / API                                  | Used for                                                                   |
+| ---------------------------------------------- | -------------------------------------------------------------------------- |
+| [Axios](https://axios-http.com/)               | HTTP client for all API calls                                              |
+| [date-fns](https://date-fns.org/)              | Date parsing, formatting and arithmetic for the age command and live clock |
+| [uuid](https://github.com/uuidjs/uuid)         | v1 and v4 UUID generation and validation                                   |
+| [wttr.in](https://wttr.in/)                    | Real-time weather data                                                     |
+| [JokeAPI v2](https://v2.jokeapi.dev/)          | Programming jokes                                                          |
+| [Advice Slip API](https://api.adviceslip.com/) | Inspirational quotes                                                       |
+| [Frankfurter / ECB](https://frankfurter.dev/)  | Real-time currency exchange rates — no API key required                    |
 
 ---
 
@@ -680,65 +755,136 @@ bun dev
 ```
 src/
 ├── app/
-│   ├── globals.css          # Design tokens, 31 theme overrides, font switching
-│   ├── layout.tsx           # Root layout, font loading, SEO metadata
-│   ├── page.tsx             # Home page
-│   └── not-found.tsx        # 404 page
-├── commands/
+│   ├── globals.css           # Design tokens, 31 theme overrides, 4 font rules, animations
+│   ├── layout.tsx            # Root layout, localFont loading (all 4 fonts), full SEO metadata
+│   ├── page.tsx              # Home page — terminal container with mobile banner
+│   └── not-found.tsx         # 404 page with ASCII art and theme init
+│
+├── commands/                 # One file per command — pure functions, HTML string output
 │   ├── about-command.ts
+│   ├── age-command.ts        # Date parsing (5 formats) + exact age + birthday countdown
 │   ├── contact-command.ts
-│   ├── fun-command.ts       # exit, rps
-│   ├── projects-command.ts  # projects, repo
-│   ├── quiz-game-command.ts # 40-question frontend quiz
+│   ├── convert-command.ts    # Currency conversion via Frankfurter/ECB
+│   ├── curl-command.ts       # Full argument parser + HTTP request + formatted output
+│   ├── fun-command.ts        # exit, rps, rps help
+│   ├── note-command.ts       # CRUD notes — localStorage via commandStorage
+│   ├── projects-command.ts   # projects, repo
+│   ├── quiz-game-command.ts  # 40-question quiz, XP, ranks, localStorage persistence
 │   ├── resume-command.ts
-│   ├── system-command.ts    # welcome, neofetch, hostname, whoami, sudo
-│   ├── theme-command.ts     # 31 themes · 4 fonts — switching + persistence
-│   ├── weather-command.ts
-│   └── index.ts
+│   ├── snippet-command.ts    # CRUD code snippets — localStorage
+│   ├── system-command.ts     # welcome, neofetch, hostname, whoami, sudo
+│   ├── theme-command.ts      # THEMES + FONTS objects, apply/init/list/switch, all labels
+│   ├── todo-command.ts       # CRUD todos with done/undone — localStorage
+│   ├── uuid-command.ts       # v1/v4 generation (max 20) and validation
+│   ├── weather-command.ts    # Output formatters (success, error, usage)
+│   └── index.ts              # Re-exports all commands
+│
 ├── components/
-│   ├── Terminal.tsx          # Main terminal shell, history, localStorage
-│   ├── CommandInput.tsx      # Input, tab completion, suggestions panel
-│   ├── CommandOutput.tsx     # Renders text / html / component / link blocks
-│   ├── TerminalPrompt.tsx    # The guest@portfolio:~$ prompt
-│   ├── LiveClock.tsx         # Real-time clock with box-drawing characters
-│   ├── MobileBanner.tsx      # Mobile experience notice
+│   ├── Terminal.tsx           # Main shell — history, localStorage, loading state machine
+│   ├── CommandInput.tsx       # Input, Tab completion, grouped suggestions panel
+│   ├── CommandOutput.tsx      # Renders text / html / component / link output blocks
+│   ├── TerminalPrompt.tsx     # guest@souleymane-sy-portfolio:~$ prompt
+│   ├── LiveClock.tsx          # Real-time clock with box-drawing frame characters
+│   ├── MobileBanner.tsx       # Mobile experience notice with dismiss
+│   ├── Custom404.tsx          # Animated 404 page component with theme init
 │   └── ui/
-│       └── loaders/          # 5 loading indicator variants
+│       └── loaders/
+│           ├── ascii-progress-bar.tsx   # Bouncing ASCII progress bar
+│           ├── braille-spinner.tsx      # Braille character spinner (default)
+│           ├── dots-accumulator.tsx     # Accumulating dots animation
+│           ├── loading-indicator.tsx    # Variant selector component
+│           ├── rotating-spinner.tsx     # Classic / | \ — spinner
+│           ├── typewritter-cursor.tsx   # Typewriter effect with erase cycle
+│           └── index.ts
+│
 ├── constants/
-│   └── index.ts             # Command list, COMPLETIONS map, help, date/time
+│   └── index.ts              # commands[], COMPLETIONS map, all --help blocks, ASCII art,
+│                             #   createHtmlOutput(), getHelpCommandOutput(), date/time outputs
+│
 ├── hooks/
-│   └── useLocalStorage.ts   # SSR-safe localStorage hook with hydration guard
+│   └── useLocalStorage.ts    # SSR-safe localStorage hook with hydration guard
+│
 ├── services/
-│   ├── joke.service.ts
-│   ├── quote.service.ts
-│   └── weather.service.ts
+│   ├── convert.service.ts    # Frankfurter API client
+│   ├── curl.service.ts       # Axios HTTP wrapper with header normalisation
+│   ├── joke.service.ts       # JokeAPI client
+│   ├── quote.service.ts      # Advice Slip API client
+│   └── weather.service.ts    # wttr.in API client
+│
 ├── types/
-│   └── index.ts
+│   └── index.ts              # All shared TypeScript interfaces and types
+│
 └── utils/
-    ├── command.ts           # executeCommand() — central command router
-    └── date.ts              # Timezone and greeting helpers
+    ├── command.ts            # executeCommand() — central command router (switch/case)
+    ├── commandStorage.ts     # Thin localStorage wrapper (get/set/remove) with SSR guard
+    └── date.ts               # getTimezone(), getGreeting()
 ```
 
 ---
 
 ## Development Status
 
+### Core Terminal
+
 - [x] Terminal interface with full command processing
-- [x] Command history — navigation and localStorage persistence
-- [x] Tab autocomplete — commands and arguments (themes, fonts, game, rps)
-- [x] Smart suggestions panel — keyboard navigation, cycling, Esc dismiss
-- [x] Theme switching — 31 themes with localStorage persistence
-- [x] Font switching — 4 fonts with persistence
-- [x] Design system — shared CSS tokens and consistent command output structure
-- [x] Smart suggestions — grouped by category for theme/typeface, with live descriptions
-- [x] Accessibility — ARIA roles, aria-hidden on ASCII art, focus management
-- [x] API integrations — weather, jokes, quotes
-- [x] Interactive Frontend Quiz — 40 questions, XP, ranks, session stats
-- [x] ASCII art features — cowsay, welcome banner, neofetch
-- [x] Resume download — French and English PDF
-- [x] Security headers and XSS sanitization
-- [x] Full SEO — OpenGraph, Twitter Card, sitemap, robots.txt
+- [x] Command history — navigation (↑↓) and localStorage persistence (max 50 entries)
+- [x] Tab autocomplete — commands and arguments (themes, fonts, game, rps, note, todo, snippet, uuid, convert, curl)
+- [x] Smart suggestions panel — grouped display for theme/typeface, keyboard navigation, cycling, Esc dismiss with input restoration
+- [x] Command safety timer — 10s fallback to restore input if a command hangs
+
+### Theming & Fonts
+
+- [x] Theme switching — 31 OKLCH themes with localStorage persistence
+- [x] Font switching — 4 fonts via `next/font/local` with persistence
+- [x] Design system — unified CSS tokens in `globals.css`, consistent command output structure
+- [x] Grouped suggestions for theme/typeface with live description in panel header
+
+### Information Commands
+
+- [x] `about` — personal story and tech stack
+- [x] `contact` — all social links
+- [x] `email` — mailto link
+- [x] `projects` — 5 featured projects with live + source links
+- [x] `repo` — portfolio source code
+- [x] `resume` — EN and FR PDF (view + download)
+- [x] `whoami` — short bio
+- [x] `hostname` — system info
+- [x] `neofetch` — full system overview with live theme/font
+- [x] `sudo` — easter egg
+- [x] `welcome` — animated ASCII banner
+
+### Utilities
+
+- [x] `age` — exact age calculator with 5 date format parsers and birthday countdown
+- [x] `convert` — real-time currency conversion for 31 currencies (ECB/Frankfurter)
+- [x] `curl` — browser HTTP client with full flag parser (`-v`, `-I`, `-s`, `-X`, `-H`, `-d`, `-u`, `-L`, `-o`)
+- [x] `note` — persistent note CRUD (add / list / edit / rm / clear) with short IDs
+- [x] `snippet` — persistent code snippet CRUD (add / show / rm / clear) with short IDs
+- [x] `todo` — persistent task list with done/undone states (add / done / undone / rm / clear)
+- [x] `uuid` — v1 and v4 UUID generation (batch up to 20) and validation
+- [x] `date` / `time` — live clock with box-drawing frame
+- [x] `weather` — real-time city weather via wttr.in
+
+### Fun & Games
+
+- [x] `joke` — random programming joke (JokeAPI)
+- [x] `quote` — random advice (Advice Slip API)
+- [x] `rps` — rock-paper-scissors
+- [x] `cowsay` — ASCII cow
+- [x] `game` — 40-question Frontend quiz with XP, accuracy tracking, 4 ranks, localStorage persistence
+
+### Loading Indicators
+
+- [x] 5 animated variants — braille spinner, ASCII progress bar, dots accumulator, typewriter cursor, rotating spinner
+
+### Quality
+
+- [x] Accessibility — ARIA roles, `aria-hidden` on ASCII art, focus management, `prefers-reduced-motion`
+- [x] API integrations — weather, jokes, quotes, currency conversion
+- [x] Security headers and DOMPurify XSS sanitization
+- [x] Full SEO — OpenGraph, Twitter Card, sitemap, robots.txt, canonical URL
 - [x] Mobile banner with responsive experience
+- [x] Custom animated 404 page
 - [ ] Easter eggs and hidden features
 
 ---
