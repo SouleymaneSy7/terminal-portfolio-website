@@ -8,10 +8,6 @@ import { createHtmlOutput } from "@/constants";
 import { NoteType } from "@/types";
 import { storageGet, storageRemove, storageSet } from "@/utils/commandStorage";
 
-// ─────────────────────────────────────────────────────────────────
-// TYPES & STORAGE
-// ─────────────────────────────────────────────────────────────────
-
 const NOTES_KEY = "terminal:notes";
 
 const getNotes = (): NoteType[] => storageGet<NoteType[]>(NOTES_KEY, []);
