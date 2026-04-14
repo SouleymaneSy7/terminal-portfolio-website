@@ -100,3 +100,24 @@ export const rspCommand = (userInput: string) => {
     },
   ];
 };
+
+export const rpsCommandHelp = () => [
+  {
+    id: crypto.randomUUID(),
+    type: "html" as const,
+    content: [
+      `<div class="space-y-t-section py-t-outer">
+                <div class="space-y-t-group">
+                  <p>Pick <span class="text-tertiary-clr">rock</span>, <span class="text-tertiary-clr">paper</span> or <span class="text-tertiary-clr">scissors</span> to battle it out!</p>
+                </div>
+                <div class="space-y-t-footer">
+                  <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+                  <p>
+                    <span class="text-secondary-clr font-bold">Usage:</span> rps &lt;rock|paper|scissors&gt;
+                    — or type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">rps --help</span><span aria-hidden="true">'</span>
+                  </p>
+                </div>
+              </div>`,
+    ],
+  },
+];
