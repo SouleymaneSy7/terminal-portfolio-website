@@ -1,4 +1,10 @@
-import { QuizQuestionType, GameStateType } from "@/types";
+import { createHtmlOutput } from "@/constants";
+import {
+  QuizQuestionType,
+  GameStateType,
+  PersistedGameStateType,
+} from "@/types";
+import { storageGet, storageSet, storageRemove } from "@/utils/commandStorage";
 
 // ============================================
 // CONSTANTS
@@ -12,6 +18,12 @@ const RANKS = {
   ADVANCED: { min: 60, name: "ADVANCED" },
   NOOB: { min: 0, name: "NOOB" },
 } as const;
+
+// ============================================
+// PERSISTENCE
+// ============================================
+
+const GAME_KEY = "terminal:quiz-game";
 
 // ============================================
 // ASCII ART
@@ -473,25 +485,61 @@ const quizQuestions: QuizQuestionType[] = [
 ];
 
 // ============================================
-// GAME STATE
+// GAME STATE  (hydrated from localStorage on module load)
 // ============================================
 
-let gameState: GameStateType = {
-  currentQuestion: null,
-  score: 0,
-  questionsAnswered: 0,
-  askedQuestions: [],
-};
+/**
+ * Restore state from localStorage.
+ * currentQuestion is stored as its index in quizQuestions[] so the
+ * full question object can be recovered after a page refresh.
+ * storageGet() returns the fallback when window is undefined (SSR),
+ * so this is safe to call at module level.
+ */
+function hydrateState(): GameStateType {
+  const saved = storageGet<PersistedGameStateType | null>(GAME_KEY, null);
 
-// ============================================
-// HELPERS
-// ============================================
+  if (!saved) {
+    return {
+      currentQuestion: null,
+      score: 0,
+      questionsAnswered: 0,
+      askedQuestions: [],
+    };
+  }
 
-const html = (content: string) => ({
-  id: crypto.randomUUID(),
-  type: "html" as const,
-  content: [content],
-});
+  const currentQuestion =
+    saved.currentQuestionIndex !== null
+      ? (quizQuestions[saved.currentQuestionIndex] ?? null)
+      : null;
+
+  return {
+    currentQuestion,
+    score: saved.score,
+    questionsAnswered: saved.questionsAnswered,
+    askedQuestions: saved.askedQuestions,
+  };
+}
+
+/**
+ * Write current state to localStorage.
+ * currentQuestion is serialized as its index (or null).
+ */
+function persistState(): void {
+  const currentQuestionIndex =
+    gameState.currentQuestion !== null
+      ? quizQuestions.indexOf(gameState.currentQuestion)
+      : null;
+
+  storageSet<PersistedGameStateType>(GAME_KEY, {
+    score: gameState.score,
+    questionsAnswered: gameState.questionsAnswered,
+    askedQuestions: gameState.askedQuestions,
+    currentQuestionIndex:
+      currentQuestionIndex === -1 ? null : currentQuestionIndex,
+  });
+}
+
+let gameState: GameStateType = hydrateState();
 
 const calculateAccuracy = (): number => {
   if (gameState.questionsAnswered === 0) return 0;
@@ -530,17 +578,72 @@ const resetGame = (): void => {
     questionsAnswered: 0,
     askedQuestions: [],
   };
+  storageRemove(GAME_KEY);
 };
 
 // ============================================
 // COMMAND HANDLERS
 // ============================================
 
+const showHelp = () =>
+  createHtmlOutput(
+    `<div class="space-y-t-section py-t-outer">
+
+      <div class="space-y-t-group">
+        <p class="text-secondary-clr font-bold">game — Command Reference</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p>Frontend quiz game. Answer questions, earn XP, climb the ranks.</p>
+        <p><span class="text-secondary-clr">Usage:</span>  game [subcommand]</p>
+      </div>
+
+      <div class="space-y-t-group">
+        <p class="text-secondary-clr font-bold">Subcommands</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p><span class="text-tertiary-clr font-bold">game          </span> - Load a new question</p>
+        <p><span class="text-tertiary-clr font-bold">game [1-3]    </span> - Submit your answer</p>
+        <p><span class="text-tertiary-clr font-bold">game stats    </span> - View your performance</p>
+        <p><span class="text-tertiary-clr font-bold">game reset    </span> - Clear all progress</p>
+        <p><span class="text-tertiary-clr font-bold">game help     </span> - Show this guide</p>
+      </div>
+
+      <div class="space-y-t-group">
+        <p class="text-secondary-clr font-bold">Scoring</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p><span class="text-tertiary-clr">+${POINTS.CORRECT} XP</span>  for a correct answer</p>
+        <p><span class="text-secondary-clr">${POINTS.WRONG} XP</span>  for a wrong answer</p>
+      </div>
+
+      <div class="space-y-t-group">
+        <p class="text-secondary-clr font-bold">Ranks</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p><span class="text-tertiary-clr">LEGEND   </span>  ≥ ${RANKS.LEGEND.min}% accuracy</p>
+        <p><span class="text-tertiary-clr">PRO      </span>  ≥ ${RANKS.PRO.min}% accuracy</p>
+        <p><span class="text-tertiary-clr">ADVANCED </span>  ≥ ${RANKS.ADVANCED.min}% accuracy</p>
+        <p><span class="text-tertiary-clr">NOOB     </span>  &lt; ${RANKS.ADVANCED.min}% accuracy</p>
+      </div>
+
+      <div class="space-y-t-group">
+        <p class="text-secondary-clr font-bold">Workflow example</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p><span class="text-primary-clr">$</span> game</p>
+        <p><span class="text-text-clr opacity-sep">  → question appears</span></p>
+        <p><span class="text-primary-clr">$</span> game 2</p>
+        <p><span class="text-text-clr opacity-sep">  → answer evaluated, score updated</span></p>
+      </div>
+
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p>Progress is <span class="text-tertiary-clr font-bold">saved automatically</span> — pick up where you left off.</p>
+      </div>
+
+    </div>`,
+  );
+
 const showStats = () => {
   const accuracy = calculateAccuracy();
   const rank = getRank(accuracy);
 
-  return html(
+  return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
 
       <div class="space-y-t-group">
@@ -573,12 +676,14 @@ const showStats = () => {
 
 const handleReset = () => {
   resetGame();
-  return html(
+
+  return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
 
       <div class="space-y-t-group">
         <p class="text-tertiary-clr font-bold">✓  Progress wiped clean</p>
         <p class="text-tertiary-clr font-bold">✓  Statistics reset to zero</p>
+        <p class="text-tertiary-clr font-bold">✓  Saved data cleared</p>
       </div>
 
       <div class="space-y-t-footer">
@@ -593,32 +698,9 @@ const handleReset = () => {
   );
 };
 
-const showHelp = () =>
-  html(
-    `<div class="space-y-t-section py-t-outer">
-
-      <div class="space-y-t-group">
-        <p class="text-secondary-clr font-bold">Quiz Command Guide</p>
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-        <p><span class="text-tertiary-clr font-bold">game          </span> - Load new question</p>
-        <p><span class="text-tertiary-clr font-bold">game [1-3]    </span> - Submit your answer</p>
-        <p><span class="text-tertiary-clr font-bold">game stats    </span> - View performance</p>
-        <p><span class="text-tertiary-clr font-bold">game reset    </span> - Clear all progress</p>
-        <p><span class="text-tertiary-clr font-bold">game help     </span> - Show this guide</p>
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-        <p>Example workflow:</p>
-        <p>  $ game</p>
-        <p>  [question appears]</p>
-        <p>  $ game 2</p>
-        <p>  [answer evaluated]</p>
-      </div>
-
-    </div>`,
-  );
-
 const handleAnswer = (answer: number) => {
   if (!gameState.currentQuestion) {
-    return html(
+    return createHtmlOutput(
       `<div class="space-y-t-section py-t-outer">
         <div class="space-y-t-group">
           <p><span aria-hidden="true" class="text-secondary-clr">⚠</span>  No active question.</p>
@@ -635,7 +717,7 @@ const handleAnswer = (answer: number) => {
   }
 
   if (isNaN(answer) || answer < 1 || answer > 3) {
-    return html(
+    return createHtmlOutput(
       `<div class="space-y-t-section py-t-outer">
         <div class="space-y-t-group">
           <p><span aria-hidden="true" class="text-secondary-clr">⚠</span>  Invalid input — enter 1, 2, or 3.</p>
@@ -663,7 +745,11 @@ const handleAnswer = (answer: number) => {
   const resultColor = isCorrect ? "text-tertiary-clr" : "text-secondary-clr";
   const explanation = gameState.currentQuestion.explanation ?? "";
 
-  const response = html(
+  // Clear current question BEFORE persisting
+  gameState.currentQuestion = null;
+  persistState();
+
+  return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
 
       <div class="space-y-t-group">
@@ -690,16 +776,14 @@ const handleAnswer = (answer: number) => {
 
     </div>`,
   );
-
-  gameState.currentQuestion = null;
-  return response;
 };
 
 const showQuestion = () => {
   const question = getRandomQuestion();
   gameState.currentQuestion = question;
+  persistState();
 
-  return html(
+  return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
 
       <div class="space-y-t-group">
@@ -737,7 +821,7 @@ export const handleGameCommand = (args: string[]) => {
 
   if (sub === "stats") return showStats();
   if (sub === "reset") return handleReset();
-  if (sub === "help") return showHelp();
+  if (sub === "help" || sub === "--help") return showHelp();
 
   if (args[0] && gameState.currentQuestion) {
     return handleAnswer(parseInt(args[0]));
