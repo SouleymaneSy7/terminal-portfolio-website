@@ -1,11 +1,11 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import * as React from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
+import { FONTS, THEMES } from "@/commands/theme-command";
 import { commands, COMPLETIONS } from "@/constants";
-import { THEMES, FONTS } from "@/commands/theme-command";
-import { CommandInputPropsType, SuggestionGroup } from "@/types";
+import { CommandInputPropsType, SuggestionGroupType } from "@/types";
 import TerminalPrompt from "./TerminalPrompt";
 
 const INTERACTIVE_SELECTOR =
@@ -13,7 +13,7 @@ const INTERACTIVE_SELECTOR =
 
 const MAX_SUGGESTIONS = Object.keys(THEMES).length;
 
-const THEME_GROUPS: SuggestionGroup[] = [
+const THEME_GROUPS: SuggestionGroupType[] = [
   {
     label: "Catppuccin",
     items: [
@@ -72,7 +72,7 @@ const THEME_GROUPS: SuggestionGroup[] = [
   },
 ];
 
-const FONT_GROUPS: SuggestionGroup[] = [
+const FONT_GROUPS: SuggestionGroupType[] = [
   {
     label: "Available Fonts",
     items: ["cascadia", "fira", "geist", "recursive-casual"],
@@ -128,8 +128,8 @@ function getDescription(cmd: string, suggestion: string): string {
 function getGroupedCompletions(
   cmd: string,
   partial: string,
-): SuggestionGroup[] | null {
-  let groups: SuggestionGroup[] | null = null;
+): SuggestionGroupType[] | null {
+  let groups: SuggestionGroupType[] | null = null;
 
   if (cmd === "theme") groups = THEME_GROUPS;
   if (cmd === "typeface") groups = FONT_GROUPS;
