@@ -8,11 +8,12 @@ export const getEmailCommandOutput = () => [
         <div class="space-y-t-group">
           <p class="text-secondary-clr font-bold">Email</p>
           <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>You can reach me at:</p>
+          <p>Three years of late nights and stubborn learning have brought me here.</p>
+          <p>If you have a project, an opportunity, or just want to talk code —</p>
+          <p>my inbox is always open. I reply to every message.</p>
           <a href="mailto:souleymanesycodes@gmail.com" target="_blank" rel="noopener noreferrer">
             souleymanesycodes@gmail.com
           </a>
-          <p>An opportunity, a collaboration, or just saying hi — write to me. I always reply.</p>
         </div>
 
         <div class="space-y-t-footer">
@@ -36,10 +37,16 @@ export const getContactCommandOutput = () => [
       `<div class="space-y-t-section py-t-outer">
 
         <div class="space-y-t-group">
-          <p class="text-secondary-clr font-bold">Find me across the web</p>
+          <p class="text-secondary-clr font-bold">Let's connect</p>
           <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+          <p>I'm a self-taught developer from Coyah, Guinea-Conakry.</p>
+          <p>I've been building in public since 2022 — every repo, every challenge,</p>
+          <p>every project is documented. Come see the work, not just the resume.</p>
+        </div>
+
+        <div class="space-y-t-group">
           <p>
-            <span class="text-primary-clr font-bold">Email</span>
+            <span class="text-primary-clr font-bold">Email          </span>
             <span>-</span>
             <a href="mailto:souleymanesycodes@gmail.com" target="_blank" rel="noopener noreferrer">
               souleymanesycodes@gmail.com
@@ -47,7 +54,7 @@ export const getContactCommandOutput = () => [
           </p>
 
           <p>
-            <span class="text-primary-clr font-bold">GitHub</span>
+            <span class="text-primary-clr font-bold">GitHub         </span>
             <span>-</span>
             <a href="https://github.com/SouleymaneSy7" target="_blank" rel="noopener noreferrer">
               github.com/SouleymaneSy7
@@ -55,7 +62,7 @@ export const getContactCommandOutput = () => [
           </p>
 
           <p>
-            <span class="text-primary-clr font-bold">LinkedIn</span>
+            <span class="text-primary-clr font-bold">LinkedIn       </span>
             <span>-</span>
             <a href="https://linkedin.com/in/souleymanesy7" target="_blank" rel="noopener noreferrer">
               linkedin.com/in/souleymanesy7
@@ -63,7 +70,7 @@ export const getContactCommandOutput = () => [
           </p>
 
           <p>
-            <span class="text-primary-clr font-bold">Twitter / X</span>
+            <span class="text-primary-clr font-bold">Twitter / X    </span>
             <span>-</span>
             <a href="https://twitter.com/Souleymanesy43" target="_blank" rel="noopener noreferrer">
               twitter.com/Souleymanesy43
@@ -85,7 +92,11 @@ export const getContactCommandOutput = () => [
               devchallenges.io/profile/SouleymaneSy7
             </a>
           </p>
-          <p>Available for freelance, collaboration, internship or remote position. I always reply.</p>
+        </div>
+
+        <div class="space-y-t-group">
+          <p>Open to <span class="text-tertiary-clr font-bold">freelance</span>, <span class="text-tertiary-clr font-bold">remote positions</span>, <span class="text-tertiary-clr font-bold">collaboration</span> and <span class="text-tertiary-clr font-bold">internships</span>.</p>
+          <p>Geography is not an obstacle. I work remote, async, and I deliver.</p>
         </div>
 
         <div class="space-y-t-footer">
