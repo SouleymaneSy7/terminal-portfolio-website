@@ -8,7 +8,9 @@ export const getResumeCommandOutput = () => [
         <div class="space-y-t-group">
           <p class="text-secondary-clr font-bold">Resume</p>
           <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>Available in two languages.</p>
+          <p>Three years of self-teaching, 89+ public repos, 50+ Frontend Mentor</p>
+          <p>challenges, a contest podium, and a certified internship — condensed</p>
+          <p>into two pages. Available in English and French.</p>
         </div>
 
         <div class="space-y-t-group">
@@ -50,8 +52,8 @@ export const getResumeCommandOutput = () => [
         <div class="space-y-t-footer">
           <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
           <p>
-            Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">contact</span><span aria-hidden="true">'</span>
-            to reach me directly.
+            Prefer to talk first? Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">contact</span><span aria-hidden="true">'</span>
+            — I always reply.
           </p>
         </div>
 
