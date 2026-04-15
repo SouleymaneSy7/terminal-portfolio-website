@@ -8,7 +8,9 @@ export const getRepoCommandOutput = () => [
         <div class="space-y-t-group">
           <p class="text-secondary-clr font-bold">This Portfolio</p>
           <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>The complete source code is publicly available on GitHub:</p>
+          <p>A terminal that tells a story — mine.</p>
+          <p>31 themes, 4 fonts, tab completion, a quiz, API integrations,</p>
+          <p>and every command written with care. Built to show, not just say.</p>
           <a
             href="https://github.com/SouleymaneSy7/terminal-portfolio-website"
             target="_blank"
@@ -16,9 +18,7 @@ export const getRepoCommandOutput = () => [
           >
             github.com/SouleymaneSy7/terminal-portfolio-website
           </a>
-          <p>Built with Next.js 16, React 19, TypeScript and Tailwind CSS v4.</p>
-          <p>Runtime: Bun.</p>
-          <p>If you like this project, a ⭐ on GitHub is always appreciated.</p>
+          <p>If it resonates, a ⭐ on GitHub means a lot.</p>
         </div>
 
         <div class="space-y-t-footer">
@@ -39,24 +39,26 @@ export const getProjectsCommandOutput = () => [
     id: crypto.randomUUID(),
     type: "html" as const,
     content: [
+      // ── Fyrre Magazine ───────────────────────────────────────
       `<div class="space-y-t-section py-t-outer">
 
         <div class="space-y-t-group">
           <p class="text-primary-clr font-bold">Fyrre Magazine</p>
           <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>My most ambitious project to date. A full-featured digital magazine website</p>
-          <p>designed for an immersive and elegant reading experience. Articles, covers,</p>
-          <p>author profiles — crafted to balance performance and editorial aesthetics.</p>
+          <p>My most ambitious project. A full digital magazine — articles,</p>
+          <p>author profiles, categories, newsletter. Every detail deliberate.</p>
+          <p>This is where Next.js finally clicked at the architecture level.</p>
+          <p>I wasn't just using the framework anymore. I was thinking in it.</p>
         </div>
 
         <div class="space-y-t-group">
-          <p class="text-secondary-clr font-bold">Technologies Used</p>
+          <p class="text-secondary-clr font-bold">Technologies used</p>
           <p>
-            <span class="text-tertiary-clr">Next.js</span>  ·
-            <span class="text-tertiary-clr">React</span>  ·
-            <span class="text-tertiary-clr">MDX</span>  ·
-            <span class="text-tertiary-clr">TypeScript</span>  ·
-            <span class="text-tertiary-clr">Tailwind CSS</span>  ·
+            <span class="text-tertiary-clr">Next.js</span> ·
+            <span class="text-tertiary-clr">React</span> ·
+            <span class="text-tertiary-clr">TypeScript</span> ·
+            <span class="text-tertiary-clr">MDX</span> ·
+            <span class="text-tertiary-clr">Tailwind CSS</span> ·
             <span class="text-tertiary-clr">Resend</span>
           </p>
         </div>
@@ -87,27 +89,32 @@ export const getProjectsCommandOutput = () => [
 
       </div>`,
 
+      // ── Conakry Tourism Website ──────────────────────────────
       `<div class="space-y-t-section py-t-outer">
 
         <div class="space-y-t-group">
           <p class="text-primary-clr font-bold">Conakry Tourism Website  🏆</p>
           <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>Built for a challenge by Le Repaire du Web (Enzo Ustariz's Discord).</p>
-          <p>Theme: create a tourism website for a city. I chose Conakry — the capital</p>
-          <p>of Guinea and my hometown.</p>
+          <p>This one is personal. Enzo Ustariz's contest — September 2024.</p>
+          <p>Theme: build a tourism website for any city.</p>
+          <p>I chose Conakry without hesitation. My capital. My home.</p>
+          <p>A city I wanted the world to see with different eyes.</p>
+          <p>Two weeks. Long nights. Every animation chosen with intent.</p>
+          <p>Culture, history, landmarks — a love letter written in code.</p>
           <p>
             <span class="text-tertiary-clr font-bold">🥉 3rd place</span>
-            among 20+ participants — a moment I'm truly proud of.
+            out of 20+ participants — Le Repaire du Web.
           </p>
+          <p>The moment I saw those results, three years of sacrifice made sense.</p>
         </div>
 
         <div class="space-y-t-group">
-          <p class="text-secondary-clr font-bold">Technologies Used</p>
+          <p class="text-secondary-clr font-bold">Technologies used</p>
           <p>
-            <span class="text-tertiary-clr">React</span>  ·
-            <span class="text-tertiary-clr">TypeScript</span>  ·
-            <span class="text-tertiary-clr">Sass</span>  ·
-            <span class="text-tertiary-clr">GSAP</span>  ·
+            <span class="text-tertiary-clr">React</span> ·
+            <span class="text-tertiary-clr">TypeScript</span> ·
+            <span class="text-tertiary-clr">Sass</span> ·
+            <span class="text-tertiary-clr">GSAP</span> ·
             <span class="text-tertiary-clr">Vite</span>
           </p>
         </div>
@@ -129,31 +136,27 @@ export const getProjectsCommandOutput = () => [
 
       </div>`,
 
+      // ── Dictionary Web App ───────────────────────────────────
       `<div class="space-y-t-section py-t-outer">
 
         <div class="space-y-t-group">
           <p class="text-primary-clr font-bold">Dictionary Web App</p>
           <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>Search any word and get its definition, phonetics and usage examples.</p>
-          <p>My first serious project with Vue.js — the one that convinced me the</p>
-          <p>Composition API was a real step forward.</p>
+          <p>My first serious project with Vue.js — and the one that made me</p>
+          <p>fall in love with the Composition API.</p>
+          <p>Search any word. Get its definition, phonetics, usage examples.</p>
+          <p>Simple on the surface. But this is where async patterns,</p>
+          <p>state management, and API integration finally clicked — for real.</p>
         </div>
 
         <div class="space-y-t-group">
-          <p class="text-secondary-clr font-bold">Technologies Used</p>
+          <p class="text-secondary-clr font-bold">Technologies used</p>
           <p>
-            <span class="text-tertiary-clr">Vue.js</span>  ·
-            <span class="text-tertiary-clr">Composition API</span>  ·
-            <span class="text-tertiary-clr">Tailwind CSS</span>  ·
+            <span class="text-tertiary-clr">Vue.js</span> ·
+            <span class="text-tertiary-clr">Composition API</span> ·
+            <span class="text-tertiary-clr">Tailwind CSS</span> ·
             <span class="text-tertiary-clr">Axios</span>
           </p>
-        </div>
-
-        <div class="space-y-t-group">
-          <p class="text-secondary-clr font-bold">Features</p>
-          <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  Real-time word search via external API</p>
-          <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  Definitions, phonetics and usage examples</p>
-          <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  Responsive design for mobile and desktop</p>
         </div>
 
         <div class="space-y-t-group">
@@ -173,29 +176,26 @@ export const getProjectsCommandOutput = () => [
 
       </div>`,
 
+      // ── Password Generator ───────────────────────────────────
       `<div class="space-y-t-section py-t-outer">
 
         <div class="space-y-t-group">
           <p class="text-primary-clr font-bold">Password Generator</p>
           <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>Secure password generator with customizable options — length, uppercase,</p>
-          <p>special characters. Built to deepen my Vue.js Composition API mastery.</p>
+          <p>Built to deepen my Vue.js mastery — deliberately kept small.</p>
+          <p>Frontend Mentor taught me that scope doesn't equal quality.</p>
+          <p>A clean utility: custom length, character sets, one-click copy.</p>
+          <p>Every option reactive, every state handled properly.</p>
+          <p>Small scope, real craft — that became my standard.</p>
         </div>
 
         <div class="space-y-t-group">
-          <p class="text-secondary-clr font-bold">Technologies Used</p>
+          <p class="text-secondary-clr font-bold">Technologies used</p>
           <p>
-            <span class="text-tertiary-clr">Vue.js</span>  ·
-            <span class="text-tertiary-clr">Composition API</span>  ·
+            <span class="text-tertiary-clr">Vue.js</span> ·
+            <span class="text-tertiary-clr">Composition API</span> ·
             <span class="text-tertiary-clr">Sass</span>
           </p>
-        </div>
-
-        <div class="space-y-t-group">
-          <p class="text-secondary-clr font-bold">Features</p>
-          <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  Customizable length and character sets</p>
-          <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  Real-time password generation</p>
-          <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  One-click copy to clipboard</p>
         </div>
 
         <div class="space-y-t-group">
@@ -215,31 +215,28 @@ export const getProjectsCommandOutput = () => [
 
       </div>`,
 
+      // ── GitHub User Search ───────────────────────────────────
       `<div class="space-y-t-section py-t-outer">
 
         <div class="space-y-t-group">
           <p class="text-primary-clr font-bold">GitHub User Search</p>
           <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>Enter any GitHub username and get their stats, repos, followers</p>
-          <p>and info in real time. A Frontend Mentor challenge I paid particular attention to.</p>
+          <p>A Frontend Mentor challenge I treated like a production app.</p>
+          <p>Enter any GitHub username. Repos, followers, bio, location —</p>
+          <p>all from the GitHub API, in real time.</p>
+          <p>I paid attention to what beginners skip: empty states, loading states,</p>
+          <p>error handling, dark mode with localStorage persistence.</p>
+          <p>The details are what separate a challenge from a product.</p>
         </div>
 
         <div class="space-y-t-group">
-          <p class="text-secondary-clr font-bold">Technologies Used</p>
+          <p class="text-secondary-clr font-bold">Technologies used</p>
           <p>
-            <span class="text-tertiary-clr">React</span>  ·
-            <span class="text-tertiary-clr">TypeScript</span>  ·
-            <span class="text-tertiary-clr">Axios</span>  ·
+            <span class="text-tertiary-clr">React</span> ·
+            <span class="text-tertiary-clr">TypeScript</span> ·
+            <span class="text-tertiary-clr">Axios</span> ·
             <span class="text-tertiary-clr">Sass</span>
           </p>
-        </div>
-
-        <div class="space-y-t-group">
-          <p class="text-secondary-clr font-bold">Features</p>
-          <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  Search GitHub profiles by username</p>
-          <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  Stats: repos, followers, following</p>
-          <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  Light / dark theme toggle with persistence</p>
-          <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  Error handling and loading states</p>
         </div>
 
         <div class="space-y-t-group">
@@ -254,6 +251,15 @@ export const getProjectsCommandOutput = () => [
             <a href="https://github.com/SouleymaneSy7/github-user-search-app" target="_blank" rel="noopener noreferrer">
               github.com/SouleymaneSy7/github-user-search-app
             </a>
+          </p>
+        </div>
+
+        <div class="space-y-t-footer">
+          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+          <p>89+ repos on GitHub. Each one a step forward, none of them faked.</p>
+          <p>
+            Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">repo</span><span aria-hidden="true">'</span>
+            to see the source for this portfolio.
           </p>
         </div>
 
