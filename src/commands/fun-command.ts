@@ -6,18 +6,28 @@ export const getExitCommandOutput = () => [
       `<div class="space-y-t-section py-t-outer">
 
         <div class="space-y-t-group">
-          <p class="text-secondary-clr font-bold">Goodbye! 👋</p>
+          <p class="text-secondary-clr font-bold">Goodbye 👋</p>
           <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>Thank you for visiting my terminal portfolio.</p>
-          <p>You can close this tab to exit.</p>
-          <p>Have a project idea or an opportunity?</p>
+          <p>Thanks for visiting. This terminal is my story —</p>
+          <p>built line by line, from Coyah, Guinea-Conakry,</p>
+          <p>without a school, without a bootcamp, without shortcuts.</p>
+          <p>Just code, persistence, and the refusal to quit.</p>
+        </div>
+
+        <div class="space-y-t-group">
+          <p>If something here caught your eye — reach out.</p>
+          <p>An opportunity, a collaboration, a project, or just a conversation —</p>
           <p>
             <span aria-hidden="true" class="text-tertiary-clr">→</span>
             <a href="mailto:souleymanesycodes@gmail.com" target="_blank" rel="noopener noreferrer">
               souleymanesycodes@gmail.com
             </a>
           </p>
-          <p>See you around. 🌍</p>
+        </div>
+
+        <div class="space-y-t-footer">
+          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+          <p>Close this tab to exit. See you around. 🌍</p>
         </div>
 
       </div>`,
