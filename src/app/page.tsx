@@ -1,8 +1,8 @@
 "use client";
 
+import Terminal from "@/components/terminal/Terminal";
+import MobileBanner from "@/components/ui/MobileBanner";
 import * as React from "react";
-import Terminal from "@/components/Terminal";
-import MobileBanner from "@/components/MobileBanner";
 
 export default function Home() {
   const containerRef = React.useRef<HTMLDivElement | null>(null);
