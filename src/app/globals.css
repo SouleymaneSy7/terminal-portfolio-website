@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "highlight.js/styles/atom-one-dark.css";
 
 @theme {
   /* ── Theme — Catppuccin Macchiato (default) ── */
@@ -12,9 +13,7 @@
   /* ── Fonts ── */
   --font-*: initial;
   --font-cascadia-code: var(--font-cascadia-code);
-  --font-fira-code: var(--font-fira-code);
-  --font-geist-mono: var(--font-geist-mono);
-  --font-recursive-casual: var(--font-recursive-casual);
+  /* All other fonts are loaded dynamically via useDynamicFont hook */
 
   /* ── Font weights ── */
   --font-weight-regular: 400;
@@ -52,6 +51,24 @@
 @layer utilities {
   .terminal-container * + * {
     margin-block-start: 0.25rem;
+  }
+}
+
+@layer components {
+  .visually-hidden {
+    display: inline-block;
+    position: absolute;
+
+    height: 0.0625rem;
+    width: 0.0625rem;
+
+    border: 0;
+    clip: rect(0 0 0 0);
+
+    margin: -0.0625rem;
+    padding: 0;
+
+    overflow: hidden;
   }
 }
 
@@ -380,23 +397,71 @@ html[data-theme="material-high-contrast"] {
 }
 
 /* ═══════════════════════════════════════════════════
-   FONTS (4 Total)
+   FONTS (15 Total - 1 static + 14 dynamic)
    ═══════════════════════════════════════════════════ */
 
+/* Default font (loaded statically) */
 html[data-font="cascadia"] body {
   font-family: var(--font-cascadia-code);
 }
 
+/* Google Fonts (loaded dynamically) */
 html[data-font="fira"] body {
   font-family: var(--font-fira-code);
 }
 
+html[data-font="jetbrains"] body {
+  font-family: var(--font-jetbrains-mono);
+}
+
+html[data-font="ibm-plex"] body {
+  font-family: var(--font-ibm-plex-mono);
+}
+
+html[data-font="source-code"] body {
+  font-family: var(--font-source-code-pro);
+}
+
+html[data-font="ubuntu"] body {
+  font-family: var(--font-ubuntu-mono);
+}
+
+html[data-font="space"] body {
+  font-family: var(--font-space-mono);
+}
+
+html[data-font="inconsolata"] body {
+  font-family: var(--font-inconsolata);
+}
+
+html[data-font="cousine"] body {
+  font-family: var(--font-cousine-mono);
+}
+
+/* NPM package font (loaded dynamically) */
 html[data-font="geist"] body {
   font-family: var(--font-geist-mono);
 }
 
+/* Local fonts (loaded dynamically) */
 html[data-font="recursive-casual"] body {
   font-family: var(--font-recursive-casual);
+}
+
+html[data-font="recursive-linear"] body {
+  font-family: var(--font-recursive-linear);
+}
+
+html[data-font="hack"] body {
+  font-family: var(--font-hack);
+}
+
+html[data-font="victor"] body {
+  font-family: var(--font-victor-mono);
+}
+
+html[data-font="meslo"] body {
+  font-family: var(--font-meslo);
 }
 
 body {
