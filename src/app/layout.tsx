@@ -2,28 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 
 import "./globals.css";
-import { GeistMono } from "geist/font/mono";
 
-// ── LOCAL FONTS ───────────────
-const FiraCode = localFont({
-  src: [
-    {
-      path: "../../public/fonts/fira-code-regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/fira-code-bold.woff2",
-      weight: "700",
-      style: "normal",
-    },
-  ],
-  variable: "--font-fira-code",
-  display: "swap",
-  fallback: ["monospace"],
-  adjustFontFallback: false,
-});
-
+// ── DEFAULT FONT (loaded statically) ───────────────
 const CascadiaCode = localFont({
   src: [
     {
@@ -38,25 +18,6 @@ const CascadiaCode = localFont({
     },
   ],
   variable: "--font-cascadia-code",
-  display: "swap",
-  fallback: ["monospace"],
-  adjustFontFallback: false,
-});
-
-const RecursiveCasual = localFont({
-  src: [
-    {
-      path: "../../public/fonts/recursive-mono-casual-regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/recursive-mono-casual-bold.woff2",
-      weight: "700",
-      style: "normal",
-    },
-  ],
-  variable: "--font-recursive-casual",
   display: "swap",
   fallback: ["monospace"],
   adjustFontFallback: false,
@@ -142,15 +103,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={[
-          CascadiaCode.variable,
-          FiraCode.variable,
-          RecursiveCasual.variable,
-          GeistMono.variable,
-          "antialiased",
-        ].join(" ")}
-      >
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+      </head>
+      <body className={[CascadiaCode.variable, "antialiased"].join(" ")}>
         {children}
       </body>
     </html>
