@@ -14,6 +14,9 @@ function useLocalStorage<T>(
   const [storedValue, setStoredValue] = React.useState<T>(initialValue);
   const [isHydrated, setIsHydrated] = React.useState(false);
 
+  // Keep a stable ref so clearValue never needs initialValue in its deps
+  const initialValueRef = React.useRef(initialValue);
+
   React.useEffect(() => {
     try {
       const raw = window.localStorage.getItem(key);
@@ -57,14 +60,15 @@ function useLocalStorage<T>(
     [key],
   );
 
+  // initialValueRef.current is stable — no array/object identity issue
   const clearValue = React.useCallback(() => {
     try {
-      setStoredValue(initialValue);
+      setStoredValue(initialValueRef.current);
       window.localStorage.removeItem(key);
     } catch (error) {
       console.error(`[useLocalStorage] Failed to clear key "${key}":`, error);
     }
-  }, [key, initialValue]);
+  }, [key]);
 
   return [storedValue, setValue, clearValue, isHydrated] as const;
 }
