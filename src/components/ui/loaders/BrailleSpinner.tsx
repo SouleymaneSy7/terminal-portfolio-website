@@ -1,16 +1,15 @@
 "use client";
 
-import * as React from "react";
+import TerminalPrompt from "@/components/terminal/TerminalPrompt";
+import { BrailleSpinnerPropsType } from "@/types";
 import { motion } from "framer-motion";
-import TerminalPrompt from "@/components/TerminalPrompt";
+import * as React from "react";
 
 const BRAILLE_FRAMES = ["⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷"];
 
-interface BrailleSpinnerProps {
-  label?: string;
-}
-
-const BrailleSpinner = ({ label = "processing" }: BrailleSpinnerProps) => {
+const BrailleSpinner: React.FC<BrailleSpinnerPropsType> = ({
+  label = "processing command",
+}) => {
   const [frame, setFrame] = React.useState(0);
 
   React.useEffect(() => {

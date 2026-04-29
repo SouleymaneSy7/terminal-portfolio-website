@@ -1,16 +1,13 @@
 "use client";
 
-import * as React from "react";
+import TerminalPrompt from "@/components/terminal/TerminalPrompt";
+import { TypewriterCursorPropsType } from "@/types";
 import { motion } from "framer-motion";
-import TerminalPrompt from "@/components/TerminalPrompt";
+import * as React from "react";
 
-interface TypewriterCursorProps {
-  label?: string;
-}
-
-const TypewriterCursor = ({
+const TypewriterCursor: React.FC<TypewriterCursorPropsType> = ({
   label = "fetching data",
-}: TypewriterCursorProps) => {
+}) => {
   const [displayed, setDisplayed] = React.useState("");
   const [cursorOn, setCursorOn] = React.useState(true);
   const phaseRef = React.useRef<"typing" | "waiting" | "erasing">("typing");

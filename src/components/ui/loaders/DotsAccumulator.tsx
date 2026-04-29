@@ -1,16 +1,13 @@
 "use client";
 
-import * as React from "react";
+import TerminalPrompt from "@/components/terminal/TerminalPrompt";
+import { DotsAccumulatorPropsType } from "@/types";
 import { motion } from "framer-motion";
-import TerminalPrompt from "@/components/TerminalPrompt";
+import * as React from "react";
 
-interface DotsAccumulatorPropsType {
-  label?: string;
-}
-
-const DotsAccumulator = ({
-  label = "processing",
-}: DotsAccumulatorPropsType) => {
+const DotsAccumulator: React.FC<DotsAccumulatorPropsType> = ({
+  label = "processing command",
+}) => {
   const [dots, setDots] = React.useState(0);
 
   React.useEffect(() => {

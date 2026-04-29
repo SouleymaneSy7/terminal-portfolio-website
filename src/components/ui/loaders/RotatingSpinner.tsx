@@ -2,15 +2,14 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import TerminalPrompt from "@/components/TerminalPrompt";
+import TerminalPrompt from "@/components/terminal/TerminalPrompt";
+import { RotatingSpinnerPropsType } from "@/types";
 
 const SPIN_FRAMES = ["/", "-", "\\", "|"];
 
-interface RotatingSpinnerProps {
-  label?: string;
-}
-
-const RotatingSpinner = ({ label = "executing" }: RotatingSpinnerProps) => {
+const RotatingSpinner: React.FC<RotatingSpinnerPropsType> = ({
+  label = "processing command",
+}) => {
   const [frame, setFrame] = React.useState(0);
 
   React.useEffect(() => {

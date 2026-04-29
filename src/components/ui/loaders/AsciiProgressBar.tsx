@@ -1,16 +1,15 @@
 "use client";
 
-import * as React from "react";
+import TerminalPrompt from "@/components/terminal/TerminalPrompt";
+import { AsciiProgressBarPropsType } from "@/types";
 import { motion } from "framer-motion";
-import TerminalPrompt from "@/components/TerminalPrompt";
+import * as React from "react";
 
-const BAR_WIDTH = 20;
+const BAR_WIDTH = 32;
 
-interface AsciiProgressBarProps {
-  label?: string;
-}
-
-const AsciiProgressBar = ({ label = "processing" }: AsciiProgressBarProps) => {
+const AsciiProgressBar: React.FC<AsciiProgressBarPropsType> = ({
+  label = "processing command",
+}) => {
   const [progress, setProgress] = React.useState(0);
   const directionRef = React.useRef<1 | -1>(1);
 
