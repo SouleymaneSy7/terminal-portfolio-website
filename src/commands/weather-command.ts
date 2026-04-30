@@ -1,55 +1,75 @@
-export const createWeatherOutput = (weather: string) => [
-  {
-    id: crypto.randomUUID(),
-    type: "text" as const,
-    content: weather.split("\n"),
-  },
-];
+/**
+ * Weather Command - Fetch real-time weather for any city
+ *
+ * @example
+ * ```bash
+ * weather Conakry
+ * weather New York
+ * weather --help
+ * ```
+ */
 
-export const weatherErrorOutput = (city: string, errorMessage?: string) => [
-  {
-    id: crypto.randomUUID(),
-    type: "html" as const,
-    content: [
-      `<div class="space-y-t-section py-t-outer">
-        <div class="space-y-t-group">
-          <p><span aria-hidden="true" class="text-secondary-clr">⚠</span>  Could not fetch weather for <span class="text-tertiary-clr">"${city}"</span></p>
-          <p>${errorMessage ?? "Please check the city name and try again."}</p>
-        </div>
-        <div class="space-y-t-footer">
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>
-            Try major cities — e.g.
-            <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">weather Conakry</span><span aria-hidden="true">'</span>
-          </p>
-        </div>
-      </div>`,
-    ],
-  },
-];
+import { weatherService } from "@/services";
+import type { CommandHistoryOutputType } from "@/types";
+import { parseArgs } from "@/utils/argParser";
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
+import {
+  createErrorOutput,
+  createTextOutput,
+} from "@/utils/output";
+import { WEATHER_HELP } from "@/constants/help/info";
 
-export const weatherUsageOutput = () => [
-  {
-    id: crypto.randomUUID(),
-    type: "html" as const,
-    content: [
-      `<div class="space-y-t-section py-t-outer">
+// ─────────────────────────────────────────────────────────────────
+// OUTPUT BUILDERS
+// ─────────────────────────────────────────────────────────────────
 
-        <div class="space-y-t-group">
-          <p class="text-secondary-clr font-bold">Weather</p>
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>Get real-time weather for any city.</p>
-          <p><span class="text-secondary-clr">Usage:</span>  <span class="text-tertiary-clr">weather &lt;city&gt;</span></p>
-        </div>
+export const createWeatherOutput = (
+  weather: string,
+): CommandHistoryOutputType => createTextOutput(weather.split("\n"));
 
-        <div class="space-y-t-group">
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p  class="text-tertiary-clr"><span aria-hidden="true"> •</span>  weather Conakry</p>
-          <p class="text-tertiary-clr"><span aria-hidden="true"> •</span>  weather Coyah</p>
-          <p class="text-tertiary-clr"><span aria-hidden="true"> •</span>  weather Paris</p>
-        </div>
+export const weatherErrorOutput = (
+  city: string,
+  errorMessage?: string,
+): CommandHistoryOutputType =>
+  createErrorOutput(
+    `Could not fetch weather for <span class="text-tertiary-clr">"${city}"</span>`,
+    errorMessage ??
+      `Please check the city name and try again. ${DT.decorators.bullet} e.g. ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">weather Conakry</span>${DT.decorators.quote}`,
+  );
 
-      </div>`,
-    ],
-  },
-];
+export const weatherUsageOutput = (): CommandHistoryOutputType =>
+  createErrorOutput(
+    `Usage: <span class="text-tertiary-clr font-bold">weather &lt;city&gt;</span>`,
+    `Try ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">weather --help</span>${DT.decorators.quote} for more information.`,
+  );
+
+// ─────────────────────────────────────────────────────────────────
+// MAIN HANDLER
+// ─────────────────────────────────────────────────────────────────
+
+/**
+ * Handle weather command execution
+ *
+ * @param args - Command arguments
+ * @returns Command output blocks
+ */
+export const handleWeatherCommand = async (
+  args: string[],
+): Promise<CommandHistoryOutputType> => {
+  const { flags, positional } = parseArgs(args);
+
+  if (flags.help) return WEATHER_HELP;
+
+  const city = positional.join(" ").trim();
+  if (!city) return weatherUsageOutput();
+
+  try {
+    const data = await weatherService.getWeather(city);
+    return createWeatherOutput(data);
+  } catch (error) {
+    return weatherErrorOutput(
+      city,
+      error instanceof Error ? error.message : undefined,
+    );
+  }
+};
