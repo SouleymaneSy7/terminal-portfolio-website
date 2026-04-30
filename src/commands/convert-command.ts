@@ -1,49 +1,13 @@
 /**
  * Currency conversion powered by frankfurter.dev.
- * Supports 164 world currencies. No API key required.
- *
+ * Supports 168 world currencies. No API key required.
  */
 
-import { createHtmlOutput } from "@/constants";
-import { convertService } from "@/services/convert.service";
-
-// ─────────────────────────────────────────────────────────────────
-// SUPPORTED CURRENCIES (static list for offline fallback + display)
-// ─────────────────────────────────────────────────────────────────
-
-const KNOWN_CURRENCIES: Record<string, string> = {
-  AUD: "Australian Dollar",
-  BGN: "Bulgarian Lev",
-  BRL: "Brazilian Real",
-  CAD: "Canadian Dollar",
-  CHF: "Swiss Franc",
-  CNY: "Chinese Renminbi Yuan",
-  CZK: "Czech Koruna",
-  DKK: "Danish Krone",
-  EUR: "Euro",
-  GBP: "British Pound",
-  HKD: "Hong Kong Dollar",
-  HUF: "Hungarian Forint",
-  IDR: "Indonesian Rupiah",
-  ILS: "Israeli New Sheqel",
-  INR: "Indian Rupee",
-  ISK: "Icelandic Króna",
-  JPY: "Japanese Yen",
-  KRW: "South Korean Won",
-  MXN: "Mexican Peso",
-  MYR: "Malaysian Ringgit",
-  NOK: "Norwegian Krone",
-  NZD: "New Zealand Dollar",
-  PHP: "Philippine Peso",
-  PLN: "Polish Zloty",
-  RON: "Romanian Leu",
-  SEK: "Swedish Krona",
-  SGD: "Singapore Dollar",
-  THB: "Thai Baht",
-  TRY: "Turkish Lira",
-  USD: "United States Dollar",
-  ZAR: "South African Rand",
-};
+import { CONVERT_HELP } from "@/constants/help/utils";
+import { convertService } from "@/services";
+import { parseArgs } from "@/utils/argParser";
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
+import { createErrorOutput, createHtmlOutput } from "@/utils/output";
 
 // ─────────────────────────────────────────────────────────────────
 // HANDLERS
@@ -53,14 +17,9 @@ const convertCurrency = async (amountStr: string, from: string, to: string) => {
   const amount = parseFloat(amountStr);
 
   if (isNaN(amount) || amount <= 0) {
-    return createHtmlOutput(
-      `<div class="space-y-t-section py-t-outer">
-        <p><span aria-hidden="true" class="text-secondary-clr">⚠</span> Invalid amount: <span class="text-tertiary-clr">"${amountStr}"</span></p>
-        <div class="space-y-t-footer">
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>Usage: <span class="text-tertiary-clr font-bold">convert &lt;amount&gt; &lt;from&gt; &lt;to&gt;</span>  ·  e.g. <span class="text-tertiary-clr">convert 100 USD EUR</span></p>
-        </div>
-      </div>`,
+    return createErrorOutput(
+      `Invalid amount: <span class="text-tertiary-clr">"${amountStr}"</span>`,
+      `<span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">convert &lt;amount&gt; &lt;from&gt; &lt;to&gt;</span>  ·  e.g. <span class="text-tertiary-clr font-bold">convert 100 USD EUR</span>`,
     );
   }
 
@@ -68,11 +27,16 @@ const convertCurrency = async (amountStr: string, from: string, to: string) => {
   const toUpper = to.toUpperCase();
 
   try {
-    const result = await convertService.convert(fromUpper, toUpper);
+    const [result, currencies] = await Promise.all([
+      convertService.convert(fromUpper, toUpper),
+      convertService.getCurrencies(),
+    ]);
 
     const convertedAmount = amount * result.rate;
-    const fromName = KNOWN_CURRENCIES[fromUpper] ?? fromUpper;
-    const toName = KNOWN_CURRENCIES[toUpper] ?? toUpper;
+    const fromName = currencies[fromUpper]?.name ?? fromUpper;
+    const toName = currencies[toUpper]?.name ?? toUpper;
+    const fromSymbol = currencies[fromUpper]?.symbol ?? "";
+    const toSymbol = currencies[toUpper]?.symbol ?? "";
     const rate = result.rate.toFixed(6);
 
     const formatted = new Intl.NumberFormat("en-US", {
@@ -89,50 +53,48 @@ const convertCurrency = async (amountStr: string, from: string, to: string) => {
       `<div class="space-y-t-section py-t-outer">
         <div class="space-y-t-group">
           <p class="text-secondary-clr font-bold">Currency Conversion</p>
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+          <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
           <p>
-            <span class="text-primary-clr font-bold">${amountFormatted} ${fromUpper}</span>
+            <span class="text-primary-clr font-bold">${amountFormatted} ${fromUpper}${fromSymbol ? ` (${fromSymbol})` : ""}</span>
             <span class="text-text-clr opacity-sep">  →  </span>
-            <span class="text-tertiary-clr font-bold">${formatted} ${toUpper}</span>
+            <span class="text-tertiary-clr font-bold">${formatted} ${toUpper}${toSymbol ? ` (${toSymbol})` : ""}</span>
           </p>
         </div>
+
         <div class="space-y-t-group">
-          <p><span class="text-secondary-clr">From      </span> - ${fromName}</p>
-          <p><span class="text-secondary-clr">To        </span> - ${toName}</p>
+          <p><span class="text-secondary-clr">From      </span> - ${fromName}${fromSymbol ? ` (${fromSymbol})` : ""}</p>
+          <p><span class="text-secondary-clr">To        </span> - ${toName}${toSymbol ? ` (${toSymbol})` : ""}</p>
           <p><span class="text-secondary-clr">Rate      </span> - 1 ${fromUpper} = ${rate} ${toUpper}</p>
           <p><span class="text-secondary-clr">Date      </span> - ${result.date}</p>
         </div>
+
         <div class="space-y-t-footer">
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+          <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
           <p class="text-text-clr opacity-sep">Source: frankfurter.dev · Rates from European Central Bank</p>
         </div>
       </div>`,
     );
   } catch (error: any) {
     console.error(error);
-    return createHtmlOutput(
-      `<div class="space-y-t-section py-t-outer">
-        <div class="space-y-t-group">
-          <p><span aria-hidden="true" class="text-secondary-clr">⚠</span> ${error.message || "Currency not found or service unavailable."}</p>
-          <p>Make sure both codes are valid ISO 4217 currency codes.</p>
-        </div>
-        <div class="space-y-t-footer">
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>Type <span class="text-tertiary-clr font-bold">convert list</span> to see supported currencies.</p>
-        </div>
-      </div>`,
+    return createErrorOutput(
+      error.message || "Currency not found or service unavailable.",
+      `Type <span class="text-tertiary-clr font-bold">convert list</span> to see supported currencies.`,
     );
   }
 };
 
-const listCurrencies = () => {
-  const rows = Object.entries(KNOWN_CURRENCIES)
+const listCurrencies = async () => {
+  const currencies = await convertService.getCurrencies();
+
+  const rows = Object.entries(currencies)
+    .sort(([a], [b]) => a.localeCompare(b))
     .map(
-      ([code, name]) =>
+      ([code, info]) =>
         `<p>
           <span class="text-tertiary-clr font-bold">${code}</span>
           <span class="text-text-clr opacity-sep">  ·  </span>
-          <span>${name}</span>
+          <span>${info.name}</span>
+          ${info.symbol ? `<span class="text-secondary-clr"> (${info.symbol})</span>` : ""}
         </p>`,
     )
     .join("\n");
@@ -140,85 +102,47 @@ const listCurrencies = () => {
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
       <div class="space-y-t-group">
-        <p class="text-secondary-clr font-bold">Supported Currencies <span class="text-text-clr opacity-sep">(${Object.keys(KNOWN_CURRENCIES).length})</span></p>
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p class="text-secondary-clr font-bold">Supported Currencies <span class="text-text-clr opacity-sep">(${Object.keys(currencies).length})</span></p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         ${rows}
       </div>
+
       <div class="space-y-t-footer">
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p>Rates provided by the European Central Bank via frankfurter.dev.</p>
-        <p>Usage: <span class="text-tertiary-clr font-bold">convert &lt;amount&gt; &lt;from&gt; &lt;to&gt;</span>  ·  e.g. <span class="text-tertiary-clr">convert 100 USD EUR</span></p>
+        <p><span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">convert &lt;amount&gt; &lt;from&gt; &lt;to&gt;</span>  ·  e.g. <span class="text-tertiary-clr">convert 100 USD EUR</span></p>
       </div>
     </div>`,
   );
 };
-
-const showConvertHelp = () =>
-  createHtmlOutput(
-    `<div class="space-y-t-section py-t-outer">
-      <div class="space-y-t-group">
-        <p class="text-secondary-clr font-bold">convert — Command Reference</p>
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-        <p><span class="text-tertiary-clr font-bold">convert &lt;amount&gt; &lt;from&gt; &lt;to&gt; </span> - Convert between currencies</p>
-        <p><span class="text-tertiary-clr font-bold">convert list                    </span> - List all supported currencies</p>
-      </div>
-      <div class="space-y-t-group">
-        <p class="text-secondary-clr font-bold">Examples</p>
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  convert 100 USD EUR</p>
-        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  convert 50 EUR GBP</p>
-        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  convert 1000 JPY USD</p>
-        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  convert 200 CHF CAD</p>
-      </div>
-    </div>`,
-  );
-
-const showConvertUsage = () =>
-  createHtmlOutput(
-    `<div class="space-y-t-section py-t-outer">
-      <div class="space-y-t-group">
-        <p class="text-secondary-clr font-bold">convert</p>
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-        <p>Real-time currency conversion powered by the European Central Bank.</p>
-        <p>Usage: <span class="text-tertiary-clr font-bold">convert &lt;amount&gt; &lt;from&gt; &lt;to&gt;</span></p>
-      </div>
-      <div class="space-y-t-group">
-        <p class="text-secondary-clr font-bold">Examples</p>
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  convert 100 USD EUR</p>
-        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  convert 50 EUR GBP</p>
-        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  convert 1000 JPY USD</p>
-      </div>
-      <div class="space-y-t-footer">
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-        <p>Type <span class="text-tertiary-clr font-bold">convert list</span> to see all supported currencies.</p>
-      </div>
-    </div>`,
-  );
 
 // ─────────────────────────────────────────────────────────────────
 // MAIN HANDLER
 // ─────────────────────────────────────────────────────────────────
 
 export const handleConvertCommand = async (args: string[]) => {
-  const first = args[0]?.toLowerCase();
+  const { flags, subcommand, positional } = parseArgs(args);
 
-  if (!first) return showConvertUsage();
-  if (first === "list") return listCurrencies();
-  if (first === "help") return showConvertHelp();
+  if (flags.help) return CONVERT_HELP;
 
-  // convert <amount> <from> <to>
-  if (args.length < 3) {
-    return createHtmlOutput(
-      `<div class="space-y-t-section py-t-outer">
-        <p><span aria-hidden="true" class="text-secondary-clr">⚠</span> Not enough arguments.</p>
-        <div class="space-y-t-footer">
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>Usage: <span class="text-tertiary-clr font-bold">convert &lt;amount&gt; &lt;from&gt; &lt;to&gt;</span>  ·  e.g. <span class="text-tertiary-clr">convert 100 USD EUR</span></p>
-        </div>
-      </div>`,
+  const sub = subcommand?.toLowerCase();
+
+  if (!sub) {
+    return createErrorOutput(
+      "Not enough arguments.",
+      `<span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">convert &lt;amount&gt; &lt;from&gt; &lt;to&gt;</span>  ·  e.g. <span class="text-tertiary-clr font-bold">convert 100 USD EUR</span>`,
     );
   }
 
-  return convertCurrency(args[0], args[1], args[2]);
+  if (sub === "list") return listCurrencies();
+  if (sub === "help") return CONVERT_HELP;
+
+  if (positional.length < 3) {
+    return createErrorOutput(
+      "Not enough arguments.",
+      `<span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">convert &lt;amount&gt; &lt;from&gt; &lt;to&gt;</span>  ·  e.g. <span class="text-tertiary-clr font-bold">convert 100 USD EUR</span>`,
+    );
+  }
+
+  return convertCurrency(positional[0], positional[1], positional[2]);
 };
