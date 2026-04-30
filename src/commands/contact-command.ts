@@ -1,113 +1,161 @@
-export const getEmailCommandOutput = () => [
-  {
-    id: crypto.randomUUID(),
-    type: "html" as const,
-    content: [
-      `<div class="space-y-t-section py-t-outer">
+/**
+ * Contact Command - Display contact information and social links
+ *
+ * @description
+ * Shows email address and all social media profiles with links.
+ *
+ * @example
+ * ```bash
+ * contact
+ * email
+ * contact --help
+ * ```
+ */
 
-        <div class="space-y-t-group">
-          <p class="text-secondary-clr font-bold">Email</p>
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>Three years of late nights and stubborn learning have brought me here.</p>
-          <p>If you have a project, an opportunity, or just want to talk code —</p>
-          <p>my inbox is always open. I reply to every message.</p>
+import { CONTACT_HELP, EMAIL_HELP } from "@/constants/help/info";
+import type { CommandHistoryOutputType } from "@/types";
+import { parseArgs } from "@/utils/argParser";
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
+import { createHtmlOutput } from "@/utils/output";
+
+// ─────────────────────────────────────────────────────────────────
+// OUTPUT BUILDERS
+// ─────────────────────────────────────────────────────────────────
+
+function createEmailOutput(): CommandHistoryOutputType {
+  return createHtmlOutput(
+    `<div class="space-y-t-section py-t-outer">
+      <div class="space-y-t-group">
+        <p class="text-secondary-clr font-bold">Email</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>Three years of late nights and stubborn learning have brought me here.</p>
+        <p>If you have a project, an opportunity, or just want to talk code —</p>
+        <p>my inbox is always open. I reply to every message.</p>
+        <a href="mailto:souleymanesycodes@gmail.com" target="_blank" rel="noopener noreferrer">
+          souleymanesycodes@gmail.com
+        </a>
+      </div>
+
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>
+          Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">contact</span>${DT.decorators.quote}
+          to see all my social links.
+        </p>
+      </div>
+    </div>`,
+  );
+}
+
+function createContactOutput(): CommandHistoryOutputType {
+  return createHtmlOutput(
+    `<div class="space-y-t-section py-t-outer">
+      <div class="space-y-t-group">
+        <p class="text-secondary-clr font-bold">Let's connect</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>I'm a self-taught developer from Coyah, Guinea-Conakry.</p>
+        <p>I've been building in public since 2022 — every repo, every challenge,</p>
+        <p>every project is documented. Come see the work, not just the resume.</p>
+      </div>
+
+      <div class="space-y-t-group">
+        <p>
+          <span class="text-primary-clr font-bold">Email          </span>
+          <span>-</span>
           <a href="mailto:souleymanesycodes@gmail.com" target="_blank" rel="noopener noreferrer">
             souleymanesycodes@gmail.com
           </a>
-        </div>
+        </p>
 
-        <div class="space-y-t-footer">
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>
-            Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">contact</span><span aria-hidden="true">'</span>
-            to see all my social links.
-          </p>
-        </div>
+        <p>
+          <span class="text-primary-clr font-bold">GitHub         </span>
+          <span>-</span>
+          <a href="https://github.com/SouleymaneSy7" target="_blank" rel="noopener noreferrer">
+            github.com/SouleymaneSy7
+          </a>
+        </p>
 
-      </div>`,
-    ],
-  },
-];
+        <p>
+          <span class="text-primary-clr font-bold">LinkedIn       </span>
+          <span>-</span>
+          <a href="https://linkedin.com/in/souleymanesy7" target="_blank" rel="noopener noreferrer">
+            linkedin.com/in/souleymanesy7
+          </a>
+        </p>
 
-export const getContactCommandOutput = () => [
-  {
-    id: crypto.randomUUID(),
-    type: "html" as const,
-    content: [
-      `<div class="space-y-t-section py-t-outer">
+        <p>
+          <span class="text-primary-clr font-bold">Twitter / X    </span>
+          <span>-</span>
+          <a href="https://twitter.com/Souleymanesy43" target="_blank" rel="noopener noreferrer">
+            twitter.com/Souleymanesy43
+          </a>
+        </p>
 
-        <div class="space-y-t-group">
-          <p class="text-secondary-clr font-bold">Let's connect</p>
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>I'm a self-taught developer from Coyah, Guinea-Conakry.</p>
-          <p>I've been building in public since 2022 — every repo, every challenge,</p>
-          <p>every project is documented. Come see the work, not just the resume.</p>
-        </div>
+        <p>
+          <span class="text-primary-clr font-bold">Frontend Mentor</span>
+          <span>-</span>
+          <a href="https://www.frontendmentor.io/profile/SouleymaneSy7" target="_blank" rel="noopener noreferrer">
+            frontendmentor.io/profile/SouleymaneSy7
+          </a>
+        </p>
 
-        <div class="space-y-t-group">
-          <p>
-            <span class="text-primary-clr font-bold">Email          </span>
-            <span>-</span>
-            <a href="mailto:souleymanesycodes@gmail.com" target="_blank" rel="noopener noreferrer">
-              souleymanesycodes@gmail.com
-            </a>
-          </p>
+        <p>
+          <span class="text-primary-clr font-bold">Dev Challenges </span>
+          <span>-</span>
+          <a href="https://devchallenges.io/profile/534cd213-3165-4c16-bdcf-058e1f468da0" target="_blank" rel="noopener noreferrer">
+            devchallenges.io/profile/SouleymaneSy7
+          </a>
+        </p>
+      </div>
 
-          <p>
-            <span class="text-primary-clr font-bold">GitHub         </span>
-            <span>-</span>
-            <a href="https://github.com/SouleymaneSy7" target="_blank" rel="noopener noreferrer">
-              github.com/SouleymaneSy7
-            </a>
-          </p>
+      <div class="space-y-t-group">
+        <p>Open to <span class="text-tertiary-clr font-bold">freelance</span>, <span class="text-tertiary-clr font-bold">remote positions</span>, <span class="text-tertiary-clr font-bold">collaboration</span> and <span class="text-tertiary-clr font-bold">internships</span>.</p>
+        <p>Geography is not an obstacle. I work remote, async, and I deliver.</p>
+      </div>
 
-          <p>
-            <span class="text-primary-clr font-bold">LinkedIn       </span>
-            <span>-</span>
-            <a href="https://linkedin.com/in/souleymanesy7" target="_blank" rel="noopener noreferrer">
-              linkedin.com/in/souleymanesy7
-            </a>
-          </p>
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>
+          Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">resume</span>${DT.decorators.quote}
+          to view or download my CV.
+        </p>
+      </div>
+    </div>`,
+  );
+}
 
-          <p>
-            <span class="text-primary-clr font-bold">Twitter / X    </span>
-            <span>-</span>
-            <a href="https://twitter.com/Souleymanesy43" target="_blank" rel="noopener noreferrer">
-              twitter.com/Souleymanesy43
-            </a>
-          </p>
+// ─────────────────────────────────────────────────────────────────
+// MAIN HANDLERS (exported)
+// ─────────────────────────────────────────────────────────────────
 
-          <p>
-            <span class="text-primary-clr font-bold">Frontend Mentor</span>
-            <span>-</span>
-            <a href="https://www.frontendmentor.io/profile/SouleymaneSy7" target="_blank" rel="noopener noreferrer">
-              frontendmentor.io/profile/SouleymaneSy7
-            </a>
-          </p>
+/**
+ * Handle email command execution
+ *
+ * @param args - Command arguments
+ * @returns Command output blocks
+ */
+export const handleEmailCommand = (
+  args: string[],
+): CommandHistoryOutputType => {
+  const { flags } = parseArgs(args);
 
-          <p>
-            <span class="text-primary-clr font-bold">Dev Challenges </span>
-            <span>-</span>
-            <a href="https://devchallenges.io/profile/534cd213-3165-4c16-bdcf-058e1f468da0" target="_blank" rel="noopener noreferrer">
-              devchallenges.io/profile/SouleymaneSy7
-            </a>
-          </p>
-        </div>
+  if (flags.help) return EMAIL_HELP;
 
-        <div class="space-y-t-group">
-          <p>Open to <span class="text-tertiary-clr font-bold">freelance</span>, <span class="text-tertiary-clr font-bold">remote positions</span>, <span class="text-tertiary-clr font-bold">collaboration</span> and <span class="text-tertiary-clr font-bold">internships</span>.</p>
-          <p>Geography is not an obstacle. I work remote, async, and I deliver.</p>
-        </div>
+  return createEmailOutput();
+};
 
-        <div class="space-y-t-footer">
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>
-            Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">resume</span><span aria-hidden="true">'</span>
-            to view or download my CV.
-          </p>
-        </div>
+/**
+ * Handle contact command execution
+ *
+ * @param args - Command arguments
+ * @returns Command output blocks
+ */
+export const handleContactCommand = (
+  args: string[],
+): CommandHistoryOutputType => {
+  const { flags } = parseArgs(args);
 
-      </div>`,
-    ],
-  },
-];
+  if (flags.help) return CONTACT_HELP;
+
+  return createContactOutput();
+};
