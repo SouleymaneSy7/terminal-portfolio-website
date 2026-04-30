@@ -1,6 +1,27 @@
-// ============================================
+/**
+ * Theme & Typeface Commands
+ *
+ * Handles: theme, typeface
+ * Exports: THEMES, FONTS, apply/init helpers, and main handlers.
+ *
+ * @example
+ * ```bash
+ * theme
+ * theme dracula
+ * typeface fira
+ * typeface --help
+ * ```
+ */
+
+import { parseArgs } from "@/utils/argParser";
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
+import { THEME_HELP, TYPEFACE_HELP } from "@/constants/help/system";
+import { createHtmlOutput, createErrorOutput } from "@/utils/output";
+import { STORAGE_KEYS } from "@/constants/storageKeys";
+
+// ─────────────────────────────────────────────────────────────────
 // CONFIGURATION
-// ============================================
+// ─────────────────────────────────────────────────────────────────
 
 export const THEMES = {
   // ── Catppuccin family ──────────────────────
@@ -139,17 +160,57 @@ export const THEMES = {
 } as const;
 
 export const FONTS = {
+  // ── Default (loaded statically by Next.js) ──
   cascadia: {
     label: "Cascadia Code",
     description:
       "Clean, modern, and incredibly polished — Microsoft's gift to developers",
     variable: "--font-cascadia-code",
   },
+
+  // ── Google Fonts (loaded dynamically) ──
   fira: {
     label: "Fira Code",
     description: "Code that breathes — famous for its stunning ligatures",
     variable: "--font-fira-code",
   },
+  jetbrains: {
+    label: "JetBrains Mono",
+    description: "Clean and crisp — designed for maximum readability",
+    variable: "--font-jetbrains-mono",
+  },
+  "ibm-plex": {
+    label: "IBM Plex Mono",
+    description: "Corporate elegance — IBM's modern monospace masterpiece",
+    variable: "--font-ibm-plex-mono",
+  },
+  "source-code": {
+    label: "Source Code Pro",
+    description: "Adobe's gift to developers — refined and professional",
+    variable: "--font-source-code-pro",
+  },
+  ubuntu: {
+    label: "Ubuntu Mono",
+    description: "Friendly and open — the Linux spirit in a font",
+    variable: "--font-ubuntu-mono",
+  },
+  space: {
+    label: "Space Mono",
+    description: "Retro-futuristic — perfect for that vintage terminal feel",
+    variable: "--font-space-mono",
+  },
+  inconsolata: {
+    label: "Inconsolata",
+    description: "Compact and efficient — a classic programmer's choice",
+    variable: "--font-inconsolata",
+  },
+  cousine: {
+    label: "Cousine",
+    description: "Metrics-compatible with Courier New — familiar yet fresh",
+    variable: "--font-cousine-mono",
+  },
+
+  // ── Local Fonts (loaded dynamically from /public/fonts/) ──
   geist: {
     label: "Geist Mono",
     description:
@@ -161,17 +222,38 @@ export const FONTS = {
     description: "Artistic and expressive, like handwriting meets monospace",
     variable: "--font-recursive-casual",
   },
+  "recursive-linear": {
+    label: "Recursive Linear Mono",
+    description: "Geometric and precise — Recursive's serious side",
+    variable: "--font-recursive-linear",
+  },
+  hack: {
+    label: "Hack",
+    description:
+      "Designed for source code — clear, readable, and battle-tested",
+    variable: "--font-hack",
+  },
+  victor: {
+    label: "Victor Mono",
+    description: "Cursive italics and personality — code with character",
+    variable: "--font-victor-mono",
+  },
+  meslo: {
+    label: "Meslo LG",
+    description: "Menlo's cousin — customized for better line spacing",
+    variable: "--font-meslo",
+  },
 } as const;
 
 export type ThemeKey = keyof typeof THEMES;
 export type FontKey = keyof typeof FONTS;
 
-export const THEME_STORAGE_KEY = "terminal:theme";
-export const FONT_STORAGE_KEY = "terminal:font";
-
-// ============================================
+export const THEME_STORAGE_KEY = STORAGE_KEYS.THEME;
+export const FONT_STORAGE_KEY = STORAGE_KEYS.FONT;
+// ─────────────────────────────────────────────────────────────────
 // HELPERS
-// ============================================
+// ─────────────────────────────────────────────────────────────────
+
 export const getCurrentTheme = (): ThemeKey => {
   if (typeof document === "undefined") return "catppuccin";
   return (
@@ -193,9 +275,6 @@ export const getThemeLabel = (key: ThemeKey): string =>
 
 export const getFontLabel = (key: FontKey): string => FONTS[key]?.label ?? key;
 
-// ============================================
-// APPLY / INIT
-// ============================================
 export const applyTheme = (theme: ThemeKey): void => {
   document.documentElement.setAttribute("data-theme", theme);
   try {
@@ -205,7 +284,12 @@ export const applyTheme = (theme: ThemeKey): void => {
   }
 };
 
-export const applyFont = (font: FontKey): void => {
+export const applyFont = async (font: FontKey): Promise<void> => {
+  // Load the font dynamically if needed (Google Fonts or local fonts)
+  const { loadDynamicFont } = await import("@/hooks/useDynamicFont");
+  await loadDynamicFont(font);
+
+  // Apply the font via data-font attribute
   document.documentElement.setAttribute("data-font", font);
   try {
     localStorage.setItem(FONT_STORAGE_KEY, font);
@@ -214,7 +298,7 @@ export const applyFont = (font: FontKey): void => {
   }
 };
 
-export const initThemeAndFont = (): void => {
+export const initThemeAndFont = async (): Promise<void> => {
   try {
     const savedTheme = localStorage.getItem(
       THEME_STORAGE_KEY,
@@ -225,6 +309,9 @@ export const initThemeAndFont = (): void => {
       document.documentElement.setAttribute("data-theme", savedTheme);
     }
     if (savedFont && savedFont in FONTS) {
+      // Load the saved font dynamically before applying
+      const { loadDynamicFont } = await import("@/hooks/useDynamicFont");
+      await loadDynamicFont(savedFont);
       document.documentElement.setAttribute("data-font", savedFont);
     }
   } catch (error) {
@@ -232,70 +319,71 @@ export const initThemeAndFont = (): void => {
   }
 };
 
-// ============================================
-// THEME COMMAND OUTPUTS
-// ============================================
+// ─────────────────────────────────────────────────────────────────
+// THEME OUTPUT BUILDERS
+// ─────────────────────────────────────────────────────────────────
+
+const THEME_GROUPS: { label: string; keys: ThemeKey[] }[] = [
+  {
+    label: "Catppuccin",
+    keys: [
+      "catppuccin",
+      "catppuccin-latte",
+      "catppuccin-frappe",
+      "catppuccin-mocha",
+    ],
+  },
+  {
+    label: "Popular Dark",
+    keys: [
+      "monokai",
+      "tokyo-night",
+      "dracula",
+      "nord",
+      "gruvbox",
+      "everforest",
+      "rose-pine",
+    ],
+  },
+  {
+    label: "Editor Classics",
+    keys: [
+      "solarized-dark",
+      "oceanic",
+      "cobalt2",
+      "github",
+      "one-dark",
+      "atom-one-dark",
+    ],
+  },
+  {
+    label: "Material",
+    keys: [
+      "material-default",
+      "material-lighter",
+      "material-oceanic",
+      "material-palenight",
+      "material-deep-ocean",
+      "material-high-contrast",
+    ],
+  },
+  {
+    label: "Others",
+    keys: [
+      "ayu-dark",
+      "night-owl",
+      "synthwave",
+      "kanagawa",
+      "horizon",
+      "poimandres",
+      "vesper",
+      "hack-the-box",
+    ],
+  },
+];
+
 export const getThemeListOutput = () => {
   const current = getCurrentTheme();
-
-  const groups: { label: string; keys: ThemeKey[] }[] = [
-    {
-      label: "Catppuccin",
-      keys: [
-        "catppuccin",
-        "catppuccin-latte",
-        "catppuccin-frappe",
-        "catppuccin-mocha",
-      ],
-    },
-    {
-      label: "Popular Dark",
-      keys: [
-        "monokai",
-        "tokyo-night",
-        "dracula",
-        "nord",
-        "gruvbox",
-        "everforest",
-        "rose-pine",
-      ],
-    },
-    {
-      label: "Editor Classics",
-      keys: [
-        "solarized-dark",
-        "oceanic",
-        "cobalt2",
-        "github",
-        "one-dark",
-        "atom-one-dark",
-      ],
-    },
-    {
-      label: "Material",
-      keys: [
-        "material-default",
-        "material-lighter",
-        "material-oceanic",
-        "material-palenight",
-        "material-deep-ocean",
-        "material-high-contrast",
-      ],
-    },
-    {
-      label: "Others",
-      keys: [
-        "ayu-dark",
-        "night-owl",
-        "synthwave",
-        "kanagawa",
-        "horizon",
-        "poimandres",
-        "vesper",
-        "hack-the-box",
-      ],
-    },
-  ];
 
   const renderGroup = ({
     label,
@@ -308,16 +396,14 @@ export const getThemeListOutput = () => {
       .map((key) => {
         const theme = THEMES[key];
         const isActive = key === current;
-        const displayLabel = theme.label.padEnd(28);
         const nameClass = isActive
           ? "text-primary-clr font-bold"
           : "text-tertiary-clr";
         const activeTag = isActive
           ? ` <span class="text-primary-clr font-bold"> ← active</span>`
           : "";
-
         return `<p>
-          <span class="${nameClass}">${displayLabel}</span>
+          <span class="${nameClass}">${theme.label.padEnd(28)}</span>
           <span class="text-text-clr">- ${theme.description}.</span>${activeTag}
         </p>`;
       })
@@ -325,201 +411,142 @@ export const getThemeListOutput = () => {
 
     return `<div class="space-y-t-group">
       <p class="text-secondary-clr font-bold">${label}</p>
-      <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+      <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
       ${rows}
     </div>`;
   };
 
-  return [
-    {
-      id: crypto.randomUUID(),
-      type: "html" as const,
-      content: [
-        `<div class="space-y-t-section py-t-outer">
-
-          ${groups.map(renderGroup).join("\n")}
-
-          <div class="space-y-t-footer">
-            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-            <p>
-              Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">theme &lt;name&gt;</span><span aria-hidden="true">'</span>
-              to switch.
-            </p>
-          </div>
-
-        </div>`,
-      ],
-    },
-  ];
+  return createHtmlOutput(
+    `<div class="space-y-t-section py-t-outer">
+      ${THEME_GROUPS.map(renderGroup).join("\n")}
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">theme &lt;name&gt;</span>${DT.decorators.quote} to switch.</p>
+      </div>
+    </div>`,
+  );
 };
 
 export const getThemeSwitchOutput = (theme: ThemeKey) => {
   applyTheme(theme);
   const { label, description } = THEMES[theme];
 
-  return [
-    {
-      id: crypto.randomUUID(),
-      type: "html" as const,
-      content: [
-        `<div class="space-y-t-section py-t-outer">
-          <div class="space-y-t-group">
-            <p class="text-tertiary-clr font-bold">✓ Theme switched <span aria-hidden="true">→</span> ${label}</p>
-            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-            <p>${description}.</p>
-            <p><span class="text-primary-clr font-bold">✓ Preference saved.</span> All text updated instantly.</p>
-          </div>
-
-          <div class="space-y-t-footer">
-            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-            <p>
-              Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">theme</span><span aria-hidden="true">'</span>
-              to see all themes.
-            </p>
-          </div>
-        </div>`,
-      ],
-    },
-  ];
+  return createHtmlOutput(
+    `<div class="space-y-t-section py-t-outer">
+      <div class="space-y-t-group">
+        <p class="text-tertiary-clr font-bold">${DT.icons.success} Theme switched${DT.decorators.arrow}${label}</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>${description}.</p>
+        <p><span class="text-primary-clr font-bold">${DT.icons.success} Preference saved.</span> All text updated instantly.</p>
+      </div>
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">theme</span>${DT.decorators.quote} to see all themes.</p>
+      </div>
+    </div>`,
+  );
 };
 
-export const getThemeInvalidOutput = (name: string) => [
-  {
-    id: crypto.randomUUID(),
-    type: "html" as const,
-    content: [
-      `<div class="space-y-t-section py-t-outer">
-          <p><span aria-hidden="true" class="text-secondary-clr">⚠</span> Unknown theme: <span class="text-tertiary-clr">"${name}"</span></p>
-          
-          <div class="space-y-t-group">
-            <p>Available theme:</p>
-            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────</p>
-          </div>
+export const getThemeInvalidOutput = (name: string) =>
+  createErrorOutput(
+    `Unknown theme: <span class="text-tertiary-clr">"${name}"</span>`,
+    `Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">theme</span>${DT.decorators.quote} to see all available themes.`,
+  );
 
-          <div class="space-y-t-group">
-          <p class="text-secondary-clr"><span class="text-primary-clr font-bold">Catppuccin:</span>  catppuccin · catppuccin-latte · catppuccin-frappe · catppuccin-mocha</p>
-          <p class="text-secondary-clr"><span class="text-primary-clr font-bold">Dark:</span>   monokai · tokyo-night · dracula · nord · gruvbox · everforest · rose-pine</p>
-          <p class="text-secondary-clr"><span class="text-primary-clr font-bold">Classics:</span>   solarized-dark · oceanic · cobalt2 · github · one-dark · atom-one-dark</p>
-          <p class="text-secondary-clr"><span class="text-primary-clr font-bold">Material:</span>   material-default · material-lighter · material-oceanic · material-palenight · material-deep-ocean · material-high-contrast</p>
-          <p class="text-secondary-clr"><span class="text-primary-clr font-bold">Others:</span>   ayu-dark · night-owl · synthwave · kanagawa · horizon · poimandres · vesper · hack-the-box</p>
-          </div>
+// ─────────────────────────────────────────────────────────────────
+// FONT OUTPUT BUILDERS
+// ─────────────────────────────────────────────────────────────────
 
-        <div class="space-y-t-footer">
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>
-            Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">theme</span><span aria-hidden="true">'</span>
-            to see all available themes.
-          </p>
-        </div>
-      </div>`,
-    ],
-  },
-];
-
-// ============================================
-// FONT COMMAND OUTPUTS
-// ============================================
 export const getFontListOutput = () => {
   const current = getCurrentFont();
 
   const rows = (Object.entries(FONTS) as [FontKey, (typeof FONTS)[FontKey]][])
     .map(([key, font]) => {
       const isActive = key === current;
-      const displayLabel = font.label.padEnd(24);
       const nameClass = isActive
         ? "text-primary-clr font-bold"
         : "text-tertiary-clr";
       const activeTag = isActive
         ? `<span class="text-primary-clr font-bold"> ← active</span>`
         : "";
-
       return `<p>
-        <span class="${nameClass}">${displayLabel}</span>
+        <span class="${nameClass}">${font.label.padEnd(24)}</span>
         <span class="text-text-clr">- ${font.description}.</span>${activeTag}
       </p>`;
     })
     .join("");
 
-  return [
-    {
-      id: crypto.randomUUID(),
-      type: "html" as const,
-      content: [
-        `<div class="space-y-t-section py-t-outer">
-          <div class="space-y-t-group">
-            <p class="text-secondary-clr font-bold">Available Fonts</p>
-            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-            ${rows}
-          </div>
-
-          <div class="space-y-t-footer">
-            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-            <p>
-              Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">typeface &lt;name&gt;</span><span aria-hidden="true">'</span>
-              to switch.
-            </p>
-          </div>
-        </div>`,
-      ],
-    },
-  ];
+  return createHtmlOutput(
+    `<div class="space-y-t-section py-t-outer">
+      <div class="space-y-t-group">
+        <p class="text-secondary-clr font-bold">Available Fonts</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        ${rows}
+      </div>
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">typeface &lt;name&gt;</span>${DT.decorators.quote} to switch.</p>
+      </div>
+    </div>`,
+  );
 };
 
-export const getFontSwitchOutput = (font: FontKey) => {
-  applyFont(font);
+export const getFontSwitchOutput = async (font: FontKey) => {
+  try {
+    await applyFont(font);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    return createErrorOutput(
+      `Failed to load font: <span class="text-tertiary-clr">${FONTS[font].label}</span>`,
+      `${msg} — try another font or check your connection.`,
+    );
+  }
   const { label, description } = FONTS[font];
 
-  return [
-    {
-      id: crypto.randomUUID(),
-      type: "html" as const,
-      content: [
-        `<div class="space-y-t-section py-t-outer">
-          <div class="space-y-t-group">
-            <p class="text-secondary-clr font-bold">✓ Font switched <span aria-hidden="true">→</span> ${label}</p>
-            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-            <p>${description}.</p>
-            <p><span class="text-primary-clr font-bold">✓ Preference saved.</span> All text updated instantly.</p>
-          </div>
-
-          <div class="space-y-t-footer">
-            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-            <p>
-              Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">typeface</span><span aria-hidden="true">'</span>
-              to see all fonts.
-            </p>
-          </div>
-        </div>`,
-      ],
-    },
-  ];
+  return createHtmlOutput(
+    `<div class="space-y-t-section py-t-outer">
+      <div class="space-y-t-group">
+        <p class="text-secondary-clr font-bold">${DT.icons.success} Font switched${DT.decorators.arrow}${label}</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>${description}.</p>
+        <p><span class="text-primary-clr font-bold">${DT.icons.success} Preference saved.</span> All text updated instantly.</p>
+      </div>
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">typeface</span>${DT.decorators.quote} to see all fonts.</p>
+      </div>
+    </div>`,
+  );
 };
 
-export const getFontInvalidOutput = (name: string) => [
-  {
-    id: crypto.randomUUID(),
-    type: "html" as const,
-    content: [
-      `<div class="space-y-t-section py-t-outer">
-          <p><span aria-hidden="true" class="text-secondary-clr">⚠</span> Unknown font: <span class="text-tertiary-clr">"${name}"</span></p>
+export const getFontInvalidOutput = (name: string) =>
+  createErrorOutput(
+    `Unknown font: <span class="text-tertiary-clr">"${name}"</span>`,
+    `Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">typeface</span>${DT.decorators.quote} to see all available fonts.`,
+  );
 
-          <div class="space-y-t-group">
-            <p>Available font:</p>
-            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────</p>
-          </div>
+// ─────────────────────────────────────────────────────────────────
+// MAIN HANDLERS
+// ─────────────────────────────────────────────────────────────────
 
-          <div class="space-y-t-group">
-            <p class="text-secondary-clr font-bold">cascadia · fira · geist · recursive-casual</p>
-          </div>
+export const handleThemeCommand = (args: string[]) => {
+  const parsed = parseArgs(args);
 
-        <div class="space-y-t-footer">
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>
-            Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">typeface</span><span aria-hidden="true">'</span>
-            to see all available fonts.
-          </p>
-        </div>
-      </div>`,
-    ],
-  },
-];
+  if (parsed.flags.help) return THEME_HELP;
+
+  const themeName = parsed.positional.join(" ").trim().toLowerCase();
+  if (!themeName) return getThemeListOutput();
+  if (themeName in THEMES) return getThemeSwitchOutput(themeName as ThemeKey);
+  return getThemeInvalidOutput(themeName);
+};
+
+export const handleTypefaceCommand = async (args: string[]) => {
+  const parsed = parseArgs(args);
+
+  if (parsed.flags.help) return TYPEFACE_HELP;
+
+  const fontName = parsed.positional.join(" ").trim().toLowerCase();
+  if (!fontName) return getFontListOutput();
+  if (fontName in FONTS) return await getFontSwitchOutput(fontName as FontKey);
+  return getFontInvalidOutput(fontName);
+};
