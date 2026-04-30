@@ -1,100 +1,109 @@
+/**
+ * System Commands
+ *
+ * Handles: welcome, neofetch, hostname, whoami, sudo
+ *
+ * @example
+ * ```bash
+ * welcome
+ * neofetch
+ * hostname --help
+ * whoami
+ * sudo
+ * ```
+ */
+
+import { ASCII_NAME, ASCII_NEOFETCH } from "@/constants";
 import packageJson from "../../package.json";
+
+import type { CommandHistoryOutputType } from "@/types";
+import { parseArgs } from "@/utils/argParser";
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
+
 import {
-  getCurrentTheme,
   getCurrentFont,
-  getThemeLabel,
+  getCurrentTheme,
   getFontLabel,
+  getThemeLabel,
 } from "./theme-command";
+import { createHtmlOutput } from "@/utils/output";
+import {
+  WELCOME_HELP,
+  NEOFETCH_HELP,
+  HOSTNAME_HELP,
+  WHOAMI_HELP,
+  SUDO_HELP,
+} from "@/constants/help/system";
+
+// ─────────────────────────────────────────────────────────────────
+// CONSTANTS
+// ─────────────────────────────────────────────────────────────────
 
 const packages = Object.keys(packageJson.dependencies);
 const packagesDev = Object.keys(packageJson.devDependencies);
+
+// ─────────────────────────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────────────────────────
 
 const getResolution = (): string => {
   if (typeof window === "undefined") return "N/A";
   return `${window.screen.availWidth}x${window.screen.availHeight}`;
 };
 
-const ASCII_NAME = `
-░██████╗░█████╗░██╗░░░██╗██╗░░░░░███████╗██╗░░░██╗███╗░░░███╗░█████╗░███╗░░██╗███████╗  ░██████╗██╗░░░██╗
-██╔════╝██╔══██╗██║░░░██║██║░░░░░██╔════╝╚██╗░██╔╝████╗░████║██╔══██╗████╗░██║██╔════╝  ██╔════╝╚██╗░██╔╝
-╚█████╗░██║░░██║██║░░░██║██║░░░░░█████╗░░░╚████╔╝░██╔████╔██║███████║██╔██╗██║█████╗░░  ╚█████╗░░╚████╔╝░
-░╚═══██╗██║░░██║██║░░░██║██║░░░░░██╔══╝░░░░╚██╔╝░░██║╚██╔╝██║██╔══██║██║╚████║██╔══╝░░  ░╚═══██╗░░╚██╔╝░░
-██████╔╝╚█████╔╝╚██████╔╝███████╗███████╗░░░██║░░░██║░╚═╝░██║██║░░██║██║░╚███║███████╗  ██████╔╝░░░██║░░░
-╚═════╝░░╚════╝░░╚═════╝░╚══════╝╚══════╝░░░╚═╝░░░╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚══╝╚══════╝  ╚═════╝░░░░╚═╝░░░
-`.trim();
+// ─────────────────────────────────────────────────────────────────
+// OUTPUT BUILDERS
+// ─────────────────────────────────────────────────────────────────
 
-const NEOFETCH_ASCII = `                    .
-                   .:.
-                  .:::.
-                 .:::::.
-             ***.:::::::.***
-        *******.:::::::::.*******
-      ********.:::::::::::.********
-     ********.:::::::::::::.********
-     *******.::::::'***\`::::.*******
-     ******.::::'*********\`::.*****
-      ****.:::'*************\`:.****
-        *.::'*****************\`.*
-        .:'  ***************    .
-       .`;
+function buildWelcomeOutput(): CommandHistoryOutputType {
+  return createHtmlOutput(
+    `<div class="space-y-t-section py-t-outer">
 
-export const getWelcomeCommandOutput = () => [
-  {
-    id: crypto.randomUUID(),
-    type: "html" as const,
-    content: [
-      `<div class="space-y-t-section py-t-outer">
+      <pre class="text-primary-clr leading-snug select-none" aria-hidden="true">${ASCII_NAME}</pre>
 
-        <pre class="text-primary-clr leading-snug select-none" aria-hidden="true">${ASCII_NAME}</pre>
+      <div class="space-y-t-group">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.long}</p>
+        <p class="font-bold">  Welcome to my terminal portfolio</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.long}</p>
+      </div>
 
-        <div class="space-y-t-group">
-          <p class="text-text-clr opacity-sep" aria-hidden="true">──────────────────────────────────────────────────────</p>
-          <p class="font-bold">  Welcome to my terminal portfolio</p>
-          <p class="text-text-clr opacity-sep" aria-hidden="true">──────────────────────────────────────────────────────</p>
-        </div>
+      <div class="space-y-t-group">
+        <p>
+          Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">about</span>${DT.decorators.quote}
+          to learn more about me.
+        </p>
+        <p>
+          Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">help</span>${DT.decorators.quote}
+          to see all available commands.
+        </p>
+      </div>
 
-        <div class="space-y-t-group">
-          <p>
-            Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">about</span><span aria-hidden="true">'</span>
-            to learn more about me.
-          </p>
-          <p>
-            Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">help</span><span aria-hidden="true">'</span>
-            to see all available commands.
-          </p>
-        </div>
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.long}</p>
+        <p>
+          <span aria-hidden="true" class="text-secondary-clr">#</span>
+          This terminal runs best on a real keyboard.
+        </p>
+        <p>
+          <span aria-hidden="true" class="text-secondary-clr">#</span>
+          Mobile works, but desktop is home.
+          <span class="text-primary-clr shrink-0 text-fs-subtitle">⌨</span>
+        </p>
+      </div>
 
-        <div class="space-y-t-footer">
-          <p class="text-text-clr opacity-sep" aria-hidden="true">──────────────────────────────────────────────────────</p>
-          <p>
-            <span aria-hidden="true" class="text-secondary-clr">#</span>
-            This terminal runs best on a real keyboard.
-          </p>
-          <p>
-            <span aria-hidden="true" class="text-secondary-clr">#</span>
-            Mobile works, but desktop is home.
-            <span class="text-primary-clr shrink-0 text-fs-subtitle">⌨</span>
-          </p>
-        </div>
+    </div>`,
+  );
+}
 
-      </div>`,
-    ],
-  },
-];
-
-export const getNeofetchCommandOutput = () => {
+function buildNeofetchOutput(): CommandHistoryOutputType {
   const themeLabel = getThemeLabel(getCurrentTheme());
   const fontLabel = getFontLabel(getCurrentFont());
 
-  return [
-    {
-      id: crypto.randomUUID(),
-      type: "html" as const,
-      content: [
-        `<div class="py-t-outer">
+  return createHtmlOutput(
+    `<div class="py-t-outer">
   <div class="flex gap-4 md:gap-20 items-start flex-nowrap">
 
-    <pre class="text-primary-clr shrink-0 m-0 leading-snug select-none" aria-hidden="true">${NEOFETCH_ASCII}</pre>
+    <pre class="text-primary-clr shrink-0 m-0 leading-snug select-none" aria-hidden="true">${ASCII_NEOFETCH}</pre>
 
     <div class="space-y-t-section">
 
@@ -102,7 +111,7 @@ export const getNeofetchCommandOutput = () => {
         <p>
           <span class="text-primary-clr font-bold">guest</span><span aria-hidden="true" class="text-secondary-clr">@</span><span class="text-tertiary-clr font-bold">souleymane-sy-portfolio</span>
         </p>
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
       </div>
 
       <div class="space-y-t-group">
@@ -120,21 +129,21 @@ export const getNeofetchCommandOutput = () => {
 
       <div class="space-y-t-group">
         <p class="text-tertiary-clr font-bold">Stack</p>
-        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  Next.js · React</p>
-        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  TypeScript · Tailwind CSS v4</p>
-        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  GSAP · Framer Motion</p>
-        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  Axios · Date-fns · DOMPurify</p>
-        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  Git · GitHub · Bun · Vercel</p>
+        <p>${DT.decorators.bullet}  Next.js · React</p>
+        <p>${DT.decorators.bullet}  TypeScript · Tailwind CSS v4</p>
+        <p>${DT.decorators.bullet}  GSAP · Framer Motion</p>
+        <p>${DT.decorators.bullet}  Axios · Date-fns · DOMPurify</p>
+        <p>${DT.decorators.bullet}  Git · GitHub · Bun · Vercel</p>
       </div>
 
       <div class="space-y-t-group">
         <p class="text-tertiary-clr font-bold">Journey</p>
-        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  Self-taught since 2022</p>
-        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  89+ GitHub repos</p>
-        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  50+ Frontend Mentor challenges</p>
-        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  🏆 Enzo Ustariz 2024 — Top 3</p>
-        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  DevelopersHub Corporation — Certified</p>
-        <p><span aria-hidden="true" class="text-tertiary-clr"> •</span>  Coyah, Guinea-Conakry 🇬🇳</p>
+        <p>${DT.decorators.bullet}  Self-taught since 2022</p>
+        <p>${DT.decorators.bullet}  89+ GitHub repos</p>
+        <p>${DT.decorators.bullet}  50+ Frontend Mentor challenges</p>
+        <p>${DT.decorators.bullet}  🏆 Enzo Ustariz 2024 — Top 3</p>
+        <p>${DT.decorators.bullet}  DevelopersHub Corporation — Certified</p>
+        <p>${DT.decorators.bullet}  Coyah, Guinea-Conakry 🇬🇳</p>
       </div>
 
       <div class="space-y-0.5" aria-hidden="true">
@@ -155,80 +164,103 @@ export const getNeofetchCommandOutput = () => {
     </div>
   </div>
 </div>`,
-      ],
-    },
-  ];
+  );
+}
+
+function buildHostnameOutput(): CommandHistoryOutputType {
+  return createHtmlOutput(
+    `<div class="space-y-t-section py-t-outer">
+      <div class="space-y-t-group">
+        <p class="text-secondary-clr font-bold">Hostname</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p><span class="text-secondary-clr">Hostname  </span>  souleymane-sy-portfolio</p>
+        <p><span class="text-secondary-clr">Owner     </span>  Souleymane Sy</p>
+        <p><span class="text-secondary-clr">Location  </span>  Coyah, Guinea-Conakry 🇬🇳</p>
+        <p><span class="text-secondary-clr">Uptime    </span>  Online since 2025, no interruptions</p>
+      </div>
+    </div>`,
+  );
+}
+
+function buildWhoamiOutput(): CommandHistoryOutputType {
+  return createHtmlOutput(
+    `<div class="space-y-t-section py-t-outer">
+
+      <div class="space-y-t-group">
+        <p>&gt; Identifying user...</p>
+        <p>root@system</p>
+        <p>...Just kidding! 😄</p>
+        <p>You're exploring the terminal portfolio of <span class="text-secondary-clr font-bold">Souleymane Sy</span> —</p>
+        <p>self-taught frontend web developer since 2022.</p>
+        <p>Based in Coyah, Guinea-Conakry. React / Next.js / TypeScript specialist.</p>
+        <p>89+ repos on GitHub. 50+ Frontend Mentor challenges.</p>
+        <p><span class="text-tertiary-clr font-bold">🏆 3rd place</span> — Enzo Ustariz Web Contest 2024.</p>
+        <p><span class="text-tertiary-clr font-bold">⭐ Certified with exceptional distinction</span> — DevelopersHub Corporation.</p>
+      </div>
+
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>
+          Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">about</span>${DT.decorators.quote}
+          for my full story.
+        </p>
+        <p>
+          Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">projects</span>${DT.decorators.quote}
+          to see what I've built.
+        </p>
+      </div>
+
+    </div>`,
+  );
+}
+
+function buildSudoOutput(): CommandHistoryOutputType {
+  return createHtmlOutput(
+    `<div class="space-y-t-section py-t-outer">
+      <div class="space-y-t-group">
+        <p>[sudo] Password for guest:</p>
+        <p class="text-secondary-clr">Access Denied.</p>
+        <p>Did you really think that would work? 😄</p>
+        <p>The superpowers here are CSS and TypeScript.</p>
+        <p>You don't need root access to build great things.</p>
+      </div>
+    </div>`,
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────
+// HANDLERS
+// ─────────────────────────────────────────────────────────────────
+
+export const handleWelcomeCommand = (
+  args: string[],
+): CommandHistoryOutputType => {
+  const { flags } = parseArgs(args);
+  return flags.help ? WELCOME_HELP : buildWelcomeOutput();
 };
 
-export const getHostNameCommandOutput = () => [
-  {
-    id: crypto.randomUUID(),
-    type: "html" as const,
-    content: [
-      `<div class="space-y-t-section py-t-outer">
-        <div class="space-y-t-group">
-          <p class="text-secondary-clr font-bold">Hostname</p>
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p><span class="text-secondary-clr">Hostname  </span>  souleymane-sy-portfolio</p>
-          <p><span class="text-secondary-clr">Owner     </span>  Souleymane Sy</p>
-          <p><span class="text-secondary-clr">Location  </span>  Coyah, Guinea-Conakry 🇬🇳</p>
-          <p><span class="text-secondary-clr">Uptime    </span>  Online since 2025, no interruptions</p>
-        </div>
-      </div>`,
-    ],
-  },
-];
+export const handleNeofetchCommand = (
+  args: string[],
+): CommandHistoryOutputType => {
+  const { flags } = parseArgs(args);
+  return flags.help ? NEOFETCH_HELP : buildNeofetchOutput();
+};
 
-export const getWhoAmICommandOutput = () => [
-  {
-    id: crypto.randomUUID(),
-    type: "html" as const,
-    content: [
-      `<div class="space-y-t-section py-t-outer">
+export const handleHostnameCommand = (
+  args: string[],
+): CommandHistoryOutputType => {
+  const { flags } = parseArgs(args);
+  return flags.help ? HOSTNAME_HELP : buildHostnameOutput();
+};
 
-        <div class="space-y-t-group">
-          <p>&gt; Identifying user...</p>
-          <p>root@system</p>
-          <p>...Just kidding! 😄</p>
-          <p>You're exploring the terminal portfolio of <span class="text-secondary-clr font-bold">Souleymane Sy</span> —</p>
-          <p>self-taught frontend web developer since 2022.</p>
-          <p>Based in Coyah, Guinea-Conakry. React / Next.js / TypeScript specialist.</p>
-          <p>89+ repos on GitHub. 50+ Frontend Mentor challenges.</p>
-          <p><span class="text-tertiary-clr font-bold">🏆 3rd place</span> — Enzo Ustariz Web Contest 2024.</p>
-          <p><span class="text-tertiary-clr font-bold">⭐ Certified with exceptional distinction</span> — DevelopersHub Corporation.</p>
-        </div>
+export const handleWhoamiCommand = (
+  args: string[],
+): CommandHistoryOutputType => {
+  const { flags } = parseArgs(args);
+  return flags.help ? WHOAMI_HELP : buildWhoamiOutput();
+};
 
-        <div class="space-y-t-footer">
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>
-            Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">about</span><span aria-hidden="true">'</span>
-            for my full story.
-          </p>
-          <p>
-            Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">projects</span><span aria-hidden="true">'</span>
-            to see what I've built.
-          </p>
-        </div>
-
-      </div>`,
-    ],
-  },
-];
-
-export const getSudoCommandOutput = () => [
-  {
-    id: crypto.randomUUID(),
-    type: "html" as const,
-    content: [
-      `<div class="space-y-t-section py-t-outer">
-        <div class="space-y-t-group">
-          <p>[sudo] Password for guest:</p>
-          <p class="text-secondary-clr">Access Denied.</p>
-          <p>Did you really think that would work? 😄</p>
-          <p>The superpowers here are CSS and TypeScript.</p>
-          <p>You don't need root access to build great things.</p>
-        </div>
-      </div>`,
-    ],
-  },
-];
+export const handleSudoCommand = (args: string[]): CommandHistoryOutputType => {
+  const { flags } = parseArgs(args);
+  return flags.help ? SUDO_HELP : buildSudoOutput();
+};
