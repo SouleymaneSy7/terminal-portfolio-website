@@ -12,7 +12,6 @@
 
   /* ── Fonts ── */
   --font-*: initial;
-  --font-cascadia-code: var(--font-cascadia-code);
   /* All other fonts are loaded dynamically via useDynamicFont hook */
 
   /* ── Font weights ── */
