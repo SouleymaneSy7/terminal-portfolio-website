@@ -63,13 +63,19 @@
     width: 0.0625rem;
 
     border: 0;
-    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
 
     margin: -0.0625rem;
     padding: 0;
 
     overflow: hidden;
   }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-tertiary-clr) var(--color-foreground-clr);
 }
 
 *::-webkit-scrollbar {
