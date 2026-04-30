@@ -1,5 +1,7 @@
 /**
- * Calculate exact age from a birth date using date-fns.
+ * Age Calculator Command
+ *
+ * Calculates exact age from a birth date using date-fns.
  *
  * Supported date formats:
  *   yyyy-MM-dd   → 1990-01-15  (ISO — preferred)
@@ -8,11 +10,18 @@
  *   dd-MM-yyyy   → 15-01-1990
  *   yyyy/MM/dd   → 1990/01/15
  *
- * Output: age in years/months/days, day of week born, next birthday countdown.
+ * @example
+ * ```bash
+ * age 1990-01-15
+ * age --help
+ * ```
  */
 
-import { createHtmlOutput } from "@/constants";
-import { ParsedDateType } from "@/types";
+import { AGE_HELP } from "@/constants/help/utils";
+import type { CommandHistoryOutputType, ParsedDateType } from "@/types";
+import { parseArgs } from "@/utils/argParser";
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
+import { createErrorOutput, createHtmlOutput } from "@/utils/output";
 import {
   differenceInDays,
   differenceInMonths,
@@ -41,7 +50,6 @@ function tryParse(input: string): ParsedDateType | null {
 
   for (const { fmt, label } of formats) {
     const parsed = parse(input.trim(), fmt, ref);
-
     if (isValid(parsed) && !isFuture(parsed)) {
       return { date: parsed, originalFormat: label };
     }
@@ -65,14 +73,12 @@ function calcAge(birthDate: Date) {
 
   const years = differenceInYears(now, birthDate);
 
-  // Last birthday this year (or previous year if not yet passed)
   const lastBirthday = (() => {
     const candidate = new Date(
       now.getFullYear(),
       birthDate.getMonth(),
       birthDate.getDate(),
     );
-
     return candidate > now
       ? new Date(
           now.getFullYear() - 1,
@@ -87,14 +93,12 @@ function calcAge(birthDate: Date) {
   afterMonths.setMonth(afterMonths.getMonth() + months);
   const days = differenceInDays(now, afterMonths);
 
-  // Next birthday
   const nextBirthday = (() => {
     const candidate = new Date(
       now.getFullYear(),
       birthDate.getMonth(),
       birthDate.getDate(),
     );
-
     return candidate <= now
       ? new Date(
           now.getFullYear() + 1,
@@ -105,84 +109,28 @@ function calcAge(birthDate: Date) {
   })();
 
   const daysUntilBirthday = differenceInDays(nextBirthday, now);
-  const isBirthdayToday = daysUntilBirthday === 0;
 
-  return {
-    years,
-    months,
-    days,
-    daysUntilBirthday,
-    isBirthdayToday,
-    nextBirthday,
-  };
+  return { years, months, days, daysUntilBirthday, nextBirthday };
 }
 
 // ─────────────────────────────────────────────────────────────────
-// MAIN HANDLER
+// OUTPUT BUILDERS
 // ─────────────────────────────────────────────────────────────────
 
-const showAgeHelp = () =>
-  createHtmlOutput(
-    `<div class="space-y-t-section py-t-outer">
-      <div class="space-y-t-group">
-        <p class="text-secondary-clr font-bold">age — Command Reference</p>
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-        <p>Calculate your exact age from a birth date.</p>
-        <p>Usage: <span class="text-tertiary-clr font-bold">age &lt;date&gt;</span></p>
-      </div>
-      <div class="space-y-t-group">
-        <p class="text-secondary-clr font-bold">Supported Formats</p>
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-        <p><span class="text-tertiary-clr">1990-01-15  </span>  ISO (preferred)</p>
-        <p><span class="text-tertiary-clr">15/01/1990  </span>  European</p>
-        <p><span class="text-tertiary-clr">01/15/1990  </span>  American</p>
-        <p><span class="text-tertiary-clr">15-01-1990  </span>  Dash-separated</p>
-      </div>
-    </div>`,
-  );
-
-export const handleAgeCommand = (args: string[]) => {
-  const input = args.join(" ").trim();
-
-  if (!input || input === "help") return showAgeHelp();
-
-  const parsed = tryParse(input);
-
-  if (!parsed) {
-    return createHtmlOutput(
-      `<div class="space-y-t-section py-t-outer">
-        <div class="space-y-t-group">
-          <p><span aria-hidden="true" class="text-secondary-clr">⚠</span> Could not parse date: <span class="text-tertiary-clr">"${input}"</span></p>
-          <p>Date must be in the past and in a recognised format.</p>
-        </div>
-        <div class="space-y-t-group">
-          <p class="text-secondary-clr font-bold">Supported formats</p>
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p><span class="text-tertiary-clr">1990-01-15</span>  ·  <span class="text-tertiary-clr">15/01/1990</span>  ·  <span class="text-tertiary-clr">01/15/1990</span>  ·  <span class="text-tertiary-clr">15-01-1990</span></p>
-        </div>
-      </div>`,
-    );
-  }
-
-  const { date } = parsed;
-  const {
-    years,
-    months,
-    days,
-    daysUntilBirthday,
-    isBirthdayToday,
-    nextBirthday,
-  } = calcAge(date);
+function createAgeOutput(date: Date): CommandHistoryOutputType {
+  const { years, months, days, daysUntilBirthday, nextBirthday } =
+    calcAge(date);
 
   const formattedBirth = format(date, "EEEE, MMMM dd, yyyy");
   const dayOfWeek = format(date, "EEEE");
   const nextBdayStr = format(nextBirthday, "MMMM dd, yyyy");
 
-  const birthdayNote = isBirthdayToday
-    ? `<p class="text-tertiary-clr font-bold">🎂 Happy Birthday! 🎉</p>`
-    : daysUntilBirthday === 1
-      ? `<p><span class="text-secondary-clr">Next birthday</span> - Tomorrow — <span class="text-tertiary-clr">${nextBdayStr}</span></p>`
-      : `<p><span class="text-secondary-clr">Next birthday</span> - ${nextBdayStr} <span class="text-text-clr opacity-sep">(${daysUntilBirthday} days)</span></p>`;
+  const birthdayNote =
+    daysUntilBirthday === 0
+      ? `<p class="text-tertiary-clr font-bold">🎂 Happy Birthday! 🎉</p>`
+      : daysUntilBirthday === 1
+        ? `<p><span class="text-secondary-clr">Next birthday</span>${DT.decorators.arrow}Tomorrow — <span class="text-tertiary-clr">${nextBdayStr}</span></p>`
+        : `<p><span class="text-secondary-clr">Next birthday</span>${DT.decorators.arrow}<span class="text-tertiary-clr">${nextBdayStr}</span> <span class="text-text-clr opacity-sep">(${daysUntilBirthday} days)</span></p>`;
 
   const detailParts = [
     months > 0 ? `${months} month${months > 1 ? "s" : ""}` : "",
@@ -199,22 +147,54 @@ export const handleAgeCommand = (args: string[]) => {
     `<div class="space-y-t-section py-t-outer">
       <div class="space-y-t-group">
         <p class="text-secondary-clr font-bold">Age Calculator</p>
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-        <p><span class="text-secondary-clr">Born on</span> - ${formattedBirth}</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p><span class="text-secondary-clr">Born on</span>${DT.decorators.arrow}${formattedBirth}</p>
       </div>
+
       <div class="space-y-t-group">
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p>
-          <span class="text-tertiary-clr font-bold" style="font-size: var(--text-fs-title);">${years}</span>
+          <span class="text-tertiary-clr font-bold text-fs-title">${years}</span>
           <span class="text-secondary-clr font-bold"> years old</span>
         </p>
         ${detailLine}
       </div>
+
       <div class="space-y-t-group">
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-        <p><span class="text-secondary-clr">Day of week</span> - You were born on a <span class="text-tertiary-clr">${dayOfWeek}</span></p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p><span class="text-secondary-clr">Day of week</span>${DT.decorators.arrow}You were born on a <span class="text-tertiary-clr font-bold">${dayOfWeek}</span></p>
         ${birthdayNote}
       </div>
     </div>`,
   );
+}
+
+// ─────────────────────────────────────────────────────────────────
+// MAIN HANDLER
+// ─────────────────────────────────────────────────────────────────
+
+export const handleAgeCommand = (args: string[]): CommandHistoryOutputType => {
+  const parsed = parseArgs(args);
+
+  if (parsed.flags.help) return AGE_HELP;
+
+  const input = parsed.positional.join(" ").trim();
+
+  if (!input) {
+    return createErrorOutput(
+      'Missing required argument <span class="text-tertiary-clr">&lt;date&gt;</span>.',
+      `Type <span class="text-tertiary-clr font-bold">${DT.decorators.quote}age --help${DT.decorators.quote}</span> for supported date formats.`,
+    );
+  }
+
+  const result = tryParse(input);
+
+  if (!result) {
+    return createErrorOutput(
+      `Could not parse date: <span class="text-tertiary-clr">"${input}"</span>`,
+      `Supported: <span class="text-tertiary-clr">1990-01-15</span>  ${DT.decorators.bullet}  <span class="text-tertiary-clr">15/01/1990</span>  ${DT.decorators.bullet}  <span class="text-tertiary-clr">01/15/1990</span>  ${DT.decorators.bullet}  <span class="text-tertiary-clr">15-01-1990</span>`,
+    );
+  }
+
+  return createAgeOutput(result.date);
 };
