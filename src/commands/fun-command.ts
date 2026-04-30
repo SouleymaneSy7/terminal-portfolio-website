@@ -1,133 +1,181 @@
-export const getExitCommandOutput = () => [
-  {
-    id: crypto.randomUUID(),
-    type: "html" as const,
-    content: [
-      `<div class="space-y-t-section py-t-outer">
+/**
+ * Fun Commands - Exit and Rock-Paper-Scissors game
+ *
+ * @description
+ * Collection of fun commands including exit message and RPS game.
+ *
+ * @example
+ * ```bash
+ * exit
+ * rps rock
+ * rps --help
+ * ```
+ */
 
-        <div class="space-y-t-group">
-          <p class="text-secondary-clr font-bold">Goodbye 👋</p>
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>Thanks for visiting. This terminal is my story —</p>
-          <p>built line by line, from Coyah, Guinea-Conakry,</p>
-          <p>without a school, without a bootcamp, without shortcuts.</p>
-          <p>Just code, persistence, and the refusal to quit.</p>
-        </div>
+import { EXIT_HELP, RPS_HELP } from "@/constants/help/fun";
+import type { CommandHistoryOutputType } from "@/types";
+import { parseArgs } from "@/utils/argParser";
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
+import { createErrorOutput, createHtmlOutput } from "@/utils/output";
 
-        <div class="space-y-t-group">
-          <p>If something here caught your eye — reach out.</p>
-          <p>An opportunity, a collaboration, a project, or just a conversation —</p>
-          <p>
-            <span aria-hidden="true" class="text-tertiary-clr">→</span>
-            <a href="mailto:souleymanesycodes@gmail.com" target="_blank" rel="noopener noreferrer">
-              souleymanesycodes@gmail.com
-            </a>
-          </p>
-        </div>
+// ─────────────────────────────────────────────────────────────────
+// TYPES & CONSTANTS
+// ─────────────────────────────────────────────────────────────────
 
-        <div class="space-y-t-footer">
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>Close this tab to exit. See you around. 🌍</p>
-        </div>
+const RPS_CHOICES = ["rock", "paper", "scissors"] as const;
+type RpsChoice = (typeof RPS_CHOICES)[number];
 
-      </div>`,
-    ],
-  },
-];
+// ─────────────────────────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────────────────────────
 
-export const rspCommand = (userInput: string) => {
-  const choices = ["rock", "paper", "scissors"] as const;
-  const userChoice = userInput.toLocaleLowerCase().trim().split(" ")[0];
-
-  if (!choices.includes(userChoice as (typeof choices)[number])) {
-    return [
-      {
-        id: crypto.randomUUID(),
-        type: "html" as const,
-        content: [
-          `<div class="space-y-t-section py-t-outer">
-            <div class="space-y-t-group">
-              <p><span aria-hidden="true" class="text-secondary-clr">⚠</span> Invalid choice.</p>
-              <p>Pick <span class="text-tertiary-clr">rock</span>, <span class="text-tertiary-clr">paper</span> or <span class="text-tertiary-clr">scissors</span>.</p>
-            </div>
-
-            <div class="space-y-t-footer">
-              <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-              <p>
-                <span class="text-secondary-clr font-bold">Example:</span> Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">rps rock</span><span aria-hidden="true">'</span>
-              </p>
-            </div>
-          </div>`,
-        ],
-      },
-    ];
-  }
-
-  const computerChoice = choices[Math.floor(Math.random() * choices.length)];
-
-  let result: string;
-  let resultColor: string;
-
+function determineWinner(
+  userChoice: RpsChoice,
+  computerChoice: RpsChoice,
+): {
+  result: string;
+  color: string;
+} {
   if (userChoice === computerChoice) {
-    result = "It's a tie! We think alike. 🤝";
-    resultColor = "text-primary-clr";
-  } else if (
-    (userChoice === "rock" && computerChoice === "scissors") ||
-    (userChoice === "paper" && computerChoice === "rock") ||
-    (userChoice === "scissors" && computerChoice === "paper")
-  ) {
-    result = "You win! Well played, champion! 🏆";
-    resultColor = "text-tertiary-clr";
-  } else {
-    result = "I win! The terminal is merciless. 😄";
-    resultColor = "text-secondary-clr";
+    return {
+      result: "It's a tie! We think alike. 🤝",
+      color: "text-primary-clr",
+    };
   }
 
-  return [
-    {
-      id: crypto.randomUUID(),
-      type: "html" as const,
-      content: [
-        `<div class="space-y-t-section py-t-outer">
+  const winConditions: Record<RpsChoice, RpsChoice> = {
+    rock: "scissors",
+    paper: "rock",
+    scissors: "paper",
+  };
 
-          <div class="space-y-t-group">
-            <p><span class="text-secondary-clr">You  →</span>  ${userChoice}</p>
-            <p><span class="text-secondary-clr">Me   →</span>  ${computerChoice}</p>
-            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-            <p class="${resultColor} font-bold">${result}</p>
-          </div>
+  if (winConditions[userChoice] === computerChoice) {
+    return {
+      result: "You win! Well played, champion! 🏆",
+      color: "text-tertiary-clr",
+    };
+  }
 
-          <div class="space-y-t-footer">
-            <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-            <p>
-              Play again? Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">rps</span><span aria-hidden="true">'</span>
-              followed by your choice.
-            </p>
-          </div>
+  return {
+    result: "I win! The terminal is merciless. 😄",
+    color: "text-secondary-clr",
+  };
+}
 
-        </div>`,
-      ],
-    },
-  ];
+// ─────────────────────────────────────────────────────────────────
+// OUTPUT BUILDERS
+// ─────────────────────────────────────────────────────────────────
+
+function createExitOutput(): CommandHistoryOutputType {
+  return createHtmlOutput(
+    `<div class="space-y-t-section py-t-outer">
+
+      <div class="space-y-t-group">
+        <p class="text-secondary-clr font-bold">Goodbye 👋</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>Thanks for visiting. This terminal is my story —</p>
+        <p>built line by line, from Coyah, Guinea-Conakry,</p>
+        <p>without a school, without a bootcamp, without shortcuts.</p>
+        <p>Just code, persistence, and the refusal to quit.</p>
+      </div>
+
+      <div class="space-y-t-group">
+        <p>If something here caught your eye — reach out.</p>
+        <p>An opportunity, a collaboration, a project, or just a conversation —</p>
+        <p>
+          ${DT.decorators.arrow}
+          <a href="mailto:souleymanesycodes@gmail.com" target="_blank" rel="noopener noreferrer">
+            souleymanesycodes@gmail.com
+          </a>
+        </p>
+      </div>
+
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>Close this tab to exit. See you around. 🌍</p>
+      </div>
+
+    </div>`,
+  );
+}
+
+function createRpsResultOutput(
+  userChoice: RpsChoice,
+  computerChoice: RpsChoice,
+): CommandHistoryOutputType {
+  const { result, color } = determineWinner(userChoice, computerChoice);
+
+  return createHtmlOutput(
+    `<div class="space-y-t-section py-t-outer">
+
+      <div class="space-y-t-group">
+        <p><span class="text-secondary-clr">You  ${DT.decorators.arrow}</span> ${userChoice}</p>
+        <p><span class="text-secondary-clr">Me   ${DT.decorators.arrow}</span> ${computerChoice}</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p class="${color} font-bold">${result}</p>
+      </div>
+
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>
+          Play again? Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">rps</span>${DT.decorators.quote}
+          followed by your choice.
+        </p>
+      </div>
+
+    </div>`,
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────
+// MAIN HANDLERS (exported)
+// ─────────────────────────────────────────────────────────────────
+
+/**
+ * Handle exit command execution
+ *
+ * @param args - Command arguments
+ * @returns Command output blocks
+ */
+export const handleExitCommand = (args: string[]): CommandHistoryOutputType => {
+  const { flags } = parseArgs(args);
+
+  if (flags.help) return EXIT_HELP;
+
+  return createExitOutput();
 };
 
-export const rpsCommandHelp = () => [
-  {
-    id: crypto.randomUUID(),
-    type: "html" as const,
-    content: [
-      `<div class="space-y-t-section py-t-outer">
-                <div class="space-y-t-group">
-                  <p>Pick <span class="text-tertiary-clr">rock</span>, <span class="text-tertiary-clr">paper</span> or <span class="text-tertiary-clr">scissors</span> to battle it out!</p>
-                </div>
-                <div class="space-y-t-footer">
-                  <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-                  <p>
-                    <span class="text-secondary-clr font-bold">Usage:</span> rps &lt;rock|paper|scissors&gt;
-                    — or type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">rps --help</span><span aria-hidden="true">'</span>
-                  </p>
-                </div>
-              </div>`,
-    ],
-  },
-];
+/**
+ * Handle rock-paper-scissors command execution
+ *
+ * @param args - Command arguments
+ * @returns Command output blocks
+ */
+export const handleRpsCommand = (args: string[]): CommandHistoryOutputType => {
+  const parsed = parseArgs(args);
+
+  if (parsed.flags.help) {
+    return RPS_HELP;
+  }
+
+  if (parsed.positional.length === 0) {
+    return createErrorOutput(
+      "Invalid choice.",
+      `Pick <span class="text-tertiary-clr">rock</span>, <span class="text-tertiary-clr">paper</span> or <span class="text-tertiary-clr">scissors</span>. Example: ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">rps rock</span>${DT.decorators.quote}`,
+    );
+  }
+
+  const userChoice = parsed.positional[0].toLowerCase().trim();
+
+  if (!RPS_CHOICES.includes(userChoice as RpsChoice)) {
+    return createErrorOutput(
+      "Invalid choice.",
+      `Pick <span class="text-tertiary-clr">rock</span>, <span class="text-tertiary-clr">paper</span> or <span class="text-tertiary-clr">scissors</span>. Example: ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">rps rock</span>${DT.decorators.quote}`,
+    );
+  }
+
+  const computerChoice =
+    RPS_CHOICES[Math.floor(Math.random() * RPS_CHOICES.length)];
+
+  return createRpsResultOutput(userChoice as RpsChoice, computerChoice);
+};
