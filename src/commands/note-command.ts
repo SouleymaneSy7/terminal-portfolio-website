@@ -1,14 +1,17 @@
 /**
  * In-terminal note management with full CRUD.
  * Data persists in localStorage under "terminal:notes".
- *
  */
 
-import { createHtmlOutput } from "@/constants";
+import { NOTE_HELP } from "@/constants/help/utils";
+import { STORAGE_KEYS } from "@/constants/storageKeys";
 import { NoteType } from "@/types";
+import { parseArgs } from "@/utils/argParser";
 import { storageGet, storageRemove, storageSet } from "@/utils/commandStorage";
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
+import { createErrorOutput, createHtmlOutput } from "@/utils/output";
 
-const NOTES_KEY = "terminal:notes";
+const NOTES_KEY = STORAGE_KEYS.NOTES;
 
 const getNotes = (): NoteType[] => storageGet<NoteType[]>(NOTES_KEY, []);
 const saveNotes = (notes: NoteType[]): boolean => storageSet(NOTES_KEY, notes);
@@ -16,7 +19,7 @@ const makeShortId = (uuid: string): string =>
   uuid.replace(/-/g, "").slice(0, 6);
 
 // ─────────────────────────────────────────────────────────────────
-// HANDLERS
+// SUBCOMMAND HANDLERS
 // ─────────────────────────────────────────────────────────────────
 
 const listNotes = () => {
@@ -27,12 +30,12 @@ const listNotes = () => {
       `<div class="space-y-t-section py-t-outer">
         <div class="space-y-t-group">
           <p class="text-secondary-clr font-bold">Notes</p>
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+          <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
           <p>No notes yet.</p>
         </div>
         <div class="space-y-t-footer">
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">note add &lt;text&gt;</span><span aria-hidden="true">'</span> to create one.</p>
+          <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+          <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">note add &lt;text&gt;</span>${DT.decorators.quote} to create one.</p>
         </div>
       </div>`,
     );
@@ -53,11 +56,11 @@ const listNotes = () => {
     `<div class="space-y-t-section py-t-outer">
       <div class="space-y-t-group">
         <p class="text-secondary-clr font-bold">Notes <span class="text-text-clr opacity-sep">(${notes.length})</span></p>
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         ${rows}
       </div>
       <div class="space-y-t-footer">
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p>Use <span class="text-tertiary-clr font-bold">note rm &lt;id&gt;</span> or <span class="text-tertiary-clr font-bold">note edit &lt;id&gt; &lt;text&gt;</span> to manage.</p>
       </div>
     </div>`,
@@ -66,14 +69,9 @@ const listNotes = () => {
 
 const addNote = (text: string) => {
   if (!text.trim()) {
-    return createHtmlOutput(
-      `<div class="space-y-t-section py-t-outer">
-        <p><span aria-hidden="true" class="text-secondary-clr">⚠</span> Note text cannot be empty.</p>
-        <div class="space-y-t-footer">
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>Usage: <span class="text-tertiary-clr font-bold">note add &lt;text&gt;</span></p>
-        </div>
-      </div>`,
+    return createErrorOutput(
+      "Note text cannot be empty.",
+      `<span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">note add &lt;text&gt;</span>`,
     );
   }
 
@@ -93,14 +91,14 @@ const addNote = (text: string) => {
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
       <div class="space-y-t-group">
-        <p class="text-tertiary-clr font-bold">✓ Note saved</p>
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p class="text-tertiary-clr font-bold">${DT.icons.success} Note saved</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p><span class="text-secondary-clr">ID    </span>  <span class="text-tertiary-clr">${note.shortId}</span></p>
         <p><span class="text-secondary-clr">Text  </span>  ${note.text}</p>
       </div>
       <div class="space-y-t-footer">
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-        <p>Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">note</span><span aria-hidden="true">'</span> to view all your notes.</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">note</span>${DT.decorators.quote} to view all your notes.</p>
       </div>
     </div>`,
   );
@@ -108,14 +106,9 @@ const addNote = (text: string) => {
 
 const removeNote = (shortId: string) => {
   if (!shortId) {
-    return createHtmlOutput(
-      `<div class="space-y-t-section py-t-outer">
-        <p><span aria-hidden="true" class="text-secondary-clr">⚠</span> Please provide a note ID.</p>
-        <div class="space-y-t-footer">
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>Usage: <span class="text-tertiary-clr font-bold">note rm &lt;id&gt;</span></p>
-        </div>
-      </div>`,
+    return createErrorOutput(
+      "Please provide a note ID.",
+      `<span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">note rm &lt;id&gt;</span>`,
     );
   }
 
@@ -123,14 +116,9 @@ const removeNote = (shortId: string) => {
   const idx = notes.findIndex((n) => n.shortId === shortId);
 
   if (idx === -1) {
-    return createHtmlOutput(
-      `<div class="space-y-t-section py-t-outer">
-        <p><span aria-hidden="true" class="text-secondary-clr">⚠</span> No note found with ID <span class="text-tertiary-clr">"${shortId}"</span>.</p>
-        <div class="space-y-t-footer">
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">note</span><span aria-hidden="true">'</span> to see note IDs.</p>
-        </div>
-      </div>`,
+    return createErrorOutput(
+      `No note found with ID <span class="text-tertiary-clr">"${shortId}"</span>.`,
+      `Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">note</span>${DT.decorators.quote} to see note IDs.`,
     );
   }
 
@@ -140,8 +128,8 @@ const removeNote = (shortId: string) => {
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
       <div class="space-y-t-group">
-        <p class="text-tertiary-clr font-bold">✓ Note deleted</p>
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p class="text-tertiary-clr font-bold">${DT.icons.success} Note deleted</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p><span class="text-secondary-clr">Removed  </span>  <span class="text-text-clr opacity-sep">${removed.text}</span></p>
       </div>
     </div>`,
@@ -150,10 +138,8 @@ const removeNote = (shortId: string) => {
 
 const editNote = (shortId: string, newText: string) => {
   if (!shortId || !newText.trim()) {
-    return createHtmlOutput(
-      `<div class="space-y-t-section py-t-outer">
-        <p><span aria-hidden="true" class="text-secondary-clr">⚠</span> Usage: <span class="text-tertiary-clr font-bold">note edit &lt;id&gt; &lt;new text&gt;</span></p>
-      </div>`,
+    return createErrorOutput(
+      `Usage: <span class="text-tertiary-clr font-bold">note edit &lt;id&gt; &lt;new text&gt;</span>`,
     );
   }
 
@@ -161,14 +147,9 @@ const editNote = (shortId: string, newText: string) => {
   const note = notes.find((n) => n.shortId === shortId);
 
   if (!note) {
-    return createHtmlOutput(
-      `<div class="space-y-t-section py-t-outer">
-        <p><span aria-hidden="true" class="text-secondary-clr">⚠</span> No note found with ID <span class="text-tertiary-clr">"${shortId}"</span>.</p>
-        <div class="space-y-t-footer">
-          <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-          <p>Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">note</span><span aria-hidden="true">'</span> to see note IDs.</p>
-        </div>
-      </div>`,
+    return createErrorOutput(
+      `No note found with ID <span class="text-tertiary-clr">"${shortId}"</span>.`,
+      `Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">note</span>${DT.decorators.quote} to see note IDs.`,
     );
   }
 
@@ -180,8 +161,8 @@ const editNote = (shortId: string, newText: string) => {
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
       <div class="space-y-t-group">
-        <p class="text-tertiary-clr font-bold">✓ Note updated</p>
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p class="text-tertiary-clr font-bold">${DT.icons.success} Note updated</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p><span class="text-secondary-clr">Before  </span>  <span class="text-text-clr opacity-sep">${oldText}</span></p>
         <p><span class="text-secondary-clr">After   </span>  ${note.text}</p>
       </div>
@@ -194,64 +175,43 @@ const clearNotes = () => {
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
       <div class="space-y-t-group">
-        <p class="text-tertiary-clr font-bold">✓ All notes deleted</p>
+        <p class="text-tertiary-clr font-bold">${DT.icons.success} All notes deleted</p>
       </div>
       <div class="space-y-t-footer">
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-        <p>Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">note add &lt;text&gt;</span><span aria-hidden="true">'</span> to start fresh.</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">note add &lt;text&gt;</span>${DT.decorators.quote} to start fresh.</p>
       </div>
     </div>`,
   );
 };
-
-const showNoteHelp = () =>
-  createHtmlOutput(
-    `<div class="space-y-t-section py-t-outer">
-      <div class="space-y-t-group">
-        <p class="text-secondary-clr font-bold">note — Command Reference</p>
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-        <p><span class="text-tertiary-clr font-bold">note                       </span> - List all notes</p>
-        <p><span class="text-tertiary-clr font-bold">note add &lt;text&gt;            </span> - Add a new note (spaces allowed)</p>
-        <p><span class="text-tertiary-clr font-bold">note rm &lt;id&gt;               </span> - Delete a note by its short ID</p>
-        <p><span class="text-tertiary-clr font-bold">note edit &lt;id&gt; &lt;text&gt;     </span> - Update note text</p>
-        <p><span class="text-tertiary-clr font-bold">note clear                 </span> - Delete all notes</p>
-        <p><span class="text-tertiary-clr font-bold">note help                  </span> - Show this guide</p>
-      </div>
-      <div class="space-y-t-footer">
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-        <p>Notes persist in your browser across sessions.</p>
-      </div>
-    </div>`,
-  );
 
 // ─────────────────────────────────────────────────────────────────
 // MAIN HANDLER
 // ─────────────────────────────────────────────────────────────────
 
 export const handleNoteCommand = (args: string[]) => {
-  const sub = args[0]?.toLowerCase();
+  const parsed = parseArgs(args);
+
+  if (parsed.flags.help) return NOTE_HELP;
+
+  const sub = parsed.subcommand?.toLowerCase();
 
   if (!sub || sub === "list") return listNotes();
-  if (sub === "help") return showNoteHelp();
+  if (sub === "help") return NOTE_HELP;
   if (sub === "clear") return clearNotes();
-
-  if (sub === "add") return addNote(args.slice(1).join(" "));
-
+  if (sub === "add") return addNote(parsed.positional.slice(1).join(" "));
   if (sub === "rm" || sub === "remove" || sub === "delete") {
-    return removeNote(args[1]?.toLowerCase() ?? "");
+    return removeNote(parsed.positional[1]?.toLowerCase() ?? "");
   }
-
   if (sub === "edit" || sub === "update") {
-    return editNote(args[1]?.toLowerCase() ?? "", args.slice(2).join(" "));
+    return editNote(
+      parsed.positional[1]?.toLowerCase() ?? "",
+      parsed.positional.slice(2).join(" "),
+    );
   }
 
-  return createHtmlOutput(
-    `<div class="space-y-t-section py-t-outer">
-      <p><span aria-hidden="true" class="text-secondary-clr">⚠</span> Unknown subcommand: <span class="text-tertiary-clr">"${args[0]}"</span></p>
-      <div class="space-y-t-footer">
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
-        <p>Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">note help</span><span aria-hidden="true">'</span> for all commands.</p>
-      </div>
-    </div>`,
+  return createErrorOutput(
+    `Unknown subcommand: <span class="text-tertiary-clr">"${args[0]}"</span>`,
+    `Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">note help</span>${DT.decorators.quote} for all commands.`,
   );
 };
