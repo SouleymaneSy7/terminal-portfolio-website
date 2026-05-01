@@ -7,15 +7,15 @@
 
 **[→ Live Demo](https://terminal-portfolio-website-xi.vercel.app)** · **[→ Source Code](https://github.com/SouleymaneSy7/terminal-portfolio-website)**
 
-[![wakatime](https://wakatime.com/badge/user/018cb534-87bb-4814-975b-ca5e3cb8572b/project/86de76f6-9a37-458f-b8dd-2975978d2205.svg)](https://wakatime.com/badge/user/018cb534-87bb-4814-975b-ca5e3cb8572b/project/86de76f6-9a37-458f-b8dd-2975978d2205)
+Total time spent on this project: [![wakatime](https://wakatime.com/badge/user/018cb534-87bb-4814-975b-ca5e3cb8572b/project/86de76f6-9a37-458f-b8dd-2975978d2205.svg)](https://wakatime.com/badge/user/018cb534-87bb-4814-975b-ca5e3cb8572b/project/86de76f6-9a37-458f-b8dd-2975978d2205)
 
 ---
 
 ## Why a terminal?
 
-I started coding in 2022, in Coyah, Guinea-Conakry 🇬🇳 — no school, no bootcamp, no mentor. Just a laptop, an unstable connection, and an obsession with understanding how the web actually works.
+I started coding in 2022, in Coyah, Guinea-Conakry — no school, no bootcamp, no mentor. Just a laptop and an obsession with understanding how the web actually works.
 
-After 8 months learning JavaScript, 50+ Frontend Mentor challenges, a contest podium, and a certified internship — I wanted a portfolio that reflected the way I think. Not a landing page. Not a scroll-heavy site. A **terminal**.
+After learning JavaScript, 50+ Frontend Mentor challenges, a contest podium, and a certified internship — I wanted a portfolio that reflected the way I think. Not a landing page. Not a scroll-heavy site. A **terminal**.
 
 This project is both a technical showcase and a personal statement. Every command, every theme, every line of code is intentional.
 
@@ -44,7 +44,7 @@ This project is both a technical showcase and a personal statement. Every comman
 - **Suggestions panel** — grouped live completions with descriptions and keyboard navigation
 - **Ctrl+R reverse search** — search through history incrementally, real terminal-style
 - **Command history** — navigate with ↑↓, persisted across sessions (max 50 entries)
-- **Manual pages** — `man <command>` for every registered command
+- **Manual pages** — `man <command>` for all 42 commands
 - **5 loading variants** — braille spinner, ASCII progress bar, typewriter, dots, rotating spinner
 - **Live clock** — real-time clock with box-drawing characters and timezone detection
 - **Interactive quiz** — 40-question Frontend quiz, XP system, rank progression, localStorage persistence
@@ -138,17 +138,17 @@ Type `help` in the terminal to see the full list. Every command accepts `--help`
 
 ### Fun & Games
 
-| Command            | Description                                              |
-| ------------------ | -------------------------------------------------------- | ---------- | ---------------------------------------- |
-| `cowsay <message>` | ASCII cow says your message                              |
-| `game`             | Start the Frontend Quiz — 40 questions, XP system, ranks |
-| `game [1-3]`       | Submit your answer                                       |
-| `game stats`       | View score, accuracy, and current rank                   |
-| `game reset`       | Wipe all progress and start fresh                        |
-| `joke`             | Random programming joke (JokeAPI)                        |
-| `quote`            | Random advice quote (Advice Slip API)                    |
-| `rps <rock         | paper                                                    | scissors>` | Rock-paper-scissors against the terminal |
-| `sudo`             | Attempt to gain root access… 😄                          |
+| Command                       | Description                                              |
+| ----------------------------- | -------------------------------------------------------- |
+| `cowsay <message>`            | ASCII cow says your message                              |
+| `game`                        | Start the Frontend Quiz — 40 questions, XP system, ranks |
+| `game [1-3]`                  | Submit your answer                                       |
+| `game stats`                  | View score, accuracy, and current rank                   |
+| `game reset`                  | Wipe all progress and start fresh                        |
+| `joke`                        | Random programming joke (JokeAPI)                        |
+| `quote`                       | Random advice quote (Advice Slip API)                    |
+| `rps <rock\|paper\|scissors>` | Rock-paper-scissors against the terminal                 |
+| `sudo`                        | Attempt to gain root access… 😄                          |
 
 ### Keyboard Shortcuts
 
@@ -466,25 +466,34 @@ The codebase is designed to make this as frictionless as possible:
 4. Add it to the `commands` array in `src/constants/commands.ts`
 5. Add tab completions in `COMPLETIONS` if applicable
 6. Write a `--help` entry in `src/constants/help/`
-7. Write a `man` page entry in `src/commands/man/pages/`
+7. (Optional) Write a `man` page entry in `src/commands/man/pages/`
 
 That's it. No switch statements to update, no global imports to hunt down.
 
 ---
 
+## Contributing
+
+Found a bug, have a command idea, or want to improve the design system? Contributions are welcome.
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feat/my-command`)
+3. Make your changes
+4. Run `bun lint` to check for issues
+5. Open a pull request
+
+When adding a new command, follow the steps in [Adding a Command](#adding-a-command) above.
+
+---
+
 ## Author
-
-**Souleymane Sy** — Self-taught frontend developer since 2022. Based in Coyah, Guinea-Conakry 🇬🇳.
-
-This portfolio is the most personal thing I've shipped publicly. It's the project where every architectural decision was mine, every theme was chosen deliberately, every command was built from scratch. No tutorials followed for this one.
 
 If something here caught your attention — reach out.
 
 - **GitHub** — [github.com/SouleymaneSy7](https://github.com/SouleymaneSy7)
 - **LinkedIn** — [linkedin.com/in/souleymanesy7](https://linkedin.com/in/souleymanesy7)
 - **Email** — [souleymanesycodes@gmail.com](mailto:souleymanesycodes@gmail.com)
-- **Live** — [terminal-portfolio-website-xi.vercel.app](https://terminal-portfolio-website-xi.vercel.app)
 
 ---
 
-<p align="center">Built with discipline, not magic — from Coyah, Guinea-Conakry 🇬🇳</p>
+<p align="center">Built with ❤️ and too many terminal commands</p>
