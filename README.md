@@ -1,751 +1,407 @@
-# Terminal Portfolio Website
+# Terminal Portfolio — Souleymane Sy
 
-## ![Preview](./preview/preview.png)
+![Preview](./preview/preview.png)
 
-> A terminal-style portfolio you actually use like a terminal. Type commands, explore projects, switch themes, play a quiz — all from the command line.
+> A terminal-style portfolio you actually _use_ like a terminal.
+> Type commands. Explore my work. Switch themes. Play a quiz. All from the prompt.
 
-**[Live Demo](https://terminal-portfolio-website-xi.vercel.app)** · **[Source Code](https://github.com/SouleymaneSy7/terminal-portfolio-website)**
+**[→ Live Demo](https://terminal-portfolio-website-xi.vercel.app)** · **[→ Source Code](https://github.com/SouleymaneSy7/terminal-portfolio-website)**
 
-Total time spent on this project: [![wakatime](https://wakatime.com/badge/user/018cb534-87bb-4814-975b-ca5e3cb8572b/project/86de76f6-9a37-458f-b8dd-2975978d2205.svg)](https://wakatime.com/badge/user/018cb534-87bb-4814-975b-ca5e3cb8572b/project/86de76f6-9a37-458f-b8dd-2975978d2205)
+[![wakatime](https://wakatime.com/badge/user/018cb534-87bb-4814-975b-ca5e3cb8572b/project/86de76f6-9a37-458f-b8dd-2975978d2205.svg)](https://wakatime.com/badge/user/018cb534-87bb-4814-975b-ca5e3cb8572b/project/86de76f6-9a37-458f-b8dd-2975978d2205)
+
+---
+
+## Why a terminal?
+
+I started coding in 2022, in Coyah, Guinea-Conakry 🇬🇳 — no school, no bootcamp, no mentor. Just a laptop, an unstable connection, and an obsession with understanding how the web actually works.
+
+After 8 months learning JavaScript, 50+ Frontend Mentor challenges, a contest podium, and a certified internship — I wanted a portfolio that reflected the way I think. Not a landing page. Not a scroll-heavy site. A **terminal**.
+
+This project is both a technical showcase and a personal statement. Every command, every theme, every line of code is intentional.
 
 ---
 
 ## Table of Contents
 
-- [Overview](#overview)
 - [Features](#features)
 - [Commands Reference](#commands-reference)
-- [Theme & Font Switching](#theme--font-switching)
+- [Theme & Font System](#theme--font-system)
+- [Architecture](#architecture)
 - [Design System](#design-system)
-- [Technologies Used](#technologies-used)
+- [Tech Stack](#tech-stack)
 - [Installation](#installation)
 - [Project Structure](#project-structure)
-- [Development Status](#development-status)
-- [Inspiration](#inspiration)
 - [Author](#author)
-
----
-
-## Overview
-
-This is a fully interactive browser-based terminal built as a portfolio. Visitors navigate the experience entirely through typed commands — no buttons, no menus, just a keyboard and a prompt.
-
-Built from the ground up with Next.js 16, React 19, TypeScript and Tailwind CSS v4, with a focus on performance, accessibility and design consistency.
 
 ---
 
 ## Features
 
-- **Real terminal emulation** — command parsing, history navigation (↑↓), tab completion.
-- **31 color themes** — all OKLCH-based with localStorage persistence.
-- **4 monospace fonts** — all loaded via `next/font/local` for zero-CLS font switching.
-- **Smart suggestions panel** — live completion panel with keyboard navigation as you type.
-- **Tab autocomplete** — completes commands and arguments (theme names, font names, game subcommands, rps choices).
-- **Command history** — navigate with arrow keys, persisted across sessions via localStorage.
-- **Loading indicators** — 5 animated variants (braille spinner, ASCII progress bar, dots accumulator, typewriter cursor, rotating spinner).
-- **Live clock** — real-time date, time and timezone display with box-drawing characters.
-- **API integrations** — live weather (wttr.in), programming jokes (JokeAPI), inspirational quotes (Advice Slip API), currency rates (Frankfurter/ECB).
-- **Interactive quiz** — 40-question Frontend quiz with XP system, accuracy tracking and rank progression.
-- **Persistent utilities** — in-terminal note manager, todo list, and code snippet vault — all backed by localStorage.
-- **UUID generator** — v1 (time-based) and v4 (random) with validation.
-- **Currency converter** — real-time rates for 31 currencies via the European Central Bank.
-- **Age calculator** — exact age from any birth date with next-birthday countdown.
-- **curl simulator** — browser-based HTTP client with verbose mode, headers, POST data and Basic Auth.
-- **ASCII art** — cowsay, neofetch banner, welcome screen, quiz results.
-- **Accessibility** — ARIA live regions, `aria-hidden` on decorative ASCII art, full focus management.
-- **Security** — DOMPurify XSS sanitization on all HTML output, strict HTTP security headers.
-- **Responsive** — works on mobile with a keyboard, optimized for desktop.
-- **SEO** — full OpenGraph, Twitter Card, sitemap, robots.txt, canonical URL.
+- **42 commands** — portfolio info, utilities, network tools, games, all with `--help` support
+- **31 color themes** — OKLCH-based, persisted in localStorage, switchable instantly
+- **15 monospace fonts** — dynamic loading system (1 static + 8 Google Fonts + 1 npm + 5 local)
+- **Tab autocomplete** — completes commands and arguments, with cycling support
+- **Suggestions panel** — grouped live completions with descriptions and keyboard navigation
+- **Ctrl+R reverse search** — search through history incrementally, real terminal-style
+- **Command history** — navigate with ↑↓, persisted across sessions (max 50 entries)
+- **Manual pages** — `man <command>` for every registered command
+- **5 loading variants** — braille spinner, ASCII progress bar, typewriter, dots, rotating spinner
+- **Live clock** — real-time clock with box-drawing characters and timezone detection
+- **Interactive quiz** — 40-question Frontend quiz, XP system, rank progression, localStorage persistence
+- **Persistent utilities** — note manager, todo list, code snippet vault — all localStorage-backed
+- **API integrations** — weather, jokes, quotes, currency rates, IP geolocation, GitHub profiles
+- **curl simulator** — browser HTTP client with full flag parser and SSRF protection
+- **Cryptographic tools** — hashes (SHA-1/256/384/512), Base64/URL/hex encode-decode
+- **Color converter** — HEX → RGB → HSL → OKLCH with 30+ named colors and live swatch
+- **Math calculator** — full expression evaluator via mathjs (algebra, trig, units, matrices)
+- **DOMPurify sanitization** — every HTML output block is sanitized before render
+- **Error boundary** — graceful recovery UI with dev-mode error details
+- **Accessibility** — ARIA live regions, `aria-hidden` on decorative elements, `VisuallyHidden` component, `prefers-reduced-motion`
+- **Security** — strict HTTP headers, SSRF protection, XSS prevention
+- **SEO** — full OpenGraph, Twitter Card, canonical URL, sitemap, robots.txt
 
 ---
 
 ## Commands Reference
 
-Type `help` in the terminal to see the full list. Here's a quick overview:
+Type `help` in the terminal to see the full list. Every command accepts `--help` for detailed usage.
 
 ### Navigation & System
 
-| Command        | Description                                                                 |
-| -------------- | --------------------------------------------------------------------------- |
-| `clear`        | Clear the terminal screen                                                   |
-| `exit`         | Display goodbye message (close the browser tab to actually exit)            |
-| `help`         | List all available commands                                                 |
-| `hostname`     | Display system hostname and portfolio information                           |
-| `neofetch`     | Linux-style system summary with live theme and font                         |
-| `theme <n>`    | Switch color theme — see [Theme & Font Switching](#theme--font-switching)   |
-| `typeface <n>` | Switch terminal font — see [Theme & Font Switching](#theme--font-switching) |
-| `welcome`      | Display the welcome banner again                                            |
+| Command           | Description                                       |
+| ----------------- | ------------------------------------------------- |
+| `clear`           | Clear the terminal screen (also `Ctrl+L`)         |
+| `exit`            | Display goodbye message                           |
+| `help`            | List all available commands                       |
+| `hostname`        | Portfolio hostname and uptime info                |
+| `neofetch`        | Linux-style system summary with live theme & font |
+| `theme [name]`    | Switch color theme — 31 available                 |
+| `typeface [name]` | Switch terminal font — 15 available               |
+| `welcome`         | Display the welcome banner again                  |
+| `whoami`          | Short bio                                         |
 
 ### Information
 
-| Command          | Description                                       |
-| ---------------- | ------------------------------------------------- |
-| `about`          | My story, journey and tech stack                  |
-| `contact`        | All social networks and contact details           |
-| `date`           | Live clock with date, time and timezone           |
-| `time`           | Alias for `date`                                  |
-| `email`          | Display my email address with mailto link         |
-| `projects`       | Browse my most notable projects                   |
-| `repo`           | This portfolio's source code on GitHub            |
-| `resume`         | View or download my CV in French or English (PDF) |
-| `weather <city>` | Real-time weather for any city via wttr.in        |
-| `whoami`         | Who is behind this terminal?                      |
+| Command          | Description                                        |
+| ---------------- | -------------------------------------------------- |
+| `about`          | My story, journey, and tech stack                  |
+| `contact`        | All social networks and contact details            |
+| `date` / `time`  | Live clock with date, time and timezone            |
+| `email`          | Email address with mailto link                     |
+| `projects`       | Featured projects with live demos and source links |
+| `repo`           | This portfolio's source code on GitHub             |
+| `resume`         | View or download my CV in French or English (PDF)  |
+| `weather <city>` | Real-time weather for any city via wttr.in         |
+
+### Network
+
+| Command                | Description                                                                |
+| ---------------------- | -------------------------------------------------------------------------- |
+| `curl [options] <url>` | Browser HTTP client — GET, POST, HEAD, verbose mode, auth, SSRF protection |
+| `github <username>`    | GitHub user profile, pinned repos, and top starred repositories            |
+| `ip`                   | Public IP address and geolocation info                                     |
 
 ### Utilities
 
-| Command                            | Description                                                  |
-| ---------------------------------- | ------------------------------------------------------------ |
-| `age <date>`                       | Calculate exact age from a birthdate with next-birthday info |
-| `convert <amount> <from> <to>`     | Real-time currency conversion via European Central Bank      |
-| `convert list`                     | List all 31 supported currencies                             |
-| `curl [options] <url>`             | Browser HTTP client — GET, POST, HEAD, verbose mode, auth    |
-| `note`                             | List all saved notes                                         |
-| `note add <text>`                  | Add a note (spaces allowed)                                  |
-| `note rm <id>`                     | Delete a note by its short ID                                |
-| `note edit <id> <text>`            | Update a note                                                |
-| `note clear`                       | Delete all notes                                             |
-| `snippet`                          | List all saved code snippets                                 |
-| `snippet add <name> <lang> <code>` | Save a code snippet                                          |
-| `snippet show <id>`                | Display snippet code                                         |
-| `snippet rm <id>`                  | Delete a snippet                                             |
-| `todo`                             | List all tasks (pending and done)                            |
-| `todo add <text>`                  | Add a new task                                               |
-| `todo done <id>`                   | Mark a task as completed                                     |
-| `todo undone <id>`                 | Mark a task as pending                                       |
-| `todo rm <id>`                     | Delete a task                                                |
-| `uuid`                             | Generate one v4 UUID                                         |
-| `uuid v1 [n]`                      | Generate n time-based v1 UUIDs (max 20)                      |
-| `uuid v4 [n]`                      | Generate n random v4 UUIDs (max 20)                          |
-| `uuid validate <string>`           | Validate a UUID string                                       |
+| Command                            | Description                                                   |
+| ---------------------------------- | ------------------------------------------------------------- |
+| `age <date>`                       | Exact age calculator with next-birthday countdown             |
+| `calc <expression>`                | Math calculator — algebra, trig, units, constants (mathjs)    |
+| `color <value>`                    | Convert colors between HEX, RGB, HSL, OKLCH                   |
+| `convert <amount> <from> <to>`     | Real-time currency conversion (168+ currencies via ECB)       |
+| `convert list`                     | List all supported currencies with names and symbols          |
+| `decode [format] <text>`           | Decode base64, url, or hex — runs locally                     |
+| `echo <text>`                      | Output text with `\n` newline support                         |
+| `encode [format] <text>`           | Encode base64, url, or hex — runs locally                     |
+| `hash [algo] <text>`               | Cryptographic hashes — sha256 (default), sha512, sha384, sha1 |
+| `history [n]`                      | Display recent command history (default 20, max 50)           |
+| `man <command>`                    | Full manual page for any command                              |
+| `note`                             | List all saved notes                                          |
+| `note add <text>`                  | Add a note (spaces supported)                                 |
+| `note rm <id>`                     | Delete a note by short ID                                     |
+| `note edit <id> <text>`            | Update a note in place                                        |
+| `note clear`                       | Delete all notes                                              |
+| `snippet`                          | List all saved code snippets                                  |
+| `snippet add <name> <lang> <code>` | Save a code snippet                                           |
+| `snippet show <id>`                | Display snippet code with syntax highlighting                 |
+| `snippet rm <id>`                  | Delete a snippet                                              |
+| `timer <duration> [label]`         | Countdown timer — supports `25m`, `1h`, `1h30m`, `90s`        |
+| `todo`                             | List all tasks (pending and done)                             |
+| `todo add <text>`                  | Add a task                                                    |
+| `todo done <id>`                   | Mark a task as completed                                      |
+| `todo undone <id>`                 | Revert a task to pending                                      |
+| `todo rm <id>`                     | Delete a task                                                 |
+| `uuid`                             | Generate one v4 UUID                                          |
+| `uuid v1 [n]`                      | Generate n time-based v1 UUIDs (max 20)                       |
+| `uuid v4 [n]`                      | Generate n random v4 UUIDs (max 20)                           |
+| `uuid validate <string>`           | Validate any UUID string                                      |
 
 ### Fun & Games
 
-| Command                       | Description                                              |
-| ----------------------------- | -------------------------------------------------------- |
-| `cowsay <message>`            | Make a cow say your message in ASCII                     |
-| `game`                        | Start the Frontend Quiz — 40 questions, XP system, ranks |
-| `game [1-3]`                  | Submit your answer                                       |
-| `game stats`                  | View your performance and current rank                   |
-| `game reset`                  | Clear all progress and start fresh                       |
-| `game help`                   | Show all game commands                                   |
-| `joke`                        | Random programming joke (JokeAPI)                        |
-| `quote`                       | Random advice quote (Advice Slip API)                    |
-| `rps <rock\|paper\|scissors>` | Play rock-paper-scissors against the terminal            |
-| `sudo`                        | Attempt to gain root access... 😄                        |
-
-> **Tip:** every command accepts `--help` for detailed usage — e.g. `weather --help`
+| Command            | Description                                              |
+| ------------------ | -------------------------------------------------------- | ---------- | ---------------------------------------- |
+| `cowsay <message>` | ASCII cow says your message                              |
+| `game`             | Start the Frontend Quiz — 40 questions, XP system, ranks |
+| `game [1-3]`       | Submit your answer                                       |
+| `game stats`       | View score, accuracy, and current rank                   |
+| `game reset`       | Wipe all progress and start fresh                        |
+| `joke`             | Random programming joke (JokeAPI)                        |
+| `quote`            | Random advice quote (Advice Slip API)                    |
+| `rps <rock         | paper                                                    | scissors>` | Rock-paper-scissors against the terminal |
+| `sudo`             | Attempt to gain root access… 😄                          |
 
 ### Keyboard Shortcuts
 
-| Shortcut   | Action                                      |
-| ---------- | ------------------------------------------- |
-| `Tab`      | Autocomplete command or argument            |
-| `↑` / `↓`  | Navigate history (or suggestions when open) |
-| `Esc`      | Dismiss suggestions panel, keep focus       |
-| `Enter`    | Execute command                             |
-| `Ctrl + L` | Clear the terminal screen                   |
+| Shortcut  | Action                                               |
+| --------- | ---------------------------------------------------- |
+| `Tab`     | Autocomplete command or argument                     |
+| `↑` / `↓` | Navigate history (or suggestions when panel is open) |
+| `Esc`     | Dismiss suggestions panel, keep input focus          |
+| `Enter`   | Execute command                                      |
+| `Ctrl+L`  | Clear the terminal screen                            |
+| `Ctrl+R`  | Enter reverse search — cycle through history matches |
+| `Ctrl+C`  | Cancel a running command (only active while loading) |
 
 ---
 
-## Theme & Font Switching
+## Theme & Font System
 
-Preferences are saved to localStorage and restored automatically on every visit. The `neofetch` command always reflects the currently active theme and font.
+### Themes (31)
 
-### Available Themes (31)
-
-```
-── Catppuccin ────────────────────────────────────────────────
-theme catppuccin                → Catppuccin Macchiato (default)
-theme catppuccin-latte          → Catppuccin Latte — warm light theme
-theme catppuccin-frappe         → Catppuccin Frappé — medium depth
-theme catppuccin-mocha          → Catppuccin Mocha — darkest variant
-
-── Popular Dark ──────────────────────────────────────────────
-theme monokai                   → Monokai
-theme tokyo-night               → Tokyo Night
-theme dracula                   → Dracula
-theme nord                      → Nord
-theme gruvbox                   → Gruvbox Dark
-theme everforest                → Everforest Dark
-theme rose-pine                 → Rosé Pine
-
-── Editor Classics ───────────────────────────────────────────
-theme solarized-dark            → Solarized Dark
-theme oceanic                   → Oceanic Next
-theme cobalt2                   → Cobalt2
-theme github                    → GitHub Dark
-theme one-dark                  → One Dark
-theme atom-one-dark             → Atom One Dark
-
-── Material ──────────────────────────────────────────────────
-theme material-default          → Material Default — teal on blue-grey
-theme material-lighter          → Material Lighter — light variant
-theme material-oceanic          → Material Oceanic — ocean-blue accent
-theme material-palenight        → Material Palenight — deep purple, neon accents
-theme material-deep-ocean       → Material Deep Ocean — near-black, electric blue
-theme material-high-contrast    → Material High Contrast — pure black, max contrast
-
-── Others ────────────────────────────────────────────────────
-theme ayu-dark                  → Ayu Dark — warm amber on near-black
-theme night-owl                 → Night Owl — cyan primary, yellow highlights
-theme synthwave                 → Synthwave '84 — neon pink and cyan retro-futurism
-theme kanagawa                  → Kanagawa — samurai red and ocean blue
-theme horizon                   → Horizon — coral and pink on dark indigo
-theme poimandres                → Poimandres — teal and purple on near-black
-theme vesper                    → Vesper — pure black, amber gold — ultra minimal
-theme hack-the-box              → Hack The Box — matrix green on deep navy
-```
-
-### Available Fonts (4)
-
-All fonts are bundled locally via `next/font/local` — no external font requests, no layout shift, zero FOUT.
-
-```
-typeface cascadia          → Cascadia Code (default) — Microsoft's gift to devs
-typeface fira              → Fira Code — stunning ligatures
-typeface geist             → Geist Mono — sharp, elegant, minimal
-typeface recursive-casual  → Recursive Casual Mono — hand-drawn expressiveness
-```
-
-### Tab Completion
-
-The `Tab` key completes both commands and their arguments:
+Switch with `theme <name>`. All themes use **OKLCH** color values for perceptually uniform contrast. Your preference is saved in localStorage and restored on every page load.
 
 ```bash
-# Command completion
-th[Tab]             → theme (unique match, completes immediately)
-t[Tab]              → cycles: theme → time → typeface → todo → ...
-
-# Argument completion
-theme cat[Tab]      → catppuccin (unique match)
-theme [Tab]         → cycles through all 31 theme names
-typeface [Tab]      → cycles through all 4 font names
-rps [Tab]           → rock → paper → scissors
-game [Tab]          → stats → reset → help → --help
-note [Tab]          → add → rm → edit → clear → list → help
-todo [Tab]          → add → done → undone → rm → clear → list → help
-snippet [Tab]       → add → show → rm → clear → list → help
-uuid [Tab]          → v1 → v4 → validate → help
-convert [Tab]       → list → help
-curl [Tab]          → --help → -v → -I → -s → -X → -H → -d → -u → -L
+theme dracula
+theme catppuccin-mocha
+theme tokyo-night
+theme hack-the-box
 ```
 
-### Suggestions Panel
+| Group               | Themes                                                                                                                                 |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| **Catppuccin**      | `catppuccin` · `catppuccin-latte` · `catppuccin-frappe` · `catppuccin-mocha`                                                           |
+| **Popular Dark**    | `monokai` · `tokyo-night` · `dracula` · `nord` · `gruvbox` · `everforest` · `rose-pine`                                                |
+| **Editor Classics** | `solarized-dark` · `oceanic` · `cobalt2` · `github` · `one-dark` · `atom-one-dark`                                                     |
+| **Material**        | `material-default` · `material-lighter` · `material-oceanic` · `material-palenight` · `material-deep-ocean` · `material-high-contrast` |
+| **Others**          | `ayu-dark` · `night-owl` · `synthwave` · `kanagawa` · `horizon` · `poimandres` · `vesper` · `hack-the-box`                             |
 
-As you type, a panel appears listing all matching completions:
+> Tab completion is available — `theme [Tab]` cycles all 31 themes with grouped suggestions and inline descriptions.
 
-```
-guest@souleymane-sy-portfolio:~$ theme cat_
+### Fonts (15)
 
-Suggestions ─── 4 matches
-  catppuccin        catppuccin-latte
-  catppuccin-frappe catppuccin-mocha
+Switch with `typeface <name>`. Fonts load on demand to keep the initial bundle lean. Once loaded, switching is instant.
 
-[Tab] cycle  ·  [↑↓] navigate  ·  [Esc] dismiss
-```
-
-Navigate with `↑↓` or `Tab` to cycle. `Esc` dismisses and restores your original input.
-
-For `theme` and `typeface`, suggestions are **grouped by category** — exactly mirroring the `theme` command's own output. The description of the currently highlighted item appears in the header.
-
-```
-guest@souleymane-sy-portfolio:~$ theme material_
-
-Suggestions ─── 6 matches  ·  The original — teal green on deep blue-grey.
-Material
-▶ material-default        material-lighter
-  material-oceanic        material-palenight
-  material-deep-ocean     material-high-contrast
-
-[Tab] cycle  ·  [↑↓] navigate  ·  [Esc] dismiss
+```bash
+typeface fira          # Fira Code — ligatures
+typeface jetbrains     # JetBrains Mono — clean readability
+typeface victor        # Victor Mono — cursive italics
+typeface geist         # Geist Mono — modern & sharp
 ```
 
-### Theme Previews
+| Category                            | Key → Label                                                                                        |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------- |
+| **Static** (always loaded)          | `cascadia` → Cascadia Code                                                                         |
+| **Google Fonts** (loaded on demand) | `fira` · `jetbrains` · `ibm-plex` · `source-code` · `ubuntu` · `space` · `inconsolata` · `cousine` |
+| **npm package**                     | `geist` → Geist Mono                                                                               |
+| **Local fonts**                     | `recursive-casual` · `recursive-linear` · `hack` · `victor` · `meslo`                              |
 
-<details>
-<summary><strong>Catppuccin Macchiato</strong> — default</summary>
-<br>
+**Loading strategy:**
+Cascadia Code is bundled statically at build time (~150 KB) — zero latency on first render. All other fonts load via `useDynamicFont` on first request: Google Fonts through a CDN `<link>` injection, Geist Mono via the official npm package, and local fonts through the `FontFace` API from `/public/fonts/`. Every font is cached after first load.
 
-![Catppuccin Macchiato](./preview/themes/theme-catppuccin.png)
+This reduces the initial bundle by ~75% compared to loading all fonts upfront.
 
-Soothing pastel palette with a deep blue-purple background. Easy on the eyes during long sessions.
+---
 
-</details>
+## Architecture
 
-<details>
-<summary><strong>Catppuccin Latte</strong> — light</summary>
-<br>
+### Command Registry
 
-![Catppuccin Latte](./preview/themes/theme-catppuccin-latte.png)
+Every command maps to a handler in a single file (`src/utils/commandRegistry.ts`). Adding or removing a command requires editing exactly one line:
 
-The only light theme in the collection. Warm cream background with Catppuccin accent palette.
+```typescript
+export const COMMAND_REGISTRY: Record<string, CommandHandlerType> = {
+  calc: (args) => handleCalcCommand(args),
+  color: (args) => handleColorCommand(args),
+  github: (args) => handleGithubCommand(args),
+  // ... 42 entries total
+};
+```
 
-</details>
+The dispatcher (`executeCommand`) does a single registry lookup — no switch statements, no if-chains. `clear` is the only exception: it bypasses the registry entirely and calls `clearHistory()` directly in `Terminal.tsx`.
 
-<details>
-<summary><strong>Catppuccin Frappé</strong></summary>
-<br>
+### Unified Argument Parser
 
-![Catppuccin Frappé](./preview/themes/theme-catppuccin-frappe.png)
+Every command uses `parseArgs()` from `src/utils/argParser.ts`:
 
-Mid-depth dark with soft contrast. Between Macchiato and Mocha.
+```typescript
+parseArgs(["add", "--verbose", "-f", "file.txt"]);
+// → { subcommand: "add", flags: { verbose: true, f: true }, positional: ["file.txt"] }
+```
 
-</details>
+Handles long flags (`--flag`), short flags (`-f`), options with values (`--option value`), positional arguments, and automatic `--help`/`-h` detection.
 
-<details>
-<summary><strong>Catppuccin Mocha</strong></summary>
-<br>
+### Output Factories
 
-![Catppuccin Mocha](./preview/themes/theme-catppuccin-mocha.png)
+All command output is created through typed factories. No command writes raw blocks manually:
 
-The darkest sip of the Catppuccin collection. Deep background with rich pastel accents.
+```typescript
+createHtmlOutput(html)          // HTML block — DOMPurify sanitized at render time
+createTextOutput(lines)         // Plain text, whitespace-pre preserved
+createErrorOutput(msg, hint?)   // Standardized error with optional guidance
+createSuccessOutput(msg)        // Standardized success feedback
+createHelpOutput(config)        // Full help block — name, usage, options, examples
+```
 
-</details>
+### Service Layer
 
-<details>
-<summary><strong>Monokai</strong></summary>
-<br>
+Every external API call is isolated in `src/services/`. Commands never make HTTP requests directly.
 
-![Monokai](./preview/themes/theme-monokai.png)
+| Service              | API                   | Used by   |
+| -------------------- | --------------------- | --------- |
+| `weather.service.ts` | wttr.in               | `weather` |
+| `joke.service.ts`    | JokeAPI v2            | `joke`    |
+| `quote.service.ts`   | Advice Slip API       | `quote`   |
+| `convert.service.ts` | Frankfurter / ECB     | `convert` |
+| `ip.service.ts`      | ipapi.co              | `ip`      |
+| `github.service.ts`  | GitHub REST + GraphQL | `github`  |
+| `curl.service.ts`    | axios (browser)       | `curl`    |
 
-The timeless classic. Warm dark background with vibrant yellow, orange and green.
+### Custom Hooks
 
-</details>
+| Hook                | Purpose                                                      |
+| ------------------- | ------------------------------------------------------------ |
+| `useCommandHistory` | Terminal history state with localStorage persistence         |
+| `useLocalStorage`   | SSR-safe generic localStorage hook with JSON serialization   |
+| `useThemeFont`      | Restore saved theme and font preferences on mount            |
+| `useDynamicFont`    | Lazy-load and cache fonts on demand                          |
+| `useDebounce`       | Debounce any value — used in suggestion computation          |
+| `useReverseSearch`  | Incremental reverse search through history (Ctrl+R)          |
+| `useSuggestions`    | Live suggestions panel — completions, grouping, keyboard nav |
 
-<details>
-<summary><strong>Tokyo Night</strong></summary>
-<br>
+### Domain-Split Types
 
-![Tokyo Night](./preview/themes/theme-tokyo-night.png)
+```
+src/types/
+├── terminal.types.ts   — Block, CommandHistory, SerializableHistory
+├── command.types.ts    — CommandHandlerType, ParsedArgsType, HelpConfigType, ManPageType
+├── ui.types.ts         — Component prop types (Timer, ErrorBoundary, Loaders…)
+└── data.types.ts       — API response shapes (GitHub, IP, currency, curl…)
+```
 
-Deep blue-black with soft blue and red accents. Made for late-night coding sessions.
+### Security
 
-</details>
-
-<details>
-<summary><strong>Dracula</strong></summary>
-<br>
-
-![Dracula](./preview/themes/theme-dracula.png)
-
-Dark and mysterious. Purple, pink and mint on near-black. One of the most iconic dark themes.
-
-</details>
-
-<details>
-<summary><strong>Nord</strong></summary>
-<br>
-
-![Nord](./preview/themes/theme-nord.png)
-
-Icy Arctic blue palette. Cool, restrained and incredibly readable.
-
-</details>
-
-<details>
-<summary><strong>Gruvbox Dark</strong></summary>
-<br>
-
-![Gruvbox Dark](./preview/themes/theme-gruvbox.png)
-
-Warm earthy tones on near-black. Feels like an old CRT monitor — in the best way.
-
-</details>
-
-<details>
-<summary><strong>Everforest Dark</strong></summary>
-<br>
-
-![Everforest Dark](./preview/themes/theme-everforest.png)
-
-Deep forest greens with warm beige text. Calm and natural.
-
-</details>
-
-<details>
-<summary><strong>Rosé Pine</strong></summary>
-<br>
-
-![Rosé Pine](./preview/themes/theme-rose-pine.png)
-
-Soft and dreamy. Deep purple with rose and sky accents.
-
-</details>
-
-<details>
-<summary><strong>Solarized Dark</strong></summary>
-<br>
-
-![Solarized Dark](./preview/themes/theme-solarized-dark.png)
-
-Ethan Schoonover's precision palette. Scientific color relationships, unmatched readability.
-
-</details>
-
-<details>
-<summary><strong>Oceanic Next</strong></summary>
-<br>
-
-![Oceanic Next](./preview/themes/theme-oceanic.png)
-
-Deep ocean blues with vibrant teal and red accents.
-
-</details>
-
-<details>
-<summary><strong>Cobalt2</strong></summary>
-<br>
-
-![Cobalt2](./preview/themes/theme-cobalt2.png)
-
-Wes Bos's high-contrast cobalt blue. Bold, vivid, immediately recognizable.
-
-</details>
-
-<details>
-<summary><strong>GitHub Dark</strong></summary>
-<br>
-
-![GitHub Dark](./preview/themes/theme-github.png)
-
-The dark theme you already know from GitHub. Familiar and clean.
-
-</details>
-
-<details>
-<summary><strong>One Dark</strong></summary>
-<br>
-
-![One Dark](./preview/themes/theme-one-dark.png)
-
-Atom's iconic dark UI. Muted blue primary with warm accents.
-
-</details>
-
-<details>
-<summary><strong>Atom One Dark</strong></summary>
-<br>
-
-![Atom One Dark](./preview/themes/theme-atom-one-dark.png)
-
-Same base as One Dark, purple primary with cyan tertiary.
-
-</details>
-
-<details>
-<summary><strong>Material Default</strong></summary>
-<br>
-
-![Material Default](./preview/themes/theme-material-default.png)
-
-The original Material theme. Teal-green accents on a classic blue-grey dark background.
-
-</details>
-
-<details>
-<summary><strong>Material Lighter</strong></summary>
-<br>
-
-![Material Lighter](./preview/themes/theme-material-lighter.png)
-
-The light variant of the Material family. Clean white background with vibrant accents.
-
-</details>
-
-<details>
-<summary><strong>Material Oceanic</strong></summary>
-<br>
-
-![Material Oceanic](./preview/themes/theme-material-oceanic.png)
-
-Same classic Material base, ocean-blue accent variant. Calm and deeply readable.
-
-</details>
-
-<details>
-<summary><strong>Material Palenight</strong></summary>
-<br>
-
-![Material Palenight](./preview/themes/theme-material-palenight.png)
-
-Deep purple background with vivid pink and green neon accents. Instantly recognizable.
-
-</details>
-
-<details>
-<summary><strong>Material Deep Ocean</strong></summary>
-<br>
-
-![Material Deep Ocean](./preview/themes/theme-material-deep-ocean.png)
-
-Near-black background with electric blue and violet accents. The darkest of the Material family.
-
-</details>
-
-<details>
-<summary><strong>Material High Contrast</strong></summary>
-<br>
-
-![Material High Contrast](./preview/themes/theme-material-high-contrast.png)
-
-Pure black background, maximum contrast. Nothing distracts — only the code matters.
-
-</details>
-
-<details>
-<summary><strong>Ayu Dark</strong></summary>
-<br>
-
-![Ayu Dark](./preview/themes/theme-ayu-dark.png)
-
-Warm amber and orange on a near-black background. Minimal and sharp.
-
-</details>
-
-<details>
-<summary><strong>Night Owl</strong></summary>
-<br>
-
-![Night Owl](./preview/themes/theme-night-owl.png)
-
-Designed for low-light conditions — cyan primary with warm yellow highlights.
-
-</details>
-
-<details>
-<summary><strong>Synthwave '84</strong></summary>
-<br>
-
-![Synthwave '84](./preview/themes/theme-synthwave.png)
-
-Neon pink and electric cyan on deep purple. Pure 80s retro-futurism.
-
-</details>
-
-<details>
-<summary><strong>Kanagawa</strong></summary>
-<br>
-
-![Kanagawa](./preview/themes/theme-kanagawa.png)
-
-Inspired by Hokusai's Great Wave. Samurai red primary, ocean blue secondary.
-
-</details>
-
-<details>
-<summary><strong>Horizon</strong></summary>
-<br>
-
-![Horizon](./preview/themes/theme-horizon.png)
-
-Warm coral and pink on dark indigo. Sunset colors, very aesthetic.
-
-</details>
-
-<details>
-<summary><strong>Poimandres</strong></summary>
-<br>
-
-![Poimandres](./preview/themes/theme-poimandres.png)
-
-Teal and purple on near-black. Calm, focused and distinctly modern.
-
-</details>
-
-<details>
-<summary><strong>Vesper</strong></summary>
-<br>
-
-![Vesper](./preview/themes/theme-vesper.png)
-
-Pure black background with amber gold accents. Ultra minimal and elegant.
-
-</details>
-
-<details>
-<summary><strong>Hack The Box</strong></summary>
-<br>
-
-![Hack The Box](./preview/themes/theme-hack-the-box.png)
-
-Matrix green on deep navy. For the hacker in you.
-
-</details>
+- **DOMPurify** sanitizes every HTML output block before it reaches the DOM — enforced in `CommandOutput.tsx` via `dangerouslySetInnerHTML` + `afterSanitizeAttributes` hook that adds `target="_blank" rel="noopener noreferrer"` to all links
+- **SSRF protection** in the curl command — local/private addresses are rejected before dispatch
+- **HTTP security headers** set in `next.config.ts`: `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `X-XSS-Protection`, `Strict-Transport-Security`, `Permissions-Policy`
 
 ---
 
 ## Design System
 
-All visual output across every command is driven by a single source of truth in `src/app/globals.css`. Changing a token once propagates to every command output automatically.
+The visual language is built on centralized tokens used consistently across all 42 commands.
 
-### CSS Tokens (in `@theme`)
+### Semantic Color Roles
 
-#### Colors
+| CSS Variable             | Role                                      |
+| ------------------------ | ----------------------------------------- |
+| `--color-primary-clr`    | Prompt, accents, interactive elements     |
+| `--color-secondary-clr`  | Section headers, labels, error indicators |
+| `--color-tertiary-clr`   | Command names, highlighted values, code   |
+| `--color-text-clr`       | Body text                                 |
+| `--color-background-clr` | Terminal background                       |
+| `--color-foreground-clr` | Input bar, card surfaces                  |
 
-```css
-/* Six semantic roles — overridden per theme via html[data-theme] */
---color-background-clr: oklch(...); /* Page background                  */
---color-foreground-clr: oklch(...); /* Terminal panel surface            */
---color-text-clr: oklch(...); /* All body text                     */
---color-primary-clr: oklch(...); /* ASCII art, strong accent, borders */
---color-secondary-clr: oklch(...); /* Keys, labels, warnings ⚠          */
---color-tertiary-clr: oklch(...); /* Commands, bullets •, success ✓    */
+All values are in OKLCH — consistent perceptual lightness and chroma across all 31 themes.
+
+### Spacing Scale
+
+| Token               | Usage                                    |
+| ------------------- | ---------------------------------------- |
+| `space-y-t-section` | Between major output sections            |
+| `space-y-t-group`   | Between lines within a section           |
+| `space-y-t-footer`  | Footer / hint area                       |
+| `py-t-outer`        | Vertical padding on the output container |
+
+### Design Tokens
+
+All decorative elements are centralized in `src/utils/designTokens.ts` — no inline strings in command files:
+
+```typescript
+DT.separators.short; // ────────────────────────────────────────
+DT.separators.long; // ──────────────────────────────────────────────────────
+DT.icons.success; // ✓  (aria-hidden)
+DT.icons.warning; // ⚠  (aria-hidden)
+DT.icons.error; // ✗  (aria-hidden)
+DT.decorators.bullet; // •  (aria-hidden)
+DT.decorators.arrow; // →  (aria-hidden)
+DT.decorators.quote; // '  (aria-hidden)
 ```
-
-All 31 theme overrides use `html[data-theme="<name>"]` attribute selectors at specificity (0,1,1), which beats `:root` (0,1,0) with no `!important` needed. Font switching follows the same pattern at (0,1,2) via `html[data-font="<name>"] body`.
-
-#### Typography
-
-```css
---font-weight-regular: 400;
---font-weight-bold: 700;
-
---text-fs-body: clamp(0.9375rem, 0.9196rem + 0.0893vw, 1rem); /* 15px → 16px */
---text-fs-subtitle: clamp(
-  1.125rem,
-  1.0893rem + 0.1786vw,
-  1.25rem
-); /* 18px → 20px */
---text-fs-title: clamp(1.25rem, 1.1786rem + 0.3571vw, 1.5rem); /* 20px → 24px */
---leading-base: 1.5;
-```
-
-#### Spacing
-
-```css
---spacing-t-outer: 0.25rem; /* py  — outer padding on each output block  */
---spacing-t-section: 0.75rem; /* space-y — between major sections           */
---spacing-t-group: 0.25rem; /* space-y — between lines within a group     */
---spacing-t-footer: 0.125rem; /* space-y — between hint and footer lines    */
-```
-
-#### Opacity
-
-```css
---opacity-sep: 0.3; /* separator lines only — nothing else uses opacity */
-```
-
-### Color Roles
-
-| Token                              | Tailwind class              | Role                                                     |
-| ---------------------------------- | --------------------------- | -------------------------------------------------------- |
-| `--color-primary-clr`              | `text-primary-clr`          | ASCII art, neofetch heading, strong accent, border color |
-| `--color-secondary-clr`            | `text-secondary-clr`        | Key labels, section headers, warning `⚠` icon            |
-| `--color-tertiary-clr`             | `text-tertiary-clr`         | Command names in hints, bullet points `•`, success `✓`   |
-| `--color-text-clr`                 | `text-text-clr`             | All regular body text                                    |
-| `--color-text-clr` + `opacity-sep` | `text-text-clr opacity-sep` | Separator lines `────` — and nothing else                |
-| `--color-foreground-clr`           | `bg-foreground-clr`         | Terminal panel surface                                   |
-| `--color-background-clr`           | `bg-background-clr`         | Page background                                          |
-
-### Spacing Classes
-
-| Tailwind class      | Token                 | Applied on                           |
-| ------------------- | --------------------- | ------------------------------------ |
-| `py-t-outer`        | `--spacing-t-outer`   | Root `<div>` of every command output |
-| `space-y-t-section` | `--spacing-t-section` | Between major content sections       |
-| `space-y-t-group`   | `--spacing-t-group`   | Between lines within a related group |
-| `space-y-t-footer`  | `--spacing-t-footer`  | Between hint and footer lines        |
-
-### Command Output Convention
-
-Every command output is a `type: "html"` block wrapping a consistent root structure:
-
-```html
-<div class="space-y-t-section py-t-outer">
-  <!-- Major section -->
-  <div class="space-y-t-group">
-    <p class="text-secondary-clr font-bold">Section Title</p>
-    <p class="text-text-clr opacity-sep" aria-hidden="true">
-      ────────────────────────────────────────
-    </p>
-    <p>
-      Body text using <span class="text-tertiary-clr">accent</span> where
-      relevant.
-    </p>
-  </div>
-
-  <!-- Hint / footer -->
-  <div class="space-y-t-footer">
-    <p class="text-text-clr opacity-sep" aria-hidden="true">
-      ────────────────────────────────────────
-    </p>
-    <p>
-      Type '<span class="text-tertiary-clr font-bold">next-command</span>' to
-      continue.
-    </p>
-  </div>
-</div>
-```
-
-This structure is applied directly in each command file as plain HTML strings — no helper abstraction — so every command is self-contained and readable without indirection.
-
-### Accessibility Practices
-
-- All ASCII art blocks carry `aria-hidden="true"` — screen readers skip decorative characters
-- All decorative separators `────`, bullets `•`, arrows `→` and quote marks `'` carry `aria-hidden="true"`
-- Terminal output uses `role="log"` with `aria-live="polite"`, `aria-relevant="additions"` and `aria-atomic="false"`
-- The terminal wrapper uses `role="application"` with a descriptive `aria-label`
-- Suggestions panel uses `role="listbox"` / `role="option"` / `aria-activedescendant`
-- All external links include `rel="noopener noreferrer"` and `target="_blank"` (enforced via DOMPurify hook)
-- `:focus-visible` styles on all interactive elements
-- Full `prefers-reduced-motion` support — all CSS transitions and Framer Motion animations disabled
 
 ---
 
-## Technologies Used
+## Tech Stack
 
 ### Core
 
-- [Next.js 16](https://nextjs.org/) — React framework, SSR, routing, `next/font/local` for zero-CLS font loading
-- [React 19](https://react.dev/) — UI library
-- [TypeScript 6](https://www.typescriptlang.org/) — strict type safety throughout
-- [Tailwind CSS v4](https://tailwindcss.com/) — utility-first styling driven entirely by CSS custom properties in `@theme`
-- [Bun](https://bun.sh/) — runtime and package manager
+| Technology   | Version | Role                                    |
+| ------------ | ------- | --------------------------------------- |
+| Next.js      | 16.2.4  | Framework, routing, headers, SSR        |
+| React        | 19.2.5  | UI rendering, hooks, error boundary     |
+| TypeScript   | 6.0.3   | Static typing, domain-split type system |
+| Tailwind CSS | 4.2.4   | Utility-first styling                   |
+| Bun          | latest  | Runtime and package manager             |
 
-### UI & Animation
+### Libraries
 
-- [Framer Motion 12](https://www.framer.com/motion/) — terminal entry animations, staggered output, loading states, AnimatePresence
+| Package       | Version | Role                                  |
+| ------------- | ------- | ------------------------------------- |
+| framer-motion | 12.38.0 | Animations and transitions            |
+| dompurify     | 3.4.1   | XSS sanitization                      |
+| axios         | 1.15.2  | HTTP client for all API calls         |
+| mathjs        | 15.2.0  | Math expression evaluator             |
+| uuid          | 14.0.0  | UUID v1 / v4 generation               |
+| date-fns      | 4.1.0   | Date parsing and arithmetic           |
+| highlight.js  | 11.11.1 | Syntax highlighting in `snippet show` |
+| geist         | 1.7.0   | Geist Mono font package               |
 
-### Fonts
+### External APIs
 
-- [Cascadia Code](https://github.com/microsoft/cascadia-code) — default, loaded via `next/font/local`
-- [Fira Code](https://github.com/tonsky/FiraCode) — loaded via `next/font/local`
-- [Geist Mono](https://vercel.com/font) — loaded via the `geist` npm package
-- [Recursive Casual Mono](https://www.recursive.design/) — loaded via `next/font/local`
-
-### Security
-
-- [DOMPurify](https://github.com/cure53/DOMPurify) — XSS sanitization on all HTML command outputs; custom hook enforces `target="_blank"` and `rel="noopener noreferrer"` on every link post-sanitization
-- Strict HTTP headers — `X-Frame-Options: DENY`, `HSTS`, `X-Content-Type-Options: nosniff`, `Referrer-Policy`, `Permissions-Policy`, `X-XSS-Protection`
-
-### Data & APIs
-
-| Library / API                                  | Used for                                                                   |
-| ---------------------------------------------- | -------------------------------------------------------------------------- |
-| [Axios](https://axios-http.com/)               | HTTP client for all API calls                                              |
-| [date-fns](https://date-fns.org/)              | Date parsing, formatting and arithmetic for the age command and live clock |
-| [uuid](https://github.com/uuidjs/uuid)         | v1 and v4 UUID generation and validation                                   |
-| [wttr.in](https://wttr.in/)                    | Real-time weather data                                                     |
-| [JokeAPI v2](https://v2.jokeapi.dev/)          | Programming jokes                                                          |
-| [Advice Slip API](https://api.adviceslip.com/) | Inspirational quotes                                                       |
-| [Frankfurter / ECB](https://frankfurter.dev/)  | Real-time currency exchange rates — no API key required                    |
+| API                   | Command   | Notes                       |
+| --------------------- | --------- | --------------------------- |
+| wttr.in               | `weather` | Free, no auth               |
+| JokeAPI v2            | `joke`    | Free, safe-mode enabled     |
+| Advice Slip API       | `quote`   | Free, no auth               |
+| Frankfurter (ECB)     | `convert` | Free, in-memory cache       |
+| ipapi.co              | `ip`      | 1,000 req/day free tier     |
+| GitHub REST + GraphQL | `github`  | 60 req/hour unauthenticated |
 
 ---
 
 ## Installation
 
-```bash
-# Clone the repository
-git clone https://github.com/SouleymaneSy7/terminal-portfolio-website.git
+### Requirements
 
-# Navigate to project directory
+- Node.js 18+ or Bun 1.0+
+
+### Quick Start
+
+```bash
+git clone https://github.com/SouleymaneSy7/terminal-portfolio-website.git
 cd terminal-portfolio-website
 
-# Install dependencies
 bun install
-
-# Start the development server
 bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+### Scripts
+
+```bash
+bun dev      # Dev server with Turbopack
+bun build    # Production build
+bun start    # Production server
+bun lint     # ESLint
 ```
 
 ---
@@ -753,162 +409,82 @@ bun dev
 ## Project Structure
 
 ```
-src/
-├── app/
-│   ├── globals.css           # Design tokens, 31 theme overrides, 4 font rules, animations
-│   ├── layout.tsx            # Root layout, localFont loading (all 4 fonts), full SEO metadata
-│   ├── page.tsx              # Home page — terminal container with mobile banner
-│   └── not-found.tsx         # 404 page with ASCII art and theme init
-│
-├── commands/                 # One file per command — pure functions, HTML string output
-│   ├── about-command.ts
-│   ├── age-command.ts        # Date parsing (5 formats) + exact age + birthday countdown
-│   ├── contact-command.ts
-│   ├── convert-command.ts    # Currency conversion via Frankfurter/ECB
-│   ├── curl-command.ts       # Full argument parser + HTTP request + formatted output
-│   ├── fun-command.ts        # exit, rps, rps help
-│   ├── note-command.ts       # CRUD notes — localStorage via commandStorage
-│   ├── projects-command.ts   # projects, repo
-│   ├── quiz-game-command.ts  # 40-question quiz, XP, ranks, localStorage persistence
-│   ├── resume-command.ts
-│   ├── snippet-command.ts    # CRUD code snippets — localStorage
-│   ├── system-command.ts     # welcome, neofetch, hostname, whoami, sudo
-│   ├── theme-command.ts      # THEMES + FONTS objects, apply/init/list/switch, all labels
-│   ├── todo-command.ts       # CRUD todos with done/undone — localStorage
-│   ├── uuid-command.ts       # v1/v4 generation (max 20) and validation
-│   ├── weather-command.ts    # Output formatters (success, error, usage)
-│   └── index.ts              # Re-exports all commands
-│
-├── components/
-│   ├── Terminal.tsx           # Main shell — history, localStorage, loading state machine
-│   ├── CommandInput.tsx       # Input, Tab completion, grouped suggestions panel
-│   ├── CommandOutput.tsx      # Renders text / html / component / link output blocks
-│   ├── TerminalPrompt.tsx     # guest@souleymane-sy-portfolio:~$ prompt
-│   ├── LiveClock.tsx          # Real-time clock with box-drawing frame characters
-│   ├── MobileBanner.tsx       # Mobile experience notice with dismiss
-│   ├── Custom404.tsx          # Animated 404 page component with theme init
-│   └── ui/
-│       └── loaders/
-│           ├── ascii-progress-bar.tsx   # Bouncing ASCII progress bar
-│           ├── braille-spinner.tsx      # Braille character spinner (default)
-│           ├── dots-accumulator.tsx     # Accumulating dots animation
-│           ├── loading-indicator.tsx    # Variant selector component
-│           ├── rotating-spinner.tsx     # Classic / | \ — spinner
-│           ├── typewritter-cursor.tsx   # Typewriter effect with erase cycle
-│           └── index.ts
-│
-├── constants/
-│   └── index.ts              # commands[], COMPLETIONS map, all --help blocks, ASCII art,
-│                             #   createHtmlOutput(), getHelpCommandOutput(), date/time outputs
-│
-├── hooks/
-│   └── useLocalStorage.ts    # SSR-safe localStorage hook with hydration guard
-│
-├── services/
-│   ├── convert.service.ts    # Frankfurter API client
-│   ├── curl.service.ts       # Axios HTTP wrapper with header normalisation
-│   ├── joke.service.ts       # JokeAPI client
-│   ├── quote.service.ts      # Advice Slip API client
-│   └── weather.service.ts    # wttr.in API client
-│
-├── types/
-│   └── index.ts              # All shared TypeScript interfaces and types
-│
-└── utils/
-    ├── command.ts            # executeCommand() — central command router (switch/case)
-    ├── commandStorage.ts     # Thin localStorage wrapper (get/set/remove) with SSR guard
-    └── date.ts               # getTimezone(), getGreeting()
+terminal-portfolio-website/
+├── public/
+│   ├── fonts/                    # Local font files (woff2)
+│   ├── resume/                   # CV PDFs — EN and FR
+│   └── og-image.png
+├── src/
+│   ├── app/
+│   │   ├── globals.css           # Design tokens, 31 themes, 15 font rules
+│   │   ├── layout.tsx            # Root layout, SEO metadata, static font
+│   │   ├── page.tsx              # Home — Terminal + MobileBanner
+│   │   ├── not-found.tsx         # Custom 404
+│   │   ├── robots.ts
+│   │   └── sitemap.ts
+│   ├── commands/
+│   │   ├── curl/                 # curl — index, parser, formatters, outputs
+│   │   ├── man/                  # man — index + pages (system, info, network, utils, fun)
+│   │   ├── _template-command.ts  # Template for new commands
+│   │   └── *.ts                  # One file per command
+│   ├── components/
+│   │   ├── common/               # Custom404, VisuallyHidden
+│   │   ├── terminal/             # Terminal, CommandInput, CommandOutput, TerminalPrompt
+│   │   └── ui/                   # LiveClock, TimerWidget, MobileBanner, loaders/
+│   ├── constants/
+│   │   ├── help/                 # Help outputs organized by category
+│   │   ├── quiz-game/            # 40 questions + XP / rank config
+│   │   ├── ascii.ts              # All ASCII art constants
+│   │   ├── commands.ts           # Command list + COMPLETIONS map
+│   │   ├── storageKeys.ts        # Centralized localStorage key names
+│   │   └── suggestions.ts        # Grouped suggestion data
+│   ├── hooks/                    # 7 custom hooks
+│   ├── services/                 # 7 service files — one per API
+│   ├── types/                    # 4 domain-split type files
+│   └── utils/
+│       ├── output/               # output.ts + outputBuilders.ts
+│       ├── argParser.ts          # Unified argument parser
+│       ├── command.ts            # executeCommand dispatcher
+│       ├── commandRegistry.ts    # Central command registry
+│       ├── commandStorage.ts     # localStorage wrapper
+│       ├── date.ts               # Date utilities
+│       └── designTokens.ts       # Centralized design tokens
+├── next.config.ts
+├── tsconfig.json
+└── package.json
 ```
 
 ---
 
-## Development Status
+## Adding a Command
 
-### Core Terminal
+The codebase is designed to make this as frictionless as possible:
 
-- [x] Terminal interface with full command processing
-- [x] Command history — navigation (↑↓) and localStorage persistence (max 50 entries)
-- [x] Tab autocomplete — commands and arguments (themes, fonts, game, rps, note, todo, snippet, uuid, convert, curl)
-- [x] Smart suggestions panel — grouped display for theme/typeface, keyboard navigation, cycling, Esc dismiss with input restoration
-- [x] Command safety timer — 10s fallback to restore input if a command hangs
+1. Copy `src/commands/_template-command.ts` and rename it
+2. Write your handler — use `parseArgs`, `createHtmlOutput`, `createErrorOutput`
+3. Register it in `src/utils/commandRegistry.ts` — one line
+4. Add it to the `commands` array in `src/constants/commands.ts`
+5. Add tab completions in `COMPLETIONS` if applicable
+6. Write a `--help` entry in `src/constants/help/`
+7. Write a `man` page entry in `src/commands/man/pages/`
 
-### Theming & Fonts
-
-- [x] Theme switching — 31 OKLCH themes with localStorage persistence
-- [x] Font switching — 4 fonts via `next/font/local` with persistence
-- [x] Design system — unified CSS tokens in `globals.css`, consistent command output structure
-- [x] Grouped suggestions for theme/typeface with live description in panel header
-
-### Information Commands
-
-- [x] `about` — personal story and tech stack
-- [x] `contact` — all social links
-- [x] `email` — mailto link
-- [x] `projects` — 5 featured projects with live + source links
-- [x] `repo` — portfolio source code
-- [x] `resume` — EN and FR PDF (view + download)
-- [x] `whoami` — short bio
-- [x] `hostname` — system info
-- [x] `neofetch` — full system overview with live theme/font
-- [x] `sudo` — easter egg
-- [x] `welcome` — animated ASCII banner
-
-### Utilities
-
-- [x] `age` — exact age calculator with 5 date format parsers and birthday countdown
-- [x] `convert` — real-time currency conversion for 31 currencies (ECB/Frankfurter)
-- [x] `curl` — browser HTTP client with full flag parser (`-v`, `-I`, `-s`, `-X`, `-H`, `-d`, `-u`, `-L`, `-o`)
-- [x] `note` — persistent note CRUD (add / list / edit / rm / clear) with short IDs
-- [x] `snippet` — persistent code snippet CRUD (add / show / rm / clear) with short IDs
-- [x] `todo` — persistent task list with done/undone states (add / done / undone / rm / clear)
-- [x] `uuid` — v1 and v4 UUID generation (batch up to 20) and validation
-- [x] `date` / `time` — live clock with box-drawing frame
-- [x] `weather` — real-time city weather via wttr.in
-
-### Fun & Games
-
-- [x] `joke` — random programming joke (JokeAPI)
-- [x] `quote` — random advice (Advice Slip API)
-- [x] `rps` — rock-paper-scissors
-- [x] `cowsay` — ASCII cow
-- [x] `game` — 40-question Frontend quiz with XP, accuracy tracking, 4 ranks, localStorage persistence
-
-### Loading Indicators
-
-- [x] 5 animated variants — braille spinner, ASCII progress bar, dots accumulator, typewriter cursor, rotating spinner
-
-### Quality
-
-- [x] Accessibility — ARIA roles, `aria-hidden` on ASCII art, focus management, `prefers-reduced-motion`
-- [x] API integrations — weather, jokes, quotes, currency conversion
-- [x] Security headers and DOMPurify XSS sanitization
-- [x] Full SEO — OpenGraph, Twitter Card, sitemap, robots.txt, canonical URL
-- [x] Mobile banner with responsive experience
-- [x] Custom animated 404 page
-- [ ] Easter eggs and hidden features
-
----
-
-## Inspiration
-
-This project draws inspiration from these developers and their work:
-
-- [M4tt72's Terminal](https://term.fathi.me/) — clean terminal design and command architecture
-- [Forrest's Portfolio](https://fkcodes.com/) — creative terminal-based portfolio execution
+That's it. No switch statements to update, no global imports to hunt down.
 
 ---
 
 ## Author
 
-**Souleymane Sy** — Self-taught frontend developer from Coyah, Guinea-Conakry 🇬🇳
+**Souleymane Sy** — Self-taught frontend developer since 2022. Based in Coyah, Guinea-Conakry 🇬🇳.
 
-- [GitHub](https://github.com/SouleymaneSy7)
-- [LinkedIn](https://linkedin.com/in/souleymanesy7)
-- [Frontend Mentor](https://www.frontendmentor.io/profile/SouleymaneSy7)
-- [Dev Challenges](https://devchallenges.io/profile/534cd213-3165-4c16-bdcf-058e1f468da0)
-- [Twitter / X](https://twitter.com/Souleymanesy43)
-- [Email](mailto:souleymanesycodes@gmail.com)
+This portfolio is the most personal thing I've shipped publicly. It's the project where every architectural decision was mine, every theme was chosen deliberately, every command was built from scratch. No tutorials followed for this one.
+
+If something here caught your attention — reach out.
+
+- **GitHub** — [github.com/SouleymaneSy7](https://github.com/SouleymaneSy7)
+- **LinkedIn** — [linkedin.com/in/souleymanesy7](https://linkedin.com/in/souleymanesy7)
+- **Email** — [souleymanesycodes@gmail.com](mailto:souleymanesycodes@gmail.com)
+- **Live** — [terminal-portfolio-website-xi.vercel.app](https://terminal-portfolio-website-xi.vercel.app)
 
 ---
 
-> Built with curiosity, persistence, and a deep love for web and the command line.
+<p align="center">Built with discipline, not magic — from Coyah, Guinea-Conakry 🇬🇳</p>
