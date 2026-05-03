@@ -190,6 +190,8 @@ async function showSnippet(shortId: string): Promise<CommandHistoryOutputType> {
   let highlighted = escHtml(snip.code);
   try {
     const hljs = (await import("highlight.js")).default;
+    await import("highlight.js/styles/atom-one-dark.css");
+
     const validLang = hljs.getLanguage(snip.lang) ? snip.lang : "plaintext";
     highlighted = hljs.highlight(snip.code, { language: validLang }).value;
   } catch {
