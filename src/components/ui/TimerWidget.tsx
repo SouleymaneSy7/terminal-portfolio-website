@@ -8,6 +8,7 @@
 import { TimerWidgetPropsType } from "@/types";
 import { motion } from "framer-motion";
 import * as React from "react";
+import VisuallyHidden from "../common/VisuallyHidden";
 
 const BAR_WIDTH = 32;
 
@@ -53,9 +54,15 @@ const TimerWidget: React.FC<TimerWidgetPropsType> = ({
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
       >
-        <p className="text-tertiary-clr font-bold">
-          🔔 Timer done!{label ? ` — ${label}` : ""}
-        </p>
+        <div role="alert" aria-live="assertive">
+          <VisuallyHidden>
+            Timer done! {label ? ` — ${label}` : ""}.
+          </VisuallyHidden>
+
+          <p className="text-tertiary-clr font-bold">
+            🔔 Timer done! {label ? ` — ${label}` : ""}
+          </p>
+        </div>
 
         <p className="text-text-clr opacity-sep">
           Duration:{" "}
