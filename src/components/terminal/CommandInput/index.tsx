@@ -19,6 +19,7 @@ import { useReverseSearch, useSuggestions } from "@/hooks";
 import { CommandInputPropsType } from "@/types";
 import TerminalPrompt from "../TerminalPrompt";
 import { SuggestionsPanel } from "./SuggestionsPanel";
+import { useAudio } from "@/hooks/useAudio";
 
 const INTERACTIVE_SELECTOR =
   'a[href], button:not([disabled]), input, textarea, select, [role="button"]';
@@ -32,6 +33,8 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
   onClearTerminal,
   commandHistory,
 }) => {
+  const { play } = useAudio();
+
   const commandInputRef = React.useRef<HTMLInputElement>(null);
   const suggestionListRef = React.useRef<HTMLUListElement>(null);
 
@@ -93,6 +96,20 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.ctrlKey) {
+      play("ctrl");
+    } else if (event.key === "Enter") {
+      play("enter");
+    } else if (event.key === "Backspace" || event.key === "Delete") {
+      play("backspace");
+    } else if (event.key === "Tab") {
+      play("tab");
+    } else if (event.key === "Escape") {
+      play("escape");
+    } else if (event.key.length === 1) {
+      play("keypress");
+    }
+
     // ── Ctrl+L — clear ──────────────────────────────────────────
     if (event.ctrlKey && event.key.toLowerCase() === "l") {
       event.preventDefault();
@@ -196,7 +213,11 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
     <div className="space-y-t-group">
       {/* Reverse search prompt */}
       {reverseSearch.isActive && (
-        <p className="text-text-clr opacity-sep" aria-live="polite">
+        <p
+          className="text-text-clr opacity-sep"
+          aria-live="polite"
+          aria-atomic="true"
+        >
           <span className="text-secondary-clr">(reverse-i-search)</span>
           <span className="text-text-clr">'{reverseSearch.query}'</span>
           <span className="text-text-clr opacity-sep">: </span>
@@ -225,6 +246,7 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
             <input
               id="command-input"
               autoFocus
+              role="combobox"
               autoComplete="off"
               autoCapitalize="off"
               autoCorrect="off"
@@ -236,6 +258,7 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
               onKeyDown={handleKeyDown}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
+              aria-haspopup="listbox"
               aria-label={
                 reverseSearch.isActive
                   ? `Reverse search: ${reverseSearch.query || "type to search"}`
