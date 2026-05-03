@@ -144,6 +144,36 @@ export function parseCurlArgs(args: string[]): CurlOptionsType {
   return opts;
 }
 
+function isPrivateIP(hostname: string): boolean {
+  const normalized = hostname.toLowerCase();
+
+  // localhost variants
+  if (normalized === "localhost" || normalized === "0.0.0.0") return true;
+
+  // IPv6 loopback
+  if (normalized === "::1" || normalized === "[::1]") return true;
+
+  // 127.0.0.0/8
+  if (/^127\./.test(normalized)) return true;
+
+  // 0.0.0.0/8
+  if (/^0\./.test(normalized)) return true;
+
+  // 10.0.0.0/8
+  if (/^10\./.test(normalized)) return true;
+
+  // 192.168.0.0/16
+  if (/^192\.168\./.test(normalized)) return true;
+
+  // 172.16.0.0/12 (172.16.x.x through 172.31.x.x)
+  if (/^172\.(1[6-9]|2\d|3[01])\./.test(normalized)) return true;
+
+  // 169.254.0.0/16 (link-local)
+  if (/^169\.254\./.test(normalized)) return true;
+
+  return false;
+}
+
 export function isValidPublicUrl(rawUrl: string): {
   ok: boolean;
   reason?: string;
@@ -164,13 +194,7 @@ export function isValidPublicUrl(rawUrl: string): {
   }
 
   const { hostname } = parsed;
-  const isLocal =
-    hostname === "localhost" ||
-    hostname === "127.0.0.1" ||
-    hostname === "0.0.0.0" ||
-    hostname.startsWith("192.168.") ||
-    hostname.startsWith("10.") ||
-    hostname.startsWith("172.16.");
+  const isLocal = isPrivateIP(hostname);
 
   if (isLocal) {
     return {
@@ -180,4 +204,8 @@ export function isValidPublicUrl(rawUrl: string): {
   }
 
   return { ok: true };
+}
+
+export function normalizeUrl(url: string): string {
+  return /^https?:\/\//i.test(url) ? url : "https://" + url;
 }
