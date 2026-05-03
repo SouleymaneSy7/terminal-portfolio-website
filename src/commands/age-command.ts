@@ -130,7 +130,7 @@ function createAgeOutput(date: Date): CommandHistoryOutputType {
       ? `<p class="text-tertiary-clr font-bold">🎂 Happy Birthday! 🎉</p>`
       : daysUntilBirthday === 1
         ? `<p><span class="text-secondary-clr">Next birthday</span>${DT.decorators.arrow}Tomorrow — <span class="text-tertiary-clr">${nextBdayStr}</span></p>`
-        : `<p><span class="text-secondary-clr">Next birthday</span>${DT.decorators.arrow}<span class="text-tertiary-clr">${nextBdayStr}</span> <span class="text-text-clr opacity-sep">(${daysUntilBirthday} days)</span></p>`;
+        : `<p><span class="text-secondary-clr">Next birthday</span>${DT.decorators.arrow}<span class="text-tertiary-clr">${nextBdayStr}</span> <span class="text-text-clr opacity-sep"> ${DT.decorators.bullet} (${daysUntilBirthday} days)</span></p>`;
 
   const detailParts = [
     months > 0 ? `${months} month${months > 1 ? "s" : ""}` : "",
