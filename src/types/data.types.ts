@@ -251,3 +251,22 @@ export type LocalFontSourceType = {
 };
 
 export type FontSourceType = GoogleFontSourceType | LocalFontSourceType;
+
+// ─────────────────────────────────────────────────────────────────
+// AUDIO TYPE
+// ─────────────────────────────────────────────────────────────────
+
+export type AudioEventType =
+  | "keypress"
+  | "enter"
+  | "backspace"
+  | "tab"
+  | "escape"
+  | "ctrl"
+  | "error"
+  | "success";
+
+export interface AudioStateType {
+  enabled: boolean;
+  volume: number;
+}
