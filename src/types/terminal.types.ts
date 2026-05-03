@@ -30,6 +30,7 @@ export type SerializableBlock =
 export type CommandHistory = {
   command: string;
   output: Block[];
+  id?: string;
 };
 
 export type CommandHistoryTypes = CommandHistory[];
