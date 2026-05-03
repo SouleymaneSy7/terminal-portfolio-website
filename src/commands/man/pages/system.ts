@@ -1,6 +1,25 @@
 import { ManPageType } from "@/types";
 
 export const SYSTEM_PAGES: Record<string, ManPageType> = {
+  audio: {
+    name: "audio",
+    synopsis: "audio\naudio on\naudio off\naudio volume <0-100>",
+    description:
+      "Controls keyboard sound effects generated via the Web Audio API. Sounds are synthesized programmatically — no audio files, no network requests. Each key category has a distinct sound: normal keypresses use a short sine click, Enter triggers a two-tone chime, Backspace a lower click, Tab a soft ascending chime, Escape a descending chime, Ctrl a square-wave tick, command errors a short noise burst, and successful commands a three-note ascending arpeggio.",
+    options: `
+    <p><span class="text-tertiary-clr font-bold">audio              </span> - Display current status and volume bar.</p>
+    <p><span class="text-tertiary-clr font-bold">audio on           </span> - Enable keyboard sounds and play a confirmation chime.</p>
+    <p><span class="text-tertiary-clr font-bold">audio off          </span> - Disable all keyboard sounds silently.</p>
+    <p><span class="text-tertiary-clr font-bold">audio volume &lt;n&gt; </span> - Set volume 0–100. Plays a keypress sound as immediate feedback.</p>`,
+    examples: `
+    <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  audio on</p>
+    <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  audio volume 60</p>
+    <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  audio off</p>
+    <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  audio volume 0   (mute sans désactiver)</p>`,
+    notes:
+      "Audio is disabled by default — it requires explicit opt-in. The AudioContext is created lazily on first keypress after enabling, satisfying browser autoplay policies. On iOS Safari, the context may suspend between interactions — it is automatically resumed on the next keydown. Respects prefers-reduced-motion: if the user has requested reduced motion, no sounds will play regardless of the audio setting.",
+    seeAlso: ["theme", "typeface"],
+  },
   clear: {
     name: "clear",
     synopsis: "clear",
