@@ -96,6 +96,19 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Souleymane Sy",
+  url: "https://terminal-portfolio-website-xi.vercel.app",
+  sameAs: [
+    "https://github.com/SouleymaneSy7",
+    "https://linkedin.com/in/souleymanesy7",
+  ],
+  jobTitle: "Frontend Developer",
+  knowsAbout: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -104,13 +117,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link
-          rel="preconnect"
+          rel="dns-prefetch"
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
+
       <body className={[CascadiaCode.variable, "antialiased"].join(" ")}>
         {children}
       </body>
