@@ -108,9 +108,79 @@ export function createUsageOutput(
   ];
 }
 
-/**
- * Configuration for help block creation
- */
+// ─────────────────────────────────────────────────────────────────
+//  SECTION BUILDERS
+// ─────────────────────────────────────────────────────────────────
+
+function separatorLine(): string {
+  return `<p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>`;
+}
+
+function sectionGroup(heading: string, content: string): string {
+  return `
+    <div class="space-y-t-group">
+      <p class="text-secondary-clr font-bold">${heading}</p>
+      ${separatorLine()}
+      <p>${content}</p>
+    </div>`;
+}
+
+function sectionOptions(options: HelpConfigType["options"]): string {
+  const items = options!
+    .map(
+      (opt) =>
+        `<p>${DT.decorators.bullet} <span class="text-tertiary-clr font-bold">${opt.flag}</span> ${DT.separators.short.slice(0, 5)} ${opt.description}</p>`,
+    )
+    .join("\n");
+
+  return `
+    <div class="space-y-t-group">
+      <p class="text-secondary-clr font-bold">Options</p>
+      ${separatorLine()}
+      ${items}
+    </div>`;
+}
+
+function sectionExamples(examples: HelpConfigType["examples"]): string {
+  const items = examples!
+    .map(
+      (ex) =>
+        `<p>${DT.decorators.bullet} <span class="text-tertiary-clr">${ex.command}</span></p>
+      <p class="text-text-clr opacity-70 ml-4">${ex.description}</p>`,
+    )
+    .join("\n");
+
+  return `
+    <div class="space-y-t-group">
+      <p class="text-secondary-clr font-bold">Examples</p>
+      ${separatorLine()}
+      ${items}
+    </div>`;
+}
+
+function sectionNotes(notes: string): string {
+  return `
+    <div class="space-y-t-group">
+      <p class="text-secondary-clr font-bold">Notes</p>
+      ${separatorLine()}
+      <p>${notes}</p>
+    </div>`;
+}
+
+function sectionSeeAlso(commands: string[]): string {
+  const links = commands
+    .map(
+      (cmd) =>
+        `<span class="text-tertiary-clr font-bold">${cmd}</span>`,
+    )
+    .join(", ");
+
+  return `
+    <div class="space-y-t-footer">
+      ${separatorLine()}
+      <p>See also: ${links}</p>
+    </div>`;
+}
 
 /**
  * Create standardized help block
@@ -121,77 +191,22 @@ export function createUsageOutput(
 export function createHelpOutput(
   config: HelpConfigType,
 ): CommandHistoryOutputType {
-  let content = `<div class="space-y-t-section py-t-outer">`;
-
-  // Name and description
-  content += `
-    <div class="space-y-t-group">
-      <p class="text-secondary-clr font-bold">${config.name}</p>
-      <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-      <p>${config.description}</p>
-    </div>`;
-
-  // Usage
-  content += `
-    <div class="space-y-t-group">
-      <p class="text-secondary-clr font-bold">Usage</p>
-      <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-      <p>${config.usage}</p>
-    </div>`;
-
-  // Options
-  if (config.options && config.options.length > 0) {
-    content += `
-    <div class="space-y-t-group">
-      <p class="text-secondary-clr font-bold">Options</p>
-      <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>`;
-    config.options.forEach((opt) => {
-      content += `
-      <p>${DT.decorators.bullet} <span class="text-tertiary-clr font-bold">${opt.flag}</span> ${DT.separators.short.slice(0, 5)} ${opt.description}</p>`;
-    });
-    content += `</div>`;
-  }
-
-  // Examples
-  if (config.examples && config.examples.length > 0) {
-    content += `
-    <div class="space-y-t-group">
-      <p class="text-secondary-clr font-bold">Examples</p>
-      <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>`;
-    config.examples.forEach((ex) => {
-      content += `
-      <p>${DT.decorators.bullet} <span class="text-tertiary-clr">${ex.command}</span></p>
-      <p class="text-text-clr opacity-70 ml-4">${ex.description}</p>`;
-    });
-    content += `</div>`;
-  }
-
-  // Notes
-  if (config.notes) {
-    content += `
-    <div class="space-y-t-group">
-      <p class="text-secondary-clr font-bold">Notes</p>
-      <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-      <p>${config.notes}</p>
-    </div>`;
-  }
-
-  // See Also
-  if (config.seeAlso && config.seeAlso.length > 0) {
-    content += `
-    <div class="space-y-t-footer">
-      <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-      <p>See also: ${config.seeAlso.map((cmd) => `<span class="text-tertiary-clr font-bold">${cmd}</span>`).join(", ")}</p>
-    </div>`;
-  }
-
-  content += `</div>`;
+  const parts = [
+    `<div class="space-y-t-section py-t-outer">`,
+    sectionGroup(config.name, config.description),
+    sectionGroup("Usage", config.usage),
+    config.options?.length ? sectionOptions(config.options) : "",
+    config.examples?.length ? sectionExamples(config.examples) : "",
+    config.notes ? sectionNotes(config.notes) : "",
+    config.seeAlso?.length ? sectionSeeAlso(config.seeAlso) : "",
+    `</div>`,
+  ];
 
   return [
     {
       id: crypto.randomUUID(),
       type: "html",
-      content: [content],
+      content: [parts.filter(Boolean).join("\n")],
     },
   ];
 }
