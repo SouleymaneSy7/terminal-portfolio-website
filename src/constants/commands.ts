@@ -13,6 +13,7 @@ import { THEMES, FONTS } from "@/commands/theme-command";
 export const commands: string[] = [
   "about",
   "age",
+  "audio",
   "calc",
   "clear",
   "color",
@@ -63,6 +64,9 @@ export const COMPLETIONS: Record<string, string[]> = {
   // Theming — derived from THEMES / FONTS objects automatically
   theme: Object.keys(THEMES),
   typeface: Object.keys(FONTS),
+
+  // Audio
+audio: ["on", "off", "volume", "--help", "help", "-h"],
 
   // Fun & Games
   rps: ["rock", "paper", "scissors", "--help", "help", "-h"],
@@ -185,6 +189,7 @@ export const COMPLETIONS: Record<string, string[]> = {
   man: [
     "about",
     "age",
+    "audio",
     "calc",
     "clear",
     "color",
