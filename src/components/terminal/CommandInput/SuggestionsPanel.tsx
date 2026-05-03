@@ -84,6 +84,7 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
                         >
                           <button
                             type="button"
+                            aria-label={`Complete with ${suggestion}`}
                             onMouseDown={(e) => {
                               e.preventDefault();
                               onSelect(suggestion);
@@ -120,6 +121,7 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
             >
               {completions.map((suggestion, index) => {
                 const isActive = index === activeIndex;
+
                 return (
                   <li
                     key={index}
@@ -130,6 +132,7 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
                   >
                     <button
                       type="button"
+                      aria-label={`Complete with ${suggestion}`}
                       onMouseDown={(e) => {
                         e.preventDefault();
                         onSelect(suggestion);
