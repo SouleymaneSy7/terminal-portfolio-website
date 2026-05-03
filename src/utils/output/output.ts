@@ -48,15 +48,3 @@ export const createLinkOutput = (
     content: links,
   },
 ];
-
-/**
- * Creates a help block — semantically identical to createHtmlOutput,
- * kept as a named alias so call-sites are self-documenting.
- */
-export const createHelpBlock = (content: string): CommandHistoryOutputType => [
-  {
-    id: crypto.randomUUID(),
-    type: "html" as const,
-    content: [content],
-  },
-];
