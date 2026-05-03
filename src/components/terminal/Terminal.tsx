@@ -18,6 +18,7 @@ import {
 import { executeCommand } from "@/utils/command";
 import { LoadingIndicator } from "../ui/loaders";
 import HistoryEntry from "./HistoryEntry";
+import { audioService } from "@/services/audio.service";
 
 const STORAGE_KEY = STORAGE_KEYS.COMMAND_HISTORY;
 
@@ -187,17 +188,22 @@ const TerminalInner: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
         : [commandOutput];
 
       pushEntry({
+        id: crypto.randomUUID(),
         command,
         output: normalizedOutput as CommandHistoryOutputType,
       });
+
+      audioService.play("success");
     } catch {
+      audioService.play("error");
+
       if (currentCommandId.current !== commandId) return;
 
       pushEntry({
         command,
         output: [
           {
-            id: "error",
+            id: crypto.randomUUID(),
             type: "text" as const,
             content: ["Error: command failed. Please try again."],
           },
