@@ -4,6 +4,30 @@
 
 import { createHelpOutput } from "@/utils/output";
 
+export const AUDIO_HELP = createHelpOutput({
+  name: "audio",
+  usage: "audio [on|off|volume <0-100>]",
+  description:
+    "Toggle keyboard sound effects and control their volume. Sounds are generated locally via the Web Audio API — no network requests.",
+  options: [
+    { flag: "audio", description: "Show current status and volume level" },
+    { flag: "audio on", description: "Enable keyboard sound effects" },
+    { flag: "audio off", description: "Disable keyboard sound effects" },
+    { flag: "audio volume <n>", description: "Set volume from 0 to 100" },
+    { flag: "--help, -h", description: "Show this help message" },
+  ],
+  examples: [
+    { command: "audio on", description: "Enable sounds" },
+    { command: "audio off", description: "Disable sounds" },
+    { command: "audio volume 80", description: "Set volume to 80%" },
+    { command: "audio volume 0", description: "Mute without disabling" },
+    { command: "audio", description: "Check current status" },
+  ],
+  notes:
+    'Preference is persisted in localStorage and restored on every page load. Audio is <span class="text-tertiary-clr">disabled by default</span> — it must be explicitly enabled. Respects <span class="text-tertiary-clr">prefers-reduced-motion</span>.',
+  seeAlso: ["theme", "typeface"],
+});
+
 export const WELCOME_HELP = createHelpOutput({
   name: "welcome",
   usage: "welcome",
