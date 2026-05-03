@@ -38,7 +38,7 @@ export const handleHistoryCommand = (args: string[]) => {
   const stored = storageGet<StoredEntryType[]>(STORAGE_KEY, []);
   const commands = stored
     .map((e) => e.command)
-    .filter((cmd) => cmd && cmd.trim() && cmd !== "^C");
+    .filter((cmd) => cmd && cmd.trim());
 
   const slice = commands.slice(-count);
 
@@ -76,6 +76,7 @@ export const handleHistoryCommand = (args: string[]) => {
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         ${rows}
       </div>
+
       <div class="space-y-t-footer">
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p>
