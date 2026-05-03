@@ -28,8 +28,9 @@ export const handleHelpCommand = (): CommandHistoryOutputType => {
           <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
           <p>
             <span class="text-secondary-clr font-bold">Tip:</span> Every command accepts
+            <span class="text-tertiary-clr font-bold">help</span>,
             <span class="text-tertiary-clr font-bold">--help</span> or
-            <span class="text-tertiary-clr font-bold">help</span>
+            <span class="text-tertiary-clr font-bold">-h</span>
             for detailed usage — e.g.
             <span class="text-tertiary-clr font-bold">weather --help</span>
           </p>
@@ -38,8 +39,9 @@ export const handleHelpCommand = (): CommandHistoryOutputType => {
         <div class="space-y-t-group">
           <p class="text-secondary-clr font-bold">Navigation &amp; System</p>
           <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+          <p><span class="text-tertiary-clr font-bold">audio     </span> - Toggle keyboard sound effects and control volume. <span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">audio [on|off|volume &lt;n&gt;]</span></p>
           <p><span class="text-tertiary-clr font-bold">clear     </span> - Clear the terminal screen</p>
-          <p><span class="text-tertiary-clr font-bold">exit      </span> - Display goodbye message (close tab to exit)</p>
+          <p><span class="text-tertiary-clr font-bold">exit      </span> - Display goodbye message <span class="text-text-clr opacity-sep">(close tab to exit)</span></p>
           <p><span class="text-tertiary-clr font-bold">help      </span> - List all available commands</p>
           <p><span class="text-tertiary-clr font-bold">hostname  </span> - Display system hostname and portfolio info</p>
           <p><span class="text-tertiary-clr font-bold">neofetch  </span> - Linux-style system summary with live theme &amp; font</p>
