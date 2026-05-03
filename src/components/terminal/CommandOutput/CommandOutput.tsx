@@ -28,6 +28,10 @@ function initDOMPurify() {
   });
 }
 
+if (typeof window !== "undefined") {
+  initDOMPurify();
+}
+
 const STAGGER = 0.04;
 const LINE_DURATION = 0.1;
 
@@ -55,10 +59,6 @@ const CommandOutput: React.FC<CommandOutputPropsType> = ({
   component,
   onComplete,
 }) => {
-  React.useEffect(() => {
-    initDOMPurify();
-  }, []);
-
   // onComplete is now in deps — if the parent re-creates it, the
   // timer resets correctly instead of calling a stale closure
   React.useEffect(() => {
