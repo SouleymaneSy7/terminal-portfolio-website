@@ -13,6 +13,7 @@ import {
   curlUsageOutput,
   handleAboutCommand,
   handleAgeCommand,
+  handleAudioCommand,
   handleCalcCommand,
   handleColorCommand,
   handleContactCommand,
@@ -54,7 +55,7 @@ import {
 } from "@/commands";
 import type { CommandHandlerType } from "@/types";
 
-import { parseCurlArgs } from "@/commands/curl/parser";
+import { normalizeUrl, parseCurlArgs } from "@/commands/curl/parser";
 import { handleWeatherCommand } from "@/commands/weather-command";
 import { createErrorOutput } from "@/utils/output";
 
@@ -82,6 +83,9 @@ export const COMMAND_REGISTRY: Record<string, CommandHandlerType> = {
   resume: (args) => handleResumeCommand(args),
 
   // ── System ────────────────────────────────────────────────────
+
+  audio: (args) => handleAudioCommand(args),
+
   hostname: (args) => handleHostnameCommand(args),
 
   neofetch: (args) => handleNeofetchCommand(args),
@@ -109,10 +113,9 @@ export const COMMAND_REGISTRY: Record<string, CommandHandlerType> = {
     // Find the URL argument (first non-flag token) and validate it
     const opts = parseCurlArgs(args);
     if (opts.url) {
-      const normalized = /^https?:\/\//i.test(opts.url)
-        ? opts.url
-        : "https://" + opts.url;
+      const normalized = normalizeUrl(opts.url);
       const check = isValidPublicUrl(normalized);
+
       if (!check.ok) return createErrorOutput("Invalid URL", check.reason);
     }
     return curlCommand(args);
