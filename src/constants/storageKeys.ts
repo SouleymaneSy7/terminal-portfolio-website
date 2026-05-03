@@ -16,6 +16,9 @@ export const STORAGE_KEYS = {
 
   // Quiz game
   QUIZ_GAME: "terminal:quiz-game",
+
+  // Audio
+  AUDIO: "terminal:audio",
 } as const;
 
 export type StorageKeyType = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];
