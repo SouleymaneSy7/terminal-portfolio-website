@@ -20,6 +20,7 @@ import { STORAGE_KEYS } from "@/constants/storageKeys";
 
 const STORAGE_KEY = STORAGE_KEYS.COMMAND_HISTORY;
 const MAX_HISTORY = 50;
+const MAX_IN_MEMORY = 200;
 
 function toSerializable(entry: CommandHistory): SerializableEntryType {
   return {
@@ -71,7 +72,10 @@ export function useCommandHistory() {
 
   // ── Public API ────────────────────────────────────────────────
   const pushEntry = React.useCallback((entry: CommandHistory) => {
-    setHistory((prev) => [...prev, entry]);
+    setHistory((prev) => {
+      const next = [...prev, { ...entry, id: crypto.randomUUID() }];
+      return next.length > MAX_IN_MEMORY ? next.slice(-MAX_IN_MEMORY) : next;
+    });
   }, []);
 
   // setSavedHistory is stable — no disable needed.
