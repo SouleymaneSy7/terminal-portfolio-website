@@ -13,7 +13,7 @@ Total time spent on this project: [![wakatime](https://wakatime.com/badge/user/0
 
 ## Why a terminal?
 
-I started coding in 2022, in Coyah, Guinea-Conakry — no school, no bootcamp, no mentor. Just a laptop and an obsession with understanding how the web actually works.
+I started coding in 2022 — no school, no bootcamp, no mentor. Just a laptop and an obsession with understanding how the web actually works.
 
 After learning JavaScript, 50+ Frontend Mentor challenges, a contest podium, and a certified internship — I wanted a portfolio that reflected the way I think. Not a landing page. Not a scroll-heavy site. A **terminal**.
 
@@ -37,14 +37,15 @@ This project is both a technical showcase and a personal statement. Every comman
 
 ## Features
 
-- **42 commands** — portfolio info, utilities, network tools, games, all with `--help` support
+- **43 commands** — portfolio info, utilities, network tools, games, all with `--help` support
+- **Audio system** — keyboard clicks, success/error sounds, Web Audio API synthesis, on/off/volume control
 - **31 color themes** — OKLCH-based, persisted in localStorage, switchable instantly
 - **15 monospace fonts** — dynamic loading system (1 static + 8 Google Fonts + 1 npm + 5 local)
 - **Tab autocomplete** — completes commands and arguments, with cycling support
 - **Suggestions panel** — grouped live completions with descriptions and keyboard navigation
 - **Ctrl+R reverse search** — search through history incrementally, real terminal-style
-- **Command history** — navigate with ↑↓, persisted across sessions (max 50 entries)
-- **Manual pages** — `man <command>` for all 42 commands
+- **Command history** — navigate with ↑↓, persisted across sessions
+- **Manual pages** — `man <command>` for all 43 commands
 - **5 loading variants** — braille spinner, ASCII progress bar, typewriter, dots, rotating spinner
 - **Live clock** — real-time clock with box-drawing characters and timezone detection
 - **Interactive quiz** — 40-question Frontend quiz, XP system, rank progression, localStorage persistence
@@ -56,9 +57,9 @@ This project is both a technical showcase and a personal statement. Every comman
 - **Math calculator** — full expression evaluator via mathjs (algebra, trig, units, matrices)
 - **DOMPurify sanitization** — every HTML output block is sanitized before render
 - **Error boundary** — graceful recovery UI with dev-mode error details
-- **Accessibility** — ARIA live regions, `aria-hidden` on decorative elements, `VisuallyHidden` component, `prefers-reduced-motion`
+- **Accessibility** — ARIA live regions, `aria-hidden` on decorative elements, `VisuallyHidden` component, `prefers-reduced-motion`, screen reader support for timers
 - **Security** — strict HTTP headers, SSRF protection, XSS prevention
-- **SEO** — full OpenGraph, Twitter Card, canonical URL, sitemap, robots.txt
+- **SEO** — full OpenGraph, Twitter Card, canonical URL, sitemap, robots.txt, JSON-LD Person schema, custom 404 metadata with noindex
 
 ---
 
@@ -68,17 +69,21 @@ Type `help` in the terminal to see the full list. Every command accepts `--help`
 
 ### Navigation & System
 
-| Command           | Description                                       |
-| ----------------- | ------------------------------------------------- |
-| `clear`           | Clear the terminal screen (also `Ctrl+L`)         |
-| `exit`            | Display goodbye message                           |
-| `help`            | List all available commands                       |
-| `hostname`        | Portfolio hostname and uptime info                |
-| `neofetch`        | Linux-style system summary with live theme & font |
-| `theme [name]`    | Switch color theme — 31 available                 |
-| `typeface [name]` | Switch terminal font — 15 available               |
-| `welcome`         | Display the welcome banner again                  |
-| `whoami`          | Short bio                                         |
+| Command              | Description                                       |
+| -------------------- | ------------------------------------------------- |
+| `audio`              | Toggle terminal sounds on/off, adjust volume      |
+| `audio on`           | Enable keyboard and feedback sounds               |
+| `audio off`          | Disable all sounds                                |
+| `audio volume <0-1>` | Set sound volume (0 = mute, 1 = max)              |
+| `clear`              | Clear the terminal screen (also `Ctrl+L`)         |
+| `exit`               | Display goodbye message                           |
+| `help`               | List all available commands                       |
+| `hostname`           | Portfolio hostname and uptime info                |
+| `neofetch`           | Linux-style system summary with live theme & font |
+| `theme [name]`       | Switch color theme — 31 available                 |
+| `typeface [name]`    | Switch terminal font — 15 available               |
+| `welcome`            | Display the welcome banner again                  |
+| `whoami`             | Short bio                                         |
 
 ### Information
 
@@ -103,38 +108,38 @@ Type `help` in the terminal to see the full list. Every command accepts `--help`
 
 ### Utilities
 
-| Command                            | Description                                                   |
-| ---------------------------------- | ------------------------------------------------------------- |
-| `age <date>`                       | Exact age calculator with next-birthday countdown             |
-| `calc <expression>`                | Math calculator — algebra, trig, units, constants (mathjs)    |
-| `color <value>`                    | Convert colors between HEX, RGB, HSL, OKLCH                   |
-| `convert <amount> <from> <to>`     | Real-time currency conversion (168+ currencies via ECB)       |
-| `convert list`                     | List all supported currencies with names and symbols          |
-| `decode [format] <text>`           | Decode base64, url, or hex — runs locally                     |
-| `echo <text>`                      | Output text with `\n` newline support                         |
-| `encode [format] <text>`           | Encode base64, url, or hex — runs locally                     |
-| `hash [algo] <text>`               | Cryptographic hashes — sha256 (default), sha512, sha384, sha1 |
-| `history [n]`                      | Display recent command history (default 20, max 50)           |
-| `man <command>`                    | Full manual page for any command                              |
-| `note`                             | List all saved notes                                          |
-| `note add <text>`                  | Add a note (spaces supported)                                 |
-| `note rm <id>`                     | Delete a note by short ID                                     |
-| `note edit <id> <text>`            | Update a note in place                                        |
-| `note clear`                       | Delete all notes                                              |
-| `snippet`                          | List all saved code snippets                                  |
-| `snippet add <name> <lang> <code>` | Save a code snippet                                           |
-| `snippet show <id>`                | Display snippet code with syntax highlighting                 |
-| `snippet rm <id>`                  | Delete a snippet                                              |
-| `timer <duration> [label]`         | Countdown timer — supports `25m`, `1h`, `1h30m`, `90s`        |
-| `todo`                             | List all tasks (pending and done)                             |
-| `todo add <text>`                  | Add a task                                                    |
-| `todo done <id>`                   | Mark a task as completed                                      |
-| `todo undone <id>`                 | Revert a task to pending                                      |
-| `todo rm <id>`                     | Delete a task                                                 |
-| `uuid`                             | Generate one v4 UUID                                          |
-| `uuid v1 [n]`                      | Generate n time-based v1 UUIDs (max 20)                       |
-| `uuid v4 [n]`                      | Generate n random v4 UUIDs (max 20)                           |
-| `uuid validate <string>`           | Validate any UUID string                                      |
+| Command                            | Description                                                    |
+| ---------------------------------- | -------------------------------------------------------------- |
+| `age <date>`                       | Exact age calculator with next-birthday countdown              |
+| `calc <expression>`                | Math calculator — algebra, trig, units, constants (mathjs)     |
+| `color <value>`                    | Convert colors between HEX, RGB, HSL, OKLCH                    |
+| `convert <amount> <from> <to>`     | Real-time currency conversion (168+ currencies via ECB)        |
+| `convert list`                     | List all supported currencies with names and symbols           |
+| `decode [format] <text>`           | Decode base64, url, or hex — runs locally                      |
+| `echo <text>`                      | Output text with `\n` newline support                          |
+| `encode [format] <text>`           | Encode base64, url, or hex — runs locally                      |
+| `hash [algo] <text>`               | Cryptographic hashes — sha256 (default), sha512, sha384, sha1  |
+| `history [n]`                      | Display recent command history (default 20, in-memory cap 200) |
+| `man <command>`                    | Full manual page for any command                               |
+| `note`                             | List all saved notes                                           |
+| `note add <text>`                  | Add a note (spaces supported)                                  |
+| `note rm <id>`                     | Delete a note by short ID                                      |
+| `note edit <id> <text>`            | Update a note in place                                         |
+| `note clear`                       | Delete all notes                                               |
+| `snippet`                          | List all saved code snippets                                   |
+| `snippet add <name> <lang> <code>` | Save a code snippet                                            |
+| `snippet show <id>`                | Display snippet code with syntax highlighting                  |
+| `snippet rm <id>`                  | Delete a snippet                                               |
+| `timer <duration> [label]`         | Countdown timer — supports `25m`, `1h`, `1h30m`, `90s`         |
+| `todo`                             | List all tasks (pending and done)                              |
+| `todo add <text>`                  | Add a task                                                     |
+| `todo done <id>`                   | Mark a task as completed                                       |
+| `todo undone <id>`                 | Revert a task to pending                                       |
+| `todo rm <id>`                     | Delete a task                                                  |
+| `uuid`                             | Generate one v4 UUID                                           |
+| `uuid v1 [n]`                      | Generate n time-based v1 UUIDs (max 20)                        |
+| `uuid v4 [n]`                      | Generate n random v4 UUIDs (max 20)                            |
+| `uuid validate <string>`           | Validate any UUID string                                       |
 
 ### Fun & Games
 
@@ -223,7 +228,7 @@ export const COMMAND_REGISTRY: Record<string, CommandHandlerType> = {
   calc: (args) => handleCalcCommand(args),
   color: (args) => handleColorCommand(args),
   github: (args) => handleGithubCommand(args),
-  // ... 42 entries total
+  // ... 43 entries total
 };
 ```
 
@@ -252,6 +257,17 @@ createSuccessOutput(msg)        // Standardized success feedback
 createHelpOutput(config)        // Full help block — name, usage, options, examples
 ```
 
+Help outputs are built from composable section builders (`createOptionsSection`, `createExamplesSection`, etc.) extracted for reusability across all `--help` and `man` pages.
+
+### Utility Helpers
+
+Common utilities shared across commands:
+
+| Helper         | Purpose                                         | Used by         |
+| -------------- | ----------------------------------------------- | --------------- |
+| `normalizeUrl` | Sanitize and validate URLs, strip fragments     | `curl`, `audio` |
+| `isPrivateIP`  | Detect loopback, link-local, and private ranges | `curl`          |
+
 ### Service Layer
 
 Every external API call is isolated in `src/services/`. Commands never make HTTP requests directly.
@@ -265,18 +281,20 @@ Every external API call is isolated in `src/services/`. Commands never make HTTP
 | `ip.service.ts`      | ipapi.co              | `ip`      |
 | `github.service.ts`  | GitHub REST + GraphQL | `github`  |
 | `curl.service.ts`    | axios (browser)       | `curl`    |
+| `audio.service.ts`   | Web Audio API         | `audio`   |
 
 ### Custom Hooks
 
-| Hook                | Purpose                                                      |
-| ------------------- | ------------------------------------------------------------ |
-| `useCommandHistory` | Terminal history state with localStorage persistence         |
-| `useLocalStorage`   | SSR-safe generic localStorage hook with JSON serialization   |
-| `useThemeFont`      | Restore saved theme and font preferences on mount            |
-| `useDynamicFont`    | Lazy-load and cache fonts on demand                          |
-| `useDebounce`       | Debounce any value — used in suggestion computation          |
-| `useReverseSearch`  | Incremental reverse search through history (Ctrl+R)          |
-| `useSuggestions`    | Live suggestions panel — completions, grouping, keyboard nav |
+| Hook                | Purpose                                                             |
+| ------------------- | ------------------------------------------------------------------- |
+| `useCommandHistory` | Terminal history state with localStorage persistence                |
+| `useLocalStorage`   | SSR-safe generic localStorage hook with JSON serialization          |
+| `useThemeFont`      | Restore saved theme and font preferences on mount                   |
+| `useDynamicFont`    | Lazy-load and cache fonts on demand                                 |
+| `useDebounce`       | Debounce any value — used in suggestion computation                 |
+| `useReverseSearch`  | Incremental reverse search through history (Ctrl+R)                 |
+| `useSuggestions`    | Live suggestions panel — completions, grouping, keyboard nav        |
+| `useAudio`          | Audio system — keyboard sounds, success/error feedback, persistence |
 
 ### Domain-Split Types
 
@@ -298,7 +316,7 @@ src/types/
 
 ## Design System
 
-The visual language is built on centralized tokens used consistently across all 42 commands.
+The visual language is built on centralized tokens used consistently across all 43 commands.
 
 ### Semantic Color Roles
 
