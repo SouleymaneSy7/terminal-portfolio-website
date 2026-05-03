@@ -1,5 +1,6 @@
 export * from "./about-command";
 export * from "./age-command";
+export * from "./audio-command";
 export * from "./calc-command";
 export * from "./color-command";
 export * from "./contact-command";
