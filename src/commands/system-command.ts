@@ -26,6 +26,7 @@ import {
   getFontLabel,
   getThemeLabel,
 } from "./theme-command";
+import { audioService } from "@/services/audio.service";
 import { createHtmlOutput } from "@/utils/output";
 import {
   WELCOME_HELP,
@@ -80,14 +81,22 @@ function buildWelcomeOutput(): CommandHistoryOutputType {
 
       <div class="space-y-t-footer">
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.long}</p>
+
         <p>
           <span aria-hidden="true" class="text-secondary-clr">#</span>
           This terminal runs best on a real keyboard.
         </p>
+
         <p>
           <span aria-hidden="true" class="text-secondary-clr">#</span>
           Mobile works, but desktop is home.
           <span class="text-primary-clr shrink-0 text-fs-subtitle">⌨</span>
+        </p>
+
+        <p>
+          <span aria-hidden="true" class="text-secondary-clr">#</span>
+          Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">audio on</span>${DT.decorators.quote}
+          for keyboard sounds.
         </p>
       </div>
 
@@ -98,6 +107,7 @@ function buildWelcomeOutput(): CommandHistoryOutputType {
 function buildNeofetchOutput(): CommandHistoryOutputType {
   const themeLabel = getThemeLabel(getCurrentTheme());
   const fontLabel = getFontLabel(getCurrentFont());
+  const { enabled, volume } = audioService.getState();
 
   return createHtmlOutput(
     `<div class="py-t-outer">
@@ -122,6 +132,7 @@ function buildNeofetchOutput(): CommandHistoryOutputType {
         <p><span class="text-secondary-clr font-bold">DE:          </span>  Terminal Portfolio v1.0</p>
         <p><span class="text-secondary-clr font-bold">Theme:       </span>  ${themeLabel}</p>
         <p><span class="text-secondary-clr font-bold">Font:        </span>  ${fontLabel}</p>
+        <p><span class="text-secondary-clr font-bold">Audio:       </span>  ${enabled ? `<span class="text-tertiary-clr">ON</span><span class="text-text-clr opacity-sep"> · ${volume}%</span>` : `<span class="text-secondary-clr">OFF</span> <span class="text-text-clr opacity-sep">← type 'audio on' to enable</span>`}</p>
         <p><span class="text-secondary-clr font-bold">Resolution:  </span>  ${getResolution()}</p>
         <p><span class="text-secondary-clr font-bold">Uptime:      </span>  Online since 2025, no interruptions</p>
         <p><span class="text-secondary-clr font-bold">Packages:    </span>  ${packages.length} (prod) · ${packagesDev.length} (dev)</p>
