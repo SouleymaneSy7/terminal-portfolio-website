@@ -96,12 +96,6 @@ export const FONT_GROUPS: readonly SuggestionGroupType[] = [
   },
   {
     label: "Handcrafted",
-    items: [
-      "recursive-casual",
-      "recursive-linear",
-      "hack",
-      "victor",
-      "meslo",
-    ],
+    items: ["recursive-casual", "recursive-linear", "hack", "victor", "meslo"],
   },
 ] as const;
