@@ -16,7 +16,7 @@ const HistoryEntry = React.memo<{
 }>(({ item, index, isLastEntry, setInputReady }) => {
   return (
     <motion.div
-      key={`${item.command}-${index}`}
+      key={item.id ?? `${item.command}-${index}`}
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 0.85, y: 0 }}
       transition={{ duration: 0.18, ease: "easeOut" }}
