@@ -16,7 +16,7 @@ import {
   prettyBody,
 } from "./formatters";
 import { curlHelpOutput, curlUsageOutput } from "./outputs";
-import { isValidPublicUrl, parseCurlArgs } from "./parser";
+import { isValidPublicUrl, normalizeUrl, parseCurlArgs } from "./parser";
 
 export { curlUsageOutput, isValidPublicUrl };
 
@@ -51,7 +51,7 @@ export async function curlCommand(
     );
   }
 
-  const url = /^https?:\/\//i.test(opts.url) ? opts.url : "https://" + opts.url;
+  const url = normalizeUrl(opts.url);
   const blocks: CommandHistoryOutputType = [];
 
   if (opts.verbose) {
