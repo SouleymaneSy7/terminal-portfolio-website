@@ -1,9 +1,11 @@
 import axios from "axios";
 
 const WEATHER_API_URL = "https://wttr.in";
+const TIMEOUT = 10_000;
 
 const weatherApi = axios.create({
   baseURL: WEATHER_API_URL,
+  timeout: TIMEOUT,
 });
 
 export const weatherService = {
