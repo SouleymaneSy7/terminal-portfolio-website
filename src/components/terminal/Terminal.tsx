@@ -9,6 +9,8 @@ import { TerminalErrorBoundary } from "./TerminalErrorBoundary";
 import { handleWelcomeCommand } from "@/commands";
 import { STORAGE_KEYS } from "@/constants/storageKeys";
 import { useCommandHistory, useThemeFont } from "@/hooks";
+import { audioService } from "@/services/audio.service";
+
 import {
   CommandHistory,
   CommandHistoryOutputType,
@@ -16,9 +18,9 @@ import {
   TerminalPropsTypes,
 } from "@/types";
 import { executeCommand } from "@/utils/command";
+import VisuallyHidden from "../common/VisuallyHidden";
 import { LoadingIndicator } from "../ui/loaders";
 import HistoryEntry from "./HistoryEntry";
-import { audioService } from "@/services/audio.service";
 
 const STORAGE_KEY = STORAGE_KEYS.COMMAND_HISTORY;
 
@@ -262,24 +264,26 @@ const TerminalInner: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
       <div
         role="log"
         aria-live="polite"
-        aria-label="Terminal output"
         aria-relevant="additions"
         aria-atomic="false"
+        aria-label="Terminal command history"
+        aria-describedby="terminal-hint"
       >
         <AnimatePresence>
-          {history.map((item: CommandHistory, index: number) => {
-            const isLastEntry = index === history.length - 1;
+          {isHydrated &&
+            history.map((item: CommandHistory, index: number) => {
+              const isLastEntry = index === history.length - 1;
 
-            return (
-              <HistoryEntry
-                key={`${item.command}-${index}`}
-                item={item}
-                index={index}
-                isLastEntry={isLastEntry}
-                setInputReady={setInputReady}
-              />
-            );
-          })}
+              return (
+                <HistoryEntry
+                  key={`${item.command}-${index}`}
+                  item={item}
+                  index={index}
+                  isLastEntry={isLastEntry}
+                  setInputReady={setInputReady}
+                />
+              );
+            })}
         </AnimatePresence>
       </div>
 
@@ -321,6 +325,11 @@ const TerminalInner: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
       </AnimatePresence>
 
       <div aria-hidden="true" style={{ height: "12rem" }} />
+
+      <VisuallyHidden id="terminal-hint">
+        Interactive terminal. Type commands and press Enter to execute. Use
+        arrow keys to navigate history.
+      </VisuallyHidden>
     </div>
   );
 };
