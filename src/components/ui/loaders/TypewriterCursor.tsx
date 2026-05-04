@@ -1,59 +1,57 @@
-"use client";
+"use client"
 
-import TerminalPrompt from "@/components/terminal/TerminalPrompt";
-import { TypewriterCursorPropsType } from "@/types";
-import { motion } from "framer-motion";
-import * as React from "react";
+import TerminalPrompt from "@/components/terminal/TerminalPrompt"
+import { TypewriterCursorPropsType } from "@/types"
+import { motion } from "framer-motion"
+import * as React from "react"
 
-const TypewriterCursor: React.FC<TypewriterCursorPropsType> = ({
-  label = "fetching data",
-}) => {
-  const [displayed, setDisplayed] = React.useState("");
-  const [cursorOn, setCursorOn] = React.useState(true);
-  const phaseRef = React.useRef<"typing" | "waiting" | "erasing">("typing");
-  const indexRef = React.useRef(0);
+const TypewriterCursor: React.FC<TypewriterCursorPropsType> = ({ label = "fetching data" }) => {
+  const [displayed, setDisplayed] = React.useState("")
+  const [cursorOn, setCursorOn] = React.useState(true)
+  const phaseRef = React.useRef<"typing" | "waiting" | "erasing">("typing")
+  const indexRef = React.useRef(0)
 
   React.useEffect(() => {
-    const interval = setInterval(() => setCursorOn((v) => !v), 500);
-    return () => clearInterval(interval);
-  }, []);
+    const interval = setInterval(() => setCursorOn((v) => !v), 500)
+    return () => clearInterval(interval)
+  }, [])
 
   React.useEffect(() => {
     const tick = () => {
       if (phaseRef.current === "typing") {
-        indexRef.current += 1;
-        setDisplayed(label.slice(0, indexRef.current));
+        indexRef.current += 1
+        setDisplayed(label.slice(0, indexRef.current))
         if (indexRef.current >= label.length) {
-          phaseRef.current = "waiting";
-          return 1200;
+          phaseRef.current = "waiting"
+          return 1200
         }
-        return 60;
+        return 60
       }
       if (phaseRef.current === "waiting") {
-        phaseRef.current = "erasing";
-        return 0;
+        phaseRef.current = "erasing"
+        return 0
       }
       if (phaseRef.current === "erasing") {
-        indexRef.current -= 1;
-        setDisplayed(label.slice(0, indexRef.current));
+        indexRef.current -= 1
+        setDisplayed(label.slice(0, indexRef.current))
         if (indexRef.current <= 0) {
-          phaseRef.current = "typing";
-          return 400;
+          phaseRef.current = "typing"
+          return 400
         }
-        return 40;
+        return 40
       }
-      return 60;
-    };
+      return 60
+    }
 
-    let timeout: ReturnType<typeof setTimeout>;
+    let timeout: ReturnType<typeof setTimeout>
 
     const run = () => {
-      const delay = tick();
-      timeout = setTimeout(run, delay ?? 60);
-    };
-    timeout = setTimeout(run, 60);
-    return () => clearTimeout(timeout);
-  }, [label]);
+      const delay = tick()
+      timeout = setTimeout(run, delay ?? 60)
+    }
+    timeout = setTimeout(run, 60)
+    return () => clearTimeout(timeout)
+  }, [label])
 
   return (
     <motion.div
@@ -76,7 +74,7 @@ const TypewriterCursor: React.FC<TypewriterCursorPropsType> = ({
         </span>
       </div>
     </motion.div>
-  );
-};
+  )
+}
 
-export default TypewriterCursor;
+export default TypewriterCursor

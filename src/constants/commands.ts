@@ -4,7 +4,7 @@
  *   - The COMPLETIONS map (tab-completes arguments per command).
  */
 
-import { THEMES, FONTS } from "@/commands/theme-command";
+import { THEMES, FONTS } from "@/commands/theme-command"
 
 // ─────────────────────────────────────────────────────────────────
 // COMMAND LIST  (alphabetical order)
@@ -54,7 +54,7 @@ export const commands: string[] = [
   "weather",
   "welcome",
   "whoami",
-];
+]
 
 // ─────────────────────────────────────────────────────────────────
 // COMPLETIONS MAP  (argument completion per command)
@@ -66,7 +66,7 @@ export const COMPLETIONS: Record<string, string[]> = {
   typeface: Object.keys(FONTS),
 
   // Audio
-audio: ["on", "off", "volume", "--help", "help", "-h"],
+  audio: ["on", "off", "volume", "--help", "help", "-h"],
 
   // Fun & Games
   rps: ["rock", "paper", "scissors", "--help", "help", "-h"],
@@ -133,18 +133,7 @@ audio: ["on", "off", "volume", "--help", "help", "-h"],
     "--help",
     "-h",
   ],
-  snippet: [
-    "add",
-    "show",
-    "rm",
-    "remove",
-    "delete",
-    "clear",
-    "list",
-    "help",
-    "--help",
-    "-h",
-  ],
+  snippet: ["add", "show", "rm", "remove", "delete", "clear", "list", "help", "--help", "-h"],
   uuid: ["v1", "v4", "validate", "help", "--help", "-h"],
   convert: ["list", "help", "--help", "-h"],
 
@@ -261,4 +250,4 @@ audio: ["on", "off", "volume", "--help", "help", "-h"],
   weather: ["--help", "help", "-h"],
   welcome: ["--help", "help", "-h"],
   whoami: ["--help", "help", "-h"],
-};
+}

@@ -3,16 +3,16 @@
  *
  */
 
-import { QuizQuestionType } from "@/types";
+import { QuizQuestionType } from "@/types"
 
-export const POINTS = { CORRECT: 10, WRONG: -5 } as const;
+export const POINTS = { CORRECT: 10, WRONG: -5 } as const
 
 export const RANKS = {
   LEGEND: { min: 90, name: "LEGEND" },
   PRO: { min: 75, name: "PRO" },
   ADVANCED: { min: 60, name: "ADVANCED" },
   NOOB: { min: 0, name: "NOOB" },
-} as const;
+} as const
 
 export const quizQuestions: QuizQuestionType[] = [
   {
@@ -33,8 +33,7 @@ export const quizQuestions: QuizQuestionType[] = [
     answer: 3,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | You know your CSS properties!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | The correct property is font-size`,
-    explanation:
-      "Use font-size to control text dimensions. Example: font-size: 16px",
+    explanation: "Use font-size to control text dimensions. Example: font-size: 16px",
   },
   {
     question: "Which of these is NOT a JavaScript framework?",
@@ -42,8 +41,7 @@ export const quizQuestions: QuizQuestionType[] = [
     answer: 3,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Django is a Python framework`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | Django is for Python, not JavaScript`,
-    explanation:
-      "React & Vue are JavaScript. Django is a Python web framework.",
+    explanation: "React & Vue are JavaScript. Django is a Python web framework.",
   },
   {
     question: "What does 'flex' in flexbox stand for?",
@@ -75,16 +73,11 @@ export const quizQuestions: QuizQuestionType[] = [
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | APIs connect systems together`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | API = Application Programming Interface`,
-    explanation:
-      "APIs enable communication between different software systems.",
+    explanation: "APIs enable communication between different software systems.",
   },
   {
     question: "What is the correct JavaScript function syntax?",
-    options: [
-      "1. function myFunc() {}",
-      "2. func myFunc() {}",
-      "3. def myFunc() {}",
-    ],
+    options: ["1. function myFunc() {}", "2. func myFunc() {}", "3. def myFunc() {}"],
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Perfect function declaration!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | JavaScript uses the function keyword`,
@@ -96,16 +89,11 @@ export const quizQuestions: QuizQuestionType[] = [
     answer: 2,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | React was born at Facebook in 2013`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | React was developed by Facebook (Meta)`,
-    explanation:
-      "Jordan Walke created React at Facebook, now used by Instagram.",
+    explanation: "Jordan Walke created React at Facebook, now used by Instagram.",
   },
   {
     question: "What does CSS stand for?",
-    options: [
-      "1. Cascading Style Sheets",
-      "2. Creative Style System",
-      "3. Computer Style Sheets",
-    ],
+    options: ["1. Cascading Style Sheets", "2. Creative Style System", "3. Computer Style Sheets"],
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | CSS brings style to the web`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | CSS = Cascading Style Sheets`,
@@ -121,11 +109,7 @@ export const quizQuestions: QuizQuestionType[] = [
   },
   {
     question: "What is the purpose of Git?",
-    options: [
-      "1. Version control system",
-      "2. Code compiler",
-      "3. Database manager",
-    ],
+    options: ["1. Version control system", "2. Code compiler", "3. Database manager"],
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Git is essential for team collaboration`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | Git tracks code changes, not compilation`,
@@ -161,11 +145,7 @@ export const quizQuestions: QuizQuestionType[] = [
   },
   {
     question: "What is npm?",
-    options: [
-      "1. Node Package Manager",
-      "2. New Programming Method",
-      "3. Network Protocol Module",
-    ],
+    options: ["1. Node Package Manager", "2. New Programming Method", "3. Network Protocol Module"],
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | npm is the JavaScript package registry`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | npm = Node Package Manager`,
@@ -181,11 +161,7 @@ export const quizQuestions: QuizQuestionType[] = [
   },
   {
     question: "What does DOM stand for?",
-    options: [
-      "1. Document Object Model",
-      "2. Data Operation Method",
-      "3. Dynamic Output Manager",
-    ],
+    options: ["1. Document Object Model", "2. Data Operation Method", "3. Dynamic Output Manager"],
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | The DOM is JavaScript's playground`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | DOM = Document Object Model`,
@@ -201,11 +177,7 @@ export const quizQuestions: QuizQuestionType[] = [
   },
   {
     question: "What is Webpack used for?",
-    options: [
-      "1. Module bundler",
-      "2. Testing framework",
-      "3. Database system",
-    ],
+    options: ["1. Module bundler", "2. Testing framework", "3. Database system"],
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Webpack optimizes your code`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | Webpack bundles modules, not tests`,
@@ -217,8 +189,7 @@ export const quizQuestions: QuizQuestionType[] = [
     answer: 2,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Form validation understood!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | The required attribute enforces input`,
-    explanation:
-      "input required prevents form submission when the field is empty.",
+    explanation: "input required prevents form submission when the field is empty.",
   },
   {
     question: "What is TypeScript?",
@@ -278,8 +249,7 @@ export const quizQuestions: QuizQuestionType[] = [
     answer: 2,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Array manipulation on point!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | Use push() to add to array end`,
-    explanation:
-      "push() modifies the original array and returns the new length.",
+    explanation: "push() modifies the original array and returns the new length.",
   },
   {
     question: "What is localhost typically bound to?",
@@ -375,11 +345,7 @@ export const quizQuestions: QuizQuestionType[] = [
   },
   {
     question: "What is MongoDB?",
-    options: [
-      "1. NoSQL database",
-      "2. SQL database",
-      "3. JavaScript framework",
-    ],
+    options: ["1. NoSQL database", "2. SQL database", "3. JavaScript framework"],
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Database types understood!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | MongoDB is a NoSQL document database`,
@@ -395,11 +361,7 @@ export const quizQuestions: QuizQuestionType[] = [
   },
   {
     question: "What is Express.js?",
-    options: [
-      "1. Node.js web framework",
-      "2. Frontend library",
-      "3. Database ORM",
-    ],
+    options: ["1. Node.js web framework", "2. Frontend library", "3. Database ORM"],
     answer: 1,
     correctMsg: `✓ CORRECT | +${POINTS.CORRECT} XP | Backend frameworks understood!`,
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | Express is a minimal Node.js framework`,
@@ -413,4 +375,4 @@ export const quizQuestions: QuizQuestionType[] = [
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | parse() deserializes, stringify() serializes`,
     explanation: "JSON.parse() converts a string to a JavaScript object.",
   },
-];
+]

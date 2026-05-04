@@ -6,7 +6,7 @@
  * at render time inside <CommandOutput />.
  */
 
-import { CommandHistoryOutputType } from "@/types";
+import { CommandHistoryOutputType } from "@/types"
 
 // ─────────────────────────────────────────────────────────────────
 // BLOCK FACTORIES
@@ -22,7 +22,7 @@ export const createHtmlOutput = (content: string): CommandHistoryOutputType => [
     type: "html" as const,
     content: [content],
   },
-];
+]
 
 /**
  * Creates a plain-text output block (whitespace-pre rendered, no HTML).
@@ -33,7 +33,7 @@ export const createTextOutput = (lines: string[]): CommandHistoryOutputType => [
     type: "text" as const,
     content: lines,
   },
-];
+]
 
 /**
  * Creates a link block that renders one or more <a> tags.
@@ -47,4 +47,4 @@ export const createLinkOutput = (
     type: "link" as const,
     content: links,
   },
-];
+]

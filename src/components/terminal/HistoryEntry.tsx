@@ -1,18 +1,18 @@
-import { CommandHistory } from "@/types";
-import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
-import * as React from "react";
-import TerminalPrompt from "./TerminalPrompt";
+import { CommandHistory } from "@/types"
+import { motion } from "framer-motion"
+import dynamic from "next/dynamic"
+import * as React from "react"
+import TerminalPrompt from "./TerminalPrompt"
 
 const CommandOutput = dynamic(() => import("./CommandOutput/CommandOutput"), {
   ssr: false,
-});
+})
 
 const HistoryEntry = React.memo<{
-  item: CommandHistory;
-  index: number;
-  isLastEntry: boolean;
-  setInputReady: (ready: boolean) => void;
+  item: CommandHistory
+  index: number
+  isLastEntry: boolean
+  setInputReady: (ready: boolean) => void
 }>(({ item, index, isLastEntry, setInputReady }) => {
   return (
     <motion.div
@@ -26,9 +26,8 @@ const HistoryEntry = React.memo<{
       <br />
 
       {item.output.map((block, bi) => {
-        const isLastBlock = bi === item.output.length - 1;
-        const handleComplete =
-          isLastEntry && isLastBlock ? () => setInputReady(true) : undefined;
+        const isLastBlock = bi === item.output.length - 1
+        const handleComplete = isLastEntry && isLastBlock ? () => setInputReady(true) : undefined
 
         return (
           <CommandOutput
@@ -38,12 +37,12 @@ const HistoryEntry = React.memo<{
             component={"component" in block ? block.component : undefined}
             onComplete={handleComplete}
           />
-        );
+        )
       })}
     </motion.div>
-  );
-});
+  )
+})
 
-HistoryEntry.displayName = "HistoryEntry";
+HistoryEntry.displayName = "HistoryEntry"
 
-export default HistoryEntry;
+export default HistoryEntry

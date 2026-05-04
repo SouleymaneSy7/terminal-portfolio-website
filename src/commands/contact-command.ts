@@ -12,11 +12,11 @@
  * ```
  */
 
-import { CONTACT_HELP, EMAIL_HELP } from "@/constants/help/info";
-import type { CommandHistoryOutputType } from "@/types";
-import { parseArgs } from "@/utils/argParser";
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
-import { createHtmlOutput } from "@/utils/output";
+import { CONTACT_HELP, EMAIL_HELP } from "@/constants/help/info"
+import type { CommandHistoryOutputType } from "@/types"
+import { parseArgs } from "@/utils/argParser"
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
+import { createHtmlOutput } from "@/utils/output"
 
 // ─────────────────────────────────────────────────────────────────
 // OUTPUT BUILDERS
@@ -44,7 +44,7 @@ function createEmailOutput(): CommandHistoryOutputType {
         </p>
       </div>
     </div>`,
-  );
+  )
 }
 
 function createContactOutput(): CommandHistoryOutputType {
@@ -121,7 +121,7 @@ function createContactOutput(): CommandHistoryOutputType {
         </p>
       </div>
     </div>`,
-  );
+  )
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -134,15 +134,13 @@ function createContactOutput(): CommandHistoryOutputType {
  * @param args - Command arguments
  * @returns Command output blocks
  */
-export const handleEmailCommand = (
-  args: string[],
-): CommandHistoryOutputType => {
-  const { flags } = parseArgs(args);
+export const handleEmailCommand = (args: string[]): CommandHistoryOutputType => {
+  const { flags } = parseArgs(args)
 
-  if (flags.help) return EMAIL_HELP;
+  if (flags.help) return EMAIL_HELP
 
-  return createEmailOutput();
-};
+  return createEmailOutput()
+}
 
 /**
  * Handle contact command execution
@@ -150,12 +148,10 @@ export const handleEmailCommand = (
  * @param args - Command arguments
  * @returns Command output blocks
  */
-export const handleContactCommand = (
-  args: string[],
-): CommandHistoryOutputType => {
-  const { flags } = parseArgs(args);
+export const handleContactCommand = (args: string[]): CommandHistoryOutputType => {
+  const { flags } = parseArgs(args)
 
-  if (flags.help) return CONTACT_HELP;
+  if (flags.help) return CONTACT_HELP
 
-  return createContactOutput();
-};
+  return createContactOutput()
+}

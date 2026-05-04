@@ -1,4 +1,4 @@
-import { ManPageType } from "@/types";
+import { ManPageType } from "@/types"
 
 export const SYSTEM_PAGES: Record<string, ManPageType> = {
   audio: {
@@ -178,4 +178,4 @@ export const SYSTEM_PAGES: Record<string, ManPageType> = {
       "Output is a single block — brief by design. For the full narrative with context and reflections, use about. For social links and availability, use contact.",
     seeAlso: ["about", "contact", "neofetch"],
   },
-};
+}

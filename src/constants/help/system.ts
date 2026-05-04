@@ -2,7 +2,7 @@
  * Help outputs for system commands
  */
 
-import { createHelpOutput } from "@/utils/output";
+import { createHelpOutput } from "@/utils/output"
 
 export const AUDIO_HELP = createHelpOutput({
   name: "audio",
@@ -26,48 +26,46 @@ export const AUDIO_HELP = createHelpOutput({
   notes:
     'Preference is persisted in localStorage and restored on every page load. Audio is <span class="text-tertiary-clr">disabled by default</span> — it must be explicitly enabled. Respects <span class="text-tertiary-clr">prefers-reduced-motion</span>.',
   seeAlso: ["theme", "typeface"],
-});
+})
 
 export const WELCOME_HELP = createHelpOutput({
   name: "welcome",
   usage: "welcome",
   description: "Re-display the terminal welcome screen with ASCII art.",
   seeAlso: ["help", "about"],
-});
+})
 
 export const NEOFETCH_HELP = createHelpOutput({
   name: "neofetch",
   usage: "neofetch",
-  description:
-    "Display a Linux-style system summary with portfolio stats and tech stack.",
+  description: "Display a Linux-style system summary with portfolio stats and tech stack.",
   seeAlso: ["hostname", "whoami"],
-});
+})
 
 export const HOSTNAME_HELP = createHelpOutput({
   name: "hostname",
   usage: "hostname",
   description: "Display the portfolio hostname, owner and uptime information.",
   seeAlso: ["neofetch", "whoami"],
-});
+})
 
 export const WHOAMI_HELP = createHelpOutput({
   name: "whoami",
   usage: "whoami",
   description: "Display a short summary of who is behind this terminal.",
   seeAlso: ["about", "neofetch"],
-});
+})
 
 export const SUDO_HELP = createHelpOutput({
   name: "sudo",
   usage: "sudo",
   description: "Attempt to gain root access. Spoiler: it won't work. 😄",
-});
+})
 
 export const THEME_HELP = createHelpOutput({
   name: "theme",
   usage: "theme <name>",
-  description:
-    "Switch the terminal color theme. Preference saved to localStorage.",
+  description: "Switch the terminal color theme. Preference saved to localStorage.",
   options: [
     { flag: "theme", description: "List all available themes" },
     { flag: "theme <name>", description: "Switch to specified theme" },
@@ -83,15 +81,13 @@ export const THEME_HELP = createHelpOutput({
       description: "Switch to Catppuccin Mocha theme",
     },
   ],
-  notes:
-    "Tab completion is available — try theme [Tab] to browse all 31 themes.",
-});
+  notes: "Tab completion is available — try theme [Tab] to browse all 31 themes.",
+})
 
 export const TYPEFACE_HELP = createHelpOutput({
   name: "typeface",
   usage: "typeface <name>",
-  description:
-    "Switch the terminal monospace font. Preference saved to localStorage.",
+  description: "Switch the terminal monospace font. Preference saved to localStorage.",
   options: [
     { flag: "typeface", description: "List all available fonts" },
     { flag: "typeface <name>", description: "Switch to specified font" },
@@ -108,6 +104,5 @@ export const TYPEFACE_HELP = createHelpOutput({
       description: "Switch to Recursive Casual Mono",
     },
   ],
-  notes:
-    "Tab completion is available — try typeface [Tab] to browse all 15 fonts.",
-});
+  notes: "Tab completion is available — try typeface [Tab] to browse all 15 fonts.",
+})

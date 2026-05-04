@@ -11,12 +11,12 @@
  * ```
  */
 
-import { JOKE_HELP } from "@/constants/help/fun";
-import { jokeService } from "@/services";
-import type { CommandHistoryOutputType } from "@/types";
-import { parseArgs } from "@/utils/argParser";
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
-import { createErrorOutput, createHtmlOutput } from "@/utils/output";
+import { JOKE_HELP } from "@/constants/help/fun"
+import { jokeService } from "@/services"
+import type { CommandHistoryOutputType } from "@/types"
+import { parseArgs } from "@/utils/argParser"
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
+import { createErrorOutput, createHtmlOutput } from "@/utils/output"
 
 // ─────────────────────────────────────────────────────────────────
 // OUTPUT BUILDERS
@@ -35,27 +35,22 @@ function createJokeOutput(setup: string, delivery: string): CommandHistoryOutput
         <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">joke</span>${DT.decorators.quote} for another one.</p>
       </div>
     </div>`,
-  );
+  )
 }
 
 // ─────────────────────────────────────────────────────────────────
 // MAIN HANDLER (exported)
 // ─────────────────────────────────────────────────────────────────
 
-export const handleJokeCommand = async (
-  args: string[],
-): Promise<CommandHistoryOutputType> => {
-  const { flags } = parseArgs(args);
-  if (flags.help) return JOKE_HELP;
+export const handleJokeCommand = async (args: string[]): Promise<CommandHistoryOutputType> => {
+  const { flags } = parseArgs(args)
+  if (flags.help) return JOKE_HELP
 
-  const joke = await jokeService.getRandomJoke();
-  
+  const joke = await jokeService.getRandomJoke()
+
   if (joke?.type === "twopart") {
-    return createJokeOutput(joke.setup, joke.delivery);
+    return createJokeOutput(joke.setup, joke.delivery)
   }
 
-  return createErrorOutput(
-    "Could not fetch a joke.",
-    "Try again later."
-  );
-};
+  return createErrorOutput("Could not fetch a joke.", "Try again later.")
+}

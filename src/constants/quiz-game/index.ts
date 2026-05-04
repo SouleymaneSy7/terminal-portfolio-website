@@ -4,4 +4,4 @@
  */
 
 // ─── Re-exports ───────────────────────────────────────────────────
-export * from "./quiz-game-constant";
+export * from "./quiz-game-constant"

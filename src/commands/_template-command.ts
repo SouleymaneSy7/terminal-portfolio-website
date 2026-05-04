@@ -38,14 +38,10 @@
 // import { MYCOMMAND_HELP } from "@/constants/help/utils";
 
 // ── Core — always needed
-import type { CommandHistoryOutputType } from "@/types";
-import { parseArgs } from "@/utils/argParser";
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
-import {
-  createErrorOutput,
-  createHtmlOutput,
-  createSuccessOutput,
-} from "@/utils/output";
+import type { CommandHistoryOutputType } from "@/types"
+import { parseArgs } from "@/utils/argParser"
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
+import { createErrorOutput, createHtmlOutput, createSuccessOutput } from "@/utils/output"
 
 // ── Uncomment based on your command's needs:
 //
@@ -121,7 +117,7 @@ function buildMainOutput(data: string): CommandHistoryOutputType {
       </div>
 
     </div>`,
-  );
+  )
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -137,10 +133,8 @@ function buildMainOutput(data: string): CommandHistoryOutputType {
 // Examples in this codebase: color, echo, cowsay, uuid
 // ────────────────────────────────────────────────
 
-export const handleMycommandCommand = (
-  args: string[],
-): CommandHistoryOutputType => {
-  const { flags, positional } = parseArgs(args);
+export const handleMycommandCommand = (args: string[]): CommandHistoryOutputType => {
+  const { flags, positional } = parseArgs(args)
 
   // if (flags.help) return MYCOMMAND_HELP;
 
@@ -149,10 +143,10 @@ export const handleMycommandCommand = (
     return createErrorOutput(
       "Missing required argument.",
       `Usage: <span class="text-tertiary-clr font-bold">mycommand &lt;value&gt;</span>`,
-    );
+    )
   }
 
-  const input = positional.join(" ").trim();
+  const input = positional.join(" ").trim()
 
   // Validate input if needed
   // if (!validateInput(input)) {
@@ -162,8 +156,8 @@ export const handleMycommandCommand = (
   //   );
   // }
 
-  return buildMainOutput(input);
-};
+  return buildMainOutput(input)
+}
 
 // ────────────────────────────────────────────────
 // PATTERN 2 — Asynchronous command (API call)

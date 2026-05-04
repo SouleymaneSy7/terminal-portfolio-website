@@ -1,5 +1,5 @@
-import nextPlugin from "@next/eslint-plugin-next";
-import tsParser from "@typescript-eslint/parser";
+import nextPlugin from "@next/eslint-plugin-next"
+import tsParser from "@typescript-eslint/parser"
 
 const eslintConfig = [
   {
@@ -14,6 +14,6 @@ const eslintConfig = [
       parser: tsParser,
     },
   },
-];
+]
 
-export default eslintConfig;
+export default eslintConfig

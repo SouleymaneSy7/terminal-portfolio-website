@@ -11,11 +11,11 @@
  * ```
  */
 
-import { COWSAY_HELP } from "@/constants/help/fun";
-import type { CommandHistoryOutputType } from "@/types";
-import { parseArgs } from "@/utils/argParser";
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
-import { createHtmlOutput } from "@/utils/output";
+import { COWSAY_HELP } from "@/constants/help/fun"
+import type { CommandHistoryOutputType } from "@/types"
+import { parseArgs } from "@/utils/argParser"
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
+import { createHtmlOutput } from "@/utils/output"
 
 // ─────────────────────────────────────────────────────────────────
 // OUTPUT BUILDERS
@@ -32,13 +32,13 @@ function createCowsayUsageOutput(): CommandHistoryOutputType {
         <p><span class="text-secondary-clr font-bold">Usage:</span> cowsay &lt;message&gt; — or type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">cowsay --help</span>${DT.decorators.quote}</p>
       </div>
     </div>`,
-  );
+  )
 }
 
 function createCowsayOutput(message: string): CommandHistoryOutputType {
-  const borderLength = message.length + 2;
-  const topBorder = " " + "_".repeat(borderLength);
-  const bottomBorder = " " + "-".repeat(borderLength);
+  const borderLength = message.length + 2
+  const topBorder = " " + "_".repeat(borderLength)
+  const bottomBorder = " " + "-".repeat(borderLength)
 
   return [
     {
@@ -55,21 +55,19 @@ function createCowsayOutput(message: string): CommandHistoryOutputType {
         "                ||     ||",
       ],
     },
-  ];
+  ]
 }
 
 // ─────────────────────────────────────────────────────────────────
 // MAIN HANDLER (exported)
 // ─────────────────────────────────────────────────────────────────
 
-export const handleCowsayCommand = (
-  args: string[],
-): CommandHistoryOutputType => {
-  const { flags } = parseArgs(args);
-  if (flags.help) return COWSAY_HELP;
+export const handleCowsayCommand = (args: string[]): CommandHistoryOutputType => {
+  const { flags } = parseArgs(args)
+  if (flags.help) return COWSAY_HELP
 
-  const message = args.join(" ").trim();
-  if (!message) return createCowsayUsageOutput();
+  const message = args.join(" ").trim()
+  if (!message) return createCowsayUsageOutput()
 
-  return createCowsayOutput(message);
-};
+  return createCowsayOutput(message)
+}

@@ -8,7 +8,7 @@
  * - Help detection
  */
 
-import { ParsedArgsType } from "@/types";
+import { ParsedArgsType } from "@/types"
 
 /**
  * Parse command arguments into structured format
@@ -28,47 +28,45 @@ export function parseArgs(args: string[]): ParsedArgsType {
     flags: {},
     options: {},
     positional: [],
-  };
+  }
 
   for (let i = 0; i < args.length; i++) {
-    const arg = args[i];
+    const arg = args[i]
 
-    const isHelpWord = arg === "help" && i === 0;
+    const isHelpWord = arg === "help" && i === 0
     if (arg === "--help" || arg === "-h" || isHelpWord) {
-      result.flags.help = true;
+      result.flags.help = true
     } else if (arg.startsWith("--")) {
-      const key = arg.slice(2);
-      const next = args[i + 1];
+      const key = arg.slice(2)
+      const next = args[i + 1]
       if (next && !next.startsWith("-")) {
-        result.options[key] = next;
-        i++;
+        result.options[key] = next
+        i++
       } else {
-        result.flags[key] = true;
+        result.flags[key] = true
       }
     } else if (arg.startsWith("-") && arg.length > 1) {
       // Handle short flags like -v, -I, etc.
-      const flags = arg.slice(1).split("");
+      const flags = arg.slice(1).split("")
       flags.forEach((flag) => {
-        result.flags[flag] = true;
-      });
+        result.flags[flag] = true
+      })
     } else {
-      result.positional.push(arg);
+      result.positional.push(arg)
     }
   }
 
   // First positional is typically the subcommand
   if (result.positional.length > 0) {
-    result.subcommand = result.positional[0];
+    result.subcommand = result.positional[0]
   }
 
-  return result;
+  return result
 }
 
 /**
  * Check if help flag is present in arguments
  */
 export function isHelp(args: string[]): boolean {
-  return (
-    args.includes("--help") || args.includes("-h") || args.includes("help")
-  );
+  return args.includes("--help") || args.includes("-h") || args.includes("help")
 }

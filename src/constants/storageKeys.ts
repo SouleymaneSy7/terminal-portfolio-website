@@ -19,6 +19,6 @@ export const STORAGE_KEYS = {
 
   // Audio
   AUDIO: "terminal:audio",
-} as const;
+} as const
 
-export type StorageKeyType = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];
+export type StorageKeyType = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS]

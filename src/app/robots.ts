@@ -1,7 +1,7 @@
-import type { MetadataRoute } from "next";
+import type { MetadataRoute } from "next"
 
 export default function robots(): MetadataRoute.Robots {
-  const SITE_URL = "https://terminal-portfolio-website-xi.vercel.app";
+  const SITE_URL = "https://terminal-portfolio-website-xi.vercel.app"
 
   return {
     rules: {
@@ -9,5 +9,5 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
     },
     sitemap: `${SITE_URL}/sitemap.xml`,
-  };
+  }
 }

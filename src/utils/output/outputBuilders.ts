@@ -7,12 +7,8 @@
  * - Usage/help blocks
  */
 
-import type {
-  CommandHistoryOutputType,
-  HelpConfigType,
-  UsageConfigType,
-} from "@/types";
-import { DESIGN_TOKENS as DT } from "../designTokens";
+import type { CommandHistoryOutputType, HelpConfigType, UsageConfigType } from "@/types"
+import { DESIGN_TOKENS as DT } from "../designTokens"
 
 /**
  * Create standardized error output
@@ -21,10 +17,7 @@ import { DESIGN_TOKENS as DT } from "../designTokens";
  * @param hint - Optional hint or suggestion
  * @returns Command output block
  */
-export function createErrorOutput(
-  message: string,
-  hint?: string,
-): CommandHistoryOutputType {
+export function createErrorOutput(message: string, hint?: string): CommandHistoryOutputType {
   return [
     {
       id: crypto.randomUUID(),
@@ -46,7 +39,7 @@ export function createErrorOutput(
     </div>`,
       ],
     },
-  ];
+  ]
 }
 
 /**
@@ -68,7 +61,7 @@ export function createSuccessOutput(message: string): CommandHistoryOutputType {
     </div>`,
       ],
     },
-  ];
+  ]
 }
 
 /**
@@ -78,9 +71,7 @@ export function createSuccessOutput(message: string): CommandHistoryOutputType {
  * @returns Command output block
  */
 
-export function createUsageOutput(
-  config: UsageConfigType,
-): CommandHistoryOutputType {
+export function createUsageOutput(config: UsageConfigType): CommandHistoryOutputType {
   return [
     {
       id: crypto.randomUUID(),
@@ -105,7 +96,7 @@ export function createUsageOutput(
     </div>`,
       ],
     },
-  ];
+  ]
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -113,7 +104,7 @@ export function createUsageOutput(
 // ─────────────────────────────────────────────────────────────────
 
 function separatorLine(): string {
-  return `<p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>`;
+  return `<p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>`
 }
 
 function sectionGroup(heading: string, content: string): string {
@@ -122,7 +113,7 @@ function sectionGroup(heading: string, content: string): string {
       <p class="text-secondary-clr font-bold">${heading}</p>
       ${separatorLine()}
       <p>${content}</p>
-    </div>`;
+    </div>`
 }
 
 function sectionOptions(options: HelpConfigType["options"]): string {
@@ -131,14 +122,14 @@ function sectionOptions(options: HelpConfigType["options"]): string {
       (opt) =>
         `<p>${DT.decorators.bullet} <span class="text-tertiary-clr font-bold">${opt.flag}</span> ${DT.separators.short.slice(0, 5)} ${opt.description}</p>`,
     )
-    .join("\n");
+    .join("\n")
 
   return `
     <div class="space-y-t-group">
       <p class="text-secondary-clr font-bold">Options</p>
       ${separatorLine()}
       ${items}
-    </div>`;
+    </div>`
 }
 
 function sectionExamples(examples: HelpConfigType["examples"]): string {
@@ -148,14 +139,14 @@ function sectionExamples(examples: HelpConfigType["examples"]): string {
         `<p>${DT.decorators.bullet} <span class="text-tertiary-clr">${ex.command}</span></p>
       <p class="text-text-clr opacity-70 ml-4">${ex.description}</p>`,
     )
-    .join("\n");
+    .join("\n")
 
   return `
     <div class="space-y-t-group">
       <p class="text-secondary-clr font-bold">Examples</p>
       ${separatorLine()}
       ${items}
-    </div>`;
+    </div>`
 }
 
 function sectionNotes(notes: string): string {
@@ -164,22 +155,19 @@ function sectionNotes(notes: string): string {
       <p class="text-secondary-clr font-bold">Notes</p>
       ${separatorLine()}
       <p>${notes}</p>
-    </div>`;
+    </div>`
 }
 
 function sectionSeeAlso(commands: string[]): string {
   const links = commands
-    .map(
-      (cmd) =>
-        `<span class="text-tertiary-clr font-bold">${cmd}</span>`,
-    )
-    .join(", ");
+    .map((cmd) => `<span class="text-tertiary-clr font-bold">${cmd}</span>`)
+    .join(", ")
 
   return `
     <div class="space-y-t-footer">
       ${separatorLine()}
       <p>See also: ${links}</p>
-    </div>`;
+    </div>`
 }
 
 /**
@@ -188,9 +176,7 @@ function sectionSeeAlso(commands: string[]): string {
  * @param config - Help configuration
  * @returns Command output block
  */
-export function createHelpOutput(
-  config: HelpConfigType,
-): CommandHistoryOutputType {
+export function createHelpOutput(config: HelpConfigType): CommandHistoryOutputType {
   const parts = [
     `<div class="space-y-t-section py-t-outer">`,
     sectionGroup(config.name, config.description),
@@ -200,7 +186,7 @@ export function createHelpOutput(
     config.notes ? sectionNotes(config.notes) : "",
     config.seeAlso?.length ? sectionSeeAlso(config.seeAlso) : "",
     `</div>`,
-  ];
+  ]
 
   return [
     {
@@ -208,5 +194,5 @@ export function createHelpOutput(
       type: "html",
       content: [parts.filter(Boolean).join("\n")],
     },
-  ];
+  ]
 }

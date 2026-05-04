@@ -1,6 +1,6 @@
-import { CommandHistoryOutputType } from "@/types";
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
-import { createHtmlOutput } from "@/utils/output/output";
+import { CommandHistoryOutputType } from "@/types"
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
+import { createHtmlOutput } from "@/utils/output/output"
 
 export function curlHelpOutput(): CommandHistoryOutputType {
   return createHtmlOutput(
@@ -45,7 +45,7 @@ export function curlHelpOutput(): CommandHistoryOutputType {
         </div>
 
       </div>`,
-  );
+  )
 }
 
 export function curlUsageOutput(): CommandHistoryOutputType {
@@ -90,5 +90,5 @@ export function curlUsageOutput(): CommandHistoryOutputType {
           </div>
 
         </div>`,
-  );
+  )
 }

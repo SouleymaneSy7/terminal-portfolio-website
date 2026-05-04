@@ -3,19 +3,16 @@
  *
  */
 
-import { CurlRequestOptionsType, CurlServiceResponseType } from "@/types";
-import axios, { type AxiosRequestConfig, isAxiosError } from "axios";
+import { CurlRequestOptionsType, CurlServiceResponseType } from "@/types"
+import axios, { type AxiosRequestConfig, isAxiosError } from "axios"
 
-function normalizeAxiosHeaders(
-  raw: Record<string, unknown>,
-): Record<string, string> {
-  const out: Record<string, string> = {};
+function normalizeAxiosHeaders(raw: Record<string, unknown>): Record<string, string> {
+  const out: Record<string, string> = {}
   for (const [k, v] of Object.entries(raw)) {
-    if (typeof v === "string") out[k] = v;
-    else if (Array.isArray(v))
-      out[k] = (v as string[]).filter(Boolean).join(", ");
+    if (typeof v === "string") out[k] = v
+    else if (Array.isArray(v)) out[k] = (v as string[]).filter(Boolean).join(", ")
   }
-  return out;
+  return out
 }
 
 export function curlStatusText(code: number): string {
@@ -40,14 +37,12 @@ export function curlStatusText(code: number): string {
     502: "Bad Gateway",
     503: "Service Unavailable",
     504: "Gateway Timeout",
-  };
-  return map[code] ?? "";
+  }
+  return map[code] ?? ""
 }
 
 export const curlService = {
-  request: async (
-    opts: CurlRequestOptionsType,
-  ): Promise<CurlServiceResponseType> => {
+  request: async (opts: CurlRequestOptionsType): Promise<CurlServiceResponseType> => {
     const config: AxiosRequestConfig = {
       method: opts.headOnly ? "HEAD" : opts.method,
       url: opts.url,
@@ -61,20 +56,16 @@ export const curlService = {
       responseType: "text",
       maxRedirects: opts.follow ? 5 : 0,
       transformResponse: [(data: unknown) => data],
-    };
+    }
 
-    const response = await axios<string>(config);
+    const response = await axios<string>(config)
 
-    const headers = normalizeAxiosHeaders(
-      response.headers as Record<string, unknown>,
-    );
+    const headers = normalizeAxiosHeaders(response.headers as Record<string, unknown>)
 
-    const contentType = headers["content-type"] ?? "";
+    const contentType = headers["content-type"] ?? ""
     const body =
-      typeof response.data === "string"
-        ? response.data
-        : JSON.stringify(response.data, null, 2);
-    const bodySize = new TextEncoder().encode(body).length;
+      typeof response.data === "string" ? response.data : JSON.stringify(response.data, null, 2)
+    const bodySize = new TextEncoder().encode(body).length
 
     return {
       status: response.status,
@@ -83,8 +74,8 @@ export const curlService = {
       body,
       bodySize,
       contentType,
-    };
+    }
   },
-};
+}
 
-export { isAxiosError };
+export { isAxiosError }

@@ -11,12 +11,12 @@
  * ```
  */
 
-import type { CommandHistoryOutputType } from "@/types";
-import { parseArgs } from "@/utils/argParser";
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
-import { createErrorOutput, createHtmlOutput } from "@/utils/output";
-import { QUOTE_HELP } from "@/constants/help/fun";
-import { quoteService } from "@/services";
+import type { CommandHistoryOutputType } from "@/types"
+import { parseArgs } from "@/utils/argParser"
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
+import { createErrorOutput, createHtmlOutput } from "@/utils/output"
+import { QUOTE_HELP } from "@/constants/help/fun"
+import { quoteService } from "@/services"
 
 // ─────────────────────────────────────────────────────────────────
 // OUTPUT BUILDERS
@@ -34,27 +34,22 @@ function createQuoteOutput(advice: string): CommandHistoryOutputType {
         <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">quote</span>${DT.decorators.quote} for another one.</p>
       </div>
     </div>`,
-  );
+  )
 }
 
 // ─────────────────────────────────────────────────────────────────
 // MAIN HANDLER (exported)
 // ─────────────────────────────────────────────────────────────────
 
-export const handleQuoteCommand = async (
-  args: string[],
-): Promise<CommandHistoryOutputType> => {
-  const { flags } = parseArgs(args);
-  if (flags.help) return QUOTE_HELP;
+export const handleQuoteCommand = async (args: string[]): Promise<CommandHistoryOutputType> => {
+  const { flags } = parseArgs(args)
+  if (flags.help) return QUOTE_HELP
 
-  const quote = await quoteService.getRandomQuote();
-  
+  const quote = await quoteService.getRandomQuote()
+
   if (quote) {
-    return createQuoteOutput(quote.slip.advice);
+    return createQuoteOutput(quote.slip.advice)
   }
 
-  return createErrorOutput(
-    "Could not fetch a quote.",
-    "Try again later."
-  );
-};
+  return createErrorOutput("Could not fetch a quote.", "Try again later.")
+}

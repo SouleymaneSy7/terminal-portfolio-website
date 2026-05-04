@@ -6,13 +6,13 @@
  * is added in the future, this is the only file that changes.
  */
 
-"use client";
+"use client"
 
-import { initThemeAndFont } from "@/commands/theme-command";
-import * as React from "react";
+import { initThemeAndFont } from "@/commands/theme-command"
+import * as React from "react"
 
 export function useThemeFont(): void {
   React.useEffect(() => {
-    initThemeAndFont();
-  }, []);
+    initThemeAndFont()
+  }, [])
 }

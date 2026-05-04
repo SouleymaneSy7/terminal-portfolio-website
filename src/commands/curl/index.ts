@@ -3,27 +3,20 @@
  *
  */
 
-import { curlService } from "@/services";
-import { CommandHistoryOutputType, CurlServiceResponseType } from "@/types";
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
-import { createHtmlOutput } from "@/utils/output/output";
-import { isAxiosError } from "axios";
+import { curlService } from "@/services"
+import { CommandHistoryOutputType, CurlServiceResponseType } from "@/types"
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
+import { createHtmlOutput } from "@/utils/output/output"
+import { isAxiosError } from "axios"
 
-import {
-  escapeHtml,
-  formatRequestHeaders,
-  formatResponseHeaders,
-  prettyBody,
-} from "./formatters";
-import { curlHelpOutput, curlUsageOutput } from "./outputs";
-import { isValidPublicUrl, normalizeUrl, parseCurlArgs } from "./parser";
+import { escapeHtml, formatRequestHeaders, formatResponseHeaders, prettyBody } from "./formatters"
+import { curlHelpOutput, curlUsageOutput } from "./outputs"
+import { isValidPublicUrl, normalizeUrl, parseCurlArgs } from "./parser"
 
-export { curlUsageOutput, isValidPublicUrl };
+export { curlUsageOutput, isValidPublicUrl }
 
-export async function curlCommand(
-  rawArgs: string[],
-): Promise<CommandHistoryOutputType> {
-  const opts = parseCurlArgs(rawArgs);
+export async function curlCommand(rawArgs: string[]): Promise<CommandHistoryOutputType> {
+  const opts = parseCurlArgs(rawArgs)
 
   if (opts.parseError) {
     return createHtmlOutput(
@@ -34,10 +27,10 @@ export async function curlCommand(
             <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">curl --help</span>${DT.decorators.quote} for usage.</p>
           </div>
         </div>`,
-    );
+    )
   }
 
-  if (opts.help) return curlHelpOutput();
+  if (opts.help) return curlHelpOutput()
 
   if (!opts.url) {
     return createHtmlOutput(
@@ -48,11 +41,11 @@ export async function curlCommand(
             <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">curl --help</span>${DT.decorators.quote} for usage.</p>
           </div>
         </div>`,
-    );
+    )
   }
 
-  const url = normalizeUrl(opts.url);
-  const blocks: CommandHistoryOutputType = [];
+  const url = normalizeUrl(opts.url)
+  const blocks: CommandHistoryOutputType = []
 
   if (opts.verbose) {
     blocks.push(
@@ -63,10 +56,10 @@ export async function curlCommand(
           opts.headers,
         )}</div>`,
       ),
-    );
+    )
   }
 
-  let resp: CurlServiceResponseType;
+  let resp: CurlServiceResponseType
 
   try {
     resp = await curlService.request({
@@ -76,12 +69,11 @@ export async function curlCommand(
       body: opts.body,
       headOnly: opts.headOnly,
       follow: opts.follow,
-    });
+    })
   } catch (err) {
     const isCors =
       isAxiosError(err) &&
-      (err.code === "ERR_NETWORK" ||
-        (err.message?.toLowerCase().includes("network") ?? false));
+      (err.code === "ERR_NETWORK" || (err.message?.toLowerCase().includes("network") ?? false))
 
     if (isCors) {
       return createHtmlOutput(
@@ -99,10 +91,10 @@ export async function curlCommand(
               <p class="text-tertiary-clr font-bold">${DT.decorators.bullet}  curl https://v2.jokeapi.dev/joke/Programming?type=single</p>
             </div>
           </div>`,
-      );
+      )
     }
 
-    const msg = err instanceof Error ? err.message : String(err);
+    const msg = err instanceof Error ? err.message : String(err)
     return createHtmlOutput(
       `<div class="space-y-t-section py-t-outer">
           <p>${DT.icons.warning} curl: Could not connect to <span class="text-tertiary-clr">${escapeHtml(
@@ -110,21 +102,17 @@ export async function curlCommand(
           )}</span></p>
           <p class="text-text-clr opacity-sep">${escapeHtml(msg)}</p>
         </div>`,
-    );
+    )
   }
 
   if (opts.verbose || opts.headOnly) {
-    blocks.push(
-      ...createHtmlOutput(
-        `<div class="space-y-0">${formatResponseHeaders(resp)}</div>`,
-      ),
-    );
+    blocks.push(...createHtmlOutput(`<div class="space-y-0">${formatResponseHeaders(resp)}</div>`))
   }
 
-  if (opts.headOnly) return blocks;
+  if (opts.headOnly) return blocks
 
   if (!opts.silent && !opts.verbose) {
-    const kb = (resp.bodySize / 1024).toFixed(1);
+    const kb = (resp.bodySize / 1024).toFixed(1)
     blocks.push(
       ...createHtmlOutput(
         `<div class="space-y-t-footer">
@@ -136,35 +124,29 @@ export async function curlCommand(
           </p>
         </div>`,
       ),
-    );
+    )
   }
 
-  const body = prettyBody(resp.body, resp.contentType);
+  const body = prettyBody(resp.body, resp.contentType)
 
   if (resp.contentType.includes("json")) {
     blocks.push(
       ...createHtmlOutput(
-        `<pre class="whitespace-pre-wrap text-tertiary-clr text-fs-body">${escapeHtml(
-          body,
-        )}</pre>`,
+        `<pre class="whitespace-pre-wrap text-tertiary-clr text-fs-body">${escapeHtml(body)}</pre>`,
       ),
-    );
+    )
   } else {
-    const lines = body.split("\n");
-    const truncated = lines.length > 2000;
-    const display = truncated ? lines.slice(0, 2000) : lines;
-    const bodyHtml = display
-      .map((l) => `<p class="whitespace-pre">${escapeHtml(l)}</p>`)
-      .join("\n");
+    const lines = body.split("\n")
+    const truncated = lines.length > 2000
+    const display = truncated ? lines.slice(0, 2000) : lines
+    const bodyHtml = display.map((l) => `<p class="whitespace-pre">${escapeHtml(l)}</p>`).join("\n")
     const note = truncated
       ? `<p class="text-secondary-clr opacity-sep">… output truncated at 2 000 lines</p>`
-      : "";
+      : ""
 
     blocks.push(
-      ...createHtmlOutput(
-        `<div class="space-y-0 text-text-clr">${bodyHtml}${note}</div>`,
-      ),
-    );
+      ...createHtmlOutput(`<div class="space-y-0 text-text-clr">${bodyHtml}${note}</div>`),
+    )
   }
 
   if (opts.outputNote) {
@@ -172,8 +154,8 @@ export async function curlCommand(
       ...createHtmlOutput(
         `<p class="text-text-clr opacity-sep">${escapeHtml(opts.outputNote)}</p>`,
       ),
-    );
+    )
   }
 
-  return blocks;
+  return blocks
 }

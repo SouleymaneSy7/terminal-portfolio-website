@@ -10,19 +10,19 @@
  * - SuggestionsPanel as separate component
  */
 
-"use client";
+"use client"
 
-import { motion } from "framer-motion";
-import * as React from "react";
+import { motion } from "framer-motion"
+import * as React from "react"
 
-import { useReverseSearch, useSuggestions } from "@/hooks";
-import { CommandInputPropsType } from "@/types";
-import TerminalPrompt from "../TerminalPrompt";
-import { SuggestionsPanel } from "./SuggestionsPanel";
-import { useAudio } from "@/hooks/useAudio";
+import { useReverseSearch, useSuggestions } from "@/hooks"
+import { CommandInputPropsType } from "@/types"
+import TerminalPrompt from "../TerminalPrompt"
+import { SuggestionsPanel } from "./SuggestionsPanel"
+import { useAudio } from "@/hooks/useAudio"
 
 const INTERACTIVE_SELECTOR =
-  'a[href], button:not([disabled]), input, textarea, select, [role="button"]';
+  'a[href], button:not([disabled]), input, textarea, select, [role="button"]'
 
 const CommandInput: React.FC<CommandInputPropsType> = ({
   input,
@@ -33,15 +33,15 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
   onClearTerminal,
   commandHistory,
 }) => {
-  const { play } = useAudio();
+  const { play } = useAudio()
 
-  const commandInputRef = React.useRef<HTMLInputElement>(null);
-  const suggestionListRef = React.useRef<HTMLUListElement>(null);
+  const commandInputRef = React.useRef<HTMLInputElement>(null)
+  const suggestionListRef = React.useRef<HTMLUListElement>(null)
 
-  const [isFocused, setIsFocused] = React.useState(true);
+  const [isFocused, setIsFocused] = React.useState(true)
 
-  const reverseSearch = useReverseSearch(commandHistory, setInput);
-  const suggestions = useSuggestions(input, setInput);
+  const reverseSearch = useReverseSearch(commandHistory, setInput)
+  const suggestions = useSuggestions(input, setInput)
 
   const prefersReducedMotion = React.useMemo(
     () =>
@@ -49,161 +49,160 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
         ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
         : false,
     [],
-  );
+  )
 
-  const showPanel =
-    suggestions.completions.length > 1 && isFocused && !reverseSearch.isActive;
+  const showPanel = suggestions.completions.length > 1 && isFocused && !reverseSearch.isActive
 
   // ── Initial focus ─────────────────────────────────────────────
   React.useEffect(() => {
-    commandInputRef.current?.focus();
-  }, []);
+    commandInputRef.current?.focus()
+  }, [])
 
   // ── Re-focus on bare click ────────────────────────────────────
   React.useEffect(() => {
     const handleDocumentClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.closest(INTERACTIVE_SELECTOR)) return;
-      commandInputRef.current?.focus();
-    };
-    document.addEventListener("click", handleDocumentClick);
-    return () => document.removeEventListener("click", handleDocumentClick);
-  }, []);
+      const target = e.target as HTMLElement
+      if (target.closest(INTERACTIVE_SELECTOR)) return
+      commandInputRef.current?.focus()
+    }
+    document.addEventListener("click", handleDocumentClick)
+    return () => document.removeEventListener("click", handleDocumentClick)
+  }, [])
 
   // ── Handlers ─────────────────────────────────────────────────
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (reverseSearch.isActive) return;
-    setInput(event.target.value);
-  };
+    if (reverseSearch.isActive) return
+    setInput(event.target.value)
+  }
 
   const handleCommandSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefault()
 
     if (reverseSearch.isActive) {
-      const accepted = reverseSearch.match?.command ?? "";
-      reverseSearch.exit();
+      const accepted = reverseSearch.match?.command ?? ""
+      reverseSearch.exit()
       if (accepted) {
-        onCommandType(accepted);
-        setInput("");
+        onCommandType(accepted)
+        setInput("")
       }
-      return;
+      return
     }
 
     if (input.trim()) {
-      onCommandType(input.trim());
-      setInput("");
+      onCommandType(input.trim())
+      setInput("")
     }
-  };
+  }
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.ctrlKey) {
-      play("ctrl");
+      play("ctrl")
     } else if (event.key === "Enter") {
-      play("enter");
+      play("enter")
     } else if (event.key === "Backspace" || event.key === "Delete") {
-      play("backspace");
+      play("backspace")
     } else if (event.key === "Tab") {
-      play("tab");
+      play("tab")
     } else if (event.key === "Escape") {
-      play("escape");
+      play("escape")
     } else if (event.key.length === 1) {
-      play("keypress");
+      play("keypress")
     }
 
     // ── Ctrl+L — clear ──────────────────────────────────────────
     if (event.ctrlKey && event.key.toLowerCase() === "l") {
-      event.preventDefault();
-      onClearTerminal();
-      return;
+      event.preventDefault()
+      onClearTerminal()
+      return
     }
 
     // ── Ctrl+R — enter / cycle reverse search ───────────────────
     if (event.ctrlKey && event.key.toLowerCase() === "r") {
-      event.preventDefault();
+      event.preventDefault()
 
       if (!reverseSearch.isActive) {
-        reverseSearch.enter(input);
+        reverseSearch.enter(input)
       } else {
-        reverseSearch.cycleNext();
+        reverseSearch.cycleNext()
       }
-      return;
+      return
     }
 
     // ── Inside reverse search ────────────────────────────────────
     if (reverseSearch.isActive) {
       if (event.key === "Escape") {
-        event.preventDefault();
-        reverseSearch.exit(reverseSearch.savedInput);
-        return;
+        event.preventDefault()
+        reverseSearch.exit(reverseSearch.savedInput)
+        return
       }
 
       if (event.key === "Backspace") {
-        event.preventDefault();
-        reverseSearch.updateQuery(reverseSearch.query.slice(0, -1));
-        return;
+        event.preventDefault()
+        reverseSearch.updateQuery(reverseSearch.query.slice(0, -1))
+        return
       }
 
       if (event.key === "ArrowUp" || event.key === "ArrowDown") {
-        event.preventDefault();
-        reverseSearch.exit(reverseSearch.match?.command);
-        return;
+        event.preventDefault()
+        reverseSearch.exit(reverseSearch.match?.command)
+        return
       }
 
       if (event.key === "Enter") {
-        return;
+        return
       }
 
       if (event.key.length === 1 && !event.ctrlKey && !event.metaKey) {
-        event.preventDefault();
-        reverseSearch.updateQuery(reverseSearch.query + event.key);
-        return;
+        event.preventDefault()
+        reverseSearch.updateQuery(reverseSearch.query + event.key)
+        return
       }
 
-      reverseSearch.exit(reverseSearch.savedInput);
-      return;
+      reverseSearch.exit(reverseSearch.savedInput)
+      return
     }
 
     // ── Normal mode ──────────────────────────────────────────────
     if (event.key === "Escape") {
-      event.preventDefault();
-      event.stopPropagation();
-      suggestions.reset();
-      setTimeout(() => commandInputRef.current?.focus(), 0);
-      return;
+      event.preventDefault()
+      event.stopPropagation()
+      suggestions.reset()
+      setTimeout(() => commandInputRef.current?.focus(), 0)
+      return
     }
 
     if (event.key === "ArrowUp") {
-      event.preventDefault();
+      event.preventDefault()
       if (showPanel) {
-        suggestions.move(-1, suggestionListRef.current);
+        suggestions.move(-1, suggestionListRef.current)
       } else {
-        const cmd = onArrowUp();
-        if (cmd) setInput(cmd);
+        const cmd = onArrowUp()
+        if (cmd) setInput(cmd)
       }
-      return;
+      return
     }
 
     if (event.key === "ArrowDown") {
-      event.preventDefault();
+      event.preventDefault()
       if (showPanel) {
-        suggestions.move(1, suggestionListRef.current);
+        suggestions.move(1, suggestionListRef.current)
       } else {
-        setInput(onArrowDown());
+        setInput(onArrowDown())
       }
-      return;
+      return
     }
 
     if (event.key === "Tab") {
-      event.preventDefault();
-      if (suggestions.completeUnique()) return;
-      suggestions.move(1, suggestionListRef.current);
+      event.preventDefault()
+      if (suggestions.completeUnique()) return
+      suggestions.move(1, suggestionListRef.current)
     }
-  };
+  }
 
   const handleSuggestionSelect = (suggestion: string) => {
-    suggestions.select(suggestion);
-    commandInputRef.current?.focus();
-  };
+    suggestions.select(suggestion)
+    commandInputRef.current?.focus()
+  }
 
   // ─────────────────────────────────────────────────────────────
   // RENDER
@@ -213,18 +212,12 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
     <div className="space-y-t-group">
       {/* Reverse search prompt */}
       {reverseSearch.isActive && (
-        <p
-          className="text-text-clr opacity-sep"
-          aria-live="polite"
-          aria-atomic="true"
-        >
+        <p className="text-text-clr opacity-sep" aria-live="polite" aria-atomic="true">
           <span className="text-secondary-clr">(reverse-i-search)</span>
           <span className="text-text-clr">'{reverseSearch.query}'</span>
           <span className="text-text-clr opacity-sep">: </span>
           {reverseSearch.match ? (
-            <span className="text-tertiary-clr">
-              {reverseSearch.match.command}
-            </span>
+            <span className="text-tertiary-clr">{reverseSearch.match.command}</span>
           ) : reverseSearch.query ? (
             <span className="text-secondary-clr opacity-sep">(no match)</span>
           ) : (
@@ -233,16 +226,13 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
         </p>
       )}
 
-      <div className="flex items-baseline flex-wrap gap-2">
+      <div className="flex flex-wrap items-baseline gap-2">
         <label htmlFor="command-input" className="shrink-0">
           <TerminalPrompt />
         </label>
 
-        <div className="flex-1 min-w-0 relative">
-          <form
-            onSubmit={handleCommandSubmit}
-            aria-label="Terminal command input"
-          >
+        <div className="relative min-w-0 flex-1">
+          <form onSubmit={handleCommandSubmit} aria-label="Terminal command input">
             <input
               id="command-input"
               autoFocus
@@ -267,12 +257,10 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
               aria-autocomplete={reverseSearch.isActive ? undefined : "list"}
               aria-expanded={showPanel}
               aria-activedescendant={
-                suggestions.activeIndex >= 0
-                  ? `suggestion-${suggestions.activeIndex}`
-                  : undefined
+                suggestions.activeIndex >= 0 ? `suggestion-${suggestions.activeIndex}` : undefined
               }
               aria-controls={showPanel ? "cmd-suggestions" : undefined}
-              className="w-full outline-none border-none text-secondary-clr bg-transparent relative z-10"
+              className="relative z-10 w-full border-none bg-transparent text-secondary-clr outline-none"
               style={{ caretColor: "transparent" }}
             />
           </form>
@@ -283,13 +271,13 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
             (prefersReducedMotion ? (
               <span
                 aria-hidden="true"
-                className="inline-block w-2 h-full bg-secondary-clr absolute top-1.75 -translate-y-1/2 pointer-events-none"
+                className="pointer-events-none absolute top-1.75 inline-block h-full w-2 -translate-y-1/2 bg-secondary-clr"
                 style={{ left: `calc(${input.length}ch)` }}
               />
             ) : (
               <motion.span
                 aria-hidden="true"
-                className="inline-block w-2 h-full bg-secondary-clr absolute top-1.75 -translate-y-1/2 pointer-events-none"
+                className="pointer-events-none absolute top-1.75 inline-block h-full w-2 -translate-y-1/2 bg-secondary-clr"
                 style={{ left: `calc(${input.length}ch)` }}
                 animate={{ opacity: [1, 0, 1] }}
                 transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
@@ -311,7 +299,7 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
         listRef={suggestionListRef}
       />
     </div>
-  );
-};
+  )
+}
 
-export default CommandInput;
+export default CommandInput

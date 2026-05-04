@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
+import type { Metadata } from "next"
+import localFont from "next/font/local"
 
-import "./globals.css";
+import "./globals.css"
 
 // ── DEFAULT FONT (loaded statically) ───────────────
 const CascadiaCode = localFont({
@@ -21,13 +21,13 @@ const CascadiaCode = localFont({
   display: "swap",
   fallback: ["monospace"],
   adjustFontFallback: false,
-});
+})
 
 // ── METADATA ───────────────
-const SITE_URL = "https://terminal-portfolio-website-xi.vercel.app";
-const SITE_TITLE = "Souleymane Sy | Frontend Developer Terminal Portfolio";
+const SITE_URL = "https://terminal-portfolio-website-xi.vercel.app"
+const SITE_TITLE = "Souleymane Sy | Frontend Developer Terminal Portfolio"
 const SITE_DESCRIPTION =
-  "Terminal-style portfolio of Souleymane Sy — self-taught frontend developer from Guinea-Conakry. Specializing in React, Next.js and TypeScript. Explore my projects, skills and journey through an interactive terminal interface.";
+  "Terminal-style portfolio of Souleymane Sy — self-taught frontend developer from Guinea-Conakry. Specializing in React, Next.js and TypeScript. Explore my projects, skills and journey through an interactive terminal interface."
 
 export const metadata: Metadata = {
   title: {
@@ -94,44 +94,35 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
   },
-};
+}
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Souleymane Sy",
   url: "https://terminal-portfolio-website-xi.vercel.app",
-  sameAs: [
-    "https://github.com/SouleymaneSy7",
-    "https://linkedin.com/in/souleymanesy7",
-  ],
+  sameAs: ["https://github.com/SouleymaneSy7", "https://linkedin.com/in/souleymanesy7"],
   jobTitle: "Frontend Developer",
   knowsAbout: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
       <head>
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link
-          rel="dns-prefetch"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
 
-      <body className={[CascadiaCode.variable, "antialiased"].join(" ")}>
-        {children}
-      </body>
+      <body className={[CascadiaCode.variable, "antialiased"].join(" ")}>{children}</body>
     </html>
-  );
+  )
 }

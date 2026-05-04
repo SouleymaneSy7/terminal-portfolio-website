@@ -1,4 +1,4 @@
-import { ManPageType } from "@/types";
+import { ManPageType } from "@/types"
 
 export const INFO_PAGES: Record<string, ManPageType> = {
   about: {
@@ -26,8 +26,7 @@ export const INFO_PAGES: Record<string, ManPageType> = {
     synopsis: "email",
     description:
       "Displays Souleymane Sy's email address as a clickable mailto link, accompanied by a short personal invitation to reach out. The link is sanitized by DOMPurify and the DOMPurify afterSanitizeAttributes hook enforces target='_blank' rel='noopener noreferrer'.",
-    notes:
-      "For all social links together, use contact. For the CV, use resume.",
+    notes: "For all social links together, use contact. For the CV, use resume.",
     seeAlso: ["contact", "resume"],
   },
 
@@ -58,4 +57,4 @@ export const INFO_PAGES: Record<string, ManPageType> = {
       "The download attribute on the anchor element triggers a browser download dialog rather than opening the PDF in a new tab. Both are offered — 'Open in browser' uses target='_blank', 'Download' uses the download attribute.",
     seeAlso: ["contact", "email", "about"],
   },
-};
+}

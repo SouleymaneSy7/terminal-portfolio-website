@@ -11,13 +11,13 @@
  * ```
  */
 
-import type { CommandHistoryOutputType, GithubRepoType } from "@/types";
-import axios from "axios";
-import { fetchGithubProfile } from "@/services";
-import { parseArgs } from "@/utils/argParser";
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
-import { createErrorOutput, createHtmlOutput } from "@/utils/output";
-import { GITHUB_HELP } from "@/constants/help/utils";
+import type { CommandHistoryOutputType, GithubRepoType } from "@/types"
+import axios from "axios"
+import { fetchGithubProfile } from "@/services"
+import { parseArgs } from "@/utils/argParser"
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
+import { createErrorOutput, createHtmlOutput } from "@/utils/output"
+import { GITHUB_HELP } from "@/constants/help/utils"
 
 // ─────────────────────────────────────────────────────────────────
 // HELPERS
@@ -28,20 +28,19 @@ function formatDate(iso: string): string {
     year: "numeric",
     month: "long",
     day: "numeric",
-  });
+  })
 }
 
 function accountAge(iso: string): string {
-  const years =
-    (Date.now() - new Date(iso).getTime()) / (365.25 * 24 * 3600 * 1000);
-  if (years < 1) return "less than a year";
-  if (years < 2) return "1 year";
-  return `${Math.floor(years)} years`;
+  const years = (Date.now() - new Date(iso).getTime()) / (365.25 * 24 * 3600 * 1000)
+  if (years < 1) return "less than a year"
+  if (years < 2) return "1 year"
+  return `${Math.floor(years)} years`
 }
 
 function normalizeUrl(url: string | null): string | null {
-  if (!url) return null;
-  return /^https?:\/\//i.test(url) ? url : `https://${url}`;
+  if (!url) return null
+  return /^https?:\/\//i.test(url) ? url : `https://${url}`
 }
 
 function buildRepoRow(repo: GithubRepoType): string {
@@ -49,7 +48,7 @@ function buildRepoRow(repo: GithubRepoType): string {
     <span class="text-tertiary-clr font-bold">★ ${String(repo.stargazers_count).padEnd(5)}</span>
     <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a>
     ${repo.language ? `<span class="text-text-clr opacity-sep"> · ${repo.language}</span>` : ""}
-  </p>`;
+  </p>`
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -61,23 +60,23 @@ function createProfileOutput(
   pinnedRepos: GithubRepoType[],
   topRepos: GithubRepoType[],
 ): CommandHistoryOutputType {
-  const pinnedRows = pinnedRepos.map(buildRepoRow).join("\n");
-  const topRows = topRepos.map(buildRepoRow).join("\n");
+  const pinnedRows = pinnedRepos.map(buildRepoRow).join("\n")
+  const topRows = topRepos.map(buildRepoRow).join("\n")
 
-  const bio = user.bio ? `<p>${user.bio}</p>` : "";
+  const bio = user.bio ? `<p>${user.bio}</p>` : ""
   const location = user.location
     ? `<p><span class="text-secondary-clr">Location   </span>  ${user.location}</p>`
-    : "";
-  const blogUrl = normalizeUrl(user.blog);
+    : ""
+  const blogUrl = normalizeUrl(user.blog)
   const blog = blogUrl
     ? `<p><span class="text-secondary-clr">Website    </span>  <a href="${blogUrl}" target="_blank" rel="noopener noreferrer">${user.blog}</a></p>`
-    : "";
+    : ""
   const company = user.company
     ? `<p><span class="text-secondary-clr">Company    </span>  ${user.company}</p>`
-    : "";
+    : ""
   const twitter = user.twitter_username
     ? `<p><span class="text-secondary-clr">Twitter    </span>  <a href="https://twitter.com/${user.twitter_username}" target="_blank" rel="noopener noreferrer">@${user.twitter_username}</a></p>`
-    : "";
+    : ""
 
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
@@ -121,7 +120,7 @@ function createProfileOutput(
         <p>View full profile ${DT.decorators.arrow}<a href="${user.html_url}" target="_blank" rel="noopener noreferrer">github.com/${user.login}</a></p>
       </div>
     </div>`,
-  );
+  )
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -134,49 +133,45 @@ function createProfileOutput(
  * @param args - Command arguments
  * @returns Command output blocks
  */
-export const handleGithubCommand = async (
-  args: string[],
-): Promise<CommandHistoryOutputType> => {
-  const { flags, positional } = parseArgs(args);
+export const handleGithubCommand = async (args: string[]): Promise<CommandHistoryOutputType> => {
+  const { flags, positional } = parseArgs(args)
 
-  if (flags.help) return GITHUB_HELP;
+  if (flags.help) return GITHUB_HELP
 
-  const username = positional[0]?.trim();
+  const username = positional[0]?.trim()
 
   if (!username) {
     return createErrorOutput(
       `Usage: <span class="text-tertiary-clr font-bold">github &lt;username&gt;</span>`,
       `Try ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">github --help</span>${DT.decorators.quote} for more information.`,
-    );
+    )
   }
 
   if (!/^[a-zA-Z0-9-]{1,39}$/.test(username)) {
     return createErrorOutput(
       `Invalid GitHub username: <span class="text-tertiary-clr">"${username}"</span>`,
-    );
+    )
   }
 
   try {
-    const { user, pinnedRepos, topRepos } = await fetchGithubProfile(username);
-    return createProfileOutput(user, pinnedRepos, topRepos);
+    const { user, pinnedRepos, topRepos } = await fetchGithubProfile(username)
+    return createProfileOutput(user, pinnedRepos, topRepos)
   } catch (err) {
     if (axios.isAxiosError(err)) {
       if (err.response?.status === 404) {
         return createErrorOutput(
           `User <span class="text-tertiary-clr">"${username}"</span> not found on GitHub.`,
-        );
+        )
       }
       if (err.response?.status === 403) {
         return createErrorOutput(
           "GitHub API rate limit reached (60 req/hr). Try again in a few minutes.",
-        );
+        )
       }
       if (err.code === "ECONNABORTED") {
-        return createErrorOutput("Request timed out. Check your connection.");
+        return createErrorOutput("Request timed out. Check your connection.")
       }
     }
-    return createErrorOutput(
-      "Could not fetch GitHub profile. Check your connection.",
-    );
+    return createErrorOutput("Could not fetch GitHub profile. Check your connection.")
   }
-};
+}

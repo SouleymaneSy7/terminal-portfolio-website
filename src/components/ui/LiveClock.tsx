@@ -3,53 +3,53 @@
  *
  */
 
-"use client";
+"use client"
 
-import { getGreeting, getTimezone } from "@/utils/date";
-import { format, getHours } from "date-fns";
-import { motion } from "framer-motion";
+import { getGreeting, getTimezone } from "@/utils/date"
+import { format, getHours } from "date-fns"
+import { motion } from "framer-motion"
 
-import * as React from "react";
-import VisuallyHidden from "../common/VisuallyHidden";
+import * as React from "react"
+import VisuallyHidden from "../common/VisuallyHidden"
 
 const LiveClock: React.FC = () => {
-  const [now, setNow] = React.useState(new Date());
+  const [now, setNow] = React.useState(new Date())
 
   React.useEffect(() => {
-    const interval = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(interval);
-  }, []);
+    const interval = setInterval(() => setNow(new Date()), 1000)
+    return () => clearInterval(interval)
+  }, [])
 
-  const longDate = format(now, "EEEE, MMMM dd, yyyy");
-  const hhmm = format(now, "hh:mm");
-  const ss = format(now, ":ss");
-  const ampm = format(now, " a");
-  const fullTime = `${hhmm}${ss}${ampm}`;
-  const timezone = getTimezone();
-  const greeting = getGreeting(getHours(now));
+  const longDate = format(now, "EEEE, MMMM dd, yyyy")
+  const hhmm = format(now, "hh:mm")
+  const ss = format(now, ":ss")
+  const ampm = format(now, " a")
+  const fullTime = `${hhmm}${ss}${ampm}`
+  const timezone = getTimezone()
+  const greeting = getGreeting(getHours(now))
 
-  const LABEL = "  DATE  ·  ";
+  const LABEL = "  DATE  ·  "
   const W =
     Math.max(
       "  ● LIVE".length,
       `${LABEL}${longDate}`.length,
       `${LABEL}${fullTime}`.length,
       `${LABEL}${timezone}`.length,
-    ) + 4;
+    ) + 4
 
-  const top = `╭${"─".repeat(W)}╮`;
-  const sep = `├${"─".repeat(W)}┤`;
-  const bot = `╰${"─".repeat(W)}╯`;
-  const empty = `│${" ".repeat(W)}│`;
+  const top = `╭${"─".repeat(W)}╮`
+  const sep = `├${"─".repeat(W)}┤`
+  const bot = `╰${"─".repeat(W)}╯`
+  const empty = `│${" ".repeat(W)}│`
 
-  const liveSpaces = " ".repeat(W - "  ● LIVE".length);
-  const dateSpaces = " ".repeat(W - `${LABEL}${longDate}`.length);
-  const timeSpaces = " ".repeat(W - `${LABEL}${fullTime}`.length);
-  const zoneSpaces = " ".repeat(W - `${LABEL}${timezone}`.length);
+  const liveSpaces = " ".repeat(W - "  ● LIVE".length)
+  const dateSpaces = " ".repeat(W - `${LABEL}${longDate}`.length)
+  const timeSpaces = " ".repeat(W - `${LABEL}${fullTime}`.length)
+  const zoneSpaces = " ".repeat(W - `${LABEL}${timezone}`.length)
 
   return (
     <motion.div
-      className="py-1 space-y-3"
+      className="space-y-3 py-1"
       initial={{ opacity: 0, x: -4 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.15, ease: "easeOut" }}
@@ -69,8 +69,8 @@ const LiveClock: React.FC = () => {
           <p className="whitespace-pre">
             <span className="text-text-clr opacity-70">│</span>
             {"  "}
-            <span className="text-tertiary-clr animate-pulse-live">●</span>{" "}
-            <span className="text-tertiary-clr font-bold">LIVE</span>
+            <span className="animate-pulse-live text-tertiary-clr">●</span>{" "}
+            <span className="font-bold text-tertiary-clr">LIVE</span>
             {liveSpaces}
             <span className="text-text-clr opacity-70">│</span>
           </p>
@@ -85,7 +85,7 @@ const LiveClock: React.FC = () => {
             {"  "}
             <span className="text-text-clr opacity-40">·</span>
             {"  "}
-            <span className="text-text-clr font-bold">{longDate}</span>
+            <span className="font-bold text-text-clr">{longDate}</span>
             {dateSpaces}
             <span className="text-text-clr opacity-70">│</span>
           </p>
@@ -97,7 +97,7 @@ const LiveClock: React.FC = () => {
             {"  "}
             <span className="text-text-clr opacity-40">·</span>
             {"  "}
-            <span className="text-primary-clr font-bold">{hhmm}</span>
+            <span className="font-bold text-primary-clr">{hhmm}</span>
             <span className="text-primary-clr opacity-50">{ss}</span>
             <span className="text-tertiary-clr">{ampm}</span>
             {timeSpaces}
@@ -129,7 +129,7 @@ const LiveClock: React.FC = () => {
         <span className="text-secondary-clr">{greeting}</span>
       </p>
     </motion.div>
-  );
-};
+  )
+}
 
-export default LiveClock;
+export default LiveClock

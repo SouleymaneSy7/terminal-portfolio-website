@@ -470,17 +470,15 @@ html[data-font="meslo"] body {
 }
 
 body {
-  @apply bg-background-clr text-text-clr font-cascadia-code text-fs-body font-regular leading-base;
+  @apply bg-background-clr font-cascadia-code text-fs-body leading-base font-regular text-text-clr;
 }
 
 a {
-  @apply text-secondary-clr inline-block underline
-         hover:bg-primary-clr hover:text-text-clr
-         transition-all duration-150 px-0.5;
+  @apply inline-block px-0.5 text-secondary-clr underline transition-all duration-150 hover:bg-primary-clr hover:text-text-clr;
 }
 
 a:focus-visible {
-  @apply outline-2 outline-offset-2 outline-primary-clr rounded-sm;
+  @apply rounded-sm outline-2 outline-offset-2 outline-primary-clr;
 }
 
 @media (prefers-reduced-motion: reduce) {

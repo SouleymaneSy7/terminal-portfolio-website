@@ -2,8 +2,8 @@
  * Help outputs for utility commands.
  */
 
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
-import { createHelpOutput } from "@/utils/output";
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
+import { createHelpOutput } from "@/utils/output"
 
 export const AGE_HELP = createHelpOutput({
   name: "age — Age Calculator",
@@ -17,7 +17,7 @@ export const AGE_HELP = createHelpOutput({
     { command: "age 15-01-1990", description: "- Dash-separated" },
     { command: "age 1990/01/15", description: "- Slash-separated ISO" },
   ],
-});
+})
 
 export const CALC_HELP = createHelpOutput({
   name: "calc — Mathematical Expression Evaluator",
@@ -35,7 +35,7 @@ export const CALC_HELP = createHelpOutput({
     { command: "calc 5 km to m", description: "Distance conversion" },
   ],
   notes: `Supported: arithmetic <span class="text-tertiary-clr">+ - * / ^ %</span>, functions <span class="text-tertiary-clr">sqrt abs ceil floor round log</span>, trig <span class="text-tertiary-clr">sin cos tan</span>, constants <span class="text-tertiary-clr">pi e phi tau</span>, units, bitwise <span class="text-tertiary-clr">&amp; | ^ ~ &lt;&lt; &gt;&gt;</span>`,
-});
+})
 
 export const COLOR_HELP = createHelpOutput({
   name: "color",
@@ -54,22 +54,30 @@ export const COLOR_HELP = createHelpOutput({
     { command: "color hsl(0, 100%, 71%)", description: "Convert HSL color" },
     { command: "color coral", description: "Convert named color" },
   ],
-});
+})
 
 export const CONVERT_HELP = createHelpOutput({
   name: "convert — Currency Conversion",
-  description:
-    "Real-time currency conversion powered by the European Central Bank.",
+  description: "Real-time currency conversion powered by the European Central Bank.",
   usage: `<span class="text-tertiary-clr font-bold">convert &lt;amount&gt; &lt;from&gt; &lt;to&gt;</span>`,
   examples: [
-    { command: "convert 100 USD EUR", description: " - Convert 100 USD to EUR" },
+    {
+      command: "convert 100 USD EUR",
+      description: " - Convert 100 USD to EUR",
+    },
     { command: "convert 50 EUR GBP", description: " - Convert 50 EUR to GBP" },
-    { command: "convert 1000 JPY USD", description: " - Convert 1000 JPY to USD" },
-    { command: "convert list", description: " - List all supported currencies" },
+    {
+      command: "convert 1000 JPY USD",
+      description: " - Convert 1000 JPY to USD",
+    },
+    {
+      command: "convert list",
+      description: " - List all supported currencies",
+    },
   ],
   notes: "Currency codes are ISO 4217 (e.g. USD, EUR, GBP, JPY).",
   seeAlso: ["convert list"],
-});
+})
 
 export const ECHO_HELP = createHelpOutput({
   name: "echo",
@@ -77,64 +85,90 @@ export const ECHO_HELP = createHelpOutput({
   description: "Output text to the terminal. Supports \\\\n for newlines.",
   examples: [
     { command: "echo Hello, World!", description: " - Print simple text" },
-    { command: "echo I love TypeScript", description: " - Print multiple words" },
+    {
+      command: "echo I love TypeScript",
+      description: " - Print multiple words",
+    },
     { command: "echo Line 1\\\\nLine 2", description: " - Print with newline" },
   ],
-});
+})
 
 export const ENCODE_HELP = createHelpOutput({
   name: "encode — Usage",
   description: "Encode text using the specified format.",
   usage: `<span class="text-tertiary-clr font-bold">encode [format] &lt;text&gt;</span>  <span class="text-secondary-clr">Default: base64</span>`,
   options: [
-    { flag: "base64", description: "Base64 — default, safe for all text including unicode" },
+    {
+      flag: "base64",
+      description: "Base64 — default, safe for all text including unicode",
+    },
     { flag: "url", description: "URL percent-encoding (encodeURIComponent)" },
     { flag: "hex", description: "Hexadecimal byte representation" },
   ],
   examples: [
-    { command: "encode Hello World", description: "Encode with default base64" },
-    { command: "encode base64 Hello World", description: "Encode explicitly as base64" },
-    { command: "encode url https://example.com/?q=hello world", description: "URL-encode a string" },
+    {
+      command: "encode Hello World",
+      description: "Encode with default base64",
+    },
+    {
+      command: "encode base64 Hello World",
+      description: "Encode explicitly as base64",
+    },
+    {
+      command: "encode url https://example.com/?q=hello world",
+      description: "URL-encode a string",
+    },
     { command: "encode hex Hello", description: "Encode as hex bytes" },
   ],
   notes: "All operations run locally in your browser — no data is sent anywhere.",
-});
+})
 
 export const DECODE_HELP = createHelpOutput({
   name: "decode — Usage",
   description: "Decode text from the specified format.",
   usage: `<span class="text-tertiary-clr font-bold">decode [format] &lt;text&gt;</span>  <span class="text-secondary-clr">Default: base64</span>`,
   options: [
-    { flag: "base64", description: "Base64 — default, safe for all text including unicode" },
+    {
+      flag: "base64",
+      description: "Base64 — default, safe for all text including unicode",
+    },
     { flag: "url", description: "URL percent-encoding (decodeURIComponent)" },
     { flag: "hex", description: "Hexadecimal byte representation" },
   ],
   examples: [
     { command: "decode SGVsbG8gV29ybGQ=", description: "Decode base64 string" },
-    { command: "decode base64 SGVsbG8gV29ybGQ=", description: "Decode explicitly as base64" },
-    { command: "decode url hello%20world", description: "Decode URL-encoded string" },
+    {
+      command: "decode base64 SGVsbG8gV29ybGQ=",
+      description: "Decode explicitly as base64",
+    },
+    {
+      command: "decode url hello%20world",
+      description: "Decode URL-encoded string",
+    },
     { command: "decode hex 48656c6c6f", description: "Decode hex bytes" },
   ],
   notes: "All operations run locally in your browser — no data is sent anywhere.",
-});
+})
 
 export const GITHUB_HELP = createHelpOutput({
   name: "github",
   usage: "github &lt;username&gt;",
   description: "Display a GitHub user's profile, stats and top repos.",
   examples: [
-    { command: "github SouleymaneSy7", description: "View SouleymaneSy7's profile" },
+    {
+      command: "github SouleymaneSy7",
+      description: "View SouleymaneSy7's profile",
+    },
     { command: "github torvalds", description: "View torvalds' profile" },
     { command: "github gaearon", description: "View gaearon's profile" },
   ],
   notes: "Uses the public GitHub REST API — 60 requests/hour unauthenticated.",
-});
+})
 
 export const HASH_HELP = createHelpOutput({
   name: "hash",
   usage: "hash [algorithm] <text>",
-  description:
-    "Generate a cryptographic hash of any text using the Web Crypto API.",
+  description: "Generate a cryptographic hash of any text using the Web Crypto API.",
   options: [
     {
       flag: "sha256",
@@ -156,9 +190,8 @@ export const HASH_HELP = createHelpOutput({
     },
     { command: "hash sha1 legacy input", description: "Hash with SHA-1" },
   ],
-  notes:
-    "Hashing runs entirely in your browser — no data is sent to any server.",
-});
+  notes: "Hashing runs entirely in your browser — no data is sent to any server.",
+})
 
 export const HISTORY_HELP = createHelpOutput({
   name: "history",
@@ -171,14 +204,14 @@ export const HISTORY_HELP = createHelpOutput({
     { command: "history 50", description: "Show last 50 commands" },
   ],
   notes: `Default: last 20 commands. Maximum: 50 entries.`,
-});
+})
 
 export const IP_HELP = createHelpOutput({
   name: "ip",
   description: "Display your public IP address and geolocation information.",
   usage: `<span class="text-tertiary-clr font-bold">ip</span>`,
   notes: `Your IP is fetched via <span class="text-tertiary-clr">ipapi.co</span>. If you're using a VPN or proxy, the detected IP will be that of your VPN/proxy.`,
-});
+})
 
 export const NOTE_HELP = createHelpOutput({
   name: "note",
@@ -197,7 +230,7 @@ export const NOTE_HELP = createHelpOutput({
     { command: "note edit 2 Updated text", description: "Edit note with ID 2" },
     { command: "note clear", description: "Clear all notes" },
   ],
-});
+})
 
 export const SNIPPET_HELP = createHelpOutput({
   name: "snippet — Code Snippet Manager",
@@ -205,9 +238,15 @@ export const SNIPPET_HELP = createHelpOutput({
   description: "Save, view, and manage code snippets in your browser.",
   options: [
     { flag: "snippet", description: "List all saved snippets" },
-    { flag: "snippet add &lt;name&gt; &lt;lang&gt; &lt;code&gt;", description: "Save a new snippet" },
+    {
+      flag: "snippet add &lt;name&gt; &lt;lang&gt; &lt;code&gt;",
+      description: "Save a new snippet",
+    },
     { flag: "snippet show &lt;id&gt;", description: "Display snippet code" },
-    { flag: "snippet rm &lt;id&gt;", description: "Delete a snippet by its short ID" },
+    {
+      flag: "snippet rm &lt;id&gt;",
+      description: "Delete a snippet by its short ID",
+    },
     { flag: "snippet clear", description: "Delete all snippets" },
     { flag: "snippet help", description: "Show this guide" },
   ],
@@ -216,11 +255,17 @@ export const SNIPPET_HELP = createHelpOutput({
       command: "snippet add fibonacci js const fib = n =&gt; n &lt;= 1 ? n : fib(n-1) + fib(n-2)",
       description: "Save a JS snippet named 'fibonacci'",
     },
-    { command: "snippet show a1b2c3", description: "Display snippet with ID a1b2c3" },
-    { command: "snippet rm a1b2c3", description: "Delete snippet with ID a1b2c3" },
+    {
+      command: "snippet show a1b2c3",
+      description: "Display snippet with ID a1b2c3",
+    },
+    {
+      command: "snippet rm a1b2c3",
+      description: "Delete snippet with ID a1b2c3",
+    },
   ],
   notes: "Snippets persist in your browser across sessions.",
-});
+})
 
 export const TIMER_HELP = createHelpOutput({
   name: "timer — Countdown Timer",
@@ -235,7 +280,7 @@ export const TIMER_HELP = createHelpOutput({
     { command: "timer 3600", description: "3600 seconds (bare number)" },
   ],
   notes: `Duration units: <span class="text-tertiary-clr">h</span> hours ${DT.decorators.bullet} <span class="text-tertiary-clr">m</span> minutes ${DT.decorators.bullet} <span class="text-tertiary-clr">s</span> seconds. Max: 24h.`,
-});
+})
 
 export const TODOS_HELP = createHelpOutput({
   name: "todo — Command Reference",
@@ -251,7 +296,7 @@ export const TODOS_HELP = createHelpOutput({
     { flag: "todo help", description: "Show this guide" },
   ],
   notes: "Tasks persist in your browser across sessions.",
-});
+})
 
 export const UUID_HELP = createHelpOutput({
   name: "uuid",
@@ -273,4 +318,4 @@ export const UUID_HELP = createHelpOutput({
       description: "Validate a UUID",
     },
   ],
-});
+})

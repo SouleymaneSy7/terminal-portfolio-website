@@ -13,10 +13,10 @@
  * ```
  */
 
-import { parseArgs } from "@/utils/argParser";
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
-import { HASH_HELP } from "@/constants/help/utils";
-import { createHtmlOutput, createErrorOutput } from "@/utils/output";
+import { parseArgs } from "@/utils/argParser"
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
+import { HASH_HELP } from "@/constants/help/utils"
+import { createHtmlOutput, createErrorOutput } from "@/utils/output"
 
 // ─────────────────────────────────────────────────────────────────
 // CONSTANTS
@@ -27,22 +27,22 @@ const ALGORITHMS: Record<string, string> = {
   sha256: "SHA-256",
   sha384: "SHA-384",
   sha512: "SHA-512",
-};
+}
 
 // ─────────────────────────────────────────────────────────────────
 // HELPERS
 // ─────────────────────────────────────────────────────────────────
 
 async function digest(algorithm: string, text: string): Promise<string> {
-  const data = new TextEncoder().encode(text);
-  const hashBuffer = await crypto.subtle.digest(algorithm, data);
+  const data = new TextEncoder().encode(text)
+  const hashBuffer = await crypto.subtle.digest(algorithm, data)
   return Array.from(new Uint8Array(hashBuffer))
     .map((b) => b.toString(16).padStart(2, "0"))
-    .join("");
+    .join("")
 }
 
 function formatBytes(n: number): string {
-  return `${n} byte${n === 1 ? "" : "s"}`;
+  return `${n} byte${n === 1 ? "" : "s"}`
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -50,10 +50,10 @@ function formatBytes(n: number): string {
 // ─────────────────────────────────────────────────────────────────
 
 function buildHashOutput(algorithm: string, text: string, hashHex: string) {
-  const byteLength = new TextEncoder().encode(text).length;
-  const grouped = hashHex.match(/.{1,8}/g)?.join(" ") ?? hashHex;
-  const displayText = text.length > 60 ? text.slice(0, 57) + "..." : text;
-  const bitSize = (hashHex.length / 2) * 8;
+  const byteLength = new TextEncoder().encode(text).length
+  const grouped = hashHex.match(/.{1,8}/g)?.join(" ") ?? hashHex
+  const displayText = text.length > 60 ? text.slice(0, 57) + "..." : text
+  const bitSize = (hashHex.length / 2) * 8
 
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
@@ -74,7 +74,7 @@ function buildHashOutput(algorithm: string, text: string, hashHex: string) {
         <p>Try: <span class="text-tertiary-clr font-bold">hash sha512 ${text.split(" ")[0]}</span> for a longer hash.</p>
       </div>
     </div>`,
-  );
+  )
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -82,43 +82,41 @@ function buildHashOutput(algorithm: string, text: string, hashHex: string) {
 // ─────────────────────────────────────────────────────────────────
 
 export const handleHashCommand = async (args: string[]) => {
-  const parsed = parseArgs(args);
+  const parsed = parseArgs(args)
 
-  if (parsed.flags.help) return HASH_HELP;
+  if (parsed.flags.help) return HASH_HELP
 
   if (parsed.positional.length === 0) {
     return createErrorOutput(
       "No text provided.",
       `<span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">hash [algorithm] &lt;text&gt;</span>`,
-    );
+    )
   }
 
   // Detect if first positional is an algorithm name
-  const firstLower = parsed.positional[0].toLowerCase();
-  let algoKey = "sha256";
-  let textParts = parsed.positional;
+  const firstLower = parsed.positional[0].toLowerCase()
+  let algoKey = "sha256"
+  let textParts = parsed.positional
 
   if (firstLower in ALGORITHMS) {
-    algoKey = firstLower;
-    textParts = parsed.positional.slice(1);
+    algoKey = firstLower
+    textParts = parsed.positional.slice(1)
   }
 
   if (textParts.length === 0) {
     return createErrorOutput(
       `No text provided after algorithm.`,
       `<span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">hash ${algoKey} &lt;text&gt;</span>`,
-    );
+    )
   }
 
-  const text = textParts.join(" ");
-  const algorithm = ALGORITHMS[algoKey];
+  const text = textParts.join(" ")
+  const algorithm = ALGORITHMS[algoKey]
 
   try {
-    const hashHex = await digest(algorithm, text);
-    return buildHashOutput(algorithm, text, hashHex);
+    const hashHex = await digest(algorithm, text)
+    return buildHashOutput(algorithm, text, hashHex)
   } catch {
-    return createErrorOutput(
-      "Failed to compute hash. Web Crypto API unavailable.",
-    );
+    return createErrorOutput("Failed to compute hash. Web Crypto API unavailable.")
   }
-};
+}

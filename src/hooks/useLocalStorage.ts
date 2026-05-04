@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import * as React from "react";
+import * as React from "react"
 
 function useLocalStorage<T>(
   key: string,
@@ -11,66 +11,57 @@ function useLocalStorage<T>(
   clearValue: () => void,
   isHydrated: boolean,
 ] {
-  const [storedValue, setStoredValue] = React.useState<T>(initialValue);
-  const [isHydrated, setIsHydrated] = React.useState(false);
+  const [storedValue, setStoredValue] = React.useState<T>(initialValue)
+  const [isHydrated, setIsHydrated] = React.useState(false)
 
   // Keep a stable ref so clearValue never needs initialValue in its deps
-  const initialValueRef = React.useRef(initialValue);
+  const initialValueRef = React.useRef(initialValue)
 
   React.useEffect(() => {
     try {
-      const raw = window.localStorage.getItem(key);
+      const raw = window.localStorage.getItem(key)
       if (raw !== null) {
-        setStoredValue(JSON.parse(raw) as T);
+        setStoredValue(JSON.parse(raw) as T)
       }
     } catch (error) {
-      console.error(`[useLocalStorage] Failed to get key "${key}":`, error);
+      console.error(`[useLocalStorage] Failed to get key "${key}":`, error)
     } finally {
-      setIsHydrated(true);
+      setIsHydrated(true)
     }
-  }, [key]);
+  }, [key])
 
   const setValue = React.useCallback(
     (value: T | ((prev: T) => T)) => {
       try {
         setStoredValue((prev) => {
-          const next =
-            typeof value === "function"
-              ? (value as (prev: T) => T)(prev)
-              : value;
+          const next = typeof value === "function" ? (value as (prev: T) => T)(prev) : value
 
           try {
-            window.localStorage.setItem(key, JSON.stringify(next));
+            window.localStorage.setItem(key, JSON.stringify(next))
           } catch (err) {
-            console.error(
-              `[useLocalStorage] Failed to write key "${key}":`,
-              err,
-            );
+            console.error(`[useLocalStorage] Failed to write key "${key}":`, err)
           }
 
-          return next;
-        });
+          return next
+        })
       } catch (error) {
-        console.error(
-          `[useLocalStorage] setValue error for key "${key}":`,
-          error,
-        );
+        console.error(`[useLocalStorage] setValue error for key "${key}":`, error)
       }
     },
     [key],
-  );
+  )
 
   // initialValueRef.current is stable — no array/object identity issue
   const clearValue = React.useCallback(() => {
     try {
-      setStoredValue(initialValueRef.current);
-      window.localStorage.removeItem(key);
+      setStoredValue(initialValueRef.current)
+      window.localStorage.removeItem(key)
     } catch (error) {
-      console.error(`[useLocalStorage] Failed to clear key "${key}":`, error);
+      console.error(`[useLocalStorage] Failed to clear key "${key}":`, error)
     }
-  }, [key]);
+  }, [key])
 
-  return [storedValue, setValue, clearValue, isHydrated] as const;
+  return [storedValue, setValue, clearValue, isHydrated] as const
 }
 
-export default useLocalStorage;
+export default useLocalStorage

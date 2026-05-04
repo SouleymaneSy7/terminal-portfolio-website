@@ -17,11 +17,11 @@
  * ```
  */
 
-import { AGE_HELP } from "@/constants/help/utils";
-import type { CommandHistoryOutputType, ParsedDateType } from "@/types";
-import { parseArgs } from "@/utils/argParser";
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
-import { createErrorOutput, createHtmlOutput } from "@/utils/output";
+import { AGE_HELP } from "@/constants/help/utils"
+import type { CommandHistoryOutputType, ParsedDateType } from "@/types"
+import { parseArgs } from "@/utils/argParser"
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
+import { createErrorOutput, createHtmlOutput } from "@/utils/output"
 import {
   differenceInDays,
   differenceInMonths,
@@ -31,14 +31,14 @@ import {
   isValid,
   parse,
   parseISO,
-} from "date-fns";
+} from "date-fns"
 
 // ─────────────────────────────────────────────────────────────────
 // DATE PARSING
 // ─────────────────────────────────────────────────────────────────
 
 function tryParse(input: string): ParsedDateType | null {
-  const ref = new Date();
+  const ref = new Date()
 
   const formats: Array<{ fmt: string; label: string }> = [
     { fmt: "yyyy-MM-dd", label: "ISO (yyyy-MM-dd)" },
@@ -46,22 +46,22 @@ function tryParse(input: string): ParsedDateType | null {
     { fmt: "MM/dd/yyyy", label: "American (MM/dd/yyyy)" },
     { fmt: "dd-MM-yyyy", label: "dd-MM-yyyy" },
     { fmt: "yyyy/MM/dd", label: "yyyy/MM/dd" },
-  ];
+  ]
 
   for (const { fmt, label } of formats) {
-    const parsed = parse(input.trim(), fmt, ref);
+    const parsed = parse(input.trim(), fmt, ref)
     if (isValid(parsed) && !isFuture(parsed)) {
-      return { date: parsed, originalFormat: label };
+      return { date: parsed, originalFormat: label }
     }
   }
 
   // ISO fallback (handles partial ISO like "1990-01")
-  const iso = parseISO(input.trim());
+  const iso = parseISO(input.trim())
   if (isValid(iso) && !isFuture(iso)) {
-    return { date: iso, originalFormat: "ISO" };
+    return { date: iso, originalFormat: "ISO" }
   }
 
-  return null;
+  return null
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -69,48 +69,32 @@ function tryParse(input: string): ParsedDateType | null {
 // ─────────────────────────────────────────────────────────────────
 
 function calcAge(birthDate: Date) {
-  const now = new Date();
+  const now = new Date()
 
-  const years = differenceInYears(now, birthDate);
+  const years = differenceInYears(now, birthDate)
 
   const lastBirthday = (() => {
-    const candidate = new Date(
-      now.getFullYear(),
-      birthDate.getMonth(),
-      birthDate.getDate(),
-    );
+    const candidate = new Date(now.getFullYear(), birthDate.getMonth(), birthDate.getDate())
     return candidate > now
-      ? new Date(
-          now.getFullYear() - 1,
-          birthDate.getMonth(),
-          birthDate.getDate(),
-        )
-      : candidate;
-  })();
+      ? new Date(now.getFullYear() - 1, birthDate.getMonth(), birthDate.getDate())
+      : candidate
+  })()
 
-  const months = differenceInMonths(now, lastBirthday);
-  const afterMonths = new Date(lastBirthday);
-  afterMonths.setMonth(afterMonths.getMonth() + months);
-  const days = differenceInDays(now, afterMonths);
+  const months = differenceInMonths(now, lastBirthday)
+  const afterMonths = new Date(lastBirthday)
+  afterMonths.setMonth(afterMonths.getMonth() + months)
+  const days = differenceInDays(now, afterMonths)
 
   const nextBirthday = (() => {
-    const candidate = new Date(
-      now.getFullYear(),
-      birthDate.getMonth(),
-      birthDate.getDate(),
-    );
+    const candidate = new Date(now.getFullYear(), birthDate.getMonth(), birthDate.getDate())
     return candidate <= now
-      ? new Date(
-          now.getFullYear() + 1,
-          birthDate.getMonth(),
-          birthDate.getDate(),
-        )
-      : candidate;
-  })();
+      ? new Date(now.getFullYear() + 1, birthDate.getMonth(), birthDate.getDate())
+      : candidate
+  })()
 
-  const daysUntilBirthday = differenceInDays(nextBirthday, now);
+  const daysUntilBirthday = differenceInDays(nextBirthday, now)
 
-  return { years, months, days, daysUntilBirthday, nextBirthday };
+  return { years, months, days, daysUntilBirthday, nextBirthday }
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -118,30 +102,29 @@ function calcAge(birthDate: Date) {
 // ─────────────────────────────────────────────────────────────────
 
 function createAgeOutput(date: Date): CommandHistoryOutputType {
-  const { years, months, days, daysUntilBirthday, nextBirthday } =
-    calcAge(date);
+  const { years, months, days, daysUntilBirthday, nextBirthday } = calcAge(date)
 
-  const formattedBirth = format(date, "EEEE, MMMM dd, yyyy");
-  const dayOfWeek = format(date, "EEEE");
-  const nextBdayStr = format(nextBirthday, "MMMM dd, yyyy");
+  const formattedBirth = format(date, "EEEE, MMMM dd, yyyy")
+  const dayOfWeek = format(date, "EEEE")
+  const nextBdayStr = format(nextBirthday, "MMMM dd, yyyy")
 
   const birthdayNote =
     daysUntilBirthday === 0
       ? `<p class="text-tertiary-clr font-bold">🎂 Happy Birthday! 🎉</p>`
       : daysUntilBirthday === 1
         ? `<p><span class="text-secondary-clr">Next birthday</span>${DT.decorators.arrow}Tomorrow — <span class="text-tertiary-clr">${nextBdayStr}</span></p>`
-        : `<p><span class="text-secondary-clr">Next birthday</span>${DT.decorators.arrow}<span class="text-tertiary-clr">${nextBdayStr}</span> <span class="text-text-clr opacity-sep"> ${DT.decorators.bullet} (${daysUntilBirthday} days)</span></p>`;
+        : `<p><span class="text-secondary-clr">Next birthday</span>${DT.decorators.arrow}<span class="text-tertiary-clr">${nextBdayStr}</span> <span class="text-text-clr opacity-sep"> ${DT.decorators.bullet} (${daysUntilBirthday} days)</span></p>`
 
   const detailParts = [
     months > 0 ? `${months} month${months > 1 ? "s" : ""}` : "",
     days > 0 ? `${days} day${days > 1 ? "s" : ""}` : "",
   ]
     .filter(Boolean)
-    .join(", ");
+    .join(", ")
 
   const detailLine = detailParts
     ? `<p class="text-text-clr opacity-sep">${years} years, ${detailParts}</p>`
-    : "";
+    : ""
 
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
@@ -166,7 +149,7 @@ function createAgeOutput(date: Date): CommandHistoryOutputType {
         ${birthdayNote}
       </div>
     </div>`,
-  );
+  )
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -174,27 +157,27 @@ function createAgeOutput(date: Date): CommandHistoryOutputType {
 // ─────────────────────────────────────────────────────────────────
 
 export const handleAgeCommand = (args: string[]): CommandHistoryOutputType => {
-  const parsed = parseArgs(args);
+  const parsed = parseArgs(args)
 
-  if (parsed.flags.help) return AGE_HELP;
+  if (parsed.flags.help) return AGE_HELP
 
-  const input = parsed.positional.join(" ").trim();
+  const input = parsed.positional.join(" ").trim()
 
   if (!input) {
     return createErrorOutput(
       'Missing required argument <span class="text-tertiary-clr">&lt;date&gt;</span>.',
       `Type <span class="text-tertiary-clr font-bold">${DT.decorators.quote}age --help${DT.decorators.quote}</span> for supported date formats.`,
-    );
+    )
   }
 
-  const result = tryParse(input);
+  const result = tryParse(input)
 
   if (!result) {
     return createErrorOutput(
       `Could not parse date: <span class="text-tertiary-clr">"${input}"</span>`,
       `Supported: <span class="text-tertiary-clr">1990-01-15</span>  ${DT.decorators.bullet}  <span class="text-tertiary-clr">15/01/1990</span>  ${DT.decorators.bullet}  <span class="text-tertiary-clr">01/15/1990</span>  ${DT.decorators.bullet}  <span class="text-tertiary-clr">15-01-1990</span>`,
-    );
+    )
   }
 
-  return createAgeOutput(result.date);
-};
+  return createAgeOutput(result.date)
+}

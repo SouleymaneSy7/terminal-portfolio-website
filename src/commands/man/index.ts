@@ -7,16 +7,10 @@
  * - Main handler remains clean and focused
  */
 
-import { ManPageType } from "@/types";
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
-import { createHtmlOutput } from "@/utils/output/output";
-import {
-  FUN_PAGES,
-  INFO_PAGES,
-  NETWORK_PAGES,
-  SYSTEM_PAGES,
-  UTILITY_PAGES,
-} from "./pages";
+import { ManPageType } from "@/types"
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
+import { createHtmlOutput } from "@/utils/output/output"
+import { FUN_PAGES, INFO_PAGES, NETWORK_PAGES, SYSTEM_PAGES, UTILITY_PAGES } from "./pages"
 
 // ─────────────────────────────────────────────────────────────────
 // AGGREGATE ALL PAGES
@@ -28,23 +22,23 @@ const MAN_PAGES: Record<string, ManPageType> = {
   ...NETWORK_PAGES,
   ...UTILITY_PAGES,
   ...FUN_PAGES,
-};
+}
 
-const ALL_PAGES = Object.keys(MAN_PAGES).sort();
+const ALL_PAGES = Object.keys(MAN_PAGES).sort()
 
 // ─────────────────────────────────────────────────────────────────
 // RENDERER
 // ─────────────────────────────────────────────────────────────────
 
 function renderManPage(page: ManPageType): string {
-  const sections: string[] = [];
+  const sections: string[] = []
 
   // NAME
   sections.push(`<div class="space-y-t-group">
     <p class="text-secondary-clr font-bold">NAME</p>
     <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
     <p><span class="text-tertiary-clr font-bold">${page.name}</span></p>
-  </div>`);
+  </div>`)
 
   // SYNOPSIS
   sections.push(`<div class="space-y-t-group">
@@ -54,14 +48,14 @@ function renderManPage(page: ManPageType): string {
       .split("\n")
       .map((s) => `<p class="text-tertiary-clr">${s}</p>`)
       .join("")}
-  </div>`);
+  </div>`)
 
   // DESCRIPTION
   sections.push(`<div class="space-y-t-group">
     <p class="text-secondary-clr font-bold">DESCRIPTION</p>
     <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
     <p>${page.description}</p>
-  </div>`);
+  </div>`)
 
   // OPTIONS
   if (page.options) {
@@ -69,7 +63,7 @@ function renderManPage(page: ManPageType): string {
       <p class="text-secondary-clr font-bold">OPTIONS</p>
       <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
       ${page.options}
-    </div>`);
+    </div>`)
   }
 
   // EXAMPLES
@@ -78,7 +72,7 @@ function renderManPage(page: ManPageType): string {
       <p class="text-secondary-clr font-bold">EXAMPLES</p>
       <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
       ${page.examples}
-    </div>`);
+    </div>`)
   }
 
   // NOTES
@@ -87,23 +81,21 @@ function renderManPage(page: ManPageType): string {
       <p class="text-secondary-clr font-bold">NOTES</p>
       <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
       <p>${page.notes}</p>
-    </div>`);
+    </div>`)
   }
 
   // SEE ALSO
   if (page.seeAlso && page.seeAlso.length > 0) {
     const links = page.seeAlso
-      .map(
-        (cmd) => `<span class="text-tertiary-clr font-bold">${cmd}(1)</span>`,
-      )
-      .join("  ");
+      .map((cmd) => `<span class="text-tertiary-clr font-bold">${cmd}(1)</span>`)
+      .join("  ")
     sections.push(`<div class="space-y-t-footer">
       <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
       <p>See also: ${links}</p>
-    </div>`);
+    </div>`)
   }
 
-  return `<div class="space-y-t-section py-t-outer">${sections.join("\n")}</div>`;
+  return `<div class="space-y-t-section py-t-outer">${sections.join("\n")}</div>`
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -112,9 +104,9 @@ function renderManPage(page: ManPageType): string {
 
 export const handleManCommand = (args: string[]) => {
   if (args.length === 0 || args[0] === "--help" || args[0] === "help") {
-    const available = ALL_PAGES.map(
-      (c) => `<span class="text-tertiary-clr">${c}</span>`,
-    ).join(" · ");
+    const available = ALL_PAGES.map((c) => `<span class="text-tertiary-clr">${c}</span>`).join(
+      " · ",
+    )
 
     return createHtmlOutput(
       `<div class="space-y-t-section py-t-outer">
@@ -139,11 +131,11 @@ export const handleManCommand = (args: string[]) => {
           <p>For quick usage, every command also accepts <span class="text-tertiary-clr font-bold">--help</span>.</p>
         </div>
       </div>`,
-    );
+    )
   }
 
-  const cmd = args[0].toLowerCase();
-  const page = MAN_PAGES[cmd];
+  const cmd = args[0].toLowerCase()
+  const page = MAN_PAGES[cmd]
 
   if (!page) {
     return createHtmlOutput(
@@ -158,8 +150,8 @@ export const handleManCommand = (args: string[]) => {
           <p>Or:  <span class="text-tertiary-clr font-bold">man</span> to list all manual pages</p>
         </div>
       </div>`,
-    );
+    )
   }
 
-  return createHtmlOutput(renderManPage(page));
-};
+  return createHtmlOutput(renderManPage(page))
+}

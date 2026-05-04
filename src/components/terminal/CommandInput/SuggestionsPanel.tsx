@@ -1,6 +1,6 @@
-import { SuggestionsPanelPropsType } from "@/types";
-import { AnimatePresence, motion } from "framer-motion";
-import * as React from "react";
+import { SuggestionsPanelPropsType } from "@/types"
+import { AnimatePresence, motion } from "framer-motion"
+import * as React from "react"
 
 export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
   show,
@@ -23,9 +23,9 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
           exit={{ opacity: 0, y: -4 }}
           transition={{ duration: 0.12, ease: "easeOut" }}
         >
-          <div className="flex items-center gap-2 flex-wrap">
+          <div className="flex flex-wrap items-center gap-2">
             <div className="flex items-center gap-2">
-              <p className="text-secondary-clr font-bold">Suggestions</p>
+              <p className="font-bold text-secondary-clr">Suggestions</p>
               <p className="text-text-clr opacity-sep" aria-hidden="true">
                 ───
               </p>
@@ -41,15 +41,10 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
 
             {activeDescription && (
               <React.Fragment>
-                <p
-                  className="hidden md:inline-block text-text-clr opacity-sep"
-                  aria-hidden="true"
-                >
+                <p className="hidden text-text-clr opacity-sep md:inline-block" aria-hidden="true">
                   ·
                 </p>
-                <p className="text-text-clr opacity-sep">
-                  {activeDescription}.
-                </p>
+                <p className="text-text-clr opacity-sep">{activeDescription}.</p>
               </React.Fragment>
             )}
           </div>
@@ -64,16 +59,13 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
             >
               {groupedSugs.map((group, groupIdx) => (
                 <li key={group.label} role="presentation">
-                  <p
-                    aria-hidden="true"
-                    className="text-secondary-clr font-bold mb-t-footer"
-                  >
+                  <p aria-hidden="true" className="mb-t-footer font-bold text-secondary-clr">
                     {group.label}
                   </p>
                   <ul role="presentation" className="grid grid-cols-2 gap-x-4">
                     {group.items.map((suggestion, itemIdx) => {
-                      const fi = flatIndex(groupIdx, itemIdx);
-                      const isActive = fi === activeIndex;
+                      const fi = flatIndex(groupIdx, itemIdx)
+                      const isActive = fi === activeIndex
                       return (
                         <li
                           key={itemIdx}
@@ -86,26 +78,23 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
                             type="button"
                             aria-label={`Complete with ${suggestion}`}
                             onMouseDown={(e) => {
-                              e.preventDefault();
-                              onSelect(suggestion);
+                              e.preventDefault()
+                              onSelect(suggestion)
                             }}
                             className={[
-                              "flex items-center gap-2 w-full text-left transition-colors duration-100 cursor-pointer",
+                              "flex w-full cursor-pointer items-center gap-2 text-left transition-colors duration-100",
                               isActive
                                 ? "text-secondary-clr"
                                 : "text-tertiary-clr hover:text-secondary-clr",
                             ].join(" ")}
                           >
-                            <span
-                              aria-hidden="true"
-                              className="w-3 shrink-0 text-xs"
-                            >
+                            <span aria-hidden="true" className="w-3 shrink-0 text-xs">
                               {isActive ? "▶" : " "}
                             </span>
                             <span>{suggestion}</span>
                           </button>
                         </li>
-                      );
+                      )
                     })}
                   </ul>
                 </li>
@@ -117,10 +106,10 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
               ref={listRef}
               role="listbox"
               aria-label="Command completions"
-              className="grid grid-cols-2 w-140"
+              className="grid w-140 grid-cols-2"
             >
               {completions.map((suggestion, index) => {
-                const isActive = index === activeIndex;
+                const isActive = index === activeIndex
 
                 return (
                   <li
@@ -134,11 +123,11 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
                       type="button"
                       aria-label={`Complete with ${suggestion}`}
                       onMouseDown={(e) => {
-                        e.preventDefault();
-                        onSelect(suggestion);
+                        e.preventDefault()
+                        onSelect(suggestion)
                       }}
                       className={[
-                        "flex items-center gap-2 w-auto text-left transition-colors duration-100 cursor-pointer",
+                        "flex w-auto cursor-pointer items-center gap-2 text-left transition-colors duration-100",
                         isActive
                           ? "text-secondary-clr"
                           : "text-tertiary-clr hover:text-secondary-clr",
@@ -151,7 +140,7 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
                       <span>{suggestion}</span>
                     </button>
                   </li>
-                );
+                )
               })}
             </ul>
           )}
@@ -160,7 +149,7 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
             className="text-text-clr opacity-50"
             aria-label="Keyboard shortcuts: Tab to cycle, arrow keys to navigate, Escape to dismiss"
           >
-            <span aria-hidden="true" className="text-tertiary-clr font-bold">
+            <span aria-hidden="true" className="font-bold text-tertiary-clr">
               [Tab]
             </span>
             <span aria-hidden="true" className="opacity-80">
@@ -170,7 +159,7 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
             <span aria-hidden="true" className="mx-2">
               ·
             </span>
-            <span aria-hidden="true" className="text-tertiary-clr font-bold">
+            <span aria-hidden="true" className="font-bold text-tertiary-clr">
               [↑↓]
             </span>
             <span aria-hidden="true" className="opacity-80">
@@ -180,7 +169,7 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
             <span aria-hidden="true" className="mx-2">
               ·
             </span>
-            <span aria-hidden="true" className="text-tertiary-clr font-bold">
+            <span aria-hidden="true" className="font-bold text-tertiary-clr">
               [Esc]
             </span>
             <span aria-hidden="true" className="opacity-80">
@@ -191,5 +180,5 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
         </motion.div>
       )}
     </AnimatePresence>
-  );
-};
+  )
+}

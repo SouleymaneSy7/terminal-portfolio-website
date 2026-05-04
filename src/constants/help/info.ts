@@ -2,7 +2,7 @@
  * Help outputs for information commands
  */
 
-import { createHelpOutput } from "@/utils/output";
+import { createHelpOutput } from "@/utils/output"
 
 export const ABOUT_HELP = createHelpOutput({
   name: "about",
@@ -10,7 +10,7 @@ export const ABOUT_HELP = createHelpOutput({
   description: "Display my story, background, journey and tech stack.",
   options: [{ flag: "--help, -h", description: "Show this help message" }],
   seeAlso: ["whoami", "projects", "contact"],
-});
+})
 
 export const CONTACT_HELP = createHelpOutput({
   name: "contact",
@@ -21,7 +21,7 @@ export const CONTACT_HELP = createHelpOutput({
     { command: "email", description: "Show email address only" },
   ],
   seeAlso: ["resume", "about"],
-});
+})
 
 export const EMAIL_HELP = createHelpOutput({
   name: "email",
@@ -29,7 +29,7 @@ export const EMAIL_HELP = createHelpOutput({
   description: "Display email address with mailto link.",
   examples: [{ command: "email", description: "Show email address" }],
   seeAlso: ["contact"],
-});
+})
 
 export const PROJECTS_HELP = createHelpOutput({
   name: "projects",
@@ -37,7 +37,7 @@ export const PROJECTS_HELP = createHelpOutput({
   description: "Browse my most notable projects with links and tech stack.",
   options: [{ flag: "--help, -h", description: "Show this help message" }],
   seeAlso: ["repo", "about", "contact"],
-});
+})
 
 export const REPO_HELP = createHelpOutput({
   name: "repo",
@@ -45,7 +45,7 @@ export const REPO_HELP = createHelpOutput({
   description: "View the source code for this portfolio on GitHub.",
   options: [{ flag: "--help, -h", description: "Show this help message" }],
   seeAlso: ["projects", "about"],
-});
+})
 
 export const RESUME_HELP = createHelpOutput({
   name: "resume",
@@ -54,7 +54,7 @@ export const RESUME_HELP = createHelpOutput({
   examples: [{ command: "resume", description: "Show resume links" }],
   notes: "Resume is available in both English (EN) and French (FR) versions.",
   seeAlso: ["contact", "about"],
-});
+})
 
 export const WEATHER_HELP = createHelpOutput({
   name: "weather",
@@ -66,4 +66,4 @@ export const WEATHER_HELP = createHelpOutput({
     { command: "weather New York", description: "Weather in New York" },
   ],
   notes: "Requires an internet connection.",
-});
+})
