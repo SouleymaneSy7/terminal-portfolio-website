@@ -79,7 +79,7 @@ function buildAboutOutput(): CommandHistoryOutputType {
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p>September 2024. Enzo Ustariz's contest. Theme: build a tourism site.</p>
         <p>I didn't hesitate. I chose Conakry — my capital, my home.</p>
-        <p>Two weeks of work. Long nights. Every section thought through.</p>
+        <p>Three weeks of intense work. Long nights. Every section thought through.</p>
         <p>React, TypeScript, Sass, GSAP — pride baked into every commit.</p>
         <p><span class="text-tertiary-clr font-bold">3rd place</span> out of 20+ participants. 🥉</p>
         <p>That result confirmed what I needed to hear:</p>
