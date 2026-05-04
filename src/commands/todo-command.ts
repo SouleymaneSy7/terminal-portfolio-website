@@ -3,28 +3,26 @@
  * Data persists in localStorage under "terminal:todos".
  */
 
-import { TodoItemType } from "@/types";
-import { storageGet, storageRemove, storageSet } from "@/utils/commandStorage";
 import { TODOS_HELP } from "@/constants/help/utils";
+import { STORAGE_KEYS } from "@/constants/storageKeys";
+import { TodoItemType } from "@/types";
 import { parseArgs } from "@/utils/argParser";
+import { storageGet, storageRemove, storageSet } from "@/utils/commandStorage";
 import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
 import {
   createErrorOutput,
-  createHelpOutput,
   createHtmlOutput,
   createSuccessOutput,
 } from "@/utils/output";
-import { STORAGE_KEYS } from "@/constants/storageKeys";
 
 const TODOS_KEY = STORAGE_KEYS.TODOS;
-
 
 const getTodos = (): TodoItemType[] =>
   storageGet<TodoItemType[]>(TODOS_KEY, []);
 const saveTodos = (todos: TodoItemType[]): boolean =>
   storageSet(TODOS_KEY, todos);
 const makeShortId = (uuid: string): string =>
-  uuid.replace(/-/g, "").slice(0, 6);
+  uuid.replace(/-/g, "").slice(0, 8);
 
 // ─────────────────────────────────────────────────────────────────
 // HANDLERS
