@@ -21,7 +21,7 @@
 
 import { ASCII } from "@/constants";
 import { GAME_HELP } from "@/constants/help/fun";
-import { POINTS, quizQuestions, RANKS } from "@/constants/quiz-game";
+import { quizQuestions, RANKS } from "@/constants/quiz-game";
 import type {
   GameStateType,
   PersistedGameStateType,
