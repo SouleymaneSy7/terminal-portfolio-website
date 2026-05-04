@@ -33,7 +33,8 @@ export function parseArgs(args: string[]): ParsedArgsType {
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
 
-    if (arg === "--help" || arg === "-h" || arg === "help") {
+    const isHelpWord = arg === "help" && i === 0;
+    if (arg === "--help" || arg === "-h" || isHelpWord) {
       result.flags.help = true;
     } else if (arg.startsWith("--")) {
       const key = arg.slice(2);
