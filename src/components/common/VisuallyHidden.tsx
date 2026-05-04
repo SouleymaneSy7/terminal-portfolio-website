@@ -3,7 +3,7 @@
 import * as React from "react";
 import { VisuallyHiddenPropsType } from "@/types";
 
-const VisualyHidden: React.FC<VisuallyHiddenPropsType> = ({
+const VisuallyHidden: React.FC<VisuallyHiddenPropsType> = ({
   children,
   ...delegatedProps
 }) => {
@@ -44,4 +44,4 @@ const VisualyHidden: React.FC<VisuallyHiddenPropsType> = ({
   );
 };
 
-export default VisualyHidden;
+export default VisuallyHidden;
