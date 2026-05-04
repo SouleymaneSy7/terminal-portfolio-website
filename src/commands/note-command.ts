@@ -16,7 +16,7 @@ const NOTES_KEY = STORAGE_KEYS.NOTES;
 const getNotes = (): NoteType[] => storageGet<NoteType[]>(NOTES_KEY, []);
 const saveNotes = (notes: NoteType[]): boolean => storageSet(NOTES_KEY, notes);
 const makeShortId = (uuid: string): string =>
-  uuid.replace(/-/g, "").slice(0, 6);
+  uuid.replace(/-/g, "").slice(0, 8);
 
 // ─────────────────────────────────────────────────────────────────
 // SUBCOMMAND HANDLERS
