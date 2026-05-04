@@ -4,6 +4,10 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
 
+  experimental: {
+    optimizePackageImports: ["mathjs"],
+  },
+
   async headers() {
     return [
       {
