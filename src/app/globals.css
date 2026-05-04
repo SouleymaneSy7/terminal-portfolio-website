@@ -470,7 +470,7 @@ html[data-font="meslo"] body {
 }
 
 body {
-  @apply bg-background-clr font-cascadia-code text-fs-body leading-base font-regular text-text-clr;
+  @apply overflow-hidden bg-background-clr font-cascadia-code text-fs-body leading-base font-regular text-text-clr;
 }
 
 a {
