@@ -4,7 +4,7 @@
  *   - The COMPLETIONS map (tab-completes arguments per command).
  */
 
-import { THEMES, FONTS } from "@/commands/theme-command"
+import { THEMES, FONTS } from "@/commands/theme-command";
 
 // ─────────────────────────────────────────────────────────────────
 // COMMAND LIST  (alphabetical order)
@@ -54,7 +54,7 @@ export const commands: string[] = [
   "weather",
   "welcome",
   "whoami",
-]
+];
 
 // ─────────────────────────────────────────────────────────────────
 // COMPLETIONS MAP  (argument completion per command)
@@ -135,7 +135,7 @@ export const COMPLETIONS: Record<string, string[]> = {
   ],
   snippet: ["add", "show", "rm", "remove", "delete", "clear", "list", "help", "--help", "-h"],
   uuid: ["v1", "v4", "validate", "help", "--help", "-h"],
-  convert: ["list", "help", "--help", "-h"],
+  convert: ["list", "--json", "-j", "help", "--help", "-h"],
 
   // Color converter — accepts color names
   color: [
@@ -234,14 +234,14 @@ export const COMPLETIONS: Record<string, string[]> = {
   echo: ["--help", "help", "-h"],
   email: ["--help", "help", "-h"],
   exit: ["--help", "help", "-h"],
-  github: ["--help", "help", "-h"],
+  github: ["--json", "-j", "--help", "help", "-h"],
   history: ["--help", "help", "-h"],
   hostname: ["--help", "help", "-h"],
-  ip: ["--help", "help", "-h"],
-  joke: ["--help", "help", "-h"],
+  ip: ["--json", "-j", "--help", "help", "-h"],
+  joke: ["--json", "-j", "--help", "help", "-h"],
   neofetch: ["--help", "help", "-h"],
   projects: ["--help", "help", "-h"],
-  quote: ["--help", "help", "-h"],
+  quote: ["--json", "-j", "--help", "help", "-h"],
   repo: ["--help", "help", "-h"],
   resume: ["--help", "help", "-h"],
   sudo: ["--help", "help", "-h"],
@@ -250,4 +250,4 @@ export const COMPLETIONS: Record<string, string[]> = {
   weather: ["--help", "help", "-h"],
   welcome: ["--help", "help", "-h"],
   whoami: ["--help", "help", "-h"],
-}
+};
