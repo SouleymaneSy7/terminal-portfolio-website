@@ -3,45 +3,41 @@
  *
  * Delegates all HTTP logic to ip.service.ts
  *
+ * Flags:
+ *   --json / -j   Output raw JSON instead of formatted table
+ *
  * Note: the IP shown is your public IP as seen by the server.
  * If you're behind a VPN or proxy, that IP will be shown instead.
  */
 
-import axios from "axios"
+import axios from "axios";
 
-import { fetchIpInfo } from "@/services"
-import { parseArgs } from "@/utils/argParser"
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
-import { createErrorOutput, createHtmlOutput } from "@/utils/output"
-import { IP_HELP } from "@/constants/help/utils"
+import { IP_HELP } from "@/constants/help/utils";
+import { fetchIpInfo } from "@/services";
+import { parseArgs } from "@/utils/argParser";
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
+import { createErrorOutput, createHtmlOutput } from "@/utils/output";
+import { createJsonOutput } from "@/utils/output/createJsonOutput";
 
 // ─────────────────────────────────────────────────────────────────
 // HELPERS
 // ─────────────────────────────────────────────────────────────────
 
-/**
- * Derive a flag emoji from a 2-letter ISO 3166-1 alpha-2 country code.
- * Uses Unicode Regional Indicator letters (U+1F1E6–U+1F1FF).
- */
 function countryFlag(code: string | null | undefined): string {
-  if (!code || code.length !== 2) return ""
+  if (!code || code.length !== 2) return "";
   return code
     .toUpperCase()
     .split("")
     .map((c) => String.fromCodePoint(c.charCodeAt(0) - 65 + 0x1f1e6))
-    .join("")
+    .join("");
 }
 
-/**
- * Format an ipapi.co utc_offset string (e.g. "-0700", "+0530")
- * into a human-readable "UTC ±HH:MM" string.
- */
 function formatUtcOffset(offset: string | null | undefined): string {
-  if (!offset || offset.length < 5) return "—"
-  const sign = offset[0]
-  const hh = offset.slice(1, 3)
-  const mm = offset.slice(3, 5)
-  return `UTC ${sign}${hh}:${mm}`
+  if (!offset || offset.length < 5) return "—";
+  const sign = offset[0];
+  const hh = offset.slice(1, 3);
+  const mm = offset.slice(3, 5);
+  return `UTC ${sign}${hh}:${mm}`;
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -49,19 +45,25 @@ function formatUtcOffset(offset: string | null | undefined): string {
 // ─────────────────────────────────────────────────────────────────
 
 export const handleIpCommand = async (args: string[]) => {
-  const { flags } = parseArgs(args)
+  const { flags } = parseArgs(args);
 
-  if (flags.help) return IP_HELP
+  if (flags.help) return IP_HELP;
 
   try {
-    const data = await fetchIpInfo()
+    const data = await fetchIpInfo();
 
-    const flag = countryFlag(data.country_code)
+    // ── JSON mode ──────────────────────────────────────────────
+    if (flags.json || flags.j) {
+      return createJsonOutput(data, "ip --json");
+    }
+
+    // ── Formatted output (default) ─────────────────────────────
+    const flag = countryFlag(data.country_code);
     const coords =
       data.latitude != null && data.longitude != null
         ? `${data.latitude.toFixed(4)}, ${data.longitude.toFixed(4)}`
-        : "—"
-    const utc = formatUtcOffset(data.utc_offset)
+        : "—";
+    const utc = formatUtcOffset(data.utc_offset);
 
     return createHtmlOutput(
       `<div class="space-y-t-section py-t-outer">
@@ -90,22 +92,23 @@ export const handleIpCommand = async (args: string[]) => {
         <div class="space-y-t-footer">
           <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
           <p class="text-text-clr opacity-sep">Data via ipapi.co — free geolocation API.</p>
+          <p class="text-text-clr opacity-sep">Tip: type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">ip --json</span>${DT.decorators.quote} for raw JSON output.</p>
         </div>
       </div>`,
-    )
+    );
   } catch (err) {
-    let msg = "Could not fetch IP information. Try again later."
+    let msg = "Could not fetch IP information. Try again later.";
 
     if (axios.isAxiosError(err)) {
       if (err.code === "ECONNABORTED") {
-        msg = "Request timed out. Check your connection."
+        msg = "Request timed out. Check your connection.";
       } else if (err.response?.status === 429) {
-        msg = "Rate limit reached. Please wait a moment and try again."
+        msg = "Rate limit reached. Please wait a moment and try again.";
       }
     } else if (err instanceof Error) {
-      msg = err.message
+      msg = err.message;
     }
 
-    return createErrorOutput(msg)
+    return createErrorOutput(msg);
   }
-}
+};
