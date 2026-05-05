@@ -28,7 +28,7 @@ async function fetchPinnedRepos(username: string): Promise<GithubRepoType[]> {
               description
               url
               stargazerCount
-              forksCount
+               forkCount
               primaryLanguage { name }
             }
           }
@@ -63,7 +63,7 @@ async function fetchPinnedRepos(username: string): Promise<GithubRepoType[]> {
       description: node.description,
       html_url: node.url,
       stargazers_count: node.stargazerCount,
-      forks_count: node.forksCount,
+      forks_count: node.forkCount,
       language: node.primaryLanguage?.name ?? null,
     }));
   } catch (err) {
