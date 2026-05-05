@@ -11,12 +11,13 @@
  * ```
  */
 
-import type { CommandHistoryOutputType } from "@/types"
-import { parseArgs } from "@/utils/argParser"
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
-import { createErrorOutput, createHtmlOutput } from "@/utils/output"
-import { QUOTE_HELP } from "@/constants/help/fun"
-import { quoteService } from "@/services"
+import type { CommandHistoryOutputType } from "@/types";
+import { parseArgs } from "@/utils/argParser";
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
+import { createErrorOutput, createHtmlOutput } from "@/utils/output";
+import { QUOTE_HELP } from "@/constants/help/fun";
+import { quoteService } from "@/services";
+import { createJsonOutput } from "@/utils/output/createJsonOutput";
 
 // ─────────────────────────────────────────────────────────────────
 // OUTPUT BUILDERS
@@ -32,9 +33,10 @@ function createQuoteOutput(advice: string): CommandHistoryOutputType {
       </div>
       <div class="space-y-t-footer">
         <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">quote</span>${DT.decorators.quote} for another one.</p>
+        <p class="text-text-clr opacity-sep">Tip: type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">quote --json</span>${DT.decorators.quote} for raw JSON.</p>
       </div>
     </div>`,
-  )
+  );
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -42,14 +44,18 @@ function createQuoteOutput(advice: string): CommandHistoryOutputType {
 // ─────────────────────────────────────────────────────────────────
 
 export const handleQuoteCommand = async (args: string[]): Promise<CommandHistoryOutputType> => {
-  const { flags } = parseArgs(args)
-  if (flags.help) return QUOTE_HELP
+  const { flags } = parseArgs(args);
+  if (flags.help) return QUOTE_HELP;
 
-  const quote = await quoteService.getRandomQuote()
+  const quote = await quoteService.getRandomQuote();
 
-  if (quote) {
-    return createQuoteOutput(quote.slip.advice)
+  if (flags.json || flags.j) {
+    return createJsonOutput(quote, "quote --json");
   }
 
-  return createErrorOutput("Could not fetch a quote.", "Try again later.")
-}
+  if (quote) {
+    return createQuoteOutput(quote.slip.advice);
+  }
+
+  return createErrorOutput("Could not fetch a quote.", "Try again later.");
+};
