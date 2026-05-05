@@ -7,7 +7,7 @@ import * as React from "react"
 // ─────────────────────────────────────────────────────────────────
 // FONT REGISTRY
 // ─────────────────────────────────────────────────────────────────
-// Cascadia Code is NOT in this registry — it is loaded statically
+// Recursive Casual Mono is NOT in this registry — it is loaded statically
 // by Next.js localFont() in layout.tsx and is always available.
 // Every other font loads on demand when the user first requests it.
 
@@ -71,6 +71,15 @@ export const FONT_SOURCES: Partial<Record<FontKey, FontSourceType>> = {
   },
 
   // ── Local fonts (served from /public/fonts/) ──
+  cascadia: {
+    type: "local",
+    cssName: "Cascadia Code",
+    cssVariable: "--font-cascadia-code",
+    files: [
+      { weight: 400, path: "/fonts/cascadia-code-regular.woff2" },
+      { weight: 700, path: "/fonts/cascadia-code-bold.woff2" },
+    ],
+  },
   "recursive-casual": {
     type: "local",
     cssName: "Recursive",
@@ -136,13 +145,13 @@ const pending = new Map<FontKey, Promise<void>>()
  * so the existing CSS rule  html[data-font="xxx"] body { font-family: var(--font-xxx) }
  * resolves correctly without any changes to globals.css.
  *
- * Cascadia Code (the default) is NOT handled here — it is always
+ * Recursive Casual Mono (the default) is NOT handled here — it is always
  * available via Next.js localFont() before any JS runs.
  */
 
 export async function loadDynamicFont(key: FontKey): Promise<void> {
   // Default font is always loaded by Next.js.
-  if (key === "cascadia") return
+  if (key === "recursive-casual") return
 
   // Geist Mono is loaded via npm package, just register the CSS variable
   if (key === "geist") {
@@ -269,7 +278,7 @@ export function useDynamicFont(): UseDynamicFontReturn {
   const [error, setError] = React.useState<string | null>(null)
 
   const loadFont = React.useCallback(async (key: FontKey): Promise<void> => {
-    if (key === "cascadia" || loaded.has(key)) return
+    if (key === "recursive-casual" || loaded.has(key)) return
 
     setIsLoading(true)
     setError(null)

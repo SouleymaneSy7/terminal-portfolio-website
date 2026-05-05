@@ -161,10 +161,10 @@ export const THEMES = {
 
 export const FONTS = {
   // ── Default (loaded statically by Next.js) ──
-  cascadia: {
-    label: "Cascadia Code",
-    description: "Clean, modern, and incredibly polished — Microsoft's gift to developers",
-    variable: "--font-cascadia-code",
+  "recursive-casual": {
+    label: "Recursive Casual Mono",
+    description: "Artistic and expressive, like handwriting meets monospace",
+    variable: "--font-recursive-casual",
   },
 
   // ── Google Fonts (loaded dynamically) ──
@@ -209,16 +209,18 @@ export const FONTS = {
     variable: "--font-cousine-mono",
   },
 
-  // ── Local Fonts (loaded dynamically from /public/fonts/) ──
+  // ── NPM package (loaded dynamically) ──
   geist: {
     label: "Geist Mono",
     description: "Sharp, elegant, and minimal — designed for the modern developer",
     variable: "--font-geist-mono",
   },
-  "recursive-casual": {
-    label: "Recursive Casual Mono",
-    description: "Artistic and expressive, like handwriting meets monospace",
-    variable: "--font-recursive-casual",
+
+  // ── Local Fonts (loaded dynamically from /public/fonts/) ──
+  cascadia: {
+    label: "Cascadia Code",
+    description: "Clean, modern, and incredibly polished — Microsoft's gift to developers",
+    variable: "--font-cascadia-code",
   },
   "recursive-linear": {
     label: "Recursive Linear Mono",
@@ -257,8 +259,8 @@ export const getCurrentTheme = (): ThemeKey => {
 }
 
 export const getCurrentFont = (): FontKey => {
-  if (typeof document === "undefined") return "cascadia"
-  return (document.documentElement.getAttribute("data-font") as FontKey) || "cascadia"
+  if (typeof document === "undefined") return "recursive-casual"
+  return (document.documentElement.getAttribute("data-font") as FontKey) || "recursive-casual"
 }
 
 export const getThemeLabel = (key: ThemeKey): string => THEMES[key]?.label ?? key
