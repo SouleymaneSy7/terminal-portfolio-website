@@ -89,6 +89,11 @@ export interface TimerWidgetPropsType {
   label?: string
 }
 
+export interface JsonOutputPropsType {
+  data: unknown
+  label?: string
+}
+
 // ─────────────────────────────────────────────────────────────────
 // HOOKS
 // ─────────────────────────────────────────────────────────────────
