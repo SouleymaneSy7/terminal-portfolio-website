@@ -55,7 +55,7 @@ export const THEME_GROUPS: readonly SuggestionGroupType[] = [
 export const FONT_GROUPS: readonly SuggestionGroupType[] = [
   {
     label: "Signature",
-    items: ["cascadia"],
+    items: ["recursive-casual"],
   },
   {
     label: "Popular",

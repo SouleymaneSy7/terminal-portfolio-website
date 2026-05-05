@@ -205,13 +205,13 @@ typeface geist         # Geist Mono — modern & sharp
 
 | Category                            | Key → Label                                                                                        |
 | ----------------------------------- | -------------------------------------------------------------------------------------------------- |
-| **Static** (always loaded)          | `cascadia` → Cascadia Code                                                                         |
+| **Static** (always loaded)          | `recursive-casual` → Recursive Casual Mono                                                         |
 | **Google Fonts** (loaded on demand) | `fira` · `jetbrains` · `ibm-plex` · `source-code` · `ubuntu` · `space` · `inconsolata` · `cousine` |
 | **npm package**                     | `geist` → Geist Mono                                                                               |
-| **Local fonts**                     | `recursive-casual` · `recursive-linear` · `hack` · `victor` · `meslo`                              |
+| **Local fonts**                     | `cascadia` · `recursive-linear` · `hack` · `victor` · `meslo`                                      |
 
 **Loading strategy:**
-Cascadia Code is bundled statically at build time (~150 KB) — zero latency on first render. All other fonts load via `useDynamicFont` on first request: Google Fonts through a CDN `<link>` injection, Geist Mono via the official npm package, and local fonts through the `FontFace` API from `/public/fonts/`. Every font is cached after first load.
+Recursive Casual Mono is bundled statically at build time (~150 KB) — zero latency on first render. All other fonts load via `useDynamicFont` on first request: Google Fonts through a CDN `<link>` injection, Geist Mono via the official npm package, and local fonts through the `FontFace` API from `/public/fonts/`. Every font is cached after first load.
 
 This reduces the initial bundle by ~75% compared to loading all fonts upfront.
 

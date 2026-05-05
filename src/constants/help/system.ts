@@ -94,8 +94,8 @@ export const TYPEFACE_HELP = createHelpOutput({
   ],
   examples: [
     {
-      command: "typeface cascadia",
-      description: "Switch to Cascadia Code (default)",
+      command: "typeface recursive-casual",
+      description: "Switch to Recursive Casual Mono (default)",
     },
     { command: "typeface fira", description: "Switch to Fira Code" },
     { command: "typeface geist", description: "Switch to Geist Mono" },

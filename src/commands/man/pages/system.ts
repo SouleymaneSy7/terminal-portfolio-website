@@ -1,4 +1,4 @@
-import { ManPageType } from "@/types"
+import { ManPageType } from "@/types";
 
 export const SYSTEM_PAGES: Record<string, ManPageType> = {
   audio: {
@@ -145,7 +145,7 @@ export const SYSTEM_PAGES: Record<string, ManPageType> = {
     name: "typeface",
     synopsis: "typeface [name]",
     description:
-      "Switches the terminal monospace font. 15 fonts available: 1 loaded statically (Cascadia Code), 8 from Google Fonts, 1 from npm package (Geist Mono), and 5 local fonts. Fonts are loaded dynamically on demand for optimal performance. The chosen font is written to localStorage ('terminal:font') and restored on every page load. Font switching is implemented via html[data-font] CSS attribute selectors.",
+      "Switches the terminal monospace font. 15 fonts available: 1 loaded statically (Recursive Casual Mono), 8 from Google Fonts, 1 from npm package (Geist Mono), and 5 local fonts. Fonts are loaded dynamically on demand for optimal performance. The chosen font is written to localStorage ('terminal:font') and restored on every page load. Font switching is implemented via html[data-font] CSS attribute selectors.",
     options: `
       <p><span class="text-tertiary-clr font-bold">typeface               </span> - List all 15 fonts with descriptions.</p>
       <p><span class="text-tertiary-clr font-bold">typeface &lt;name&gt;        </span> - Apply the named font immediately.</p>`,
@@ -153,9 +153,9 @@ export const SYSTEM_PAGES: Record<string, ManPageType> = {
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  typeface fira</p>
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  typeface geist</p>
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  typeface recursive-casual</p>
-      <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  typeface cascadia   (default)</p>`,
+      <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  typeface recursive-casual   (default)</p>`,
     notes:
-      "Available fonts: cascadia (Cascadia Code), fira (Fira Code), geist (Geist Mono), recursive-casual (Recursive Casual Mono). All use adjustFontFallback: false to avoid a Turbopack build error.",
+      "Available fonts: recursive-casual (Recursive Casual Mono, static) • fira (Fira Code) • jetbrains (JetBrains Mono) • ibm-plex (IBM Plex Mono) • source-code (Source Code Pro) • ubuntu (Ubuntu Mono) • space (Space Mono) • inconsolata (Inconsolata) • cousine (Cousine) — Google Fonts • geist (Geist Mono, npm) • cascadia (Cascadia Code) • recursive-linear (Recursive Linear Mono) • hack (Hack) • victor (Victor Mono) • meslo (Meslo LG) — local fonts.",
     seeAlso: ["theme", "neofetch"],
   },
 
@@ -178,4 +178,4 @@ export const SYSTEM_PAGES: Record<string, ManPageType> = {
       "Output is a single block — brief by design. For the full narrative with context and reflections, use about. For social links and availability, use contact.",
     seeAlso: ["about", "contact", "neofetch"],
   },
-}
+};
