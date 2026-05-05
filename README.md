@@ -229,7 +229,7 @@ export const COMMAND_REGISTRY: Record<string, CommandHandlerType> = {
   color: (args) => handleColorCommand(args),
   github: (args) => handleGithubCommand(args),
   // ... 43 entries total
-}
+};
 ```
 
 The dispatcher (`executeCommand`) does a single registry lookup — no switch statements, no if-chains. `clear` is the only exception: it bypasses the registry entirely and calls `clearHistory()` directly in `Terminal.tsx`.
@@ -239,7 +239,7 @@ The dispatcher (`executeCommand`) does a single registry lookup — no switch st
 Every command uses `parseArgs()` from `src/utils/argParser.ts`:
 
 ```typescript
-parseArgs(["add", "--verbose", "-f", "file.txt"])
+parseArgs(["add", "--verbose", "-f", "file.txt"]);
 // → { subcommand: "add", flags: { verbose: true, f: true }, positional: ["file.txt"] }
 ```
 
@@ -345,14 +345,14 @@ All values are in OKLCH — consistent perceptual lightness and chroma across al
 All decorative elements are centralized in `src/utils/designTokens.ts` — no inline strings in command files:
 
 ```typescript
-DT.separators.short // ────────────────────────────────────────
-DT.separators.long // ──────────────────────────────────────────────────────
-DT.icons.success // ✓  (aria-hidden)
-DT.icons.warning // ⚠  (aria-hidden)
-DT.icons.error // ✗  (aria-hidden)
-DT.decorators.bullet // •  (aria-hidden)
-DT.decorators.arrow // →  (aria-hidden)
-DT.decorators.quote // '  (aria-hidden)
+DT.separators.short; // ────────────────────────────────────────
+DT.separators.long; // ──────────────────────────────────────────────────────
+DT.icons.success; // ✓  (aria-hidden)
+DT.icons.warning; // ⚠  (aria-hidden)
+DT.icons.error; // ✗  (aria-hidden)
+DT.decorators.bullet; // •  (aria-hidden)
+DT.decorators.arrow; // →  (aria-hidden)
+DT.decorators.quote; // '  (aria-hidden)
 ```
 
 ---

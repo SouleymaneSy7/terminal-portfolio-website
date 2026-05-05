@@ -1,4 +1,4 @@
-import { ManPageType } from "@/types"
+import { ManPageType } from "@/types";
 
 export const FUN_PAGES: Record<string, ManPageType> = {
   cowsay: {
@@ -92,4 +92,4 @@ export const FUN_PAGES: Record<string, ManPageType> = {
       "No actual privilege escalation occurs. No system calls are made. The entire command is a single HTML block output with a denial message and a 😄 emoji.",
     seeAlso: ["exit", "cowsay"],
   },
-}
+};

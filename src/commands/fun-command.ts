@@ -12,18 +12,18 @@
  * ```
  */
 
-import { EXIT_HELP, RPS_HELP } from "@/constants/help/fun"
-import type { CommandHistoryOutputType } from "@/types"
-import { parseArgs } from "@/utils/argParser"
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
-import { createErrorOutput, createHtmlOutput } from "@/utils/output"
+import { EXIT_HELP, RPS_HELP } from "@/constants/help/fun";
+import type { CommandHistoryOutputType } from "@/types";
+import { parseArgs } from "@/utils/argParser";
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
+import { createErrorOutput, createHtmlOutput } from "@/utils/output";
 
 // ─────────────────────────────────────────────────────────────────
 // TYPES & CONSTANTS
 // ─────────────────────────────────────────────────────────────────
 
-const RPS_CHOICES = ["rock", "paper", "scissors"] as const
-type RpsChoice = (typeof RPS_CHOICES)[number]
+const RPS_CHOICES = ["rock", "paper", "scissors"] as const;
+type RpsChoice = (typeof RPS_CHOICES)[number];
 
 // ─────────────────────────────────────────────────────────────────
 // HELPERS
@@ -33,33 +33,33 @@ function determineWinner(
   userChoice: RpsChoice,
   computerChoice: RpsChoice,
 ): {
-  result: string
-  color: string
+  result: string;
+  color: string;
 } {
   if (userChoice === computerChoice) {
     return {
       result: "It's a tie! We think alike. 🤝",
       color: "text-primary-clr",
-    }
+    };
   }
 
   const winConditions: Record<RpsChoice, RpsChoice> = {
     rock: "scissors",
     paper: "rock",
     scissors: "paper",
-  }
+  };
 
   if (winConditions[userChoice] === computerChoice) {
     return {
       result: "You win! Well played, champion! 🏆",
       color: "text-tertiary-clr",
-    }
+    };
   }
 
   return {
     result: "I win! The terminal is merciless. 😄",
     color: "text-secondary-clr",
-  }
+  };
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -96,14 +96,14 @@ function createExitOutput(): CommandHistoryOutputType {
       </div>
 
     </div>`,
-  )
+  );
 }
 
 function createRpsResultOutput(
   userChoice: RpsChoice,
   computerChoice: RpsChoice,
 ): CommandHistoryOutputType {
-  const { result, color } = determineWinner(userChoice, computerChoice)
+  const { result, color } = determineWinner(userChoice, computerChoice);
 
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
@@ -124,7 +124,7 @@ function createRpsResultOutput(
       </div>
 
     </div>`,
-  )
+  );
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -138,12 +138,12 @@ function createRpsResultOutput(
  * @returns Command output blocks
  */
 export const handleExitCommand = (args: string[]): CommandHistoryOutputType => {
-  const { flags } = parseArgs(args)
+  const { flags } = parseArgs(args);
 
-  if (flags.help) return EXIT_HELP
+  if (flags.help) return EXIT_HELP;
 
-  return createExitOutput()
-}
+  return createExitOutput();
+};
 
 /**
  * Handle rock-paper-scissors command execution
@@ -152,29 +152,29 @@ export const handleExitCommand = (args: string[]): CommandHistoryOutputType => {
  * @returns Command output blocks
  */
 export const handleRpsCommand = (args: string[]): CommandHistoryOutputType => {
-  const parsed = parseArgs(args)
+  const parsed = parseArgs(args);
 
   if (parsed.flags.help) {
-    return RPS_HELP
+    return RPS_HELP;
   }
 
   if (parsed.positional.length === 0) {
     return createErrorOutput(
       "Invalid choice.",
       `Pick <span class="text-tertiary-clr">rock</span>, <span class="text-tertiary-clr">paper</span> or <span class="text-tertiary-clr">scissors</span>. Example: ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">rps rock</span>${DT.decorators.quote}`,
-    )
+    );
   }
 
-  const userChoice = parsed.positional[0].toLowerCase().trim()
+  const userChoice = parsed.positional[0].toLowerCase().trim();
 
   if (!RPS_CHOICES.includes(userChoice as RpsChoice)) {
     return createErrorOutput(
       "Invalid choice.",
       `Pick <span class="text-tertiary-clr">rock</span>, <span class="text-tertiary-clr">paper</span> or <span class="text-tertiary-clr">scissors</span>. Example: ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">rps rock</span>${DT.decorators.quote}`,
-    )
+    );
   }
 
-  const computerChoice = RPS_CHOICES[Math.floor(Math.random() * RPS_CHOICES.length)]
+  const computerChoice = RPS_CHOICES[Math.floor(Math.random() * RPS_CHOICES.length)];
 
-  return createRpsResultOutput(userChoice as RpsChoice, computerChoice)
-}
+  return createRpsResultOutput(userChoice as RpsChoice, computerChoice);
+};

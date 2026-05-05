@@ -3,16 +3,16 @@
  *
  */
 
-import { QuizQuestionType } from "@/types"
+import { QuizQuestionType } from "@/types";
 
-export const POINTS = { CORRECT: 10, WRONG: -5 } as const
+export const POINTS = { CORRECT: 10, WRONG: -5 } as const;
 
 export const RANKS = {
   LEGEND: { min: 90, name: "LEGEND" },
   PRO: { min: 75, name: "PRO" },
   ADVANCED: { min: 60, name: "ADVANCED" },
   NOOB: { min: 0, name: "NOOB" },
-} as const
+} as const;
 
 export const quizQuestions: QuizQuestionType[] = [
   {
@@ -375,4 +375,4 @@ export const quizQuestions: QuizQuestionType[] = [
     wrongMsg: `✗ INCORRECT | ${POINTS.WRONG} XP | parse() deserializes, stringify() serializes`,
     explanation: "JSON.parse() converts a string to a JavaScript object.",
   },
-]
+];

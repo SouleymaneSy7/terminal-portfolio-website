@@ -1,38 +1,38 @@
-"use client"
+"use client";
 
-import TerminalPrompt from "@/components/terminal/TerminalPrompt"
-import { AsciiProgressBarPropsType } from "@/types"
-import { motion } from "framer-motion"
-import * as React from "react"
+import TerminalPrompt from "@/components/terminal/TerminalPrompt";
+import { AsciiProgressBarPropsType } from "@/types";
+import { motion } from "framer-motion";
+import * as React from "react";
 
-const BAR_WIDTH = 32
+const BAR_WIDTH = 32;
 
 const AsciiProgressBar: React.FC<AsciiProgressBarPropsType> = ({
   label = "processing command",
 }) => {
-  const [progress, setProgress] = React.useState(0)
-  const directionRef = React.useRef<1 | -1>(1)
+  const [progress, setProgress] = React.useState(0);
+  const directionRef = React.useRef<1 | -1>(1);
 
   React.useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prev) => {
-        const next = prev + directionRef.current * 4
+        const next = prev + directionRef.current * 4;
         if (next >= 100) {
-          directionRef.current = -1
-          return 100
+          directionRef.current = -1;
+          return 100;
         }
         if (next <= 0) {
-          directionRef.current = 1
-          return 0
+          directionRef.current = 1;
+          return 0;
         }
-        return next
-      })
-    }, 60)
-    return () => clearInterval(interval)
-  }, [])
+        return next;
+      });
+    }, 60);
+    return () => clearInterval(interval);
+  }, []);
 
-  const filled = Math.round((progress / 100) * BAR_WIDTH)
-  const bar = "█".repeat(filled) + "░".repeat(BAR_WIDTH - filled)
+  const filled = Math.round((progress / 100) * BAR_WIDTH);
+  const bar = "█".repeat(filled) + "░".repeat(BAR_WIDTH - filled);
 
   return (
     <motion.div
@@ -50,7 +50,7 @@ const AsciiProgressBar: React.FC<AsciiProgressBarPropsType> = ({
         <span className="text-secondary-clr opacity-50">{String(progress).padStart(3, " ")}%</span>
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
-export default AsciiProgressBar
+export default AsciiProgressBar;

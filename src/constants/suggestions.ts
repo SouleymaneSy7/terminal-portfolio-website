@@ -3,7 +3,7 @@
  * They live here so CommandInput can import them as stable references.
  */
 
-import type { SuggestionGroupType } from "@/types"
+import type { SuggestionGroupType } from "@/types";
 
 // ─────────────────────────────────────────────────────────────────
 // THEME GROUPS  (mirrors the grouping in theme-command.ts output)
@@ -46,7 +46,7 @@ export const THEME_GROUPS: readonly SuggestionGroupType[] = [
       "hack-the-box",
     ],
   },
-] as const
+] as const;
 
 // ─────────────────────────────────────────────────────────────────
 // FONT GROUPS
@@ -78,4 +78,4 @@ export const FONT_GROUPS: readonly SuggestionGroupType[] = [
     label: "Handcrafted",
     items: ["recursive-casual", "recursive-linear", "hack", "victor", "meslo"],
   },
-] as const
+] as const;

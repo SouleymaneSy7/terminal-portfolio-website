@@ -1,11 +1,11 @@
-import Custom404 from "@/components/common/Custom404"
-import type { Metadata } from "next"
+import Custom404 from "@/components/common/Custom404";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "404 — Page Not Found",
   description: "The page you're looking for doesn't exist. Return to the terminal.",
   robots: { index: false, follow: false },
-}
+};
 
 export default function NotFound() {
   return (
@@ -14,5 +14,5 @@ export default function NotFound() {
         <Custom404 />
       </div>
     </main>
-  )
+  );
 }

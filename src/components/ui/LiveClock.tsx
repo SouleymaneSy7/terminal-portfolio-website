@@ -3,49 +3,49 @@
  *
  */
 
-"use client"
+"use client";
 
-import { getGreeting, getTimezone } from "@/utils/date"
-import { format, getHours } from "date-fns"
-import { motion } from "framer-motion"
+import { getGreeting, getTimezone } from "@/utils/date";
+import { format, getHours } from "date-fns";
+import { motion } from "framer-motion";
 
-import * as React from "react"
-import VisuallyHidden from "../common/VisuallyHidden"
+import * as React from "react";
+import VisuallyHidden from "../common/VisuallyHidden";
 
 const LiveClock: React.FC = () => {
-  const [now, setNow] = React.useState(new Date())
+  const [now, setNow] = React.useState(new Date());
 
   React.useEffect(() => {
-    const interval = setInterval(() => setNow(new Date()), 1000)
-    return () => clearInterval(interval)
-  }, [])
+    const interval = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(interval);
+  }, []);
 
-  const longDate = format(now, "EEEE, MMMM dd, yyyy")
-  const hhmm = format(now, "hh:mm")
-  const ss = format(now, ":ss")
-  const ampm = format(now, " a")
-  const fullTime = `${hhmm}${ss}${ampm}`
-  const timezone = getTimezone()
-  const greeting = getGreeting(getHours(now))
+  const longDate = format(now, "EEEE, MMMM dd, yyyy");
+  const hhmm = format(now, "hh:mm");
+  const ss = format(now, ":ss");
+  const ampm = format(now, " a");
+  const fullTime = `${hhmm}${ss}${ampm}`;
+  const timezone = getTimezone();
+  const greeting = getGreeting(getHours(now));
 
-  const LABEL = "  DATE  ·  "
+  const LABEL = "  DATE  ·  ";
   const W =
     Math.max(
       "  ● LIVE".length,
       `${LABEL}${longDate}`.length,
       `${LABEL}${fullTime}`.length,
       `${LABEL}${timezone}`.length,
-    ) + 4
+    ) + 4;
 
-  const top = `╭${"─".repeat(W)}╮`
-  const sep = `├${"─".repeat(W)}┤`
-  const bot = `╰${"─".repeat(W)}╯`
-  const empty = `│${" ".repeat(W)}│`
+  const top = `╭${"─".repeat(W)}╮`;
+  const sep = `├${"─".repeat(W)}┤`;
+  const bot = `╰${"─".repeat(W)}╯`;
+  const empty = `│${" ".repeat(W)}│`;
 
-  const liveSpaces = " ".repeat(W - "  ● LIVE".length)
-  const dateSpaces = " ".repeat(W - `${LABEL}${longDate}`.length)
-  const timeSpaces = " ".repeat(W - `${LABEL}${fullTime}`.length)
-  const zoneSpaces = " ".repeat(W - `${LABEL}${timezone}`.length)
+  const liveSpaces = " ".repeat(W - "  ● LIVE".length);
+  const dateSpaces = " ".repeat(W - `${LABEL}${longDate}`.length);
+  const timeSpaces = " ".repeat(W - `${LABEL}${fullTime}`.length);
+  const zoneSpaces = " ".repeat(W - `${LABEL}${timezone}`.length);
 
   return (
     <motion.div
@@ -129,7 +129,7 @@ const LiveClock: React.FC = () => {
         <span className="text-secondary-clr">{greeting}</span>
       </p>
     </motion.div>
-  )
-}
+  );
+};
 
-export default LiveClock
+export default LiveClock;

@@ -1,79 +1,79 @@
-import type * as React from "react"
+import type * as React from "react";
 
 // ─────────────────────────────────────────────────────────────────
 // COMMON
 // ─────────────────────────────────────────────────────────────────
 
 export type VisuallyHiddenPropsType = {
-  children: React.ReactNode
-} & React.ComponentPropsWithoutRef<"span">
+  children: React.ReactNode;
+} & React.ComponentPropsWithoutRef<"span">;
 
 // ─────────────────────────────────────────────────────────────────
 // TERMINAL
 // ─────────────────────────────────────────────────────────────────
 
 export type TerminalPropsTypes = {
-  containerRef: React.RefObject<HTMLDivElement | null>
-}
+  containerRef: React.RefObject<HTMLDivElement | null>;
+};
 
 export type CommandInputPropsType = {
-  input: string
-  setInput: React.Dispatch<React.SetStateAction<string>>
-  onArrowUp: () => string
-  onArrowDown: () => string
-  onCommandType: (command: string) => void
-  onClearTerminal: () => void
-  commandHistory: string[]
-}
+  input: string;
+  setInput: React.Dispatch<React.SetStateAction<string>>;
+  onArrowUp: () => string;
+  onArrowDown: () => string;
+  onCommandType: (command: string) => void;
+  onClearTerminal: () => void;
+  commandHistory: string[];
+};
 
 export type CommandOutputPropsType = {
-  outputLines?: string[] | string[][]
-  outputTypes: "text" | "link" | "html" | "component"
-  component?: React.ReactNode
-  onComplete?: () => void
-}
+  outputLines?: string[] | string[][];
+  outputTypes: "text" | "link" | "html" | "component";
+  component?: React.ReactNode;
+  onComplete?: () => void;
+};
 
 // ─────────────────────────────────────────────────────────────────
 // TERMINAL ERROR BOUNDARY
 // ─────────────────────────────────────────────────────────────────
 
 export interface TerminalErrorBoundaryPropsType {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export interface TerminalErrorBoundaryStateType {
-  hasError: boolean
-  error: Error | null
+  hasError: boolean;
+  error: Error | null;
 }
 // ─────────────────────────────────────────────────────────────────
 // LOADERS
 // ─────────────────────────────────────────────────────────────────
 
-export type LoadingVariant = "ascii" | "spinner" | "typewriter" | "dots" | "braille"
+export type LoadingVariant = "ascii" | "spinner" | "typewriter" | "dots" | "braille";
 
 export interface LoadingIndicatorPropsType {
-  variant?: LoadingVariant
-  label?: string
+  variant?: LoadingVariant;
+  label?: string;
 }
 
 export interface AsciiProgressBarPropsType {
-  label?: string
+  label?: string;
 }
 
 export interface BrailleSpinnerPropsType {
-  label?: string
+  label?: string;
 }
 
 export interface DotsAccumulatorPropsType {
-  label?: string
+  label?: string;
 }
 
 export interface RotatingSpinnerPropsType {
-  label?: string
+  label?: string;
 }
 
 export interface TypewriterCursorPropsType {
-  label?: string
+  label?: string;
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -81,17 +81,17 @@ export interface TypewriterCursorPropsType {
 // ─────────────────────────────────────────────────────────────────
 
 export interface MobileBannerPropsType {
-  onClose: () => void
+  onClose: () => void;
 }
 
 export interface TimerWidgetPropsType {
-  totalSeconds: number
-  label?: string
+  totalSeconds: number;
+  label?: string;
 }
 
 export interface JsonOutputPropsType {
-  data: unknown
-  label?: string
+  data: unknown;
+  label?: string;
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -99,15 +99,15 @@ export interface JsonOutputPropsType {
 // ─────────────────────────────────────────────────────────────────
 
 export interface VirtualizedListOptionsType {
-  itemCount: number
-  itemHeight: number
-  containerHeight: number
-  overscan?: number
+  itemCount: number;
+  itemHeight: number;
+  containerHeight: number;
+  overscan?: number;
 }
 
 export interface VirtualizedListResultType {
-  visibleStart: number
-  visibleEnd: number
-  offsetY: number
-  totalHeight: number
+  visibleStart: number;
+  visibleEnd: number;
+  offsetY: number;
+  totalHeight: number;
 }

@@ -14,11 +14,11 @@
  * ```
  */
 
-import type { CommandHistoryOutputType } from "@/types"
-import { parseArgs } from "@/utils/argParser"
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
-import { createHtmlOutput } from "@/utils/output"
-import { RESUME_HELP } from "@/constants/help/info"
+import type { CommandHistoryOutputType } from "@/types";
+import { parseArgs } from "@/utils/argParser";
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
+import { createHtmlOutput } from "@/utils/output";
+import { RESUME_HELP } from "@/constants/help/info";
 
 // ─────────────────────────────────────────────────────────────────
 // OUTPUT BUILDERS
@@ -81,7 +81,7 @@ function createResumeOutput(): CommandHistoryOutputType {
       </div>
 
     </div>`,
-  )
+  );
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -95,9 +95,9 @@ function createResumeOutput(): CommandHistoryOutputType {
  * @returns Command output blocks
  */
 export const handleResumeCommand = (args: string[]): CommandHistoryOutputType => {
-  const { flags } = parseArgs(args)
+  const { flags } = parseArgs(args);
 
-  if (flags.help) return RESUME_HELP
+  if (flags.help) return RESUME_HELP;
 
-  return createResumeOutput()
-}
+  return createResumeOutput();
+};

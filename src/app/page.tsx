@@ -1,27 +1,27 @@
-"use client"
+"use client";
 
-import Terminal from "@/components/terminal/Terminal"
-import MobileBanner from "@/components/ui/MobileBanner"
-import * as React from "react"
+import Terminal from "@/components/terminal/Terminal";
+import MobileBanner from "@/components/ui/MobileBanner";
+import * as React from "react";
 
 export default function Home() {
-  const containerRef = React.useRef<HTMLDivElement | null>(null)
-  const bannerRef = React.useRef<HTMLDivElement | null>(null)
+  const containerRef = React.useRef<HTMLDivElement | null>(null);
+  const bannerRef = React.useRef<HTMLDivElement | null>(null);
 
-  const [bannerVisible, setBannerVisible] = React.useState(true)
-  const [bannerHeight, setBannerHeight] = React.useState(0)
+  const [bannerVisible, setBannerVisible] = React.useState(true);
+  const [bannerHeight, setBannerHeight] = React.useState(0);
 
   React.useEffect(() => {
-    if (!bannerVisible || !bannerRef.current) return
+    if (!bannerVisible || !bannerRef.current) return;
 
     const observer = new ResizeObserver(([entry]) => {
-      const fullHeight = entry.target.getBoundingClientRect().height
-      setBannerHeight(fullHeight > 0 ? fullHeight + 12 : 0)
-    })
+      const fullHeight = entry.target.getBoundingClientRect().height;
+      setBannerHeight(fullHeight > 0 ? fullHeight + 12 : 0);
+    });
 
-    observer.observe(bannerRef.current)
-    return () => observer.disconnect()
-  }, [bannerVisible])
+    observer.observe(bannerRef.current);
+    return () => observer.disconnect();
+  }, [bannerVisible]);
 
   return (
     <main className="h-screen w-full overflow-hidden p-4 lg:p-5">
@@ -45,5 +45,5 @@ export default function Home() {
         </div>
       </div>
     </main>
-  )
+  );
 }

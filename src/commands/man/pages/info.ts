@@ -1,4 +1,4 @@
-import { ManPageType } from "@/types"
+import { ManPageType } from "@/types";
 
 export const INFO_PAGES: Record<string, ManPageType> = {
   about: {
@@ -57,4 +57,4 @@ export const INFO_PAGES: Record<string, ManPageType> = {
       "The download attribute on the anchor element triggers a browser download dialog rather than opening the PDF in a new tab. Both are offered — 'Open in browser' uses target='_blank', 'Download' uses the download attribute.",
     seeAlso: ["contact", "email", "about"],
   },
-}
+};

@@ -1,39 +1,39 @@
-"use client"
+"use client";
 
-import DOMPurify from "dompurify"
-import { motion, Variants } from "framer-motion"
-import * as React from "react"
+import DOMPurify from "dompurify";
+import { motion, Variants } from "framer-motion";
+import * as React from "react";
 
-import { CommandOutputPropsType } from "@/types"
-import SanitizedHtmlLine from "./SanitizedHtmlLine"
+import { CommandOutputPropsType } from "@/types";
+import SanitizedHtmlLine from "./SanitizedHtmlLine";
 
-let domPurifyInitialized = false
+let domPurifyInitialized = false;
 
 function initDOMPurify() {
-  if (typeof window === "undefined" || domPurifyInitialized) return
-  domPurifyInitialized = true
+  if (typeof window === "undefined" || domPurifyInitialized) return;
+  domPurifyInitialized = true;
 
   DOMPurify.addHook("afterSanitizeAttributes", (node) => {
     if (node.tagName === "A") {
-      node.setAttribute("target", "_blank")
-      node.setAttribute("rel", "noopener noreferrer")
+      node.setAttribute("target", "_blank");
+      node.setAttribute("rel", "noopener noreferrer");
     }
 
     if (
       !node.hasAttribute("target") &&
       (node.hasAttribute("xlink:href") || node.hasAttribute("href"))
     ) {
-      node.setAttribute("xlink:show", "new")
+      node.setAttribute("xlink:show", "new");
     }
-  })
+  });
 }
 
 if (typeof window !== "undefined") {
-  initDOMPurify()
+  initDOMPurify();
 }
 
-const STAGGER = 0.04
-const LINE_DURATION = 0.1
+const STAGGER = 0.04;
+const LINE_DURATION = 0.1;
 
 const containerVariants: Variants = {
   hidden: {},
@@ -42,7 +42,7 @@ const containerVariants: Variants = {
       staggerChildren: STAGGER,
     },
   },
-}
+};
 
 const lineVariants: Variants = {
   hidden: { opacity: 0, x: -4 },
@@ -51,7 +51,7 @@ const lineVariants: Variants = {
     x: 0,
     transition: { duration: LINE_DURATION, ease: "easeOut" },
   },
-}
+};
 
 const CommandOutput: React.FC<CommandOutputPropsType> = ({
   outputLines = [],
@@ -62,19 +62,19 @@ const CommandOutput: React.FC<CommandOutputPropsType> = ({
   // onComplete is now in deps — if the parent re-creates it, the
   // timer resets correctly instead of calling a stale closure
   React.useEffect(() => {
-    if (!onComplete) return
+    if (!onComplete) return;
 
     if (outputTypes === "component") {
-      const timer = setTimeout(onComplete, 50)
-      return () => clearTimeout(timer)
+      const timer = setTimeout(onComplete, 50);
+      return () => clearTimeout(timer);
     }
 
-    const lineCount = (outputLines as string[]).length
-    const totalMs = lineCount > 0 ? ((lineCount - 1) * STAGGER + LINE_DURATION) * 1000 + 50 : 50
+    const lineCount = (outputLines as string[]).length;
+    const totalMs = lineCount > 0 ? ((lineCount - 1) * STAGGER + LINE_DURATION) * 1000 + 50 : 50;
 
-    const timer = setTimeout(onComplete, totalMs)
-    return () => clearTimeout(timer)
-  }, [outputLines.length, outputTypes, onComplete])
+    const timer = setTimeout(onComplete, totalMs);
+    return () => clearTimeout(timer);
+  }, [outputLines.length, outputTypes, onComplete]);
 
   if (outputTypes === "text") {
     return (
@@ -89,7 +89,7 @@ const CommandOutput: React.FC<CommandOutputPropsType> = ({
           </motion.div>
         ))}
       </motion.div>
-    )
+    );
   }
 
   if (outputTypes === "html") {
@@ -99,7 +99,7 @@ const CommandOutput: React.FC<CommandOutputPropsType> = ({
           <SanitizedHtmlLine key={index} text={text} index={index} />
         ))}
       </motion.div>
-    )
+    );
   }
 
   if (outputTypes === "link") {
@@ -113,14 +113,14 @@ const CommandOutput: React.FC<CommandOutputPropsType> = ({
           </motion.div>
         ))}
       </motion.div>
-    )
+    );
   }
 
   if (outputTypes === "component") {
-    return <React.Fragment>{component}</React.Fragment>
+    return <React.Fragment>{component}</React.Fragment>;
   }
 
-  return null
-}
+  return null;
+};
 
-export default CommandOutput
+export default CommandOutput;

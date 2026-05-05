@@ -1,4 +1,4 @@
-import type * as React from "react"
+import type * as React from "react";
 
 // ─────────────────────────────────────────────────────────────────
 // OUTPUT BLOCKS
@@ -12,7 +12,7 @@ export type Block =
   | { id: string; type: "text"; content: string[] }
   | { id: string; type: "html"; content: string[] }
   | { id: string; type: "link"; content: string[][] }
-  | { id: string; type: "component"; component: React.ReactNode }
+  | { id: string; type: "component"; component: React.ReactNode };
 
 /**
  * Subset of Block that can be JSON-serialized to localStorage.
@@ -21,23 +21,23 @@ export type Block =
 export type SerializableBlock =
   | { id: string; type: "text"; content: string[] }
   | { id: string; type: "html"; content: string[] }
-  | { id: string; type: "link"; content: string[][] }
+  | { id: string; type: "link"; content: string[][] };
 
 // ─────────────────────────────────────────────────────────────────
 // HISTORY
 // ─────────────────────────────────────────────────────────────────
 
 export type CommandHistory = {
-  command: string
-  output: Block[]
-  id?: string
-}
+  command: string;
+  output: Block[];
+  id?: string;
+};
 
-export type CommandHistoryTypes = CommandHistory[]
+export type CommandHistoryTypes = CommandHistory[];
 
 export type SerializableEntryType = {
-  command: string
-  output: SerializableBlock[]
-}
+  command: string;
+  output: SerializableBlock[];
+};
 
-export type SerializableHistoryType = SerializableEntryType[]
+export type SerializableHistoryType = SerializableEntryType[];

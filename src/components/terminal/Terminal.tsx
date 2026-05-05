@@ -1,34 +1,34 @@
-"use client"
+"use client";
 
-import { AnimatePresence, motion } from "framer-motion"
-import * as React from "react"
+import { AnimatePresence, motion } from "framer-motion";
+import * as React from "react";
 
-import CommandInput from "./CommandInput"
-import { TerminalErrorBoundary } from "./TerminalErrorBoundary"
+import CommandInput from "./CommandInput";
+import { TerminalErrorBoundary } from "./TerminalErrorBoundary";
 
-import { handleWelcomeCommand } from "@/commands"
-import { STORAGE_KEYS } from "@/constants/storageKeys"
-import { useCommandHistory, useThemeFont } from "@/hooks"
-import { audioService } from "@/services/audio.service"
+import { handleWelcomeCommand } from "@/commands";
+import { STORAGE_KEYS } from "@/constants/storageKeys";
+import { useCommandHistory, useThemeFont } from "@/hooks";
+import { audioService } from "@/services/audio.service";
 
 import {
   CommandHistory,
   CommandHistoryOutputType,
   SerializableHistoryType,
   TerminalPropsTypes,
-} from "@/types"
-import { executeCommand } from "@/utils/command"
-import VisuallyHidden from "../common/VisuallyHidden"
-import { LoadingIndicator } from "../ui/loaders"
-import HistoryEntry from "./HistoryEntry"
+} from "@/types";
+import { executeCommand } from "@/utils/command";
+import VisuallyHidden from "../common/VisuallyHidden";
+import { LoadingIndicator } from "../ui/loaders";
+import HistoryEntry from "./HistoryEntry";
 
-const STORAGE_KEY = STORAGE_KEYS.COMMAND_HISTORY
+const STORAGE_KEY = STORAGE_KEYS.COMMAND_HISTORY;
 
 function getWelcomeEntry(): CommandHistory {
   return {
     command: "welcome",
     output: handleWelcomeCommand([]) as CommandHistoryOutputType,
-  }
+  };
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -36,25 +36,25 @@ function getWelcomeEntry(): CommandHistory {
 // ─────────────────────────────────────────────────────────────────
 
 const TerminalInner: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
-  const [input, setInput] = React.useState("")
-  const [commandIndex, setCommandIndex] = React.useState(-1)
-  const [inputReady, setInputReady] = React.useState(false)
-  const [isLoading, setIsLoading] = React.useState(false)
+  const [input, setInput] = React.useState("");
+  const [commandIndex, setCommandIndex] = React.useState(-1);
+  const [inputReady, setInputReady] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  const currentCommandId = React.useRef(0)
-  const runningCommandRef = React.useRef<string>("")
-  const safetyTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null)
-  const hasInitialized = React.useRef(false)
+  const currentCommandId = React.useRef(0);
+  const runningCommandRef = React.useRef<string>("");
+  const safetyTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hasInitialized = React.useRef(false);
 
-  const { history, pushEntry, clearHistory, isHydrated } = useCommandHistory()
+  const { history, pushEntry, clearHistory, isHydrated } = useCommandHistory();
 
-  useThemeFont()
+  useThemeFont();
 
   // ── Derived: command history strings for Ctrl+R ───────────────
   const commandHistory = React.useMemo(
     () => history.map((h) => h.command).filter((c) => c && c !== "^C"),
     [history],
-  )
+  );
 
   // ─────────────────────────────────────────────────────────────
   // HELPERS & CALLBACKS
@@ -64,20 +64,20 @@ const TerminalInner: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
 
   const clearSafetyTimer = React.useCallback(() => {
     if (safetyTimer.current) {
-      clearTimeout(safetyTimer.current)
-      safetyTimer.current = null
+      clearTimeout(safetyTimer.current);
+      safetyTimer.current = null;
     }
-  }, [])
+  }, []);
 
   // ── Cancel (Ctrl+C while loading) ────────────────────────────
   const handleCancelCommand = React.useCallback(() => {
-    currentCommandId.current++
-    clearSafetyTimer()
-    setIsLoading(false)
-    setInputReady(true)
+    currentCommandId.current++;
+    clearSafetyTimer();
+    setIsLoading(false);
+    setInputReady(true);
 
-    const cancelled = runningCommandRef.current
-    runningCommandRef.current = ""
+    const cancelled = runningCommandRef.current;
+    runningCommandRef.current = "";
 
     if (cancelled) {
       pushEntry({
@@ -89,10 +89,10 @@ const TerminalInner: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
             content: ["^C", "Interrupt signal received"],
           },
         ],
-      })
+      });
     }
-    setCommandIndex(-1)
-  }, [clearSafetyTimer, pushEntry])
+    setCommandIndex(-1);
+  }, [clearSafetyTimer, pushEntry]);
 
   // ─────────────────────────────────────────────────────────────
   // EFFECTS
@@ -104,21 +104,21 @@ const TerminalInner: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
   // getWelcomeEntry and STORAGE_KEY are module-level — not reactive.
   // The disable that was here was completely unnecessary.
   React.useEffect(() => {
-    if (!isHydrated || hasInitialized.current) return
-    hasInitialized.current = true
+    if (!isHydrated || hasInitialized.current) return;
+    hasInitialized.current = true;
 
-    const raw = window.localStorage.getItem(STORAGE_KEY)
+    const raw = window.localStorage.getItem(STORAGE_KEY);
     if (raw === null) {
-      pushEntry(getWelcomeEntry())
+      pushEntry(getWelcomeEntry());
     } else {
       try {
-        const parsed: SerializableHistoryType = JSON.parse(raw)
-        if (parsed.length === 0) setInputReady(true)
+        const parsed: SerializableHistoryType = JSON.parse(raw);
+        if (parsed.length === 0) setInputReady(true);
       } catch {
-        setInputReady(true)
+        setInputReady(true);
       }
     }
-  }, [isHydrated, pushEntry])
+  }, [isHydrated, pushEntry]);
 
   // ── Auto-scroll on new output ─────────────────────────────────
   React.useEffect(() => {
@@ -126,30 +126,30 @@ const TerminalInner: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
       containerRef.current.scrollTo({
         top: containerRef.current.scrollHeight,
         behavior: "smooth",
-      })
+      });
     }
-  }, [history, containerRef])
+  }, [history, containerRef]);
 
   // ── Cleanup safety timer on unmount ──────────────────────────
   React.useEffect(() => {
-    return () => clearSafetyTimer()
-  }, [clearSafetyTimer])
+    return () => clearSafetyTimer();
+  }, [clearSafetyTimer]);
 
   // ── Ctrl+C global listener (only active during loading) ───────
   // handleCancelCommand is now declared above — can be added to deps cleanly.
   React.useEffect(() => {
-    if (!isLoading) return
+    if (!isLoading) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.ctrlKey && event.key.toLowerCase() === "c") {
-        event.preventDefault()
-        handleCancelCommand()
+        event.preventDefault();
+        handleCancelCommand();
       }
-    }
+    };
 
-    document.addEventListener("keydown", handleKeyDown)
-    return () => document.removeEventListener("keydown", handleKeyDown)
-  }, [isLoading, handleCancelCommand])
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isLoading, handleCancelCommand]);
 
   // ─────────────────────────────────────────────────────────────
   // COMMAND HANDLER
@@ -157,47 +157,47 @@ const TerminalInner: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
 
   const handleCommand = async (command: string) => {
     if (command.trim().toLowerCase() === "clear") {
-      clearHistory()
-      setInputReady(true)
-      setCommandIndex(-1)
-      return
+      clearHistory();
+      setInputReady(true);
+      setCommandIndex(-1);
+      return;
     }
 
-    const commandId = ++currentCommandId.current
-    runningCommandRef.current = command
+    const commandId = ++currentCommandId.current;
+    runningCommandRef.current = command;
 
-    setInputReady(false)
-    setIsLoading(true)
-    clearSafetyTimer()
+    setInputReady(false);
+    setIsLoading(true);
+    clearSafetyTimer();
 
     // Safety fallback — restore input after 10s if command hangs
     safetyTimer.current = setTimeout(() => {
       if (currentCommandId.current === commandId) {
-        setIsLoading(false)
-        setInputReady(true)
-        runningCommandRef.current = ""
+        setIsLoading(false);
+        setInputReady(true);
+        runningCommandRef.current = "";
       }
-    }, 10000)
+    }, 10000);
 
     try {
-      const commandOutput = await executeCommand(command)
+      const commandOutput = await executeCommand(command);
 
       // Stale check — if cancelled, discard result
-      if (currentCommandId.current !== commandId) return
+      if (currentCommandId.current !== commandId) return;
 
-      const normalizedOutput = Array.isArray(commandOutput) ? commandOutput : [commandOutput]
+      const normalizedOutput = Array.isArray(commandOutput) ? commandOutput : [commandOutput];
 
       pushEntry({
         id: crypto.randomUUID(),
         command,
         output: normalizedOutput as CommandHistoryOutputType,
-      })
+      });
 
-      audioService.play("success")
+      audioService.play("success");
     } catch {
-      audioService.play("error")
+      audioService.play("error");
 
-      if (currentCommandId.current !== commandId) return
+      if (currentCommandId.current !== commandId) return;
 
       pushEntry({
         command,
@@ -208,47 +208,47 @@ const TerminalInner: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
             content: ["Error: command failed. Please try again."],
           },
         ],
-      })
-      setInputReady(true)
+      });
+      setInputReady(true);
     } finally {
       if (currentCommandId.current === commandId) {
-        clearSafetyTimer()
-        setIsLoading(false)
-        runningCommandRef.current = ""
+        clearSafetyTimer();
+        setIsLoading(false);
+        runningCommandRef.current = "";
       }
     }
 
-    setCommandIndex(-1)
-  }
+    setCommandIndex(-1);
+  };
 
   const handleClearTerminal = () => {
-    clearHistory()
-    setInputReady(true)
-    setCommandIndex(-1)
-  }
+    clearHistory();
+    setInputReady(true);
+    setCommandIndex(-1);
+  };
 
   const handleArrowUp = () => {
     if (commandIndex < history.length - 1) {
-      const newIndex = commandIndex + 1
-      const historyIdx = history.length - 1 - newIndex
-      setCommandIndex(newIndex)
-      if (historyIdx >= 0) return history[historyIdx].command
+      const newIndex = commandIndex + 1;
+      const historyIdx = history.length - 1 - newIndex;
+      setCommandIndex(newIndex);
+      if (historyIdx >= 0) return history[historyIdx].command;
     }
-    return ""
-  }
+    return "";
+  };
 
   const handleArrowDown = () => {
     if (commandIndex > 0) {
-      const newIndex = commandIndex - 1
-      const historyIdx = history.length - 1 - newIndex
-      setCommandIndex(newIndex)
-      if (historyIdx >= 0) return history[historyIdx].command
+      const newIndex = commandIndex - 1;
+      const historyIdx = history.length - 1 - newIndex;
+      setCommandIndex(newIndex);
+      if (historyIdx >= 0) return history[historyIdx].command;
     } else if (commandIndex === 0) {
-      setCommandIndex(-1)
-      return ""
+      setCommandIndex(-1);
+      return "";
     }
-    return ""
-  }
+    return "";
+  };
 
   // ─────────────────────────────────────────────────────────────
   // RENDER
@@ -267,7 +267,7 @@ const TerminalInner: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
         <AnimatePresence>
           {isHydrated &&
             history.map((item: CommandHistory, index: number) => {
-              const isLastEntry = index === history.length - 1
+              const isLastEntry = index === history.length - 1;
 
               return (
                 <HistoryEntry
@@ -277,7 +277,7 @@ const TerminalInner: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
                   isLastEntry={isLastEntry}
                   setInputReady={setInputReady}
                 />
-              )
+              );
             })}
         </AnimatePresence>
       </div>
@@ -326,8 +326,8 @@ const TerminalInner: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
         history.
       </VisuallyHidden>
     </div>
-  )
-}
+  );
+};
 
 // ─────────────────────────────────────────────────────────────────
 // TERMINAL  (public export — wrapped with Error Boundary)
@@ -337,6 +337,6 @@ const Terminal: React.FC<TerminalPropsTypes> = (props) => (
   <TerminalErrorBoundary>
     <TerminalInner {...props} />
   </TerminalErrorBoundary>
-)
+);
 
-export default Terminal
+export default Terminal;

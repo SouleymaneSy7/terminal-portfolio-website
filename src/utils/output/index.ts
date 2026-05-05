@@ -3,5 +3,5 @@
  *
  */
 
-export * from "./output"
-export * from "./outputBuilders"
+export * from "./output";
+export * from "./outputBuilders";

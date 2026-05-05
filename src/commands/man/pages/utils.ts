@@ -1,4 +1,4 @@
-import { ManPageType } from "@/types"
+import { ManPageType } from "@/types";
 
 export const UTILITY_PAGES: Record<string, ManPageType> = {
   age: {
@@ -251,4 +251,4 @@ export const UTILITY_PAGES: Record<string, ManPageType> = {
       "v4 UUIDs are preferred for most use cases (database IDs, session tokens, correlation IDs). v1 is useful when you need to decode the creation timestamp from the UUID later.",
     seeAlso: ["hash", "encode"],
   },
-}
+};

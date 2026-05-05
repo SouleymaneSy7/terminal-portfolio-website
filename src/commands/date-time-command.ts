@@ -12,9 +12,9 @@
  * ```
  */
 
-import LiveClock from "@/components/ui/LiveClock"
-import type { CommandHistoryOutputType } from "@/types"
-import * as React from "react"
+import LiveClock from "@/components/ui/LiveClock";
+import type { CommandHistoryOutputType } from "@/types";
+import * as React from "react";
 
 // ─────────────────────────────────────────────────────────────────
 // HANDLERS
@@ -26,7 +26,7 @@ export const handleDateCommand = (): CommandHistoryOutputType => [
     type: "component" as const,
     component: React.createElement(LiveClock),
   },
-]
+];
 
 export const handleTimeCommand = (): CommandHistoryOutputType => [
   {
@@ -34,4 +34,4 @@ export const handleTimeCommand = (): CommandHistoryOutputType => [
     type: "component" as const,
     component: React.createElement(LiveClock),
   },
-]
+];

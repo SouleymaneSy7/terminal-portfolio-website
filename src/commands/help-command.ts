@@ -10,10 +10,10 @@
  * ```
  */
 
-import { commands } from "@/constants"
-import type { CommandHistoryOutputType } from "@/types"
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
-import { createHtmlOutput } from "@/utils/output"
+import { commands } from "@/constants";
+import type { CommandHistoryOutputType } from "@/types";
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
+import { createHtmlOutput } from "@/utils/output";
 
 // ─────────────────────────────────────────────────────────────────
 // MAIN HANDLER
@@ -123,5 +123,5 @@ export const handleHelpCommand = (): CommandHistoryOutputType => {
         </div>
 
       </div>`,
-  )
-}
+  );
+};

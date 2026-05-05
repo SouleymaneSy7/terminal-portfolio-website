@@ -1,4 +1,4 @@
-import { ManPageType } from "@/types"
+import { ManPageType } from "@/types";
 
 export const NETWORK_PAGES: Record<string, ManPageType> = {
   curl: {
@@ -65,4 +65,4 @@ export const NETWORK_PAGES: Record<string, ManPageType> = {
       "Uses the ATm format query (?ATm) which returns a 3-day forecast in ASCII. If wttr.in returns a 404, the city was not recognized. The service is free and public — no API key required.",
     seeAlso: ["ip", "date"],
   },
-}
+};

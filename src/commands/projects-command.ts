@@ -13,11 +13,11 @@
  * ```
  */
 
-import type { CommandHistoryOutputType } from "@/types"
-import { parseArgs } from "@/utils/argParser"
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
-import { createHtmlOutput } from "@/utils/output"
-import { PROJECTS_HELP, REPO_HELP } from "@/constants/help/info"
+import type { CommandHistoryOutputType } from "@/types";
+import { parseArgs } from "@/utils/argParser";
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
+import { createHtmlOutput } from "@/utils/output";
+import { PROJECTS_HELP, REPO_HELP } from "@/constants/help/info";
 
 // ─────────────────────────────────────────────────────────────────
 // OUTPUT BUILDERS
@@ -51,12 +51,12 @@ function buildRepoOutput(): CommandHistoryOutputType {
         </p>
       </div>
     </div>`,
-  )
+  );
 }
 
 function buildProjectsOutput(): CommandHistoryOutputType {
-  const sep = `<p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>`
-  const bullet = DT.decorators.bullet
+  const sep = `<p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>`;
+  const bullet = DT.decorators.bullet;
 
   const projects = [
     // ── Fyrre Magazine ───────────────────────────────────────
@@ -279,7 +279,7 @@ function buildProjectsOutput(): CommandHistoryOutputType {
         </p>
       </div>
     </div>`,
-  ]
+  ];
 
   return [
     {
@@ -287,7 +287,7 @@ function buildProjectsOutput(): CommandHistoryOutputType {
       type: "html" as const,
       content: projects,
     },
-  ]
+  ];
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -295,13 +295,13 @@ function buildProjectsOutput(): CommandHistoryOutputType {
 // ─────────────────────────────────────────────────────────────────
 
 export const handleProjectsCommand = (args: string[]): CommandHistoryOutputType => {
-  const { flags } = parseArgs(args)
-  if (flags.help) return PROJECTS_HELP
-  return buildProjectsOutput()
-}
+  const { flags } = parseArgs(args);
+  if (flags.help) return PROJECTS_HELP;
+  return buildProjectsOutput();
+};
 
 export const handleRepoCommand = (args: string[]): CommandHistoryOutputType => {
-  const { flags } = parseArgs(args)
-  if (flags.help) return REPO_HELP
-  return buildRepoOutput()
-}
+  const { flags } = parseArgs(args);
+  if (flags.help) return REPO_HELP;
+  return buildRepoOutput();
+};

@@ -23,6 +23,6 @@ export const DESIGN_TOKENS = {
     error: '<span aria-hidden="true" class="text-secondary-clr">✗</span>',
     info: '<span aria-hidden="true" class="text-secondary-clr">ℹ</span>',
   },
-} as const
+} as const;
 
-export const DT = DESIGN_TOKENS
+export const DT = DESIGN_TOKENS;

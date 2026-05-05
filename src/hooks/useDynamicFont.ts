@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import type { FontKey } from "@/commands/theme-command"
-import { FontSourceType, GoogleFontSourceType, LocalFontSourceType } from "@/types"
-import * as React from "react"
+import type { FontKey } from "@/commands/theme-command";
+import { FontSourceType, GoogleFontSourceType, LocalFontSourceType } from "@/types";
+import * as React from "react";
 
 // ─────────────────────────────────────────────────────────────────
 // FONT REGISTRY
@@ -125,10 +125,10 @@ export const FONT_SOURCES: Partial<Record<FontKey, FontSourceType>> = {
       { weight: 700, path: "/fonts/meslo-bold.woff2" },
     ],
   },
-}
+};
 
-const loaded = new Set<FontKey>()
-const pending = new Map<FontKey, Promise<void>>()
+const loaded = new Set<FontKey>();
+const pending = new Map<FontKey, Promise<void>>();
 
 // ─────────────────────────────────────────────────────────────────
 // CORE LOADER  (framework-agnostic, callable outside React)
@@ -151,49 +151,52 @@ const pending = new Map<FontKey, Promise<void>>()
 
 export async function loadDynamicFont(key: FontKey): Promise<void> {
   // Default font is always loaded by Next.js.
-  if (key === "recursive-casual") return
+  if (key === "recursive-casual") return;
 
   // Geist Mono is loaded via npm package, just register the CSS variable
   if (key === "geist") {
     if (!loaded.has(key)) {
-      const { GeistMono } = await import("geist/font/mono")
-      document.documentElement.style.setProperty("--font-geist-mono", GeistMono.style.fontFamily)
-      loaded.add(key)
+      const { GeistMono } = await import("geist/font/mono");
+      document.documentElement.style.setProperty("--font-geist-mono", GeistMono.style.fontFamily);
+      loaded.add(key);
     }
-    return
+    return;
   }
 
-  if (loaded.has(key)) return
+  if (loaded.has(key)) return;
 
   if (pending.has(key)) {
-    return pending.get(key)!
+    return pending.get(key)!;
   }
 
-  const source = FONT_SOURCES[key]
+  const source = FONT_SOURCES[key];
   if (!source) {
-    console.warn(`[useDynamicFont] No source registered for font key: "${key}"`)
-    return
+    console.warn(`[useDynamicFont] No source registered for font key: "${key}"`);
+    return;
   }
 
   const promise = (async () => {
     if (source.type === "google") {
-      await loadGoogleFont(source)
+      await loadGoogleFont(source);
     } else {
-      await loadLocalFont(source)
+      await loadLocalFont(source);
     }
 
     // Register the CSS custom property so the CSS rule resolves.
-    document.documentElement.style.setProperty(source.cssVariable, `"${source.cssName}", monospace`)
+    document.documentElement.style.setProperty(
+      source.cssVariable,
+      `"${source.cssName}", monospace`,
+    );
 
-    loaded.add(key)
-  })()
+    loaded.add(key);
+  })();
 
-  pending.set(key, promise)
+  pending.set(key, promise);
 
   try {
-    await promise
+    await promise;
   } finally {
-    pending.delete(key)
+    pending.delete(key);
   }
 }
 
@@ -203,22 +206,22 @@ export async function loadDynamicFont(key: FontKey): Promise<void> {
 
 function loadGoogleFont(source: GoogleFontSourceType): Promise<void> {
   return new Promise((resolve, reject) => {
-    const url = `https://fonts.googleapis.com/css2?family=${source.googleFamily}:wght@${source.weights}&display=swap`
+    const url = `https://fonts.googleapis.com/css2?family=${source.googleFamily}:wght@${source.weights}&display=swap`;
 
     // Avoid injecting the same stylesheet twice.
     if (document.querySelector(`link[href="${url}"]`)) {
-      resolve()
-      return
+      resolve();
+      return;
     }
 
-    const link = document.createElement("link")
-    link.rel = "stylesheet"
-    link.href = url
-    link.onload = () => resolve()
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = url;
+    link.onload = () => resolve();
     link.onerror = () =>
-      reject(new Error(`[useDynamicFont] Failed to load Google Font: ${source.googleFamily}`))
-    document.head.appendChild(link)
-  })
+      reject(new Error(`[useDynamicFont] Failed to load Google Font: ${source.googleFamily}`));
+    document.head.appendChild(link);
+  });
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -233,21 +236,21 @@ async function loadLocalFont(source: LocalFontSourceType): Promise<void> {
           weight: String(weight),
           style: "normal",
           display: "swap",
-        })
+        });
 
-        const loaded = await face.load()
-        document.fonts.add(loaded)
+        const loaded = await face.load();
+        document.fonts.add(loaded);
       } catch (err) {
         console.error(
           `[useDynamicFont] Failed to load local font "${source.cssName}" (weight ${weight}) from ${path}:`,
           err,
-        )
+        );
         throw new Error(
           `Failed to load font file: ${path}. Make sure the file exists in /public/fonts/`,
-        )
+        );
       }
     }),
-  )
+  );
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -255,9 +258,9 @@ async function loadLocalFont(source: LocalFontSourceType): Promise<void> {
 // ─────────────────────────────────────────────────────────────────
 
 interface UseDynamicFontReturn {
-  loadFont: (key: FontKey) => Promise<void>
-  isLoading: boolean
-  error: string | null
+  loadFont: (key: FontKey) => Promise<void>;
+  isLoading: boolean;
+  error: string | null;
 }
 
 /**
@@ -274,34 +277,34 @@ interface UseDynamicFontReturn {
  */
 
 export function useDynamicFont(): UseDynamicFontReturn {
-  const [isLoading, setIsLoading] = React.useState(false)
-  const [error, setError] = React.useState<string | null>(null)
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
 
   const loadFont = React.useCallback(async (key: FontKey): Promise<void> => {
-    if (key === "recursive-casual" || loaded.has(key)) return
+    if (key === "recursive-casual" || loaded.has(key)) return;
 
-    setIsLoading(true)
-    setError(null)
+    setIsLoading(true);
+    setError(null);
     try {
-      await loadDynamicFont(key)
+      await loadDynamicFont(key);
     } catch (err) {
-      const message = err instanceof Error ? err.message : String(err)
-      setError(message)
-      console.error("[useDynamicFont] Font load failed:", err)
+      const message = err instanceof Error ? err.message : String(err);
+      setError(message);
+      console.error("[useDynamicFont] Font load failed:", err);
 
       // Display error in terminal if possible
       if (typeof window !== "undefined") {
         const event = new CustomEvent("terminal:font-error", {
           detail: { font: key, error: message },
-        })
-        window.dispatchEvent(event)
+        });
+        window.dispatchEvent(event);
       }
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }, [])
+  }, []);
 
-  return { loadFont, isLoading, error }
+  return { loadFont, isLoading, error };
 }
 
-export default useDynamicFont
+export default useDynamicFont;

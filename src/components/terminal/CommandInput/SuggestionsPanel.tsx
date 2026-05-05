@@ -1,6 +1,6 @@
-import { SuggestionsPanelPropsType } from "@/types"
-import { AnimatePresence, motion } from "framer-motion"
-import * as React from "react"
+import { SuggestionsPanelPropsType } from "@/types";
+import { AnimatePresence, motion } from "framer-motion";
+import * as React from "react";
 
 export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
   show,
@@ -64,8 +64,8 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
                   </p>
                   <ul role="presentation" className="grid grid-cols-2 gap-x-4">
                     {group.items.map((suggestion, itemIdx) => {
-                      const fi = flatIndex(groupIdx, itemIdx)
-                      const isActive = fi === activeIndex
+                      const fi = flatIndex(groupIdx, itemIdx);
+                      const isActive = fi === activeIndex;
                       return (
                         <li
                           key={itemIdx}
@@ -78,8 +78,8 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
                             type="button"
                             aria-label={`Complete with ${suggestion}`}
                             onMouseDown={(e) => {
-                              e.preventDefault()
-                              onSelect(suggestion)
+                              e.preventDefault();
+                              onSelect(suggestion);
                             }}
                             className={[
                               "flex w-full cursor-pointer items-center gap-2 text-left transition-colors duration-100",
@@ -94,7 +94,7 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
                             <span>{suggestion}</span>
                           </button>
                         </li>
-                      )
+                      );
                     })}
                   </ul>
                 </li>
@@ -109,7 +109,7 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
               className="grid w-140 grid-cols-2"
             >
               {completions.map((suggestion, index) => {
-                const isActive = index === activeIndex
+                const isActive = index === activeIndex;
 
                 return (
                   <li
@@ -123,8 +123,8 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
                       type="button"
                       aria-label={`Complete with ${suggestion}`}
                       onMouseDown={(e) => {
-                        e.preventDefault()
-                        onSelect(suggestion)
+                        e.preventDefault();
+                        onSelect(suggestion);
                       }}
                       className={[
                         "flex w-auto cursor-pointer items-center gap-2 text-left transition-colors duration-100",
@@ -140,7 +140,7 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
                       <span>{suggestion}</span>
                     </button>
                   </li>
-                )
+                );
               })}
             </ul>
           )}
@@ -180,5 +180,5 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
         </motion.div>
       )}
     </AnimatePresence>
-  )
-}
+  );
+};

@@ -1,11 +1,11 @@
-import type { Block } from "./terminal.types"
+import type { Block } from "./terminal.types";
 
 // ─────────────────────────────────────────────────────────────────
 // COMMAND HANDLER
 // ─────────────────────────────────────────────────────────────────
 
 /** The full output returned by any command handler. */
-export type CommandHistoryOutputType = Block[]
+export type CommandHistoryOutputType = Block[];
 
 /**
  * Shape every command handler must satisfy.
@@ -13,27 +13,27 @@ export type CommandHistoryOutputType = Block[]
  */
 export type CommandHandlerType = (
   args: string[],
-) => CommandHistoryOutputType | Promise<CommandHistoryOutputType>
+) => CommandHistoryOutputType | Promise<CommandHistoryOutputType>;
 
 // ─────────────────────────────────────────────────────────────────
 // SUGGESTIONS
 // ─────────────────────────────────────────────────────────────────
 
 export type SuggestionGroupType = {
-  label: string
-  items: string[]
-}
+  label: string;
+  items: string[];
+};
 
 export interface SuggestionsPanelPropsType {
-  show: boolean
-  totalCount: number
-  activeDescription: string
-  groupedSugs: SuggestionGroupType[] | null
-  completions: string[]
-  activeIndex: number
-  onSelect: (suggestion: string) => void
-  flatIndex: (groupIdx: number, itemIdx: number) => number
-  listRef: React.RefObject<HTMLUListElement | null>
+  show: boolean;
+  totalCount: number;
+  activeDescription: string;
+  groupedSugs: SuggestionGroupType[] | null;
+  completions: string[];
+  activeIndex: number;
+  onSelect: (suggestion: string) => void;
+  flatIndex: (groupIdx: number, itemIdx: number) => number;
+  listRef: React.RefObject<HTMLUListElement | null>;
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -41,8 +41,8 @@ export interface SuggestionsPanelPropsType {
 // ─────────────────────────────────────────────────────────────────
 
 export interface ParsedDateType {
-  date: Date
-  originalFormat: string
+  date: Date;
+  originalFormat: string;
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -50,11 +50,11 @@ export interface ParsedDateType {
 // ─────────────────────────────────────────────────────────────────
 
 export interface ParsedArgsType {
-  command: string
-  subcommand?: string
-  flags: Record<string, boolean>
-  options: Record<string, string>
-  positional: string[]
+  command: string;
+  subcommand?: string;
+  flags: Record<string, boolean>;
+  options: Record<string, string>;
+  positional: string[];
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -62,19 +62,19 @@ export interface ParsedArgsType {
 // ─────────────────────────────────────────────────────────────────
 
 export interface ManPageType {
-  name: string
-  synopsis: string
-  description: string
-  options?: string
-  examples?: string
-  notes?: string
-  seeAlso?: string[]
+  name: string;
+  synopsis: string;
+  description: string;
+  options?: string;
+  examples?: string;
+  notes?: string;
+  seeAlso?: string[];
 }
 // ─────────────────────────────────────────────────────────────────
 // HISTORY COMMAND
 // ─────────────────────────────────────────────────────────────────
 
 export interface StoredEntryType {
-  command: string
-  output: unknown[]
+  command: string;
+  output: unknown[];
 }

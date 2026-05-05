@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 /**
  * JsonOutput — renders raw JSON with syntax-aware coloring and a
@@ -15,16 +15,16 @@
  *
  */
 
-import { JsonOutputPropsType } from "@/types"
-import { motion } from "framer-motion"
-import * as React from "react"
-import VisuallyHidden from "../common/VisuallyHidden"
+import { JsonOutputPropsType } from "@/types";
+import { motion } from "framer-motion";
+import * as React from "react";
+import VisuallyHidden from "../common/VisuallyHidden";
 
 // ─────────────────────────────────────────────────────────────────
 //  CONSTANTS
 // ─────────────────────────────────────────────────────────────────
 
-const COPY_RESET_MS = 2_000
+const COPY_RESET_MS = 2_000;
 
 // ─────────────────────────────────────────────────────────────────
 // SYNTAX HIGHLIGHTER  (runs locally, zero dependencies)
@@ -46,63 +46,63 @@ function highlightJson(json: string): string {
   return json.replace(
     /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?|[{}[\],:])/g,
     (match) => {
-      let cls = "text-text-clr opacity-50"
+      let cls = "text-text-clr opacity-50";
 
       if (/^"/.test(match)) {
         if (/:$/.test(match)) {
-          cls = "text-primary-clr font-bold"
+          cls = "text-primary-clr font-bold";
         } else {
-          cls = "text-tertiary-clr"
+          cls = "text-tertiary-clr";
         }
       } else if (/true|false/.test(match)) {
-        cls = "text-secondary-clr font-bold"
+        cls = "text-secondary-clr font-bold";
       } else if (/null/.test(match)) {
-        cls = "text-secondary-clr opacity-70"
+        cls = "text-secondary-clr opacity-70";
       } else if (/^-?\d/.test(match)) {
-        cls = "text-secondary-clr"
+        cls = "text-secondary-clr";
       }
 
-      return `<span class="${cls}">${match}</span>`
+      return `<span class="${cls}">${match}</span>`;
     },
-  )
+  );
 }
 
 const JsonOutput: React.FC<JsonOutputPropsType> = ({ data, label }) => {
-  const [copied, setCopied] = React.useState(false)
-  const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null)
+  const [copied, setCopied] = React.useState(false);
+  const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Memoized so it doesn't re-serialize on every render
-  const json = React.useMemo(() => JSON.stringify(data, null, 2), [data])
-  const highlighted = React.useMemo(() => highlightJson(json), [json])
-  const lineCount = React.useMemo(() => json.split("\n").length, [json])
+  const json = React.useMemo(() => JSON.stringify(data, null, 2), [data]);
+  const highlighted = React.useMemo(() => highlightJson(json), [json]);
+  const lineCount = React.useMemo(() => json.split("\n").length, [json]);
 
   React.useEffect(() => {
     return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current)
-    }
-  }, [])
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   const handleCopy = React.useCallback(async () => {
     try {
-      await navigator.clipboard.writeText(json)
+      await navigator.clipboard.writeText(json);
     } catch {
       // Fallback for environments without Clipboard API
-      const textarea = document.createElement("textarea")
-      textarea.value = json
-      textarea.style.position = "fixed"
-      textarea.style.opacity = "0"
-      document.body.appendChild(textarea)
-      textarea.select()
-      document.execCommand("copy")
-      document.body.removeChild(textarea)
+      const textarea = document.createElement("textarea");
+      textarea.value = json;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
     }
 
-    setCopied(true)
-    if (timeoutRef.current) clearTimeout(timeoutRef.current)
-    timeoutRef.current = setTimeout(() => setCopied(false), COPY_RESET_MS)
-  }, [json])
+    setCopied(true);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => setCopied(false), COPY_RESET_MS);
+  }, [json]);
 
-  const rawJsonLength = (new TextEncoder().encode(json).length / 1024).toFixed(1)
+  const rawJsonLength = (new TextEncoder().encode(json).length / 1024).toFixed(1);
 
   return (
     <motion.div
@@ -164,7 +164,7 @@ const JsonOutput: React.FC<JsonOutputPropsType> = ({ data, label }) => {
         Raw JSON — <span className="font-bold text-tertiary-clr">{rawJsonLength} KB</span>
       </p>
     </motion.div>
-  )
-}
+  );
+};
 
-export default JsonOutput
+export default JsonOutput;

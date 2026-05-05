@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 
 const TerminalPrompt: React.FC = () => (
   <p className="inline-block">
@@ -9,6 +9,6 @@ const TerminalPrompt: React.FC = () => (
     <span className="font-bold text-tertiary-clr">souleymane-sy-portfolio</span>
     <span className="font-bold text-secondary-clr">:~$</span>
   </p>
-)
+);
 
-export default TerminalPrompt
+export default TerminalPrompt;

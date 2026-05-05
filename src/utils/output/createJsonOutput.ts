@@ -8,9 +8,9 @@
  *
  */
 
-import JsonOutput from "@/components/ui/JsonOutput"
-import type { CommandHistoryOutputType } from "@/types"
-import * as React from "react"
+import JsonOutput from "@/components/ui/JsonOutput";
+import type { CommandHistoryOutputType } from "@/types";
+import * as React from "react";
 
 export function createJsonOutput(data: unknown, label?: string): CommandHistoryOutputType {
   return [
@@ -19,5 +19,5 @@ export function createJsonOutput(data: unknown, label?: string): CommandHistoryO
       type: "component" as const,
       component: React.createElement(JsonOutput, { data, label, key: `json-${Date.now()}` }),
     },
-  ]
+  ];
 }

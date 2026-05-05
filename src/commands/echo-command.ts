@@ -16,10 +16,10 @@
  * ```
  */
 
-import type { CommandHistoryOutputType } from "@/types"
-import { parseArgs } from "@/utils/argParser"
-import { createErrorOutput, createTextOutput } from "@/utils/output"
-import { ECHO_HELP } from "@/constants/help/utils"
+import type { CommandHistoryOutputType } from "@/types";
+import { parseArgs } from "@/utils/argParser";
+import { createErrorOutput, createTextOutput } from "@/utils/output";
+import { ECHO_HELP } from "@/constants/help/utils";
 
 // ─────────────────────────────────────────────────────────────────
 // MAIN HANDLER (exported)
@@ -32,20 +32,20 @@ import { ECHO_HELP } from "@/constants/help/utils"
  * @returns Command output blocks
  */
 export const handleEchoCommand = (args: string[]): CommandHistoryOutputType => {
-  const { flags } = parseArgs(args)
+  const { flags } = parseArgs(args);
 
-  if (flags.help) return ECHO_HELP
+  if (flags.help) return ECHO_HELP;
 
   if (args.length === 0) {
     return createErrorOutput(
       "No text provided.",
       `Type <span class="text-tertiary-clr font-bold">echo --help</span> for usage and examples.`,
-    )
+    );
   }
 
   // Join args and replace literal \n with newlines
-  const raw = args.join(" ").replace(/\\n/g, "\n")
-  const lines = raw.split("\n")
+  const raw = args.join(" ").replace(/\\n/g, "\n");
+  const lines = raw.split("\n");
 
-  return createTextOutput(lines)
-}
+  return createTextOutput(lines);
+};

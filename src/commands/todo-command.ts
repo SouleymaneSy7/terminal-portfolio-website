@@ -3,26 +3,26 @@
  * Data persists in localStorage under "terminal:todos".
  */
 
-import { TODOS_HELP } from "@/constants/help/utils"
-import { STORAGE_KEYS } from "@/constants/storageKeys"
-import { TodoItemType } from "@/types"
-import { parseArgs } from "@/utils/argParser"
-import { storageGet, storageRemove, storageSet } from "@/utils/commandStorage"
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
-import { createErrorOutput, createHtmlOutput, createSuccessOutput } from "@/utils/output"
+import { TODOS_HELP } from "@/constants/help/utils";
+import { STORAGE_KEYS } from "@/constants/storageKeys";
+import { TodoItemType } from "@/types";
+import { parseArgs } from "@/utils/argParser";
+import { storageGet, storageRemove, storageSet } from "@/utils/commandStorage";
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
+import { createErrorOutput, createHtmlOutput, createSuccessOutput } from "@/utils/output";
 
-const TODOS_KEY = STORAGE_KEYS.TODOS
+const TODOS_KEY = STORAGE_KEYS.TODOS;
 
-const getTodos = (): TodoItemType[] => storageGet<TodoItemType[]>(TODOS_KEY, [])
-const saveTodos = (todos: TodoItemType[]): boolean => storageSet(TODOS_KEY, todos)
-const makeShortId = (uuid: string): string => uuid.replace(/-/g, "").slice(0, 8)
+const getTodos = (): TodoItemType[] => storageGet<TodoItemType[]>(TODOS_KEY, []);
+const saveTodos = (todos: TodoItemType[]): boolean => storageSet(TODOS_KEY, todos);
+const makeShortId = (uuid: string): string => uuid.replace(/-/g, "").slice(0, 8);
 
 // ─────────────────────────────────────────────────────────────────
 // HANDLERS
 // ─────────────────────────────────────────────────────────────────
 
 const listTodos = () => {
-  const todos = getTodos()
+  const todos = getTodos();
 
   if (todos.length === 0) {
     return createHtmlOutput(
@@ -37,26 +37,26 @@ const listTodos = () => {
           <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">todo add &lt;text&gt;</span>${DT.decorators.quote} to create a task.</p>
         </div>
       </div>`,
-    )
+    );
   }
 
-  const pending = todos.filter((t) => !t.done)
-  const done = todos.filter((t) => t.done)
+  const pending = todos.filter((t) => !t.done);
+  const done = todos.filter((t) => t.done);
 
   const rows = todos
     .map((t, i) => {
       const statusIcon = t.done
         ? `<span class="text-tertiary-clr font-bold">✓</span>`
-        : `<span class="text-text-clr opacity-sep">○</span>`
-      const textClass = t.done ? "text-text-clr opacity-sep" : "text-text-clr"
+        : `<span class="text-text-clr opacity-sep">○</span>`;
+      const textClass = t.done ? "text-text-clr opacity-sep" : "text-text-clr";
       return `<p>
         <span class="text-primary-clr font-bold">${String(i + 1).padStart(2, "0")}</span>
         <span>  ${statusIcon}  </span>
         <span class="text-text-clr opacity-sep">[</span><span class="text-tertiary-clr">${t.shortId}</span><span class="text-text-clr opacity-sep">]</span>
         <span class="${textClass}">  ${t.text}</span>
-      </p>`
+      </p>`;
     })
-    .join("\n")
+    .join("\n");
 
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
@@ -73,18 +73,18 @@ const listTodos = () => {
         <p>Use <span class="text-tertiary-clr font-bold">todo done &lt;id&gt;</span> to mark complete · <span class="text-tertiary-clr font-bold">todo rm &lt;id&gt;</span> to delete</p>
       </div>
     </div>`,
-  )
-}
+  );
+};
 
 const addTodo = (text: string) => {
   if (!text.trim()) {
     return createErrorOutput(
       "Task text cannot be empty.",
       `<span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">todo add &lt;task description&gt;</span>`,
-    )
+    );
   }
 
-  const id = crypto.randomUUID()
+  const id = crypto.randomUUID();
   const item: TodoItemType = {
     id,
     shortId: makeShortId(id),
@@ -92,11 +92,11 @@ const addTodo = (text: string) => {
     done: false,
     createdAt: new Date().toISOString(),
     completedAt: null,
-  }
+  };
 
-  const todos = getTodos()
-  todos.push(item)
-  saveTodos(todos)
+  const todos = getTodos();
+  todos.push(item);
+  saveTodos(todos);
 
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
@@ -111,34 +111,34 @@ const addTodo = (text: string) => {
         <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">todo</span>${DT.decorators.quote} to view your list.</p>
       </div>
     </div>`,
-  )
-}
+  );
+};
 
 const setDone = (shortId: string, done: boolean) => {
-  const subCmd = done ? "done" : "undone"
+  const subCmd = done ? "done" : "undone";
 
   if (!shortId) {
     return createErrorOutput(
       `Usage: <span class="text-tertiary-clr font-bold">todo ${subCmd} &lt;id&gt;</span>`,
-    )
+    );
   }
 
-  const todos = getTodos()
-  const item = todos.find((t) => t.shortId === shortId)
+  const todos = getTodos();
+  const item = todos.find((t) => t.shortId === shortId);
 
   if (!item) {
     return createErrorOutput(
       `No task found with ID <span class="text-tertiary-clr">"${shortId}"</span>.`,
       `Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">todo</span>${DT.decorators.quote} to see task IDs.`,
-    )
+    );
   }
 
-  item.done = done
-  item.completedAt = done ? new Date().toISOString() : null
-  saveTodos(todos)
+  item.done = done;
+  item.completedAt = done ? new Date().toISOString() : null;
+  saveTodos(todos);
 
-  const statusText = done ? "marked as done ✓" : "marked as pending ○"
-  const statusClass = done ? "text-tertiary-clr" : "text-primary-clr"
+  const statusText = done ? "marked as done ✓" : "marked as pending ○";
+  const statusClass = done ? "text-tertiary-clr" : "text-primary-clr";
 
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
@@ -148,28 +148,28 @@ const setDone = (shortId: string, done: boolean) => {
         <p>${item.text}</p>
       </div>
     </div>`,
-  )
-}
+  );
+};
 
 const removeTodo = (shortId: string) => {
   if (!shortId) {
     return createErrorOutput(
       `Usage: <span class="text-tertiary-clr font-bold">todo rm &lt;id&gt;</span>`,
-    )
+    );
   }
 
-  const todos = getTodos()
-  const idx = todos.findIndex((t) => t.shortId === shortId)
+  const todos = getTodos();
+  const idx = todos.findIndex((t) => t.shortId === shortId);
 
   if (idx === -1) {
     return createErrorOutput(
       `No task found with ID <span class="text-tertiary-clr">"${shortId}"</span>.`,
       `Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">todo</span>${DT.decorators.quote} to see task IDs.`,
-    )
+    );
   }
 
-  const [removed] = todos.splice(idx, 1)
-  saveTodos(todos)
+  const [removed] = todos.splice(idx, 1);
+  saveTodos(todos);
 
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
@@ -179,38 +179,38 @@ const removeTodo = (shortId: string) => {
         <p><span class="text-secondary-clr">Removed  </span>  <span class="text-text-clr opacity-sep">${removed.text}</span></p>
       </div>
     </div>`,
-  )
-}
+  );
+};
 
 const clearTodos = () => {
-  storageRemove(TODOS_KEY)
+  storageRemove(TODOS_KEY);
   return createSuccessOutput(
     `All tasks deleted. Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">todo add &lt;text&gt;</span>${DT.decorators.quote} to start fresh.`,
-  )
-}
+  );
+};
 
-const showTodoHelp = () => TODOS_HELP
+const showTodoHelp = () => TODOS_HELP;
 
 // ─────────────────────────────────────────────────────────────────
 // MAIN HANDLER
 // ─────────────────────────────────────────────────────────────────
 
 export const handleTodoCommand = (args: string[]) => {
-  const parsed = parseArgs(args)
-  const sub = parsed.subcommand?.toLowerCase()
+  const parsed = parseArgs(args);
+  const sub = parsed.subcommand?.toLowerCase();
 
-  if (parsed.flags.help) return showTodoHelp()
-  if (!sub || sub === "list") return listTodos()
-  if (sub === "clear") return clearTodos()
-  if (sub === "add") return addTodo(parsed.positional.slice(1).join(" "))
-  if (sub === "done") return setDone(parsed.positional[1]?.toLowerCase() ?? "", true)
-  if (sub === "undone") return setDone(parsed.positional[1]?.toLowerCase() ?? "", false)
+  if (parsed.flags.help) return showTodoHelp();
+  if (!sub || sub === "list") return listTodos();
+  if (sub === "clear") return clearTodos();
+  if (sub === "add") return addTodo(parsed.positional.slice(1).join(" "));
+  if (sub === "done") return setDone(parsed.positional[1]?.toLowerCase() ?? "", true);
+  if (sub === "undone") return setDone(parsed.positional[1]?.toLowerCase() ?? "", false);
   if (sub === "rm" || sub === "remove" || sub === "delete") {
-    return removeTodo(parsed.positional[1]?.toLowerCase() ?? "")
+    return removeTodo(parsed.positional[1]?.toLowerCase() ?? "");
   }
 
   return createErrorOutput(
     `Unknown subcommand: <span class="text-tertiary-clr">"${args[0]}"</span>`,
     `Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">todo help</span>${DT.decorators.quote} for all commands.`,
-  )
-}
+  );
+};

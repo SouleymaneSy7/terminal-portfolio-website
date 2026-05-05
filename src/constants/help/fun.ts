@@ -2,9 +2,9 @@
  * Help outputs for fun commands
  */
 
-import { POINTS, RANKS } from "@/constants/quiz-game"
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
-import { createHelpOutput } from "@/utils/output"
+import { POINTS, RANKS } from "@/constants/quiz-game";
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
+import { createHelpOutput } from "@/utils/output";
 
 export const COWSAY_HELP = createHelpOutput({
   name: "cowsay",
@@ -14,21 +14,21 @@ export const COWSAY_HELP = createHelpOutput({
     { command: "cowsay Hello World", description: "Cow says 'Hello World'" },
     { command: "cowsay I love coding", description: "Express yourself" },
   ],
-})
+});
 
 export const JOKE_HELP = createHelpOutput({
   name: "joke",
   usage: "joke",
   description: "Get a random programming joke from JokeAPI.",
   examples: [{ command: "joke", description: "Fetch a random joke" }],
-})
+});
 
 export const QUOTE_HELP = createHelpOutput({
   name: "quote",
   usage: "quote",
   description: "Get a random inspirational quote from Advice Slip API.",
   examples: [{ command: "quote", description: "Fetch a random quote" }],
-})
+});
 
 export const RPS_HELP = createHelpOutput({
   name: "rps",
@@ -39,14 +39,14 @@ export const RPS_HELP = createHelpOutput({
     { command: "rps paper", description: "Play with paper" },
     { command: "rps scissors", description: "Play with scissors" },
   ],
-})
+});
 
 export const EXIT_HELP = createHelpOutput({
   name: "exit",
   usage: "exit [--help]",
   description: "exit",
   options: [{ flag: "--help, -h", description: "Show this help message" }],
-})
+});
 
 export const GAME_HELP = createHelpOutput({
   name: "game — Frontend Quiz",
@@ -61,4 +61,4 @@ export const GAME_HELP = createHelpOutput({
   ],
   notes: `<span class="text-tertiary-clr">+${POINTS.CORRECT} XP</span> correct ${DT.decorators.bullet} <span class="text-secondary-clr">${POINTS.WRONG} XP</span> wrong ${DT.decorators.bullet} Ranks: LEGEND ≥${RANKS.LEGEND.min}% ${DT.decorators.bullet} PRO ≥${RANKS.PRO.min}% ${DT.decorators.bullet} ADVANCED ≥${RANKS.ADVANCED.min}% ${DT.decorators.bullet} NOOB &lt;${RANKS.ADVANCED.min}%`,
   seeAlso: ["game stats", "game reset"],
-})
+});

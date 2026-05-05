@@ -3,13 +3,13 @@
  */
 
 // Fun commands
-export * from "./fun"
+export * from "./fun";
 
 // Information commands
-export * from "./info"
+export * from "./info";
 
 // System commands
-export * from "./system"
+export * from "./system";
 
 // Utility commands
-export * from "./utils"
+export * from "./utils";

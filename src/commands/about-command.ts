@@ -10,11 +10,11 @@
  * ```
  */
 
-import type { CommandHistoryOutputType } from "@/types"
-import { parseArgs } from "@/utils/argParser"
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
-import { createHtmlOutput } from "@/utils/output"
-import { ABOUT_HELP } from "@/constants/help/info"
+import type { CommandHistoryOutputType } from "@/types";
+import { parseArgs } from "@/utils/argParser";
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
+import { createHtmlOutput } from "@/utils/output";
+import { ABOUT_HELP } from "@/constants/help/info";
 
 // ─────────────────────────────────────────────────────────────────
 // OUTPUT BUILDERS
@@ -151,7 +151,7 @@ function buildAboutOutput(): CommandHistoryOutputType {
         </p>
       </div>
     </div>`,
-  )
+  );
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -159,8 +159,8 @@ function buildAboutOutput(): CommandHistoryOutputType {
 // ─────────────────────────────────────────────────────────────────
 
 export const handleAboutCommand = (args: string[]): CommandHistoryOutputType => {
-  const { flags } = parseArgs(args)
-  if (flags.help) return ABOUT_HELP
+  const { flags } = parseArgs(args);
+  if (flags.help) return ABOUT_HELP;
 
-  return buildAboutOutput()
-}
+  return buildAboutOutput();
+};

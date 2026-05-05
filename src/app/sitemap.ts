@@ -1,7 +1,7 @@
-import type { MetadataRoute } from "next"
+import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const SITE_URL = "https://terminal-portfolio-website-xi.vercel.app"
+  const SITE_URL = "https://terminal-portfolio-website-xi.vercel.app";
 
   return [
     {
@@ -10,5 +10,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
-  ]
+  ];
 }

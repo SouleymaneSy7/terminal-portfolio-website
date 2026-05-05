@@ -2,7 +2,7 @@
  * Help outputs for system commands
  */
 
-import { createHelpOutput } from "@/utils/output"
+import { createHelpOutput } from "@/utils/output";
 
 export const AUDIO_HELP = createHelpOutput({
   name: "audio",
@@ -26,41 +26,41 @@ export const AUDIO_HELP = createHelpOutput({
   notes:
     'Preference is persisted in localStorage and restored on every page load. Audio is <span class="text-tertiary-clr">disabled by default</span> — it must be explicitly enabled. Respects <span class="text-tertiary-clr">prefers-reduced-motion</span>.',
   seeAlso: ["theme", "typeface"],
-})
+});
 
 export const WELCOME_HELP = createHelpOutput({
   name: "welcome",
   usage: "welcome",
   description: "Re-display the terminal welcome screen with ASCII art.",
   seeAlso: ["help", "about"],
-})
+});
 
 export const NEOFETCH_HELP = createHelpOutput({
   name: "neofetch",
   usage: "neofetch",
   description: "Display a Linux-style system summary with portfolio stats and tech stack.",
   seeAlso: ["hostname", "whoami"],
-})
+});
 
 export const HOSTNAME_HELP = createHelpOutput({
   name: "hostname",
   usage: "hostname",
   description: "Display the portfolio hostname, owner and uptime information.",
   seeAlso: ["neofetch", "whoami"],
-})
+});
 
 export const WHOAMI_HELP = createHelpOutput({
   name: "whoami",
   usage: "whoami",
   description: "Display a short summary of who is behind this terminal.",
   seeAlso: ["about", "neofetch"],
-})
+});
 
 export const SUDO_HELP = createHelpOutput({
   name: "sudo",
   usage: "sudo",
   description: "Attempt to gain root access. Spoiler: it won't work. 😄",
-})
+});
 
 export const THEME_HELP = createHelpOutput({
   name: "theme",
@@ -82,7 +82,7 @@ export const THEME_HELP = createHelpOutput({
     },
   ],
   notes: "Tab completion is available — try theme [Tab] to browse all 31 themes.",
-})
+});
 
 export const TYPEFACE_HELP = createHelpOutput({
   name: "typeface",
@@ -105,4 +105,4 @@ export const TYPEFACE_HELP = createHelpOutput({
     },
   ],
   notes: "Tab completion is available — try typeface [Tab] to browse all 15 fonts.",
-})
+});

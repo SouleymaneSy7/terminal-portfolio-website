@@ -2,8 +2,8 @@
  * Help outputs for utility commands.
  */
 
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
-import { createHelpOutput } from "@/utils/output"
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
+import { createHelpOutput } from "@/utils/output";
 
 export const AGE_HELP = createHelpOutput({
   name: "age — Age Calculator",
@@ -17,7 +17,7 @@ export const AGE_HELP = createHelpOutput({
     { command: "age 15-01-1990", description: "- Dash-separated" },
     { command: "age 1990/01/15", description: "- Slash-separated ISO" },
   ],
-})
+});
 
 export const CALC_HELP = createHelpOutput({
   name: "calc — Mathematical Expression Evaluator",
@@ -35,7 +35,7 @@ export const CALC_HELP = createHelpOutput({
     { command: "calc 5 km to m", description: "Distance conversion" },
   ],
   notes: `Supported: arithmetic <span class="text-tertiary-clr">+ - * / ^ %</span>, functions <span class="text-tertiary-clr">sqrt abs ceil floor round log</span>, trig <span class="text-tertiary-clr">sin cos tan</span>, constants <span class="text-tertiary-clr">pi e phi tau</span>, units, bitwise <span class="text-tertiary-clr">&amp; | ^ ~ &lt;&lt; &gt;&gt;</span>`,
-})
+});
 
 export const COLOR_HELP = createHelpOutput({
   name: "color",
@@ -54,7 +54,7 @@ export const COLOR_HELP = createHelpOutput({
     { command: "color hsl(0, 100%, 71%)", description: "Convert HSL color" },
     { command: "color coral", description: "Convert named color" },
   ],
-})
+});
 
 export const CONVERT_HELP = createHelpOutput({
   name: "convert — Currency Conversion",
@@ -77,7 +77,7 @@ export const CONVERT_HELP = createHelpOutput({
   ],
   notes: "Currency codes are ISO 4217 (e.g. USD, EUR, GBP, JPY).",
   seeAlso: ["convert list"],
-})
+});
 
 export const ECHO_HELP = createHelpOutput({
   name: "echo",
@@ -91,7 +91,7 @@ export const ECHO_HELP = createHelpOutput({
     },
     { command: "echo Line 1\\\\nLine 2", description: " - Print with newline" },
   ],
-})
+});
 
 export const ENCODE_HELP = createHelpOutput({
   name: "encode — Usage",
@@ -121,7 +121,7 @@ export const ENCODE_HELP = createHelpOutput({
     { command: "encode hex Hello", description: "Encode as hex bytes" },
   ],
   notes: "All operations run locally in your browser — no data is sent anywhere.",
-})
+});
 
 export const DECODE_HELP = createHelpOutput({
   name: "decode — Usage",
@@ -148,7 +148,7 @@ export const DECODE_HELP = createHelpOutput({
     { command: "decode hex 48656c6c6f", description: "Decode hex bytes" },
   ],
   notes: "All operations run locally in your browser — no data is sent anywhere.",
-})
+});
 
 export const GITHUB_HELP = createHelpOutput({
   name: "github",
@@ -163,7 +163,7 @@ export const GITHUB_HELP = createHelpOutput({
     { command: "github gaearon", description: "View gaearon's profile" },
   ],
   notes: "Uses the public GitHub REST API — 60 requests/hour unauthenticated.",
-})
+});
 
 export const HASH_HELP = createHelpOutput({
   name: "hash",
@@ -191,7 +191,7 @@ export const HASH_HELP = createHelpOutput({
     { command: "hash sha1 legacy input", description: "Hash with SHA-1" },
   ],
   notes: "Hashing runs entirely in your browser — no data is sent to any server.",
-})
+});
 
 export const HISTORY_HELP = createHelpOutput({
   name: "history",
@@ -204,14 +204,14 @@ export const HISTORY_HELP = createHelpOutput({
     { command: "history 50", description: "Show last 50 commands" },
   ],
   notes: `Default: last 20 commands. Maximum: 50 entries.`,
-})
+});
 
 export const IP_HELP = createHelpOutput({
   name: "ip",
   description: "Display your public IP address and geolocation information.",
   usage: `<span class="text-tertiary-clr font-bold">ip</span>`,
   notes: `Your IP is fetched via <span class="text-tertiary-clr">ipapi.co</span>. If you're using a VPN or proxy, the detected IP will be that of your VPN/proxy.`,
-})
+});
 
 export const NOTE_HELP = createHelpOutput({
   name: "note",
@@ -230,7 +230,7 @@ export const NOTE_HELP = createHelpOutput({
     { command: "note edit 2 Updated text", description: "Edit note with ID 2" },
     { command: "note clear", description: "Clear all notes" },
   ],
-})
+});
 
 export const SNIPPET_HELP = createHelpOutput({
   name: "snippet — Code Snippet Manager",
@@ -265,7 +265,7 @@ export const SNIPPET_HELP = createHelpOutput({
     },
   ],
   notes: "Snippets persist in your browser across sessions.",
-})
+});
 
 export const TIMER_HELP = createHelpOutput({
   name: "timer — Countdown Timer",
@@ -280,7 +280,7 @@ export const TIMER_HELP = createHelpOutput({
     { command: "timer 3600", description: "3600 seconds (bare number)" },
   ],
   notes: `Duration units: <span class="text-tertiary-clr">h</span> hours ${DT.decorators.bullet} <span class="text-tertiary-clr">m</span> minutes ${DT.decorators.bullet} <span class="text-tertiary-clr">s</span> seconds. Max: 24h.`,
-})
+});
 
 export const TODOS_HELP = createHelpOutput({
   name: "todo — Command Reference",
@@ -296,7 +296,7 @@ export const TODOS_HELP = createHelpOutput({
     { flag: "todo help", description: "Show this guide" },
   ],
   notes: "Tasks persist in your browser across sessions.",
-})
+});
 
 export const UUID_HELP = createHelpOutput({
   name: "uuid",
@@ -318,4 +318,4 @@ export const UUID_HELP = createHelpOutput({
       description: "Validate a UUID",
     },
   ],
-})
+});

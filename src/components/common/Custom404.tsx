@@ -1,32 +1,32 @@
-"use client"
+"use client";
 
 /**
  * Custom404 — terminal-style 404 error page.
  *
  */
 
-import { motion, type Variants } from "framer-motion"
-import Link from "next/link"
-import * as React from "react"
+import { motion, type Variants } from "framer-motion";
+import Link from "next/link";
+import * as React from "react";
 
-import { ASCII_404, ASCII_ERROR } from "@/constants/ascii"
-import TerminalPrompt from "../terminal/TerminalPrompt"
-import { useThemeFont } from "@/hooks"
+import { ASCII_404, ASCII_ERROR } from "@/constants/ascii";
+import TerminalPrompt from "../terminal/TerminalPrompt";
+import { useThemeFont } from "@/hooks";
 
 const containerVariants: Variants = {
   hidden: {},
   visible: {
     transition: { staggerChildren: 0.12 },
   },
-}
+};
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 10 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } },
-}
+};
 
 const Custom404: React.FC = () => {
-  useThemeFont()
+  useThemeFont();
 
   return (
     <motion.div
@@ -81,7 +81,7 @@ const Custom404: React.FC = () => {
         to return to safety.
       </motion.p>
     </motion.div>
-  )
-}
+  );
+};
 
-export default Custom404
+export default Custom404;

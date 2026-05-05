@@ -13,11 +13,11 @@
  * ```
  */
 
-import { parseArgs } from "@/utils/argParser"
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
-import { THEME_HELP, TYPEFACE_HELP } from "@/constants/help/system"
-import { createHtmlOutput, createErrorOutput } from "@/utils/output"
-import { STORAGE_KEYS } from "@/constants/storageKeys"
+import { parseArgs } from "@/utils/argParser";
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
+import { THEME_HELP, TYPEFACE_HELP } from "@/constants/help/system";
+import { createHtmlOutput, createErrorOutput } from "@/utils/output";
+import { STORAGE_KEYS } from "@/constants/storageKeys";
 
 // ─────────────────────────────────────────────────────────────────
 // CONFIGURATION
@@ -157,7 +157,7 @@ export const THEMES = {
     label: "Hack The Box",
     description: "Matrix green on deep navy — for the hacker in you",
   },
-} as const
+} as const;
 
 export const FONTS = {
   // ── Default (loaded statically by Next.js) ──
@@ -242,72 +242,72 @@ export const FONTS = {
     description: "Menlo's cousin — customized for better line spacing",
     variable: "--font-meslo",
   },
-} as const
+} as const;
 
-export type ThemeKey = keyof typeof THEMES
-export type FontKey = keyof typeof FONTS
+export type ThemeKey = keyof typeof THEMES;
+export type FontKey = keyof typeof FONTS;
 
-export const THEME_STORAGE_KEY = STORAGE_KEYS.THEME
-export const FONT_STORAGE_KEY = STORAGE_KEYS.FONT
+export const THEME_STORAGE_KEY = STORAGE_KEYS.THEME;
+export const FONT_STORAGE_KEY = STORAGE_KEYS.FONT;
 // ─────────────────────────────────────────────────────────────────
 // HELPERS
 // ─────────────────────────────────────────────────────────────────
 
 export const getCurrentTheme = (): ThemeKey => {
-  if (typeof document === "undefined") return "catppuccin"
-  return (document.documentElement.getAttribute("data-theme") as ThemeKey) || "catppuccin"
-}
+  if (typeof document === "undefined") return "catppuccin";
+  return (document.documentElement.getAttribute("data-theme") as ThemeKey) || "catppuccin";
+};
 
 export const getCurrentFont = (): FontKey => {
-  if (typeof document === "undefined") return "recursive-casual"
-  return (document.documentElement.getAttribute("data-font") as FontKey) || "recursive-casual"
-}
+  if (typeof document === "undefined") return "recursive-casual";
+  return (document.documentElement.getAttribute("data-font") as FontKey) || "recursive-casual";
+};
 
-export const getThemeLabel = (key: ThemeKey): string => THEMES[key]?.label ?? key
+export const getThemeLabel = (key: ThemeKey): string => THEMES[key]?.label ?? key;
 
-export const getFontLabel = (key: FontKey): string => FONTS[key]?.label ?? key
+export const getFontLabel = (key: FontKey): string => FONTS[key]?.label ?? key;
 
 export const applyTheme = (theme: ThemeKey): void => {
-  document.documentElement.setAttribute("data-theme", theme)
+  document.documentElement.setAttribute("data-theme", theme);
   try {
-    localStorage.setItem(THEME_STORAGE_KEY, theme)
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
   } catch (err) {
-    console.error("[Theme - apply] failed to set:", err)
+    console.error("[Theme - apply] failed to set:", err);
   }
-}
+};
 
 export const applyFont = async (font: FontKey): Promise<void> => {
   // Load the font dynamically if needed (Google Fonts or local fonts)
-  const { loadDynamicFont } = await import("@/hooks/useDynamicFont")
-  await loadDynamicFont(font)
+  const { loadDynamicFont } = await import("@/hooks/useDynamicFont");
+  await loadDynamicFont(font);
 
   // Apply the font via data-font attribute
-  document.documentElement.setAttribute("data-font", font)
+  document.documentElement.setAttribute("data-font", font);
   try {
-    localStorage.setItem(FONT_STORAGE_KEY, font)
+    localStorage.setItem(FONT_STORAGE_KEY, font);
   } catch (err) {
-    console.error("[Font - apply] failed to set:", err)
+    console.error("[Font - apply] failed to set:", err);
   }
-}
+};
 
 export const initThemeAndFont = async (): Promise<void> => {
   try {
-    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) as ThemeKey | null
-    const savedFont = localStorage.getItem(FONT_STORAGE_KEY) as FontKey | null
+    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) as ThemeKey | null;
+    const savedFont = localStorage.getItem(FONT_STORAGE_KEY) as FontKey | null;
 
     if (savedTheme && savedTheme in THEMES) {
-      document.documentElement.setAttribute("data-theme", savedTheme)
+      document.documentElement.setAttribute("data-theme", savedTheme);
     }
     if (savedFont && savedFont in FONTS) {
       // Load the saved font dynamically before applying
-      const { loadDynamicFont } = await import("@/hooks/useDynamicFont")
-      await loadDynamicFont(savedFont)
-      document.documentElement.setAttribute("data-font", savedFont)
+      const { loadDynamicFont } = await import("@/hooks/useDynamicFont");
+      await loadDynamicFont(savedFont);
+      document.documentElement.setAttribute("data-font", savedFont);
     }
   } catch (error) {
-    console.error("[initThemeAndFont]", error)
+    console.error("[initThemeAndFont]", error);
   }
-}
+};
 
 // ─────────────────────────────────────────────────────────────────
 // THEME OUTPUT BUILDERS
@@ -350,33 +350,33 @@ const THEME_GROUPS: { label: string; keys: ThemeKey[] }[] = [
       "hack-the-box",
     ],
   },
-]
+];
 
 export const getThemeListOutput = () => {
-  const current = getCurrentTheme()
+  const current = getCurrentTheme();
 
   const renderGroup = ({ label, keys }: { label: string; keys: ThemeKey[] }) => {
     const rows = keys
       .map((key) => {
-        const theme = THEMES[key]
-        const isActive = key === current
-        const nameClass = isActive ? "text-primary-clr font-bold" : "text-tertiary-clr"
+        const theme = THEMES[key];
+        const isActive = key === current;
+        const nameClass = isActive ? "text-primary-clr font-bold" : "text-tertiary-clr";
         const activeTag = isActive
           ? ` <span class="text-primary-clr font-bold"> ← active</span>`
-          : ""
+          : "";
         return `<p>
           <span class="${nameClass}">${theme.label.padEnd(28)}</span>
           <span class="text-text-clr">- ${theme.description}.</span>${activeTag}
-        </p>`
+        </p>`;
       })
-      .join("")
+      .join("");
 
     return `<div class="space-y-t-group">
       <p class="text-secondary-clr font-bold">${label}</p>
       <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
       ${rows}
-    </div>`
-  }
+    </div>`;
+  };
 
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
@@ -386,12 +386,12 @@ export const getThemeListOutput = () => {
         <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">theme &lt;name&gt;</span>${DT.decorators.quote} to switch.</p>
       </div>
     </div>`,
-  )
-}
+  );
+};
 
 export const getThemeSwitchOutput = (theme: ThemeKey) => {
-  applyTheme(theme)
-  const { label, description } = THEMES[theme]
+  applyTheme(theme);
+  const { label, description } = THEMES[theme];
 
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
@@ -406,33 +406,33 @@ export const getThemeSwitchOutput = (theme: ThemeKey) => {
         <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">theme</span>${DT.decorators.quote} to see all themes.</p>
       </div>
     </div>`,
-  )
-}
+  );
+};
 
 export const getThemeInvalidOutput = (name: string) =>
   createErrorOutput(
     `Unknown theme: <span class="text-tertiary-clr">"${name}"</span>`,
     `Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">theme</span>${DT.decorators.quote} to see all available themes.`,
-  )
+  );
 
 // ─────────────────────────────────────────────────────────────────
 // FONT OUTPUT BUILDERS
 // ─────────────────────────────────────────────────────────────────
 
 export const getFontListOutput = () => {
-  const current = getCurrentFont()
+  const current = getCurrentFont();
 
   const rows = (Object.entries(FONTS) as [FontKey, (typeof FONTS)[FontKey]][])
     .map(([key, font]) => {
-      const isActive = key === current
-      const nameClass = isActive ? "text-primary-clr font-bold" : "text-tertiary-clr"
-      const activeTag = isActive ? `<span class="text-primary-clr font-bold"> ← active</span>` : ""
+      const isActive = key === current;
+      const nameClass = isActive ? "text-primary-clr font-bold" : "text-tertiary-clr";
+      const activeTag = isActive ? `<span class="text-primary-clr font-bold"> ← active</span>` : "";
       return `<p>
         <span class="${nameClass}">${font.label.padEnd(24)}</span>
         <span class="text-text-clr">- ${font.description}.</span>${activeTag}
-      </p>`
+      </p>`;
     })
-    .join("")
+    .join("");
 
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
@@ -446,20 +446,20 @@ export const getFontListOutput = () => {
         <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">typeface &lt;name&gt;</span>${DT.decorators.quote} to switch.</p>
       </div>
     </div>`,
-  )
-}
+  );
+};
 
 export const getFontSwitchOutput = async (font: FontKey) => {
   try {
-    await applyFont(font)
+    await applyFont(font);
   } catch (err) {
-    const msg = err instanceof Error ? err.message : String(err)
+    const msg = err instanceof Error ? err.message : String(err);
     return createErrorOutput(
       `Failed to load font: <span class="text-tertiary-clr">${FONTS[font].label}</span>`,
       `${msg} — try another font or check your connection.`,
-    )
+    );
   }
-  const { label, description } = FONTS[font]
+  const { label, description } = FONTS[font];
 
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
@@ -474,37 +474,37 @@ export const getFontSwitchOutput = async (font: FontKey) => {
         <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">typeface</span>${DT.decorators.quote} to see all fonts.</p>
       </div>
     </div>`,
-  )
-}
+  );
+};
 
 export const getFontInvalidOutput = (name: string) =>
   createErrorOutput(
     `Unknown font: <span class="text-tertiary-clr">"${name}"</span>`,
     `Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">typeface</span>${DT.decorators.quote} to see all available fonts.`,
-  )
+  );
 
 // ─────────────────────────────────────────────────────────────────
 // MAIN HANDLERS
 // ─────────────────────────────────────────────────────────────────
 
 export const handleThemeCommand = (args: string[]) => {
-  const parsed = parseArgs(args)
+  const parsed = parseArgs(args);
 
-  if (parsed.flags.help) return THEME_HELP
+  if (parsed.flags.help) return THEME_HELP;
 
-  const themeName = parsed.positional.join(" ").trim().toLowerCase()
-  if (!themeName) return getThemeListOutput()
-  if (themeName in THEMES) return getThemeSwitchOutput(themeName as ThemeKey)
-  return getThemeInvalidOutput(themeName)
-}
+  const themeName = parsed.positional.join(" ").trim().toLowerCase();
+  if (!themeName) return getThemeListOutput();
+  if (themeName in THEMES) return getThemeSwitchOutput(themeName as ThemeKey);
+  return getThemeInvalidOutput(themeName);
+};
 
 export const handleTypefaceCommand = async (args: string[]) => {
-  const parsed = parseArgs(args)
+  const parsed = parseArgs(args);
 
-  if (parsed.flags.help) return TYPEFACE_HELP
+  if (parsed.flags.help) return TYPEFACE_HELP;
 
-  const fontName = parsed.positional.join(" ").trim().toLowerCase()
-  if (!fontName) return getFontListOutput()
-  if (fontName in FONTS) return await getFontSwitchOutput(fontName as FontKey)
-  return getFontInvalidOutput(fontName)
-}
+  const fontName = parsed.positional.join(" ").trim().toLowerCase();
+  if (!fontName) return getFontListOutput();
+  if (fontName in FONTS) return await getFontSwitchOutput(fontName as FontKey);
+  return getFontInvalidOutput(fontName);
+};

@@ -6,7 +6,7 @@
  * No other file needs to change.
  */
 
-"use client"
+"use client";
 
 import {
   curlCommand,
@@ -52,12 +52,12 @@ import {
   handleWelcomeCommand,
   handleWhoamiCommand,
   isValidPublicUrl,
-} from "@/commands"
-import type { CommandHandlerType } from "@/types"
+} from "@/commands";
+import type { CommandHandlerType } from "@/types";
 
-import { normalizeUrl, parseCurlArgs } from "@/commands/curl/parser"
-import { handleWeatherCommand } from "@/commands/weather-command"
-import { createErrorOutput } from "@/utils/output"
+import { normalizeUrl, parseCurlArgs } from "@/commands/curl/parser";
+import { handleWeatherCommand } from "@/commands/weather-command";
+import { createErrorOutput } from "@/utils/output";
 
 // ─────────────────────────────────────────────────────────────────
 // REGISTRY
@@ -108,17 +108,17 @@ export const COMMAND_REGISTRY: Record<string, CommandHandlerType> = {
 
   // ── Network ───────────────────────────────────────────────────
   curl: (args) => {
-    if (args.length === 0) return curlUsageOutput()
+    if (args.length === 0) return curlUsageOutput();
 
     // Find the URL argument (first non-flag token) and validate it
-    const opts = parseCurlArgs(args)
+    const opts = parseCurlArgs(args);
     if (opts.url) {
-      const normalized = normalizeUrl(opts.url)
-      const check = isValidPublicUrl(normalized)
+      const normalized = normalizeUrl(opts.url);
+      const check = isValidPublicUrl(normalized);
 
-      if (!check.ok) return createErrorOutput("Invalid URL", check.reason)
+      if (!check.ok) return createErrorOutput("Invalid URL", check.reason);
     }
-    return curlCommand(args)
+    return curlCommand(args);
   },
 
   weather: (args) => handleWeatherCommand(args),
@@ -127,8 +127,8 @@ export const COMMAND_REGISTRY: Record<string, CommandHandlerType> = {
   cowsay: (args) => handleCowsayCommand(args),
 
   rps: (args) => {
-    if (!args.length) return handleRpsCommand(args)
-    return handleRpsCommand([args.join(" ").trim()])
+    if (!args.length) return handleRpsCommand(args);
+    return handleRpsCommand([args.join(" ").trim()]);
   },
 
   game: (args) => handleGameCommand(args),
@@ -171,4 +171,4 @@ export const COMMAND_REGISTRY: Record<string, CommandHandlerType> = {
   decode: (args) => handleDecodeCommand(args),
 
   calc: (args) => handleCalcCommand(args),
-}
+};

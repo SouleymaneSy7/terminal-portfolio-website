@@ -4,36 +4,36 @@
  * Error details are visible only in development mode.
  */
 
-"use client"
+"use client";
 
-import { TerminalErrorBoundaryPropsType, TerminalErrorBoundaryStateType } from "@/types"
-import * as React from "react"
+import { TerminalErrorBoundaryPropsType, TerminalErrorBoundaryStateType } from "@/types";
+import * as React from "react";
 
 export class TerminalErrorBoundary extends React.Component<
   TerminalErrorBoundaryPropsType,
   TerminalErrorBoundaryStateType
 > {
   constructor(props: TerminalErrorBoundaryPropsType) {
-    super(props)
-    this.state = { hasError: false, error: null }
+    super(props);
+    this.state = { hasError: false, error: null };
   }
 
   static getDerivedStateFromError(error: Error): TerminalErrorBoundaryStateType {
-    return { hasError: true, error }
+    return { hasError: true, error };
   }
 
   componentDidCatch(error: Error, info: React.ErrorInfo) {
     // Log to console in production too — important for debugging
-    console.error("[TerminalErrorBoundary]", error, info.componentStack)
+    console.error("[TerminalErrorBoundary]", error, info.componentStack);
   }
 
   handleReset = () => {
-    this.setState({ hasError: false, error: null })
-  }
+    this.setState({ hasError: false, error: null });
+  };
 
   render() {
     if (!this.state.hasError) {
-      return this.props.children
+      return this.props.children;
     }
 
     return (
@@ -73,6 +73,6 @@ export class TerminalErrorBoundary extends React.Component<
           <p className="text-text-clr opacity-sep">If the error persists, refresh the page.</p>
         </div>
       </div>
-    )
+    );
   }
 }

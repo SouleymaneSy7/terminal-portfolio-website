@@ -6,11 +6,11 @@
  * because it has no output — it signals Terminal to wipe its history.
  */
 
-"use client"
+"use client";
 
-import { CommandHistoryOutputType } from "@/types"
-import { COMMAND_REGISTRY } from "./commandRegistry"
-import { createHtmlOutput } from "./output/output"
+import { CommandHistoryOutputType } from "@/types";
+import { COMMAND_REGISTRY } from "./commandRegistry";
+import { createHtmlOutput } from "./output/output";
 
 const notFoundOutput = (cmd: string): CommandHistoryOutputType =>
   createHtmlOutput(
@@ -23,13 +23,13 @@ const notFoundOutput = (cmd: string): CommandHistoryOutputType =>
         <p>Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">help</span><span aria-hidden="true">'</span> to see all available commands.</p>
       </div>
     </div>`,
-  )
+  );
 
 export const executeCommand = async (command: string): Promise<CommandHistoryOutputType> => {
-  const [rawCmd, ...args] = command.trim().split(" ")
-  const cmd = rawCmd.toLowerCase()
-  if (cmd === "clear") return []
+  const [rawCmd, ...args] = command.trim().split(" ");
+  const cmd = rawCmd.toLowerCase();
+  if (cmd === "clear") return [];
 
-  const handler = COMMAND_REGISTRY[cmd]
-  return handler ? handler(args) : notFoundOutput(cmd)
-}
+  const handler = COMMAND_REGISTRY[cmd];
+  return handler ? handler(args) : notFoundOutput(cmd);
+};

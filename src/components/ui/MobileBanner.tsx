@@ -3,11 +3,11 @@
  *
  */
 
-"use client"
+"use client";
 
-import { MobileBannerPropsType } from "@/types"
-import * as React from "react"
-import VisuallyHidden from "../common/VisuallyHidden"
+import { MobileBannerPropsType } from "@/types";
+import * as React from "react";
+import VisuallyHidden from "../common/VisuallyHidden";
 
 const MobileBanner: React.FC<MobileBannerPropsType> = ({ onClose }) => {
   return (
@@ -36,7 +36,7 @@ const MobileBanner: React.FC<MobileBannerPropsType> = ({ onClose }) => {
         <span aria-hidden="true">✕</span>
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default MobileBanner
+export default MobileBanner;

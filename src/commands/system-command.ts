@@ -13,39 +13,39 @@
  * ```
  */
 
-import { ASCII_NAME, ASCII_NEOFETCH } from "@/constants"
-import packageJson from "../../package.json"
+import { ASCII_NAME, ASCII_NEOFETCH } from "@/constants";
+import packageJson from "../../package.json";
 
-import type { CommandHistoryOutputType } from "@/types"
-import { parseArgs } from "@/utils/argParser"
-import { DESIGN_TOKENS as DT } from "@/utils/designTokens"
+import type { CommandHistoryOutputType } from "@/types";
+import { parseArgs } from "@/utils/argParser";
+import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
 
-import { getCurrentFont, getCurrentTheme, getFontLabel, getThemeLabel } from "./theme-command"
-import { audioService } from "@/services/audio.service"
-import { createHtmlOutput } from "@/utils/output"
+import { getCurrentFont, getCurrentTheme, getFontLabel, getThemeLabel } from "./theme-command";
+import { audioService } from "@/services/audio.service";
+import { createHtmlOutput } from "@/utils/output";
 import {
   WELCOME_HELP,
   NEOFETCH_HELP,
   HOSTNAME_HELP,
   WHOAMI_HELP,
   SUDO_HELP,
-} from "@/constants/help/system"
+} from "@/constants/help/system";
 
 // ─────────────────────────────────────────────────────────────────
 // CONSTANTS
 // ─────────────────────────────────────────────────────────────────
 
-const packages = Object.keys(packageJson.dependencies)
-const packagesDev = Object.keys(packageJson.devDependencies)
+const packages = Object.keys(packageJson.dependencies);
+const packagesDev = Object.keys(packageJson.devDependencies);
 
 // ─────────────────────────────────────────────────────────────────
 // HELPERS
 // ─────────────────────────────────────────────────────────────────
 
 const getResolution = (): string => {
-  if (typeof window === "undefined") return "N/A"
-  return `${window.screen.availWidth}x${window.screen.availHeight}`
-}
+  if (typeof window === "undefined") return "N/A";
+  return `${window.screen.availWidth}x${window.screen.availHeight}`;
+};
 
 // ─────────────────────────────────────────────────────────────────
 // OUTPUT BUILDERS
@@ -96,13 +96,13 @@ function buildWelcomeOutput(): CommandHistoryOutputType {
       </div>
 
     </div>`,
-  )
+  );
 }
 
 function buildNeofetchOutput(): CommandHistoryOutputType {
-  const themeLabel = getThemeLabel(getCurrentTheme())
-  const fontLabel = getFontLabel(getCurrentFont())
-  const { enabled, volume } = audioService.getState()
+  const themeLabel = getThemeLabel(getCurrentTheme());
+  const fontLabel = getFontLabel(getCurrentFont());
+  const { enabled, volume } = audioService.getState();
 
   return createHtmlOutput(
     `<div class="py-t-outer">
@@ -170,7 +170,7 @@ function buildNeofetchOutput(): CommandHistoryOutputType {
     </div>
   </div>
 </div>`,
-  )
+  );
 }
 
 function buildHostnameOutput(): CommandHistoryOutputType {
@@ -185,7 +185,7 @@ function buildHostnameOutput(): CommandHistoryOutputType {
         <p><span class="text-secondary-clr">Uptime    </span>  Online since 2025, no interruptions</p>
       </div>
     </div>`,
-  )
+  );
 }
 
 function buildWhoamiOutput(): CommandHistoryOutputType {
@@ -217,7 +217,7 @@ function buildWhoamiOutput(): CommandHistoryOutputType {
       </div>
 
     </div>`,
-  )
+  );
 }
 
 function buildSudoOutput(): CommandHistoryOutputType {
@@ -231,7 +231,7 @@ function buildSudoOutput(): CommandHistoryOutputType {
         <p>You don't need root access to build great things.</p>
       </div>
     </div>`,
-  )
+  );
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -239,26 +239,26 @@ function buildSudoOutput(): CommandHistoryOutputType {
 // ─────────────────────────────────────────────────────────────────
 
 export const handleWelcomeCommand = (args: string[]): CommandHistoryOutputType => {
-  const { flags } = parseArgs(args)
-  return flags.help ? WELCOME_HELP : buildWelcomeOutput()
-}
+  const { flags } = parseArgs(args);
+  return flags.help ? WELCOME_HELP : buildWelcomeOutput();
+};
 
 export const handleNeofetchCommand = (args: string[]): CommandHistoryOutputType => {
-  const { flags } = parseArgs(args)
-  return flags.help ? NEOFETCH_HELP : buildNeofetchOutput()
-}
+  const { flags } = parseArgs(args);
+  return flags.help ? NEOFETCH_HELP : buildNeofetchOutput();
+};
 
 export const handleHostnameCommand = (args: string[]): CommandHistoryOutputType => {
-  const { flags } = parseArgs(args)
-  return flags.help ? HOSTNAME_HELP : buildHostnameOutput()
-}
+  const { flags } = parseArgs(args);
+  return flags.help ? HOSTNAME_HELP : buildHostnameOutput();
+};
 
 export const handleWhoamiCommand = (args: string[]): CommandHistoryOutputType => {
-  const { flags } = parseArgs(args)
-  return flags.help ? WHOAMI_HELP : buildWhoamiOutput()
-}
+  const { flags } = parseArgs(args);
+  return flags.help ? WHOAMI_HELP : buildWhoamiOutput();
+};
 
 export const handleSudoCommand = (args: string[]): CommandHistoryOutputType => {
-  const { flags } = parseArgs(args)
-  return flags.help ? SUDO_HELP : buildSudoOutput()
-}
+  const { flags } = parseArgs(args);
+  return flags.help ? SUDO_HELP : buildSudoOutput();
+};
