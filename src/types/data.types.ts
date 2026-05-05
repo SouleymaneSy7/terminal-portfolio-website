@@ -172,7 +172,7 @@ export interface GraphQLRepoNodeType {
   description: string | null;
   url: string;
   stargazerCount: number;
-  forksCount: number;
+  forkCount: number;
   primaryLanguage: { name: string } | null;
 }
 
