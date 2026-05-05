@@ -180,6 +180,8 @@ theme dracula
 theme catppuccin-mocha
 theme tokyo-night
 theme hack-the-box
+theme --random            # Roll the dice on a random theme
+theme random              # Same result, different syntax
 ```
 
 | Group               | Themes                                                                                                                                 |
@@ -190,17 +192,19 @@ theme hack-the-box
 | **Material**        | `material-default` · `material-lighter` · `material-oceanic` · `material-palenight` · `material-deep-ocean` · `material-high-contrast` |
 | **Others**          | `ayu-dark` · `night-owl` · `synthwave` · `kanagawa` · `horizon` · `poimandres` · `vesper` · `hack-the-box`                             |
 
-> Tab completion is available — `theme [Tab]` cycles all 31 themes with grouped suggestions and inline descriptions.
+> Tab completion is available — `theme [Tab]` cycles all 31 themes with grouped suggestions and inline descriptions. Use `theme --random` or `theme random` for a surprise.
 
 ### Fonts (15)
 
 Switch with `typeface <name>`. Fonts load on demand to keep the initial bundle lean. Once loaded, switching is instant.
 
 ```bash
-typeface fira          # Fira Code — ligatures
-typeface jetbrains     # JetBrains Mono — clean readability
-typeface victor        # Victor Mono — cursive italics
-typeface geist         # Geist Mono — modern & sharp
+typeface fira             # Fira Code — ligatures
+typeface jetbrains        # JetBrains Mono — clean readability
+typeface victor           # Victor Mono — cursive italics
+typeface geist            # Geist Mono — modern & sharp
+typeface --random         # Roll the dice on a random font
+typeface random           # Same result, different syntax
 ```
 
 | Category                            | Key → Label                                                                                        |
