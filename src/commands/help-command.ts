@@ -45,8 +45,8 @@ export const handleHelpCommand = (): CommandHistoryOutputType => {
           <p><span class="text-tertiary-clr font-bold">help      </span> - List all available commands</p>
           <p><span class="text-tertiary-clr font-bold">hostname  </span> - Display system hostname and portfolio info</p>
           <p><span class="text-tertiary-clr font-bold">neofetch  </span> - Linux-style system summary with live theme &amp; font</p>
-          <p><span class="text-tertiary-clr font-bold">theme     </span> - Switch color theme (31 themes). <span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">theme [name]</span></p>
-          <p><span class="text-tertiary-clr font-bold">typeface  </span> - Switch terminal font (15 fonts). <span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">typeface [name]</span></p>
+          <p><span class="text-tertiary-clr font-bold">theme     </span> - Switch color theme (31 themes). <span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">theme [name| --random]</span></p>
+          <p><span class="text-tertiary-clr font-bold">typeface  </span> - Switch terminal font (15 fonts). <span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">typeface [name| --random]</span></p>
           <p><span class="text-tertiary-clr font-bold">welcome   </span> - Display the welcome banner again</p>
           <p><span class="text-tertiary-clr font-bold">whoami    </span> - Who is behind this terminal?</p>
         </div>

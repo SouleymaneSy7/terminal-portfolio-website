@@ -117,19 +117,22 @@ export const SYSTEM_PAGES: Record<string, ManPageType> = {
 
   theme: {
     name: "theme",
-    synopsis: "theme [name]",
+    synopsis: "theme [name]\ntheme --random\ntheme random",
     description:
       "Switches the terminal color theme instantly. All 31 themes use OKLCH color values for perceptually uniform contrast, derived from official palette hex codes. The chosen theme is written to localStorage ('terminal:theme') and restored on every page load via initThemeAndFont(). Running neofetch after switching shows the live theme name.",
     options: `
-      <p><span class="text-tertiary-clr font-bold">theme           </span> - List all 31 themes grouped by family (Catppuccin, Popular Dark, Editor Classics, Material, Others).</p>
-      <p><span class="text-tertiary-clr font-bold">theme &lt;name&gt;    </span> - Apply the named theme immediately — all colors update without a page reload.</p>`,
+      <p><span class="text-tertiary-clr font-bold">theme              </span> - List all 31 themes grouped by family (Catppuccin, Popular Dark, Editor Classics, Material, Others).</p>
+      <p><span class="text-tertiary-clr font-bold">theme &lt;name&gt;       </span> - Apply the named theme immediately — all colors update without a page reload.</p>
+      <p><span class="text-tertiary-clr font-bold">theme --random, -r </span> - Switch to a random theme from all 31 available.</p>
+      <p><span class="text-tertiary-clr font-bold">theme random       </span> - Same as above, positional form.</p>`,
     examples: `
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  theme dracula</p>
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  theme catppuccin-mocha</p>
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  theme material-high-contrast</p>
-      <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  theme [Tab]  — cycle all 31 names in grouped suggestions</p>`,
+      <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  theme --random   (flag form)</p>
+      <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  theme random     (positional form)</p>`,
     notes:
-      "Themes are applied by setting the data-theme attribute on &lt;html&gt;, which triggers CSS attribute selectors at specificity (0,1,1) — higher than :root (0,1,0), no !important needed. Tab completion displays themes grouped by family with an inline description for the highlighted item.",
+      "Themes are applied by setting the data-theme attribute on <html>, which triggers CSS attribute selectors at specificity (0,1,1) — higher than :root (0,1,0), no !important needed. Tab completion displays themes grouped by family with an inline description. Use --random, -r, or the positional random keyword for a random theme.",
     seeAlso: ["typeface", "neofetch", "color"],
   },
 
@@ -143,19 +146,22 @@ export const SYSTEM_PAGES: Record<string, ManPageType> = {
 
   typeface: {
     name: "typeface",
-    synopsis: "typeface [name]",
+    synopsis: "typeface [name]\ntypeface --random\ntypeface random",
     description:
       "Switches the terminal monospace font. 15 fonts available: 1 loaded statically (Recursive Casual Mono), 8 from Google Fonts, 1 from npm package (Geist Mono), and 5 local fonts. Fonts are loaded dynamically on demand for optimal performance. The chosen font is written to localStorage ('terminal:font') and restored on every page load. Font switching is implemented via html[data-font] CSS attribute selectors.",
     options: `
       <p><span class="text-tertiary-clr font-bold">typeface               </span> - List all 15 fonts with descriptions.</p>
-      <p><span class="text-tertiary-clr font-bold">typeface &lt;name&gt;        </span> - Apply the named font immediately.</p>`,
+      <p><span class="text-tertiary-clr font-bold">typeface &lt;name&gt;        </span> - Apply the named font immediately.</p>
+      <p><span class="text-tertiary-clr font-bold">typeface --random, -r  </span> - Switch to a random font from all 15 available.</p>
+      <p><span class="text-tertiary-clr font-bold">typeface random          </span> - Same as above, positional form.</p>`,
     examples: `
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  typeface fira</p>
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  typeface geist</p>
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  typeface recursive-casual</p>
-      <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  typeface recursive-casual   (default)</p>`,
+      <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  typeface --random   (flag form)</p>
+      <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  typeface random     (positional form)</p>`,
     notes:
-      "Available fonts: recursive-casual (Recursive Casual Mono, static) • fira (Fira Code) • jetbrains (JetBrains Mono) • ibm-plex (IBM Plex Mono) • source-code (Source Code Pro) • ubuntu (Ubuntu Mono) • space (Space Mono) • inconsolata (Inconsolata) • cousine (Cousine) — Google Fonts • geist (Geist Mono, npm) • cascadia (Cascadia Code) • recursive-linear (Recursive Linear Mono) • hack (Hack) • victor (Victor Mono) • meslo (Meslo LG) — local fonts.",
+      "Available fonts: recursive-casual (Recursive Casual Mono), fira (Fira Code), geist (Geist Mono), cascadia (Cascadia Code). All use adjustFontFallback: false to avoid a Turbopack build error. Use --random, -r, or the positional random keyword for a random font.",
     seeAlso: ["theme", "neofetch"],
   },
 

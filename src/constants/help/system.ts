@@ -64,11 +64,12 @@ export const SUDO_HELP = createHelpOutput({
 
 export const THEME_HELP = createHelpOutput({
   name: "theme",
-  usage: "theme <name>",
+  usage: "theme <name> [--random]",
   description: "Switch the terminal color theme. Preference saved to localStorage.",
   options: [
     { flag: "theme", description: "List all available themes" },
     { flag: "theme <name>", description: "Switch to specified theme" },
+    { flag: "theme --random, -r, random", description: "Switch to a random theme" },
   ],
   examples: [
     { command: "theme dracula", description: "Switch to Dracula theme" },
@@ -80,17 +81,20 @@ export const THEME_HELP = createHelpOutput({
       command: "theme catppuccin-mocha",
       description: "Switch to Catppuccin Mocha theme",
     },
+    { command: "theme --random", description: "Roll the dice on a random theme" },
+    { command: "theme random", description: "Same result, different syntax" },
   ],
-  notes: "Tab completion is available — try theme [Tab] to browse all 31 themes.",
+  notes: "Tab completion is available — try theme [Tab] to browse all 31 themes, or use --random / -r / random for a surprise.",
 });
 
 export const TYPEFACE_HELP = createHelpOutput({
   name: "typeface",
-  usage: "typeface <name>",
+  usage: "typeface <name> [--random]",
   description: "Switch the terminal monospace font. Preference saved to localStorage.",
   options: [
     { flag: "typeface", description: "List all available fonts" },
     { flag: "typeface <name>", description: "Switch to specified font" },
+    { flag: "typeface --random, -r, random", description: "Switch to a random font" },
   ],
   examples: [
     {
@@ -99,10 +103,8 @@ export const TYPEFACE_HELP = createHelpOutput({
     },
     { command: "typeface fira", description: "Switch to Fira Code" },
     { command: "typeface geist", description: "Switch to Geist Mono" },
-    {
-      command: "typeface recursive-casual",
-      description: "Switch to Recursive Casual Mono",
-    },
+    { command: "typeface --random", description: "Roll the dice on a random font" },
+    { command: "typeface random", description: "Same result, different syntax" },
   ],
-  notes: "Tab completion is available — try typeface [Tab] to browse all 15 fonts.",
+  notes: "Tab completion is available — try typeface [Tab] to browse all 15 fonts, or use --random / -r / random for a surprise.",
 });

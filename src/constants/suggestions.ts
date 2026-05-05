@@ -11,6 +11,10 @@ import type { SuggestionGroupType } from "@/types";
 
 export const THEME_GROUPS: readonly SuggestionGroupType[] = [
   {
+    label: "Special",
+    items: ["--random", "-r", "random"],
+  },
+  {
     label: "Catppuccin",
     items: ["catppuccin", "catppuccin-latte", "catppuccin-frappe", "catppuccin-mocha"],
   },
@@ -53,6 +57,10 @@ export const THEME_GROUPS: readonly SuggestionGroupType[] = [
 // ─────────────────────────────────────────────────────────────────
 
 export const FONT_GROUPS: readonly SuggestionGroupType[] = [
+  {
+    label: "Special",
+    items: ["--random", "-r", "random"],
+  },
   {
     label: "Signature",
     items: ["recursive-casual"],
