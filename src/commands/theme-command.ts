@@ -491,9 +491,19 @@ export const handleThemeCommand = (args: string[]) => {
   const parsed = parseArgs(args);
 
   if (parsed.flags.help) return THEME_HELP;
+  if (parsed.flags.random || parsed.flags.r) {
+    const keys = Object.keys(THEMES) as ThemeKey[];
+    const randomTheme = keys[Math.floor(Math.random() * keys.length)];
+    return getThemeSwitchOutput(randomTheme);
+  }
 
   const themeName = parsed.positional.join(" ").trim().toLowerCase();
   if (!themeName) return getThemeListOutput();
+  if (themeName === "random") {
+    const keys = Object.keys(THEMES) as ThemeKey[];
+    const randomTheme = keys[Math.floor(Math.random() * keys.length)];
+    return getThemeSwitchOutput(randomTheme);
+  }
   if (themeName in THEMES) return getThemeSwitchOutput(themeName as ThemeKey);
   return getThemeInvalidOutput(themeName);
 };
@@ -502,9 +512,19 @@ export const handleTypefaceCommand = async (args: string[]) => {
   const parsed = parseArgs(args);
 
   if (parsed.flags.help) return TYPEFACE_HELP;
+  if (parsed.flags.random || parsed.flags.r) {
+    const keys = Object.keys(FONTS) as FontKey[];
+    const randomFont = keys[Math.floor(Math.random() * keys.length)];
+    return await getFontSwitchOutput(randomFont);
+  }
 
   const fontName = parsed.positional.join(" ").trim().toLowerCase();
   if (!fontName) return getFontListOutput();
+  if (fontName === "random") {
+    const keys = Object.keys(FONTS) as FontKey[];
+    const randomFont = keys[Math.floor(Math.random() * keys.length)];
+    return await getFontSwitchOutput(randomFont);
+  }
   if (fontName in FONTS) return await getFontSwitchOutput(fontName as FontKey);
   return getFontInvalidOutput(fontName);
 };
