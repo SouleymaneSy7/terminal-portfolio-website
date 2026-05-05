@@ -11,7 +11,7 @@
 
   /* ── Fonts ── */
   --font-*: initial;
-  --font-cascadia-code: var(--font-cascadia-code);
+  --font-recursive-casual: var(--font-recursive-casual);
   /* All other fonts are loaded dynamically via useDynamicFont hook */
 
   /* ── Font weights ── */
@@ -406,8 +406,8 @@ html[data-theme="material-high-contrast"] {
    ═══════════════════════════════════════════════════ */
 
 /* Default font (loaded statically) */
-html[data-font="cascadia"] body {
-  font-family: var(--font-cascadia-code);
+html[data-font="recursive-casual"] body {
+  font-family: var(--font-recursive-casual);
 }
 
 /* Google Fonts (loaded dynamically) */
@@ -470,7 +470,7 @@ html[data-font="meslo"] body {
 }
 
 body {
-  @apply overflow-hidden bg-background-clr font-cascadia-code text-fs-body leading-base font-regular text-text-clr;
+  @apply overflow-hidden bg-background-clr font-recursive-casual text-fs-body leading-base font-regular text-text-clr;
 }
 
 a {

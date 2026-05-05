@@ -4,20 +4,20 @@ import localFont from "next/font/local"
 import "./globals.css"
 
 // ── DEFAULT FONT (loaded statically) ───────────────
-const CascadiaCode = localFont({
+const RecursiveCasualMono = localFont({
   src: [
     {
-      path: "../../public/fonts/cascadia-code-regular.woff2",
+      path: "../../public/fonts/recursive-mono-casual-regular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../public/fonts/cascadia-code-bold.woff2",
+      path: "../../public/fonts/recursive-mono-casual-bold.woff2",
       weight: "700",
       style: "normal",
     },
   ],
-  variable: "--font-cascadia-code",
+  variable: "--font-recursive-casual",
   display: "swap",
   fallback: ["monospace"],
   adjustFontFallback: false,
@@ -122,7 +122,7 @@ export default function RootLayout({
         />
       </head>
 
-      <body className={[CascadiaCode.variable, "antialiased"].join(" ")}>{children}</body>
+      <body className={[RecursiveCasualMono.variable, "antialiased"].join(" ")}>{children}</body>
     </html>
   )
 }
