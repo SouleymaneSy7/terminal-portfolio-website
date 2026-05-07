@@ -9,6 +9,7 @@ import type { CommandHistoryOutputType, SnippetType } from "@/types";
 import { storageGet, storageRemove, storageSet } from "@/utils/commandStorage";
 import { SNIPPET_HELP } from "@/constants/help/utils";
 import { parseArgs } from "@/utils/argParser";
+import { generateShortId } from "@/utils/id";
 
 import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
 import { createErrorOutput, createHtmlOutput } from "@/utils/output";
@@ -27,7 +28,6 @@ const MAX_SNIPPETS = 50;
 
 const getSnippets = (): SnippetType[] => storageGet<SnippetType[]>(SNIPPETS_KEY, []);
 const saveSnippets = (snips: SnippetType[]): boolean => storageSet(SNIPPETS_KEY, snips);
-const makeShortId = (uuid: string): string => uuid.replace(/-/g, "").slice(0, 8);
 
 function escHtml(s: string): string {
   return s
@@ -114,7 +114,7 @@ function addSnippet(args: string[]): CommandHistoryOutputType {
   const id = crypto.randomUUID();
   const snip: SnippetType = {
     id,
-    shortId: makeShortId(id),
+    shortId: generateShortId(),
     name: name.trim(),
     lang: lang.trim().toLowerCase(),
     code,
@@ -129,7 +129,7 @@ function addSnippet(args: string[]): CommandHistoryOutputType {
   const existing = snips.find((s) => s.shortId === snip.shortId);
 
   if (existing) {
-    snip.shortId = makeShortId(crypto.randomUUID());
+    snip.shortId = generateShortId();
   }
 
   if (snips.length >= MAX_SNIPPETS) {
