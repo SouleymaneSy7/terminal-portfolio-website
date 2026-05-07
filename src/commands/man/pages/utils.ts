@@ -182,7 +182,7 @@ export const UTILITY_PAGES: Record<string, ManPageType> = {
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  snippet show a3f2bc</p>
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  snippet rm a3f2bc</p>`,
     notes:
-      "There is no edit subcommand — delete and re-add to update a snippet. Snippets survive page refreshes. The language tag is stored as-is (lowercased), used only for display — no syntax highlighting is applied.",
+      "There is no edit subcommand — delete and re-add to update a snippet. Snippets survive page refreshes. Syntax highlighting is automatically applied in 'show' mode using highlight.js based on the provided language tag.",
     seeAlso: ["note", "todo"],
   },
 
