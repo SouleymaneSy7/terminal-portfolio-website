@@ -24,6 +24,7 @@ const MAX_IN_MEMORY = 200;
 
 function toSerializable(entry: CommandHistory): SerializableEntryType {
   return {
+    id: entry.id || crypto.randomUUID(),
     command: entry.command,
     output: entry.output.filter((block): block is SerializableBlock => block.type !== "component"),
   };
