@@ -8,6 +8,7 @@ import { STORAGE_KEYS } from "@/constants/storageKeys";
 import { TodoItemType } from "@/types";
 import { parseArgs } from "@/utils/argParser";
 import { storageGet, storageRemove, storageSet } from "@/utils/commandStorage";
+import { generateShortId } from "@/utils/id";
 import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
 import { createErrorOutput, createHtmlOutput, createSuccessOutput } from "@/utils/output";
 
@@ -15,7 +16,6 @@ const TODOS_KEY = STORAGE_KEYS.TODOS;
 
 const getTodos = (): TodoItemType[] => storageGet<TodoItemType[]>(TODOS_KEY, []);
 const saveTodos = (todos: TodoItemType[]): boolean => storageSet(TODOS_KEY, todos);
-const makeShortId = (uuid: string): string => uuid.replace(/-/g, "").slice(0, 8);
 
 // ─────────────────────────────────────────────────────────────────
 // HANDLERS
@@ -87,7 +87,7 @@ const addTodo = (text: string) => {
   const id = crypto.randomUUID();
   const item: TodoItemType = {
     id,
-    shortId: makeShortId(id),
+    shortId: generateShortId(),
     text: text.trim(),
     done: false,
     createdAt: new Date().toISOString(),
