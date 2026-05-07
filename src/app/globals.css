@@ -47,6 +47,22 @@
   }
 }
 
+@layer base {
+  body {
+    font-family: var(--font-recursive-casual);
+    font-weight: var(--font-weight-regular);
+    font-size: var(--text-fs-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: var(--leading-base);
+
+    background-color: var(--color-background-clr);
+    color: var(--color-text-clr);
+
+    overflow: hidden;
+  }
+}
+
 @layer utilities {
   .terminal-container * + * {
     margin-block-start: 0.25rem;
@@ -467,10 +483,6 @@ html[data-font="victor"] body {
 
 html[data-font="meslo"] body {
   font-family: var(--font-meslo);
-}
-
-body {
-  @apply overflow-hidden bg-background-clr font-recursive-casual text-fs-body leading-base font-regular text-text-clr;
 }
 
 a {
