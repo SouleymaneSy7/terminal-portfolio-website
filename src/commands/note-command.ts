@@ -8,6 +8,7 @@ import { STORAGE_KEYS } from "@/constants/storageKeys";
 import { NoteType } from "@/types";
 import { parseArgs } from "@/utils/argParser";
 import { storageGet, storageRemove, storageSet } from "@/utils/commandStorage";
+import { generateShortId } from "@/utils/id";
 import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
 import { createErrorOutput, createHtmlOutput } from "@/utils/output";
 
@@ -15,7 +16,6 @@ const NOTES_KEY = STORAGE_KEYS.NOTES;
 
 const getNotes = (): NoteType[] => storageGet<NoteType[]>(NOTES_KEY, []);
 const saveNotes = (notes: NoteType[]): boolean => storageSet(NOTES_KEY, notes);
-const makeShortId = (uuid: string): string => uuid.replace(/-/g, "").slice(0, 8);
 
 // ─────────────────────────────────────────────────────────────────
 // SUBCOMMAND HANDLERS
@@ -77,7 +77,7 @@ const addNote = (text: string) => {
   const id = crypto.randomUUID();
   const note: NoteType = {
     id,
-    shortId: makeShortId(id),
+    shortId: generateShortId(),
     text: text.trim(),
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
