@@ -21,13 +21,13 @@
 
 import { ASCII } from "@/constants";
 import { GAME_HELP } from "@/constants/help/fun";
-import { quizQuestions, RANKS } from "@/constants/quiz-game";
+import { POINTS, quizQuestions, RANKS } from "@/constants/quiz-game";
+import { STORAGE_KEYS } from "@/constants/storageKeys";
 import type { GameStateType, PersistedGameStateType, QuizQuestionType } from "@/types";
 import { parseArgs } from "@/utils/argParser";
 import { storageGet, storageRemove, storageSet } from "@/utils/commandStorage";
 import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
 import { createErrorOutput, createHtmlOutput } from "@/utils/output";
-import { STORAGE_KEYS } from "@/constants/storageKeys";
 
 // ============================================
 // PERSISTENCE
@@ -78,7 +78,8 @@ let gameState: GameStateType = hydrateState();
 
 const calculateAccuracy = (): number => {
   if (gameState.questionsAnswered === 0) return 0;
-  return Math.round((gameState.score / gameState.questionsAnswered) * 100);
+  const maxPossibleScore = gameState.questionsAnswered * POINTS.CORRECT;
+  return Math.round((Math.max(0, gameState.score) / maxPossibleScore) * 100);
 };
 
 const getRank = (accuracy: number): { name: string; art: string } => {
@@ -176,7 +177,11 @@ const handleAnswer = (answer: number) => {
 
   const isCorrect = answer === gameState.currentQuestion.answer;
   gameState.questionsAnswered++;
-  if (isCorrect) gameState.score++;
+  if (isCorrect) {
+    gameState.score += POINTS.CORRECT;
+  } else {
+    gameState.score += POINTS.WRONG;
+  }
 
   const accuracy = calculateAccuracy();
   const resultArt = isCorrect ? ASCII.CORRECT : ASCII.WRONG;
