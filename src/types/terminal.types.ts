@@ -36,6 +36,7 @@ export type CommandHistory = {
 export type CommandHistoryTypes = CommandHistory[];
 
 export type SerializableEntryType = {
+  id: string;
   command: string;
   output: SerializableBlock[];
 };
