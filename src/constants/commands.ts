@@ -13,6 +13,7 @@ import { THEMES, FONTS } from "@/commands/theme-command";
 export const commands: string[] = [
   "about",
   "age",
+  "alias",
   "audio",
   "calc",
   "clear",
@@ -50,6 +51,7 @@ export const commands: string[] = [
   "timer",
   "todo",
   "typeface",
+  "unalias",
   "uuid",
   "weather",
   "welcome",
@@ -178,6 +180,7 @@ export const COMPLETIONS: Record<string, string[]> = {
   man: [
     "about",
     "age",
+    "alias",
     "audio",
     "calc",
     "clear",
@@ -215,6 +218,7 @@ export const COMPLETIONS: Record<string, string[]> = {
     "timer",
     "todo",
     "typeface",
+    "unalias",
     "uuid",
     "weather",
     "welcome",
@@ -227,6 +231,7 @@ export const COMPLETIONS: Record<string, string[]> = {
   // Simple commands — always accept --help, -h and help
   about: ["--help", "help", "-h"],
   age: ["--help", "help", "-h"],
+  alias: ["list", "--help", "help", "-h"],
   calc: ["--help", "help", "-h"],
   contact: ["--help", "help", "-h"],
   cowsay: ["--help", "help", "-h"],
@@ -247,6 +252,7 @@ export const COMPLETIONS: Record<string, string[]> = {
   sudo: ["--help", "help", "-h"],
   time: ["--help", "help", "-h"],
   timer: ["--help", "help", "-h"],
+  unalias: ["--all", "clear", "--help", "help", "-h"],
   weather: ["--help", "help", "-h"],
   welcome: ["--help", "help", "-h"],
   whoami: ["--help", "help", "-h"],
