@@ -47,6 +47,14 @@ export const handleCalcCommand = async (args: string[]) => {
   // Rejoin all positional args — allows expressions with spaces like "2 + 2" or "5 km to m"
   const expression = positional.join(" ").trim();
 
+  // Preventive safety check to avoid freezing the main thread
+  if (expression.length > 300 || (expression.match(/\^/g) || []).length > 3) {
+    return createErrorOutput(
+      "Expression too complex.",
+      "To prevent performance issues, deep exponential nesting or very long expressions are restricted.",
+    );
+  }
+
   try {
     // math.js evaluate() is sandboxed: no access to globals, filesystem, or network.
     const result = evaluate(expression);
