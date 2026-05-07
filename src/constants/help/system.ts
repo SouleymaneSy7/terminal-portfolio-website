@@ -84,7 +84,8 @@ export const THEME_HELP = createHelpOutput({
     { command: "theme --random", description: "Roll the dice on a random theme" },
     { command: "theme random", description: "Same result, different syntax" },
   ],
-  notes: "Tab completion is available — try theme [Tab] to browse all 31 themes, or use --random / -r / random for a surprise.",
+  notes:
+    "Tab completion is available — try theme [Tab] to browse all 31 themes, or use --random / -r / random for a surprise.",
 });
 
 export const TYPEFACE_HELP = createHelpOutput({
@@ -106,5 +107,52 @@ export const TYPEFACE_HELP = createHelpOutput({
     { command: "typeface --random", description: "Roll the dice on a random font" },
     { command: "typeface random", description: "Same result, different syntax" },
   ],
-  notes: "Tab completion is available — try typeface [Tab] to browse all 15 fonts, or use --random / -r / random for a surprise.",
+  notes:
+    "Tab completion is available — try typeface [Tab] to browse all 15 fonts, or use --random / -r / random for a surprise.",
+});
+
+export const ALIAS_HELP = createHelpOutput({
+  name: "alias",
+  usage: 'alias [name="command [args]"]',
+  description:
+    "Create, update, or list persistent command aliases. Aliases are resolved transparently before every command dispatch — they feel like native commands.",
+  options: [
+    { flag: "alias", description: "List all defined aliases" },
+    { flag: "alias list", description: "Same as above — explicit form" },
+    { flag: 'alias name="value"', description: "Create or update an alias" },
+    { flag: "--help, -h", description: "Show this help message" },
+  ],
+  examples: [
+    {
+      command: 'alias g="github SouleymaneSy7"',
+      description: "Create a shortcut for your GitHub profile",
+    },
+    { command: 'alias p="projects"', description: "Short alias for the projects command" },
+    { command: 'alias ph="projects --help"', description: "Alias with a flag in the value" },
+    { command: "alias", description: "List all defined aliases" },
+    { command: "alias list", description: "Same as above" },
+  ],
+  notes:
+    "Aliases are stored in localStorage and persist across sessions. Resolution is single-level — aliases do not expand other aliases. Maximum 30 aliases, maximum value length 200 characters.",
+  seeAlso: ["unalias"],
+});
+
+export const UNALIAS_HELP = createHelpOutput({
+  name: "unalias",
+  usage: "unalias <name>",
+  description: "Remove a previously defined alias by its name.",
+  options: [
+    { flag: "unalias <name>", description: "Remove a single alias" },
+    { flag: "unalias --all, clear", description: "Remove all aliases at once" },
+    { flag: "--help, -h", description: "Show this help message" },
+  ],
+  examples: [
+    { command: "unalias g", description: "Remove the alias named 'g'" },
+    { command: "unalias p", description: "Remove the alias named 'p'" },
+    { command: "unalias --all", description: "Remove all aliases at once" },
+    { command: "unalias clear", description: "Same as above" },
+  ],
+  notes:
+    "Run alias with no arguments to see the full list of defined aliases. No confirmation prompt — aliases are permanently deleted immediately.",
+  seeAlso: ["alias"],
 });
