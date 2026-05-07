@@ -184,4 +184,43 @@ export const SYSTEM_PAGES: Record<string, ManPageType> = {
       "Output is a single block — brief by design. For the full narrative with context and reflections, use about. For social links and availability, use contact.",
     seeAlso: ["about", "contact", "neofetch"],
   },
+
+  alias: {
+    name: "alias",
+    synopsis: 'alias\nalias list\nalias name="command [args]"',
+    description:
+      "Creates, updates, or lists persistent command aliases stored in localStorage under 'terminal:aliases'. Alias resolution happens in executeCommand before the registry lookup, so aliases are completely transparent — they behave identically to real commands. Resolution is intentionally single-level: an alias value is never expanded again, preventing infinite loops.",
+    options: `
+      <p><span class="text-tertiary-clr font-bold">alias                    </span> - List all aliases.</p>
+      <p><span class="text-tertiary-clr font-bold">alias list               </span> - Same as above — explicit form.</p>
+      <p><span class="text-tertiary-clr font-bold">alias name="value"       </span> - Create or update an alias.</p>
+      <p><span class="text-tertiary-clr font-bold">alias name='value'       </span> - Single-quote variant.</p>`,
+    examples: `
+      <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  alias g="github SouleymaneSy7"</p>
+      <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  alias ph="projects --help"</p>
+      <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  alias</p>
+      <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  alias list</p>`,
+    notes:
+      "Alias names follow POSIX convention: must start with a letter or underscore, then alphanumeric, hyphens, or underscores. 'clear' is a protected built-in and cannot be aliased. Maximum 30 aliases stored concurrently. Values are capped at 200 characters.",
+    seeAlso: ["unalias", "history"],
+  },
+
+  unalias: {
+    name: "unalias",
+    synopsis: "unalias <name>\nunalias --all\nunalias clear",
+    description:
+      "Removes a single alias by its name from localStorage. If the last alias is removed, the storage key is cleaned up entirely. The operation is immediate and permanent within the current device — no confirmation prompt is shown.",
+    options: `
+      <p><span class="text-tertiary-clr font-bold">unalias <name>  </span> - Remove a single alias by name.</p>
+      <p><span class="text-tertiary-clr font-bold">unalias --all   </span> - Remove all aliases at once.</p>
+      <p><span class="text-tertiary-clr font-bold">unalias clear   </span> - Same as above.</p>`,
+    examples: `
+      <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  unalias g</p>
+      <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  unalias ph</p>
+      <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  unalias --all</p>
+      <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  unalias clear</p>`,
+    notes:
+      "Use alias with no arguments to inspect current aliases before removing them. No confirmation prompt — all aliases are permanently deleted immediately.",
+    seeAlso: ["alias"],
+  },
 };
