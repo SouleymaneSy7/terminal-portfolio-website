@@ -22,7 +22,7 @@ export function useSuggestions(input: string, setInput: (value: string) => void)
     }
     setActiveIndex(-1);
     setSavedInput("");
-  }, [input]);
+  }, [debouncedInput]);
 
   const baseInput = savedInput || debouncedInput;
   const completions = React.useMemo(() => getCompletions(baseInput), [baseInput]);
