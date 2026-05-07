@@ -44,7 +44,17 @@ export async function curlCommand(rawArgs: string[]): Promise<CommandHistoryOutp
     );
   }
 
-  const url = normalizeUrl(opts.url);
+  const normalizedUrl = normalizeUrl(opts.url);
+  const check = isValidPublicUrl(normalizedUrl);
+  if (!check.ok) {
+    return createHtmlOutput(
+      `<div class="space-y-t-section py-t-outer">
+          <p>${DT.icons.error} curl: (3) <span class="text-tertiary-clr">${check.reason}</span></p>
+        </div>`,
+    );
+  }
+
+  const url = normalizedUrl;
   const blocks: CommandHistoryOutputType = [];
 
   if (opts.verbose) {
