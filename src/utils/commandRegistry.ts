@@ -13,6 +13,7 @@ import {
   curlUsageOutput,
   handleAboutCommand,
   handleAgeCommand,
+  handleAliasCommand,
   handleAudioCommand,
   handleCalcCommand,
   handleColorCommand,
@@ -48,6 +49,7 @@ import {
   handleTimerCommand,
   handleTodoCommand,
   handleTypefaceCommand,
+  handleUnaliasCommand,
   handleUUIDCommand,
   handleWelcomeCommand,
   handleWhoamiCommand,
@@ -83,6 +85,9 @@ export const COMMAND_REGISTRY: Record<string, CommandHandlerType> = {
   resume: (args) => handleResumeCommand(args),
 
   // ── System ────────────────────────────────────────────────────
+  alias: (args) => handleAliasCommand(args),
+
+  unalias: (args) => handleUnaliasCommand(args),
 
   audio: (args) => handleAudioCommand(args),
 
@@ -109,15 +114,6 @@ export const COMMAND_REGISTRY: Record<string, CommandHandlerType> = {
   // ── Network ───────────────────────────────────────────────────
   curl: (args) => {
     if (args.length === 0) return curlUsageOutput();
-
-    // Find the URL argument (first non-flag token) and validate it
-    const opts = parseCurlArgs(args);
-    if (opts.url) {
-      const normalized = normalizeUrl(opts.url);
-      const check = isValidPublicUrl(normalized);
-
-      if (!check.ok) return createErrorOutput("Invalid URL", check.reason);
-    }
     return curlCommand(args);
   },
 
@@ -126,10 +122,7 @@ export const COMMAND_REGISTRY: Record<string, CommandHandlerType> = {
   // ── Fun & Games ───────────────────────────────────────────────
   cowsay: (args) => handleCowsayCommand(args),
 
-  rps: (args) => {
-    if (!args.length) return handleRpsCommand(args);
-    return handleRpsCommand([args.join(" ").trim()]);
-  },
+  rps: (args) => handleRpsCommand(args),
 
   game: (args) => handleGameCommand(args),
 
