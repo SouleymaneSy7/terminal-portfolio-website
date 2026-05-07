@@ -75,7 +75,7 @@ async function fetchPinnedRepos(username: string): Promise<GithubRepoType[]> {
 }
 
 export async function fetchGithubProfile(username: string): Promise<GithubProfileDataType> {
-  const [userRes, pinnedRepos, reposRes] = await Promise.all([
+  const results = await Promise.allSettled([
     axios.get<GithubUserType>(`${GITHUB_API_BASE_URL}/users/${username}`, {
       timeout: TIMEOUT_MS,
       headers: REST_HEADERS,
@@ -88,11 +88,27 @@ export async function fetchGithubProfile(username: string): Promise<GithubProfil
     }),
   ]);
 
+  // The main user profile is MANDATORY
+  const userResult = results[0];
+  if (userResult.status === "rejected") {
+    throw userResult.reason;
+  }
+
+  const user = userResult.value.data;
+
+  // Pinned repos are optional
+  const pinnedReposResult = results[1];
+  const pinnedRepos = pinnedReposResult.status === "fulfilled" ? pinnedReposResult.value : [];
+
+  // Top repos are optional
+  const reposResResult = results[2];
+  const reposData = reposResResult.status === "fulfilled" ? reposResResult.value.data : [];
+
   const pinnedNames = new Set(pinnedRepos.map((r) => r.name));
-  const topRepos = reposRes.data.filter((r) => !pinnedNames.has(r.name)).slice(0, 5);
+  const topRepos = reposData.filter((r) => !pinnedNames.has(r.name)).slice(0, 5);
 
   return {
-    user: userRes.data,
+    user,
     pinnedRepos,
     topRepos,
   };
