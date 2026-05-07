@@ -40,6 +40,7 @@ export const handleHelpCommand = (): CommandHistoryOutputType => {
           <p class="text-secondary-clr font-bold">Navigation &amp; System</p>
           <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
           <p><span class="text-tertiary-clr font-bold">audio     </span> - Toggle keyboard sound effects and control volume. <span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">audio [on|off|volume &lt;n&gt;]</span></p>
+          <p><span class="text-tertiary-clr font-bold">alias     </span> - Create, update, or list persistent command aliases. <span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">alias [name="value"]</span></p>
           <p><span class="text-tertiary-clr font-bold">clear     </span> - Clear the terminal screen</p>
           <p><span class="text-tertiary-clr font-bold">exit      </span> - Display goodbye message <span class="text-text-clr opacity-sep">(close tab to exit)</span></p>
           <p><span class="text-tertiary-clr font-bold">help      </span> - List all available commands</p>
@@ -47,6 +48,7 @@ export const handleHelpCommand = (): CommandHistoryOutputType => {
           <p><span class="text-tertiary-clr font-bold">neofetch  </span> - Linux-style system summary with live theme &amp; font</p>
           <p><span class="text-tertiary-clr font-bold">theme     </span> - Switch color theme (31 themes). <span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">theme [name| --random]</span></p>
           <p><span class="text-tertiary-clr font-bold">typeface  </span> - Switch terminal font (15 fonts). <span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">typeface [name| --random]</span></p>
+          <p><span class="text-tertiary-clr font-bold">unalias   </span> - Remove a previously defined alias. <span class="text-secondary-clr">Usage:</span> <span class="text-tertiary-clr font-bold">unalias &lt;name&gt;</span></p>
           <p><span class="text-tertiary-clr font-bold">welcome   </span> - Display the welcome banner again</p>
           <p><span class="text-tertiary-clr font-bold">whoami    </span> - Who is behind this terminal?</p>
         </div>
