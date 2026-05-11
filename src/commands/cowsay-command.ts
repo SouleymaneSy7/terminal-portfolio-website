@@ -25,11 +25,14 @@ function createCowsayUsageOutput(): CommandHistoryOutputType {
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
       <div class="space-y-t-group">
-        <p>Make a cow say something!</p>
+        <p>Make a cow say something — just provide a message as an argument.</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p><span class="text-secondary-clr">Usage  </span>${DT.decorators.arrow}<span class="text-tertiary-clr font-bold">cowsay &lt;message&gt;</span></p>
+        <p><span class="text-secondary-clr">Example</span>${DT.decorators.arrow}<span class="text-tertiary-clr">cowsay Hello, World!</span></p>
       </div>
       <div class="space-y-t-footer">
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p><span class="text-secondary-clr font-bold">Usage:</span> cowsay &lt;message&gt; — or type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">cowsay --help</span>${DT.decorators.quote}</p>
+        <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">cowsay --help</span>${DT.decorators.quote} for more options.</p>
       </div>
     </div>`,
   );
