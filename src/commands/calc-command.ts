@@ -47,14 +47,6 @@ export const handleCalcCommand = async (args: string[]) => {
   // Rejoin all positional args — allows expressions with spaces like "2 + 2" or "5 km to m"
   const expression = positional.join(" ").trim();
 
-  // Preventive safety check to avoid freezing the main thread
-  if (expression.length > 300 || (expression.match(/\^/g) || []).length > 3) {
-    return createErrorOutput(
-      "Expression too complex.",
-      "To prevent performance issues, deep exponential nesting or very long expressions are restricted.",
-    );
-  }
-
   try {
     // math.js evaluate() is sandboxed: no access to globals, filesystem, or network.
     const result = evaluate(expression);
@@ -70,7 +62,8 @@ export const handleCalcCommand = async (args: string[]) => {
         </div>
         <div class="space-y-t-footer">
           <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-          <p class="text-text-clr opacity-sep">Powered by <span class="text-tertiary-clr">math.js</span> — runs locally, no network call.</p>
+          <p class="text-text-clr opacity-sep">Powered by <span class="text-tertiary-clr">math.js</span> — runs entirely in the browser, nothing is sent over the network.</p>
+          <p class="text-text-clr opacity-sep">Supports arithmetic, algebra, trigonometry, units, matrices, and more.</p>
         </div>
       </div>`,
     );
