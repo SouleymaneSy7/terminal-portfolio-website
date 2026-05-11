@@ -80,6 +80,9 @@ export const handleHistoryCommand = (args: string[]) => {
         <p>
           <span class="text-tertiary-clr font-bold">↑↓</span>
           <span> navigate history</span>
+          <span class="text-text-clr opacity-sep"> · </span>
+          <span class="text-tertiary-clr font-bold">Ctrl+R</span>
+          <span> for reverse search</span>
         </p>
       </div>
     </div>`,
