@@ -92,8 +92,8 @@ const addNote = (text: string) => {
       <div class="space-y-t-group">
         <p class="text-tertiary-clr font-bold">${DT.icons.success} Note saved</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p><span class="text-secondary-clr">ID    </span>  <span class="text-tertiary-clr">${note.shortId}</span></p>
-        <p><span class="text-secondary-clr">Text  </span>  ${note.text}</p>
+        <p><span class="text-secondary-clr">ID    </span>${DT.decorators.arrow}<span class="text-tertiary-clr">${note.shortId}</span></p>
+        <p><span class="text-secondary-clr">Text  </span>${DT.decorators.arrow}${note.text}</p>
       </div>
       <div class="space-y-t-footer">
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
@@ -129,7 +129,11 @@ const removeNote = (shortId: string) => {
       <div class="space-y-t-group">
         <p class="text-tertiary-clr font-bold">${DT.icons.success} Note deleted</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p><span class="text-secondary-clr">Removed  </span>  <span class="text-text-clr opacity-sep">${removed.text}</span></p>
+        <p><span class="text-secondary-clr">Removed  </span>${DT.decorators.arrow}<span class="text-text-clr opacity-sep">${removed.text}</span></p>
+      </div>
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">note</span>${DT.decorators.quote} to view remaining notes.</p>
       </div>
     </div>`,
   );
@@ -162,8 +166,12 @@ const editNote = (shortId: string, newText: string) => {
       <div class="space-y-t-group">
         <p class="text-tertiary-clr font-bold">${DT.icons.success} Note updated</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p><span class="text-secondary-clr">Before  </span>  <span class="text-text-clr opacity-sep">${oldText}</span></p>
-        <p><span class="text-secondary-clr">After   </span>  ${note.text}</p>
+        <p><span class="text-secondary-clr">Before  </span>${DT.decorators.arrow}<span class="text-text-clr opacity-sep">${oldText}</span></p>
+        <p><span class="text-secondary-clr">After   </span>${DT.decorators.arrow}${note.text}</p>
+      </div>
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">note</span>${DT.decorators.quote} to view all notes.</p>
       </div>
     </div>`,
   );
