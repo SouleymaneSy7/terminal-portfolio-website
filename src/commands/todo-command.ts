@@ -103,8 +103,8 @@ const addTodo = (text: string) => {
       <div class="space-y-t-group">
         <p class="text-tertiary-clr font-bold">${DT.icons.success} Task added</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p><span class="text-secondary-clr">ID    </span>  <span class="text-tertiary-clr">${item.shortId}</span></p>
-        <p><span class="text-secondary-clr">Task  </span>  ${item.text}</p>
+        <p><span class="text-secondary-clr">ID    </span>${DT.decorators.arrow}<span class="text-tertiary-clr">${item.shortId}</span></p>
+        <p><span class="text-secondary-clr">Task  </span>${DT.decorators.arrow}${item.text}</p>
       </div>
       <div class="space-y-t-footer">
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
@@ -147,6 +147,10 @@ const setDone = (shortId: string, done: boolean) => {
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p>${item.text}</p>
       </div>
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">todo</span>${DT.decorators.quote} to view your updated list.</p>
+      </div>
     </div>`,
   );
 };
@@ -176,7 +180,11 @@ const removeTodo = (shortId: string) => {
       <div class="space-y-t-group">
         <p class="text-tertiary-clr font-bold">${DT.icons.success} Task deleted</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p><span class="text-secondary-clr">Removed  </span>  <span class="text-text-clr opacity-sep">${removed.text}</span></p>
+        <p><span class="text-secondary-clr">Removed  </span>${DT.decorators.arrow}<span class="text-text-clr opacity-sep">${removed.text}</span></p>
+      </div>
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">todo</span>${DT.decorators.quote} to view remaining tasks.</p>
       </div>
     </div>`,
   );
