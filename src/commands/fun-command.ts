@@ -109,8 +109,8 @@ function createRpsResultOutput(
     `<div class="space-y-t-section py-t-outer">
 
       <div class="space-y-t-group">
-        <p><span class="text-secondary-clr">You  ${DT.decorators.arrow}</span> ${userChoice}</p>
-        <p><span class="text-secondary-clr">Me   ${DT.decorators.arrow}</span> ${computerChoice}</p>
+        <p><span class="text-secondary-clr">You   </span>${DT.decorators.arrow}${userChoice}</p>
+        <p><span class="text-secondary-clr">Me    </span>${DT.decorators.arrow}${computerChoice}</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p class="${color} font-bold">${result}</p>
       </div>
