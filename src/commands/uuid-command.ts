@@ -65,8 +65,12 @@ function buildValidateOutput(input: string) {
       <div class="space-y-t-group">
         <p class="text-secondary-clr font-bold">UUID Validation</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p><span class="text-secondary-clr">Input  </span>  <span class="text-text-clr">${input}</span></p>
-        <p><span class="text-secondary-clr">Result </span>  <span class="${statusClass} font-bold">${statusIcon}  ${statusText}</span></p>
+        <p><span class="text-secondary-clr">Input  </span>${DT.decorators.arrow}<span class="text-text-clr">${input}</span></p>
+        <p><span class="text-secondary-clr">Result </span>${DT.decorators.arrow}<span class="${statusClass} font-bold">${statusIcon}  ${statusText}</span></p>
+      </div>
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">uuid v4</span>${DT.decorators.quote} to generate a new UUID.</p>
       </div>
     </div>`,
   );
