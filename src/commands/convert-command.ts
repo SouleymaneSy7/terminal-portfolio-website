@@ -96,12 +96,12 @@ const convertCurrency = async (amountStr: string, from: string, to: string, json
           <p><span class="text-secondary-clr">From      </span> - ${fromName}${fromSymbol ? ` (${fromSymbol})` : ""}</p>
           <p><span class="text-secondary-clr">To        </span> - ${toName}${toSymbol ? ` (${toSymbol})` : ""}</p>
           <p><span class="text-secondary-clr">Rate      </span> - 1 ${fromUpper} = ${rate} ${toUpper}</p>
-          <p><span class="text-secondary-clr">Date      </span> - ${result.date}</p>
+          <p><span class="text-secondary-clr">Rate date </span> - ${result.date}</p>
         </div>
 
         <div class="space-y-t-footer">
           <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-          <p class="text-text-clr opacity-sep">Source: <span class="font-bold text-tertiary-clr">frankfurter.dev</span> · Rates from European Central Bank</p>
+          <p class="text-text-clr opacity-sep">Source: <span class="font-bold text-tertiary-clr">frankfurter.dev</span> · Daily reference rates published by the European Central Bank</p>
           <p class="text-text-clr opacity-sep">Tip: type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">convert ${amount} ${fromUpper} ${toUpper} --json</span>${DT.decorators.quote} for raw JSON.</p>
         </div>
       </div>`,
