@@ -23,7 +23,7 @@ function buildStatusOutput() {
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
       <div class="space-y-t-group">
-        <p class="text-secondary-clr font-bold">Audio</p>
+        <p class="text-secondary-clr font-bold">Audio Status</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p>
           <span class="text-secondary-clr">Status </span>${DT.decorators.arrow}
@@ -65,11 +65,11 @@ export const handleAudioCommand = (args: string[]) => {
       `<div class="space-y-t-section py-t-outer">
         <div class="space-y-t-group">
           <p class="text-tertiary-clr font-bold">${DT.icons.success} Audio enabled</p>
-          <p>Keyboard sounds are now <span class="text-tertiary-clr font-bold">active</span>.</p>
+          <p>Keypress sounds are now <span class="text-tertiary-clr font-bold">active</span>.</p>
         </div>
         <div class="space-y-t-footer">
           <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-          <p>Use <span class="text-tertiary-clr font-bold">audio volume &lt;0-100&gt;</span> to adjust.</p>
+          <p>Use <span class="text-tertiary-clr font-bold">audio volume &lt;0-100&gt;</span> to adjust the volume.</p>
         </div>
       </div>`,
     );
@@ -83,7 +83,7 @@ export const handleAudioCommand = (args: string[]) => {
       `<div class="space-y-t-section py-t-outer">
         <div class="space-y-t-group">
           <p class="text-secondary-clr font-bold">${DT.icons.success} Audio disabled</p>
-          <p>Keyboard sounds are now <span class="text-secondary-clr font-bold">silent</span>.</p>
+          <p>Keypress sounds are now <span class="text-secondary-clr font-bold">muted</span>.</p>
         </div>
       </div>`,
     );
