@@ -11,11 +11,11 @@ export const AGE_HELP = createHelpOutput({
   description: "Calculate your exact age from a birth date.",
   options: [{ flag: "--help, -h", description: "Show this help message" }],
   examples: [
-    { command: "age 1990-01-15", description: "- ISO format (preferred)" },
-    { command: "age 15/01/1990", description: "- European format" },
-    { command: "age 01/15/1990", description: "- American format" },
-    { command: "age 15-01-1990", description: "- Dash-separated" },
-    { command: "age 1990/01/15", description: "- Slash-separated ISO" },
+    { command: "age 1990-01-15", description: "ISO format (preferred)" },
+    { command: "age 15/01/1990", description: "European format" },
+    { command: "age 01/15/1990", description: "American format" },
+    { command: "age 15-01-1990", description: "Dash-separated" },
+    { command: "age 1990/01/15", description: "Slash-separated ISO" },
   ],
 });
 
@@ -63,16 +63,16 @@ export const CONVERT_HELP = createHelpOutput({
   examples: [
     {
       command: "convert 100 USD EUR",
-      description: " - Convert 100 USD to EUR",
+      description: "Convert 100 USD to EUR",
     },
-    { command: "convert 50 EUR GBP", description: " - Convert 50 EUR to GBP" },
+    { command: "convert 50 EUR GBP", description: "Convert 50 EUR to GBP" },
     {
       command: "convert 1000 JPY USD",
-      description: " - Convert 1000 JPY to USD",
+      description: "Convert 1000 JPY to USD",
     },
     {
       command: "convert list",
-      description: " - List all supported currencies",
+      description: "List all supported currencies",
     },
   ],
   notes: "Currency codes are ISO 4217 (e.g. USD, EUR, GBP, JPY).",
@@ -87,7 +87,7 @@ export const ECHO_HELP = createHelpOutput({
     { command: "echo Hello, World!", description: " - Print simple text" },
     {
       command: "echo I love TypeScript",
-      description: " - Print multiple words",
+      description: "Print multiple words",
     },
     { command: "echo Line 1\\\\nLine 2", description: " - Print with newline" },
   ],
