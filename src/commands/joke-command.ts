@@ -34,8 +34,7 @@ function createJokeOutput(setup: string, delivery: string): CommandHistoryOutput
       <div class="space-y-t-footer">
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">joke</span>${DT.decorators.quote} for another one.</p>
-          <p class="text-text-clr opacity-sep">Tip: type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">joke --json</span>${DT.decorators.quote} for raw JSON.</p>
-
+        <p class="text-text-clr opacity-sep">Tip: type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">joke --json</span>${DT.decorators.quote} for raw JSON.</p>
       </div>
     </div>`,
   );
