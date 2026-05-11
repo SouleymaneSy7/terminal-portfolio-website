@@ -25,8 +25,7 @@ export const SYSTEM_PAGES: Record<string, ManPageType> = {
     synopsis: "clear",
     description:
       "Clears all output from the terminal viewport and resets the localStorage command history to an empty array. This is equivalent to pressing Ctrl+L at any time. The command does not produce any output itself.",
-    notes:
-      "Keyboard shortcut: Ctrl+L. The clear action is handled before the registry lookup — it bypasses the normal command dispatch path and calls clearHistory() directly in Terminal.tsx.",
+    notes: "Keyboard shortcut: Ctrl+L.",
     seeAlso: ["welcome", "help"],
   },
 
@@ -36,7 +35,7 @@ export const SYSTEM_PAGES: Record<string, ManPageType> = {
     description:
       "Displays a live real-time clock rendered as a box-drawing frame with DATE, TIME, and ZONE rows that update every second via a React interval. The greeting message below the frame changes based on the current hour (morning / afternoon / evening). 'time' is an alias that produces identical output.",
     notes:
-      "The clock component uses React state + setInterval — it ticks client-side without any network request. The timezone string is obtained from Intl.DateTimeFormat().resolvedOptions().timeZone. The ● LIVE indicator uses the animate-pulse-live CSS animation defined in globals.css.",
+      "The clock updates client-side — no network request is made. The timezone shown is your browser's local timezone.",
     seeAlso: ["timer", "age", "hostname"],
   },
 
@@ -56,7 +55,7 @@ export const SYSTEM_PAGES: Record<string, ManPageType> = {
     description:
       "Displays the full command reference grouped by category: Navigation & System, Network, Information, Utilities, and Fun & Games. Each entry shows the command name, a one-line description, and usage syntax where applicable. A tip reminds users that every command accepts --help for detailed usage.",
     notes:
-      "The command count shown in the header (e.g. '42 total') is derived dynamically from the commands[] array in constants/commands.ts — it updates automatically whenever a new command is added.",
+      "The command count shown in the header (e.g. '42 total') updates automatically whenever a new command is added.",
     seeAlso: ["man", "welcome"],
   },
 
@@ -73,7 +72,7 @@ export const SYSTEM_PAGES: Record<string, ManPageType> = {
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  history 10</p>
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  history 50</p>`,
     notes:
-      "Keyboard navigation: [↑↓] steps through history one command at a time. Ctrl+R opens the interactive reverse-i-search mode inside CommandInput.tsx, which searches history in real time as you type. The history command itself is excluded from its own output.",
+      "Keyboard navigation: [↑↓] steps through history one command at a time. Ctrl+R opens a reverse-i-search mode that filters history in real time as you type. The history command itself is excluded from its own output.",
     seeAlso: ["help", "man"],
   },
 
@@ -132,7 +131,7 @@ export const SYSTEM_PAGES: Record<string, ManPageType> = {
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  theme --random   (flag form)</p>
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  theme random     (positional form)</p>`,
     notes:
-      "Themes are applied by setting the data-theme attribute on <html>, which triggers CSS attribute selectors at specificity (0,1,1) — higher than :root (0,1,0), no !important needed. Tab completion displays themes grouped by family with an inline description. Use --random, -r, or the positional random keyword for a random theme.",
+      "Tab completion displays themes grouped by family with an inline description. Use --random, -r, or the positional random keyword for a random theme.",
     seeAlso: ["typeface", "neofetch", "color"],
   },
 
