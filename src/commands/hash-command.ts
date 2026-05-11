@@ -60,8 +60,8 @@ function buildHashOutput(algorithm: string, text: string, hashHex: string) {
       <div class="space-y-t-group">
         <p class="text-secondary-clr font-bold">${algorithm}</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p><span class="text-secondary-clr">Input    </span>  <span class="text-text-clr">${displayText}</span></p>
-        <p><span class="text-secondary-clr">Size     </span>  ${formatBytes(byteLength)}</p>
+        <p><span class="text-secondary-clr">Input    </span>${DT.decorators.arrow}<span class="text-text-clr">${displayText}</span></p>
+        <p><span class="text-secondary-clr">Size     </span>${DT.decorators.arrow}${formatBytes(byteLength)}</p>
       </div>
       <div class="space-y-t-group">
         <p class="text-secondary-clr font-bold">Hash</p>
