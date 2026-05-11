@@ -17,7 +17,7 @@ export const INFO_PAGES: Record<string, ManPageType> = {
     description:
       "Displays all social network links and contact details for Souleymane Sy, including email, GitHub, LinkedIn, Twitter/X, Frontend Mentor, and Dev Challenges profiles. Also communicates availability for freelance, remote positions, collaboration, and internships.",
     notes:
-      "All links are rendered with target='_blank' and rel='noopener noreferrer', enforced post-sanitization by the DOMPurify hook. For the email address alone, use the email command. For the CV, use resume.",
+      "All links open in a new tab. For the email address alone, use the email command. For the CV, use resume.",
     seeAlso: ["email", "resume", "about"],
   },
 
@@ -25,7 +25,7 @@ export const INFO_PAGES: Record<string, ManPageType> = {
     name: "email",
     synopsis: "email",
     description:
-      "Displays Souleymane Sy's email address as a clickable mailto link, accompanied by a short personal invitation to reach out. The link is sanitized by DOMPurify and the DOMPurify afterSanitizeAttributes hook enforces target='_blank' rel='noopener noreferrer'.",
+      "Displays Souleymane Sy's email address as a clickable mailto link, accompanied by a short personal invitation to reach out. The link opens in a new tab.",
     notes: "For all social links together, use contact. For the CV, use resume.",
     seeAlso: ["contact", "resume"],
   },
