@@ -70,17 +70,17 @@ function createProfileOutput(
 
   const bio = user.bio ? `<p>${user.bio}</p>` : "";
   const location = user.location
-    ? `<p><span class="text-secondary-clr">Location   </span> - ${user.location}</p>`
+    ? `<p><span class="text-secondary-clr">Location   </span>${DT.decorators.arrow}${user.location}</p>`
     : "";
   const blogUrl = normalizeUrl(user.blog);
   const blog = blogUrl
-    ? `<p><span class="text-secondary-clr">Website    </span> - <a href="${blogUrl}" target="_blank" rel="noopener noreferrer">${user.blog}</a></p>`
+    ? `<p><span class="text-secondary-clr">Website    </span>${DT.decorators.arrow}<a href="${blogUrl}" target="_blank" rel="noopener noreferrer">${user.blog}</a></p>`
     : "";
   const company = user.company
-    ? `<p><span class="text-secondary-clr">Company    </span> - ${user.company}</p>`
+    ? `<p><span class="text-secondary-clr">Company    </span>${DT.decorators.arrow}${user.company}</p>`
     : "";
   const twitter = user.twitter_username
-    ? `<p><span class="text-secondary-clr">Twitter    </span> - <a href="https://twitter.com/${user.twitter_username}" target="_blank" rel="noopener noreferrer">@${user.twitter_username}</a></p>`
+    ? `<p><span class="text-secondary-clr">Twitter    </span>${DT.decorators.arrow}<a href="https://twitter.com/${user.twitter_username}" target="_blank" rel="noopener noreferrer">@${user.twitter_username}</a></p>`
     : "";
 
   return createHtmlOutput(
@@ -99,7 +99,7 @@ function createProfileOutput(
           <span class="text-tertiary-clr font-bold">${user.followers}</span><span class="text-text-clr opacity-sep"> followers · </span>
           <span class="text-tertiary-clr font-bold">${user.following}</span><span class="text-text-clr opacity-sep"> following</span>
         </p>
-        <p><span class="text-secondary-clr">Member since </span> - ${formatDate(user.created_at)} <span class="text-text-clr opacity-sep">(${accountAge(user.created_at)})</span></p>
+        <p><span class="text-secondary-clr">Member since </span>${DT.decorators.arrow}${formatDate(user.created_at)} <span class="text-text-clr opacity-sep">(${accountAge(user.created_at)})</span></p>
         ${location}${company}${blog}${twitter}
       </div>
       ${
