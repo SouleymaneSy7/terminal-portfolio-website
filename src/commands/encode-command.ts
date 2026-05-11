@@ -59,8 +59,8 @@ function renderResult(mode: "encode" | "decode", format: string, input: string, 
       <div class="space-y-t-group">
         <p class="text-secondary-clr font-bold">${mode === "encode" ? "Encoded" : "Decoded"} · ${format.toUpperCase()}</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p><span class="text-secondary-clr">Input   </span>  <span class="text-text-clr">${inputPreview}</span></p>
-        <p><span class="text-secondary-clr">Output  </span>  <span class="text-tertiary-clr font-bold break-all">${outputPreview}</span></p>
+        <p><span class="text-secondary-clr">Input   </span>${DT.decorators.arrow}<span class="text-text-clr">${inputPreview}</span></p>
+        <p><span class="text-secondary-clr">Output  </span>${DT.decorators.arrow}<span class="text-tertiary-clr font-bold break-all">${outputPreview}</span></p>
       </div>
       ${
         output.length > 80
@@ -71,6 +71,10 @@ function renderResult(mode: "encode" | "decode", format: string, input: string, 
             </div>`
           : ""
       }
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p class="text-text-clr opacity-sep">All operations run locally — nothing is sent over the network.</p>
+      </div>
     </div>`,
   );
 }
