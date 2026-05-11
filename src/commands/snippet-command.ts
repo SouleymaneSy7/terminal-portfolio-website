@@ -151,9 +151,9 @@ function addSnippet(args: string[]): CommandHistoryOutputType {
       <div class="space-y-t-group">
         <p>${DT.icons.success}  <span class="text-tertiary-clr font-bold">Snippet saved</span></p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p><span class="text-secondary-clr">ID    </span>  <span class="text-tertiary-clr">${safeShortId}</span></p>
-        <p><span class="text-secondary-clr">Name  </span>  ${safeName}</p>
-        <p><span class="text-secondary-clr">Lang  </span>  ${safeLang}</p>
+        <p><span class="text-secondary-clr">ID    </span>${DT.decorators.arrow}<span class="text-tertiary-clr">${safeShortId}</span></p>
+        <p><span class="text-secondary-clr">Name  </span>${DT.decorators.arrow}${safeName}</p>
+        <p><span class="text-secondary-clr">Lang  </span>${DT.decorators.arrow}${safeLang}</p>
       </div>
       <div class="space-y-t-footer">
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
@@ -239,7 +239,12 @@ function removeSnippet(shortId: string): CommandHistoryOutputType {
       <div class="space-y-t-group">
         <p>${DT.icons.success}  <span class="text-tertiary-clr font-bold">Snippet deleted</span></p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p><span class="text-secondary-clr">Removed  </span>  <span class="text-text-clr opacity-sep">${safeName} (${safeLang})</span></p>
+        <p><span class="text-secondary-clr">Name  </span>${DT.decorators.arrow}<span class="text-text-clr opacity-sep">${safeName}</span></p>
+        <p><span class="text-secondary-clr">Lang  </span>${DT.decorators.arrow}<span class="text-text-clr opacity-sep">${safeLang}</span></p>
+      </div>
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">snippet</span>${DT.decorators.quote} to view remaining snippets.</p>
       </div>
     </div>`,
   );
