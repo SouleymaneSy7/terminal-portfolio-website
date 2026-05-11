@@ -87,7 +87,7 @@ export const FUN_PAGES: Record<string, ManPageType> = {
     name: "sudo",
     synopsis: "sudo",
     description:
-      "Simulates an access denied response, as if superuser privileges were requested in a real shell. An intentional easter egg — the 'superpowers' in this terminal are CSS and TypeScript, not root access.",
+      "Simulates an access denied response, as if superuser privileges were requested in a real shell. Displays a denial message with a humorous reminder that the only superpowers here are CSS and TypeScript.",
     notes:
       "No actual privilege escalation occurs. No system calls are made. The entire command is a single HTML block output with a denial message and a 😄 emoji.",
     seeAlso: ["exit", "cowsay"],
