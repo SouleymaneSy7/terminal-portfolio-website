@@ -21,13 +21,13 @@
 
 import { ASCII } from "@/constants";
 import { GAME_HELP } from "@/constants/help/fun";
-import { POINTS, quizQuestions, RANKS } from "@/constants/quiz-game";
-import { STORAGE_KEYS } from "@/constants/storageKeys";
+import { quizQuestions, RANKS } from "@/constants/quiz-game";
 import type { GameStateType, PersistedGameStateType, QuizQuestionType } from "@/types";
 import { parseArgs } from "@/utils/argParser";
 import { storageGet, storageRemove, storageSet } from "@/utils/commandStorage";
 import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
 import { createErrorOutput, createHtmlOutput } from "@/utils/output";
+import { STORAGE_KEYS } from "@/constants/storageKeys";
 
 // ============================================
 // PERSISTENCE
@@ -78,8 +78,7 @@ let gameState: GameStateType = hydrateState();
 
 const calculateAccuracy = (): number => {
   if (gameState.questionsAnswered === 0) return 0;
-  const maxPossibleScore = gameState.questionsAnswered * POINTS.CORRECT;
-  return Math.round((Math.max(0, gameState.score) / maxPossibleScore) * 100);
+  return Math.round((gameState.score / gameState.questionsAnswered) * 100);
 };
 
 const getRank = (accuracy: number): { name: string; art: string } => {
@@ -148,6 +147,8 @@ const handleReset = () => {
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
       <div class="space-y-t-group">
+        <p class="text-secondary-clr font-bold">Game Reset</p>
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p>${DT.icons.success}  Progress wiped clean</p>
         <p>${DT.icons.success}  Statistics reset to zero</p>
         <p>${DT.icons.success}  Saved data cleared</p>
@@ -177,11 +178,7 @@ const handleAnswer = (answer: number) => {
 
   const isCorrect = answer === gameState.currentQuestion.answer;
   gameState.questionsAnswered++;
-  if (isCorrect) {
-    gameState.score += POINTS.CORRECT;
-  } else {
-    gameState.score += POINTS.WRONG;
-  }
+  if (isCorrect) gameState.score++;
 
   const accuracy = calculateAccuracy();
   const resultArt = isCorrect ? ASCII.CORRECT : ASCII.WRONG;
