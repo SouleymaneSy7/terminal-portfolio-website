@@ -83,10 +83,7 @@ export function curlUsageOutput(): CommandHistoryOutputType {
 
           <div class="space-y-t-footer">
             <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-            <p>
-            Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">curl --help</span>${DT.decorators.quote}
-              for full options.
-            </p>
+            <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">curl --help</span>${DT.decorators.quote} for full options.</p>
           </div>
 
         </div>`,
