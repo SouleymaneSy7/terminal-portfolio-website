@@ -55,6 +55,10 @@ export function useSuggestions(input: string, setInput: (value: string) => void)
     (delta: 1 | -1, scrollContainer?: HTMLUListElement | null) => {
       const list = flatGrouped ?? completions;
       if (list.length === 0) return;
+
+      // Capture base synchronously — setSavedInput is async so we cannot rely
+      // on savedInput having the new value when setInput is called right after.
+      const base = savedInput !== "" ? savedInput : input;
       if (savedInput === "") setSavedInput(input);
 
       const next = activeIndex + delta;
@@ -62,7 +66,7 @@ export function useSuggestions(input: string, setInput: (value: string) => void)
 
       setActiveIndex(clamped);
       navigatingRef.current = true;
-      setInput(clamped === -1 ? savedInput : applyCompletion(savedInput, list[clamped]));
+      setInput(clamped === -1 ? base : applyCompletion(base, list[clamped]));
 
       setTimeout(() => {
         if (scrollContainer && clamped >= 0) {
