@@ -179,10 +179,14 @@ function buildHostnameOutput(): CommandHistoryOutputType {
       <div class="space-y-t-group">
         <p class="text-secondary-clr font-bold">Hostname</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p><span class="text-secondary-clr">Hostname  </span>  souleymane-sy-portfolio</p>
-        <p><span class="text-secondary-clr">Owner     </span>  Souleymane Sy</p>
-        <p><span class="text-secondary-clr">Location  </span>  Coyah, Guinea-Conakry 🇬🇳</p>
-        <p><span class="text-secondary-clr">Uptime    </span>  Online since 2025, no interruptions</p>
+        <p><span class="text-secondary-clr">Hostname  </span>${DT.decorators.arrow}souleymane-sy-portfolio</p>
+        <p><span class="text-secondary-clr">Owner     </span>${DT.decorators.arrow}Souleymane Sy</p>
+        <p><span class="text-secondary-clr">Location  </span>${DT.decorators.arrow}Coyah, Guinea-Conakry 🇬🇳</p>
+        <p><span class="text-secondary-clr">Uptime    </span>${DT.decorators.arrow}Online since 2025, no interruptions</p>
+      </div>
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">neofetch</span>${DT.decorators.quote} for a full system overview.</p>
       </div>
     </div>`,
   );
