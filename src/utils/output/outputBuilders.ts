@@ -120,7 +120,7 @@ function sectionOptions(options: HelpConfigType["options"]): string {
   const items = options!
     .map(
       (opt) =>
-        `<p>${DT.decorators.bullet} <span class="text-tertiary-clr font-bold">${opt.flag}</span> ${DT.separators.short.slice(0, 5)} ${opt.description}</p>`,
+        `<p>${DT.decorators.bullet} <span class="text-tertiary-clr font-bold">${opt.flag}</span> - ${opt.description}</p>`,
     )
     .join("\n");
 
@@ -137,7 +137,7 @@ function sectionExamples(examples: HelpConfigType["examples"]): string {
     .map(
       (ex) =>
         `<p>${DT.decorators.bullet} <span class="text-tertiary-clr">${ex.command}</span></p>
-      <p class="text-text-clr opacity-70 ml-4">${ex.description}</p>`,
+      <p class="text-text-clr opacity-70 ml-4"> - ${ex.description}</p>`,
     )
     .join("\n");
 
