@@ -145,8 +145,18 @@ function createAgeOutput(date: Date): CommandHistoryOutputType {
 
       <div class="space-y-t-group">
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p><span class="text-secondary-clr">Day of week</span>${DT.decorators.arrow}You were born on a <span class="text-tertiary-clr font-bold">${dayOfWeek}</span></p>
+        <p><span class="text-secondary-clr">Day of week</span>${DT.decorators.arrow}Born on a <span class="text-tertiary-clr font-bold">${dayOfWeek}</span></p>
         ${birthdayNote}
+      </div>
+
+      <div class="space-y-t-footer">
+        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+        <p>
+          Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">date</span>${DT.decorators.quote}
+          to see today's date ${DT.decorators.bullet}
+          ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">timer &lt;seconds&gt;</span>${DT.decorators.quote}
+          to start a countdown.
+        </p>
       </div>
     </div>`,
   );
