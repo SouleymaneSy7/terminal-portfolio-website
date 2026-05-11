@@ -194,10 +194,10 @@ function addAlias(rawInput: string) {
         <p class="text-tertiary-clr font-bold">${DT.icons.success} Alias ${isUpdate ? "updated" : "created"}</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p>
-          <span class="text-secondary-clr">Name    </span>${DT.decorators.arrow}<span class="text-tertiary-clr font-bold">${name}</span>
+          <span class="text-secondary-clr">Name      </span>${DT.decorators.arrow}<span class="text-tertiary-clr font-bold">${name}</span>
         </p>
         <p>
-          <span class="text-secondary-clr">Expands </span>${DT.decorators.arrow}<span class="text-text-clr">${value}</span>
+          <span class="text-secondary-clr">Expands to</span>${DT.decorators.arrow}<span class="text-text-clr">${value}</span>
         </p>
       </div>
       <div class="space-y-t-footer">
@@ -245,8 +245,12 @@ export function removeAlias(name: string) {
         <p class="text-tertiary-clr font-bold">${DT.icons.success} Alias removed</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p>
-          <span class="text-secondary-clr">Removed  </span>${DT.decorators.arrow}
-          <span class="text-text-clr opacity-sep">${name} = ${removedValue}</span>
+          <span class="text-secondary-clr">Name      </span>${DT.decorators.arrow}
+          <span class="text-text-clr opacity-sep">${name}</span>
+        </p>
+        <p>
+          <span class="text-secondary-clr">Expanded  </span>${DT.decorators.arrow}
+          <span class="text-text-clr opacity-sep">${removedValue}</span>
         </p>
       </div>
       <div class="space-y-t-footer">
