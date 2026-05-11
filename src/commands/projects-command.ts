@@ -74,12 +74,12 @@ function buildProjectsOutput(): CommandHistoryOutputType {
       <div class="space-y-t-group">
         <p class="text-secondary-clr font-bold">Technologies used</p>
         <p>
-          <span class="text-tertiary-clr">Next.js</span> ·
-          <span class="text-tertiary-clr">React</span> ·
-          <span class="text-tertiary-clr">TypeScript</span> ·
-          <span class="text-tertiary-clr">MDX</span> ·
-          <span class="text-tertiary-clr">Tailwind CSS</span> ·
-          <span class="text-tertiary-clr">Resend</span>
+          <span class="text-tertiary-clr font-bold">Next.js</span> ·
+          <span class="text-tertiary-clr font-bold">React</span> ·
+          <span class="text-tertiary-clr font-bold">TypeScript</span> ·
+          <span class="text-tertiary-clr font-bold">MDX</span> ·
+          <span class="text-tertiary-clr font-bold">Tailwind CSS</span> ·
+          <span class="text-tertiary-clr font-bold">Resend</span>
         </p>
       </div>
 
@@ -94,13 +94,13 @@ function buildProjectsOutput(): CommandHistoryOutputType {
 
       <div class="space-y-t-group">
         <p>
-          <span class="text-secondary-clr">Live   ${DT.decorators.arrow}</span>
+          <span class="text-secondary-clr font-bold">Live   ${DT.decorators.arrow}</span>
           <a href="https://fyrre-magazine-website.netlify.app/" target="_blank" rel="noopener noreferrer">
             fyrre-magazine-website.netlify.app
           </a>
         </p>
         <p>
-          <span class="text-secondary-clr">Source ${DT.decorators.arrow}</span>
+          <span class="text-secondary-clr font-bold">Source ${DT.decorators.arrow}</span>
           <a href="https://github.com/SouleymaneSy7/fyrre-magazine-website" target="_blank" rel="noopener noreferrer">
             github.com/SouleymaneSy7/fyrre-magazine-website
           </a>
@@ -130,23 +130,23 @@ function buildProjectsOutput(): CommandHistoryOutputType {
       <div class="space-y-t-group">
         <p class="text-secondary-clr font-bold">Technologies used</p>
         <p>
-          <span class="text-tertiary-clr">React</span> ·
-          <span class="text-tertiary-clr">TypeScript</span> ·
-          <span class="text-tertiary-clr">Sass</span> ·
-          <span class="text-tertiary-clr">GSAP</span> ·
-          <span class="text-tertiary-clr">Vite</span>
+          <span class="text-tertiary-clr font-bold">React</span> ·
+          <span class="text-tertiary-clr font-bold">TypeScript</span> ·
+          <span class="text-tertiary-clr font-bold">Sass</span> ·
+          <span class="text-tertiary-clr font-bold">GSAP</span> ·
+          <span class="text-tertiary-clr font-bold">Vite</span>
         </p>
       </div>
 
       <div class="space-y-t-group">
         <p>
-          <span class="text-secondary-clr">Live   ${DT.decorators.arrow}</span>
+          <span class="text-secondary-clr font-bold">Live   ${DT.decorators.arrow}</span>
           <a href="https://conakry-website-challenge-z4t7.vercel.app/" target="_blank" rel="noopener noreferrer">
             conakry-website-challenge-z4t7.vercel.app
           </a>
         </p>
         <p>
-          <span class="text-secondary-clr">Source ${DT.decorators.arrow}</span>
+          <span class="text-secondary-clr font-bold">Source ${DT.decorators.arrow}</span>
           <a href="https://github.com/SouleymaneSy7/conakry-website-challenge" target="_blank" rel="noopener noreferrer">
             github.com/SouleymaneSy7/conakry-website-challenge
           </a>
@@ -170,22 +170,22 @@ function buildProjectsOutput(): CommandHistoryOutputType {
       <div class="space-y-t-group">
         <p class="text-secondary-clr font-bold">Technologies used</p>
         <p>
-          <span class="text-tertiary-clr">Vue.js</span> ·
-          <span class="text-tertiary-clr">Composition API</span> ·
-          <span class="text-tertiary-clr">Tailwind CSS</span> ·
-          <span class="text-tertiary-clr">Axios</span>
+          <span class="text-tertiary-clr font-bold">Vue.js</span> ·
+          <span class="text-tertiary-clr font-bold">Composition API</span> ·
+          <span class="text-tertiary-clr font-bold">Tailwind CSS</span> ·
+          <span class="text-tertiary-clr font-bold">Axios</span>
         </p>
       </div>
 
       <div class="space-y-t-group">
         <p>
-          <span class="text-secondary-clr">Live   ${DT.decorators.arrow}</span>
+          <span class="text-secondary-clr font-bold">Live   ${DT.decorators.arrow}</span>
           <a href="https://dictionary-web-app-seven-olive.vercel.app/" target="_blank" rel="noopener noreferrer">
             dictionary-web-app-seven-olive.vercel.app
           </a>
         </p>
         <p>
-          <span class="text-secondary-clr">Source ${DT.decorators.arrow}</span>
+          <span class="text-secondary-clr font-bold">Source ${DT.decorators.arrow}</span>
           <a href="https://github.com/SouleymaneSy7/dictionary-web-app" target="_blank" rel="noopener noreferrer">
             github.com/SouleymaneSy7/dictionary-web-app
           </a>
@@ -209,21 +209,21 @@ function buildProjectsOutput(): CommandHistoryOutputType {
       <div class="space-y-t-group">
         <p class="text-secondary-clr font-bold">Technologies used</p>
         <p>
-          <span class="text-tertiary-clr">Vue.js</span> ·
-          <span class="text-tertiary-clr">Composition API</span> ·
-          <span class="text-tertiary-clr">Sass</span>
+          <span class="text-tertiary-clr font-bold">Vue.js</span> ·
+          <span class="text-tertiary-clr font-bold">Composition API</span> ·
+          <span class="text-tertiary-clr font-bold">Sass</span>
         </p>
       </div>
 
       <div class="space-y-t-group">
         <p>
-          <span class="text-secondary-clr">Live   ${DT.decorators.arrow}</span>
+          <span class="text-secondary-clr font-bold">Live   ${DT.decorators.arrow}</span>
           <a href="https://vue-js-password-generator.vercel.app/" target="_blank" rel="noopener noreferrer">
             vue-js-password-generator.vercel.app
           </a>
         </p>
         <p>
-          <span class="text-secondary-clr">Source ${DT.decorators.arrow}</span>
+          <span class="text-secondary-clr font-bold">Source ${DT.decorators.arrow}</span>
           <a href="https://github.com/SouleymaneSy7/vue-js-password-generator" target="_blank" rel="noopener noreferrer">
             github.com/SouleymaneSy7/vue-js-password-generator
           </a>
@@ -248,22 +248,22 @@ function buildProjectsOutput(): CommandHistoryOutputType {
       <div class="space-y-t-group">
         <p class="text-secondary-clr font-bold">Technologies used</p>
         <p>
-          <span class="text-tertiary-clr">React</span> ·
-          <span class="text-tertiary-clr">TypeScript</span> ·
-          <span class="text-tertiary-clr">Axios</span> ·
-          <span class="text-tertiary-clr">Sass</span>
+          <span class="text-tertiary-clr font-bold">React</span> ·
+          <span class="text-tertiary-clr font-bold">TypeScript</span> ·
+          <span class="text-tertiary-clr font-bold">Axios</span> ·
+          <span class="text-tertiary-clr font-bold">Sass</span>
         </p>
       </div>
 
       <div class="space-y-t-group">
         <p>
-          <span class="text-secondary-clr">Live   ${DT.decorators.arrow}</span>
+          <span class="text-secondary-clr font-bold">Live   ${DT.decorators.arrow}</span>
           <a href="https://github-user-search-app-self.vercel.app/" target="_blank" rel="noopener noreferrer">
             github-user-search-app-self.vercel.app
           </a>
         </p>
         <p>
-          <span class="text-secondary-clr">Source ${DT.decorators.arrow}</span>
+          <span class="text-secondary-clr font-bold">Source ${DT.decorators.arrow}</span>
           <a href="https://github.com/SouleymaneSy7/github-user-search-app" target="_blank" rel="noopener noreferrer">
             github.com/SouleymaneSy7/github-user-search-app
           </a>
