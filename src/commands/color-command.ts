@@ -196,30 +196,31 @@ export const handleColorCommand = (args: string[]) => {
       <div class="space-y-t-group">
         <p class="text-secondary-clr font-bold">Color Converter</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p>Input:  <span class="text-tertiary-clr">${raw}</span></p>
-        <p>Swatch: <span aria-hidden="true" style="${swatchStyle}">${hex}</span></p>
+        <p><span class="text-secondary-clr">Input   </span>${DT.decorators.arrow}<span class="text-tertiary-clr">${raw}</span></p>
+        <p><span class="text-secondary-clr">Preview </span>${DT.decorators.arrow}<span aria-hidden="true" style="${swatchStyle}">${hex}</span></p>
       </div>
 
       <div class="space-y-t-group">
-        <p class="text-secondary-clr font-bold">Representations</p>
+        <p class="text-secondary-clr font-bold">Color Formats</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p><span class="text-secondary-clr">HEX     </span> - <span class="text-tertiary-clr font-bold">${hex}</span></p>
-        <p><span class="text-secondary-clr">RGB     </span> - <span class="text-tertiary-clr font-bold">rgb(${r}, ${g}, ${b})</span></p>
-        <p><span class="text-secondary-clr">HSL     </span> - <span class="text-tertiary-clr font-bold">hsl(${h}, ${s}%, ${l}%)</span></p>
-        <p><span class="text-secondary-clr">OKLCH   </span> - <span class="text-tertiary-clr font-bold">oklch(${oklchL} ${oklchC} ${oklchH})</span></p>
+        <p><span class="text-secondary-clr">HEX     </span>${DT.decorators.arrow}<span class="text-tertiary-clr font-bold">${hex}</span></p>
+        <p><span class="text-secondary-clr">RGB     </span>${DT.decorators.arrow}<span class="text-tertiary-clr font-bold">rgb(${r}, ${g}, ${b})</span></p>
+        <p><span class="text-secondary-clr">HSL     </span>${DT.decorators.arrow}<span class="text-tertiary-clr font-bold">hsl(${h}, ${s}%, ${l}%)</span></p>
+        <p><span class="text-secondary-clr">OKLCH   </span>${DT.decorators.arrow}<span class="text-tertiary-clr font-bold">oklch(${oklchL} ${oklchC} ${oklchH})</span></p>
       </div>
 
       <div class="space-y-t-group">
         <p class="text-secondary-clr font-bold">Channels</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p><span class="text-secondary-clr">R </span>  ${r}  <span class="text-text-clr opacity-sep">(${Math.round((r / 255) * 100)}%)</span></p>
-        <p><span class="text-secondary-clr">G </span>  ${g}  <span class="text-text-clr opacity-sep">(${Math.round((g / 255) * 100)}%)</span></p>
-        <p><span class="text-secondary-clr">B </span>  ${b}  <span class="text-text-clr opacity-sep">(${Math.round((b / 255) * 100)}%)</span></p>
+        <p><span class="text-secondary-clr">R       </span>${DT.decorators.arrow}${r}  <span class="text-text-clr opacity-sep">(${Math.round((r / 255) * 100)}%)</span></p>
+        <p><span class="text-secondary-clr">G       </span>${DT.decorators.arrow}${g}  <span class="text-text-clr opacity-sep">(${Math.round((g / 255) * 100)}%)</span></p>
+        <p><span class="text-secondary-clr">B       </span>${DT.decorators.arrow}${b}  <span class="text-text-clr opacity-sep">(${Math.round((b / 255) * 100)}%)</span></p>
       </div>
 
       <div class="space-y-t-footer">
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">color --help</span>${DT.decorators.quote} for all options.</p>
+        <p class="text-text-clr opacity-sep">The HEX or RGB value can be used directly in your CSS.</p>
       </div>
     </div>`,
   );
