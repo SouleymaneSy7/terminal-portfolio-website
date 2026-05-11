@@ -169,7 +169,7 @@ export const UTILITY_PAGES: Record<string, ManPageType> = {
     name: "snippet",
     synopsis: "snippet [subcommand] [args]",
     description:
-      "Stores and retrieves code snippets in localStorage under 'terminal:snippets'. Each snippet has a name, language tag, and code body. Snippet IDs are short 6-character hex strings. Code is HTML-escaped before rendering to prevent XSS in the pre block.",
+      "Stores and retrieves code snippets in localStorage under 'terminal:snippets'. Each snippet has a name, language tag, and code body. Snippet IDs are short 6-character hex strings. Syntax highlighting is applied automatically in 'show' mode based on the provided language tag.",
     options: `
       <p><span class="text-tertiary-clr font-bold">snippet                            </span> - List all snippets with ID, name, and language.</p>
       <p><span class="text-tertiary-clr font-bold">snippet add &lt;name&gt; &lt;lang&gt; &lt;code&gt;  </span> - Save a snippet. Code spans the remaining arguments.</p>
@@ -182,7 +182,7 @@ export const UTILITY_PAGES: Record<string, ManPageType> = {
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  snippet show a3f2bc</p>
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  snippet rm a3f2bc</p>`,
     notes:
-      "There is no edit subcommand — delete and re-add to update a snippet. Snippets survive page refreshes. Syntax highlighting is automatically applied in 'show' mode using highlight.js based on the provided language tag.",
+      "There is no edit subcommand — delete and re-add to update a snippet. Snippets survive page refreshes.",
     seeAlso: ["note", "todo"],
   },
 
@@ -203,8 +203,7 @@ export const UTILITY_PAGES: Record<string, ManPageType> = {
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  timer 5m Short break</p>
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  timer 1h30m Deep work</p>
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  timer 30</p>`,
-    notes:
-      "Maximum duration is 24 hours. The timer is rendered as a 'component' block type — it holds a React ReactNode and is never serialized to localStorage. Refreshing the page will discard any running timers.",
+    notes: "Maximum duration is 24 hours. Refreshing the page will discard any running timers.",
     seeAlso: ["date", "time"],
   },
 
@@ -227,7 +226,7 @@ export const UTILITY_PAGES: Record<string, ManPageType> = {
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  todo undone a3f2bc</p>
       <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  todo rm a3f2bc</p>`,
     notes:
-      "Tasks survive page refreshes. There is no edit subcommand — remove and re-add to update task text. The ○ and ✓ icons in list output are decorative ASCII, not interactive.",
+      "Tasks survive page refreshes. There is no edit subcommand — remove and re-add to update task text.",
     seeAlso: ["note", "snippet"],
   },
 
