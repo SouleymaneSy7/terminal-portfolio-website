@@ -91,9 +91,9 @@ export const handleIpCommand = async (args: string[]) => {
         </div>
         <div class="space-y-t-footer">
           <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-          <p class="text-text-clr opacity-sep">Data via ipapi.co — free geolocation API.</p>
+          <p class="text-text-clr"><span class="text-primary-clr">Tip:</span> type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">ip --json</span>${DT.decorators.quote} for raw JSON output.</p>
+          <p class="text-text-clr opacity-sep"><span class="text-primary-clr">Source:</span> <span class="font-bold text-tertiary-clr">ipapi.co</span> · Free IP geolocation API</p>
           <p class="text-text-clr opacity-sep">Behind a VPN or proxy? That IP will be shown instead of your real one.</p>
-          <p class="text-text-clr opacity-sep">Tip: type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">ip --json</span>${DT.decorators.quote} for raw JSON output.</p>
         </div>
       </div>`,
     );
