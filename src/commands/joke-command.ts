@@ -30,11 +30,13 @@ function createJokeOutput(setup: string, delivery: string): CommandHistoryOutput
         <p>${setup}</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p class="text-secondary-clr font-bold">${delivery}</p>
-      </div>
-      <div class="space-y-t-footer">
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
+      </div>
+
+      <div class="space-y-t-footer">
         <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">joke</span>${DT.decorators.quote} for another one.</p>
-        <p class="text-text-clr opacity-sep">Tip: type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">joke --json</span>${DT.decorators.quote} for raw JSON.</p>
+        <p class="text-text-clr"><span class="text-primary-clr">Tip:</span> type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">joke --json</span>${DT.decorators.quote} for raw JSON.</p>
+<p class="text-text-clr opacity-sep"><span class="text-primary-clr">Source:</span> <span class="font-bold text-tertiary-clr">jokeapi.dev</span> · Random programming jokes</p>
       </div>
     </div>`,
   );
