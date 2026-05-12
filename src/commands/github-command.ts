@@ -123,7 +123,8 @@ function createProfileOutput(
       <div class="space-y-t-footer">
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p>View full profile ${DT.decorators.arrow}<a href="${user.html_url}" target="_blank" rel="noopener noreferrer">github.com/${user.login}</a></p>
-        <p class="text-text-clr opacity-sep">Tip: type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">github ${user.login} --json</span>${DT.decorators.quote} for raw JSON.</p>
+        <p class="text-text-clr"><span class="text-primary-clr">Tip:</span> type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">github ${user.login} --json</span>${DT.decorators.quote} for raw JSON.</p>
+        <p class="text-text-clr opacity-sep"><span class="text-primary-clr">Source:</span> <span class="font-bold text-tertiary-clr">api.github.com</span> · Official GitHub REST & GraphQL API</p>
       </div>
     </div>`,
   );
