@@ -101,8 +101,8 @@ const convertCurrency = async (amountStr: string, from: string, to: string, json
 
         <div class="space-y-t-footer">
           <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-          <p class="text-text-clr opacity-sep">Source: <span class="font-bold text-tertiary-clr">frankfurter.dev</span> · Daily reference rates published by the European Central Bank</p>
-          <p class="text-text-clr opacity-sep">Tip: type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">convert ${amount} ${fromUpper} ${toUpper} --json</span>${DT.decorators.quote} for raw JSON.</p>
+          <p class="text-text-clr"><span class="text-primary-clr">Tip:</span> type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">convert ${amount} ${fromUpper} ${toUpper} --json</span>${DT.decorators.quote} for raw JSON.</p>
+          <p class="text-text-clr opacity-sep"><span class="text-primary-clr">Source:</span> <span class="font-bold text-tertiary-clr">frankfurter.dev</span> · Daily reference rates published by the European Central Bank</p>
         </div>
       </div>`,
     );
