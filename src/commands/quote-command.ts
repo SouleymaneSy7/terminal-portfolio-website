@@ -28,14 +28,13 @@ function createQuoteOutput(advice: string): CommandHistoryOutputType {
     `<div class="space-y-t-section py-t-outer">
       <div class="space-y-t-group">
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p class="text-secondary-clr">"${advice}"</p>
+        <p class="text-secondary-clr font-bold">"${advice}"</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
       </div>
       <div class="space-y-t-footer">
-        <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">quote</span>${DT.decorators.quote} for another one.</p>
-        <p class="text-text-clr opacity-sep">Tip: type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">quote --json</span>${DT.decorators.quote} for raw JSON.</p>
-        <p class="text-text-clr opacity-sep">Source: <span class="text-tertiary-clr">Advice Slip API</span> — adviceslip.com</p>
+        <p class="text-text-clr"><span class="text-primary-clr">Tip:</span> type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">quote --json</span>${DT.decorators.quote} for raw JSON.</p>
+        <p class="text-text-clr opacity-sep"><span class="text-primary-clr">Source:</span> <span class="font-bold text-tertiary-clr">adviceslip.com</span> · Random inspirational quotes (Advice Slip)</p>
       </div>
     </div>`,
   );
