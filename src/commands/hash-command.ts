@@ -67,7 +67,7 @@ function buildHashOutput(algorithm: string, text: string, hashHex: string) {
         <p class="text-secondary-clr font-bold">Hash</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p class="text-tertiary-clr font-bold whitespace-pre-wrap break-all">${grouped}</p>
-        <p class="text-text-clr opacity-sep">${bitSize}-bit · ${hashHex.length} hex chars</p>
+        <p class="text-text-clr opacity-dim">${bitSize}-bit · ${hashHex.length} hex chars</p>
       </div>
       <div class="space-y-t-footer">
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>

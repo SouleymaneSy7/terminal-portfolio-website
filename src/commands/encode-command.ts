@@ -73,7 +73,7 @@ function renderResult(mode: "encode" | "decode", format: string, input: string, 
       }
       <div class="space-y-t-footer">
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p class="text-text-clr opacity-sep">All operations run locally — nothing is sent over the network.</p>
+        <p class="text-text-clr opacity-dim">All operations run locally — nothing is sent over the network.</p>
       </div>
     </div>`,
   );

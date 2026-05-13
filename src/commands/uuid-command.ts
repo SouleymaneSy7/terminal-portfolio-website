@@ -36,7 +36,7 @@ function buildGenerateOutput(version: 1 | 4, count: number) {
   const rows = ids.map((id) => `<p class="text-tertiary-clr font-bold">${id}</p>`).join("\n");
 
   const countNote =
-    safeCount > 1 ? `<p class="text-text-clr opacity-sep">${safeCount} UUIDs generated</p>` : "";
+    safeCount > 1 ? `<p class="text-text-clr opacity-dim">${safeCount} UUIDs generated</p>` : "";
 
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">

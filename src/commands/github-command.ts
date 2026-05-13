@@ -87,7 +87,7 @@ function createProfileOutput(
     `<div class="space-y-t-section py-t-outer">
       <div class="space-y-t-group">
         <p class="text-primary-clr font-bold" style="font-size: var(--text-fs-subtitle);">${user.name ?? user.login}</p>
-        <p class="text-text-clr opacity-sep">@${user.login}</p>
+        <p class="text-text-clr opacity-dim">@${user.login}</p>
         ${bio}
         <a href="${user.html_url}" target="_blank" rel="noopener noreferrer">${user.html_url}</a>
       </div>
@@ -95,11 +95,11 @@ function createProfileOutput(
         <p class="text-secondary-clr font-bold">Stats</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p>
-          <span class="text-tertiary-clr font-bold">${user.public_repos}</span><span class="text-text-clr opacity-sep"> repos · </span>
-          <span class="text-tertiary-clr font-bold">${user.followers}</span><span class="text-text-clr opacity-sep"> followers · </span>
-          <span class="text-tertiary-clr font-bold">${user.following}</span><span class="text-text-clr opacity-sep"> following</span>
+          <span class="text-tertiary-clr font-bold">${user.public_repos}</span><span class="text-text-clr opacity-dim"> repos · </span>
+          <span class="text-tertiary-clr font-bold">${user.followers}</span><span class="text-text-clr opacity-dim"> followers · </span>
+          <span class="text-tertiary-clr font-bold">${user.following}</span><span class="text-text-clr opacity-dim"> following</span>
         </p>
-        <p><span class="text-secondary-clr">Member since </span>${DT.decorators.arrow}${formatDate(user.created_at)} <span class="text-text-clr opacity-sep">(${accountAge(user.created_at)})</span></p>
+        <p><span class="text-secondary-clr">Member since </span>${DT.decorators.arrow}${formatDate(user.created_at)} <span class="text-text-clr opacity-dim">(${accountAge(user.created_at)})</span></p>
         ${location}${company}${blog}${twitter}
       </div>
       ${
@@ -114,7 +114,7 @@ function createProfileOutput(
       ${
         topRepos.length > 0
           ? `<div class="space-y-t-group">
-              <p class="text-secondary-clr font-bold">Top Repos <span class="text-text-clr opacity-sep">(by stars)</span></p>
+              <p class="text-secondary-clr font-bold">Top Repos <span class="text-text-clr opacity-dim">(by stars)</span></p>
               <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
               ${topRows}
             </div>`
@@ -124,7 +124,7 @@ function createProfileOutput(
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p>View full profile ${DT.decorators.arrow}<a href="${user.html_url}" target="_blank" rel="noopener noreferrer">github.com/${user.login}</a></p>
         <p class="text-text-clr"><span class="text-primary-clr">Tip:</span> type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">github ${user.login} --json</span>${DT.decorators.quote} for raw JSON.</p>
-        <p class="text-text-clr opacity-sep"><span class="text-primary-clr">Source:</span> <span class="font-bold text-tertiary-clr">api.github.com</span> · Official GitHub REST & GraphQL API</p>
+        <p class="text-text-clr opacity-dim"><span class="text-primary-clr">Source:</span> <span class="font-bold text-tertiary-clr">api.github.com</span> · Official GitHub REST & GraphQL API</p>
       </div>
     </div>`,
   );

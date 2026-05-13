@@ -32,7 +32,7 @@ function buildStatusOutput() {
         <p>
           <span class="text-secondary-clr">Volume </span>${DT.decorators.arrow}
           <span class="text-tertiary-clr">${bar}</span>
-          <span class="text-text-clr opacity-sep"> ${volume}%</span>
+          <span class="text-text-clr opacity-dim"> ${volume}%</span>
         </p>
       </div>
       <div class="space-y-t-footer">

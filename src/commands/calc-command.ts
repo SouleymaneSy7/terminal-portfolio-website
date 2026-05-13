@@ -57,13 +57,13 @@ export const handleCalcCommand = async (args: string[]) => {
         <div class="space-y-t-group">
           <p class="text-secondary-clr font-bold">Result</p>
           <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-          <p class="text-text-clr opacity-sep">${expression}</p>
+          <p class="text-text-clr opacity-dim">${expression}</p>
           <p><span aria-hidden="true" class="text-tertiary-clr"> =</span>  <span class="text-tertiary-clr font-bold text-fs-subtitle">${formatted}</span></p>
         </div>
         <div class="space-y-t-footer">
           <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-          <p class="text-text-clr opacity-sep">Powered by <span class="text-tertiary-clr">math.js</span> — runs entirely in the browser, nothing is sent over the network.</p>
-          <p class="text-text-clr opacity-sep">Supports arithmetic, algebra, trigonometry, units, matrices, and more.</p>
+          <p class="text-text-clr opacity-dim">Powered by <span class="text-tertiary-clr">math.js</span> — runs entirely in the browser, nothing is sent over the network.</p>
+          <p class="text-text-clr opacity-dim">Supports arithmetic, algebra, trigonometry, units, matrices, and more.</p>
         </div>
       </div>`,
     );

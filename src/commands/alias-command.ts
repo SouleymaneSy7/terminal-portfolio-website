@@ -125,7 +125,7 @@ function listAliases() {
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
       <div class="space-y-t-group">
-        <p class="text-secondary-clr font-bold">Aliases <span class="text-text-clr opacity-sep">(${entries.length})</span></p>
+        <p class="text-secondary-clr font-bold">Aliases <span class="text-text-clr opacity-dim">(${entries.length})</span></p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         ${rows}
       </div>
@@ -246,11 +246,11 @@ export function removeAlias(name: string) {
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p>
           <span class="text-secondary-clr">Name      </span>${DT.decorators.arrow}
-          <span class="text-text-clr opacity-sep">${name}</span>
+          <span class="text-text-clr opacity-dim">${name}</span>
         </p>
         <p>
           <span class="text-secondary-clr">Expanded  </span>${DT.decorators.arrow}
-          <span class="text-text-clr opacity-sep">${removedValue}</span>
+          <span class="text-text-clr opacity-dim">${removedValue}</span>
         </p>
       </div>
       <div class="space-y-t-footer">

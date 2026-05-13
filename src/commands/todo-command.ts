@@ -48,11 +48,11 @@ const listTodos = () => {
       const statusIcon = t.done
         ? `<span class="text-tertiary-clr font-bold">✓</span>`
         : `<span class="text-text-clr opacity-sep">○</span>`;
-      const textClass = t.done ? "text-text-clr opacity-sep" : "text-text-clr";
+      const textClass = t.done ? "text-text-clr opacity-dim" : "text-text-clr";
       return `<p>
         <span class="text-primary-clr font-bold">${String(i + 1).padStart(2, "0")}</span>
         <span>  ${statusIcon}  </span>
-        <span class="text-text-clr opacity-sep">[</span><span class="text-tertiary-clr">${t.shortId}</span><span class="text-text-clr opacity-sep">]</span>
+        <span class="text-text-clr opacity-dim">[</span><span class="text-tertiary-clr">${t.shortId}</span><span class="text-text-clr opacity-dim">]</span>
         <span class="${textClass}">  ${t.text}</span>
       </p>`;
     })
@@ -63,7 +63,7 @@ const listTodos = () => {
       <div class="space-y-t-group">
         <p class="text-secondary-clr font-bold">
           Todo List
-          <span class="text-text-clr opacity-sep">— ${pending.length} pending · ${done.length} done</span>
+          <span class="text-text-clr opacity-dim">— ${pending.length} pending · ${done.length} done</span>
         </p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         ${rows}
@@ -180,7 +180,7 @@ const removeTodo = (shortId: string) => {
       <div class="space-y-t-group">
         <p class="text-tertiary-clr font-bold">${DT.icons.success} Task deleted</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p><span class="text-secondary-clr">Removed  </span>${DT.decorators.arrow}<span class="text-text-clr opacity-sep">${removed.text}</span></p>
+        <p><span class="text-secondary-clr">Removed  </span>${DT.decorators.arrow}<span class="text-text-clr opacity-dim">${removed.text}</span></p>
       </div>
       <div class="space-y-t-footer">
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
