@@ -4,7 +4,25 @@
 
 ![Preview](./preview/preview.png)
 
-**A terminal-style portfolio you actually _use_ like a terminal.**
+</div>
+
+---
+
+## Before anything else
+
+I don't have a CS degree.
+No bootcamp. No mentor. No industry connections.
+
+I started in 2022 from Coyah, Guinea-Conakry, with a laptop, a spotty internet connection, and an obsession with understanding how the web actually works — not just how to copy it.
+
+This portfolio is the result of 130+ hours on this single project. Not 130 hours of following tutorials. 130 hours of designing, implementing, debugging, refactoring, documenting, and pushing every detail past what any recruiter would expect. Every command, every animation, every design token was deliberate.
+
+This is not a template. This is not a generic showcase.
+This is a statement.
+
+<div align="center">
+
+**A terminal you actually use like a terminal.**
 Type commands. Explore my work. Switch themes. Play a quiz. All from the prompt.
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-terminal--portfolio--website--xi.vercel.app-6e40c9?style=flat-square&logo=vercel)](https://terminal-portfolio-website-xi.vercel.app)
@@ -21,369 +39,350 @@ Type commands. Explore my work. Switch themes. Play a quiz. All from the prompt.
 
 ---
 
-## Why a terminal?
+## What you can do
 
-I started coding in 2022 — no school, no bootcamp, no mentor. Just a laptop and an obsession with understanding how the web actually works.
+46 commands packed into this terminal. Every single one accepts `--help` for details and `man <command>` for a full manual page. Type `help` to see them all.
 
-After learning JavaScript, 50+ Frontend Mentor challenges, a contest podium, and a certified internship — I wanted a portfolio that reflected the way I think. Not a landing page. Not a scroll-heavy site. A **terminal**.
-
-This project is both a technical showcase and a personal statement. Every command, every theme, every line of code is intentional.
-
----
-
-## Table of Contents
-
-- [Features at a Glance](#features-at-a-glance)
-- [Commands Reference](#commands-reference)
-- [Keyboard Shortcuts](#keyboard-shortcuts)
-- [Theme & Font System](#theme--font-system)
-- [Architecture](#architecture)
-- [Design System](#design-system)
-- [Performance](#performance)
-- [Accessibility](#accessibility)
-- [Security](#security)
-- [Tech Stack](#tech-stack)
-- [Browser Support](#browser-support)
-- [Getting Started](#getting-started)
-- [Project Structure](#project-structure)
-- [Adding a Command](#adding-a-command)
-- [Contributing](#contributing)
-- [Author](#author)
+| Category          | Features |
+| ----------------- | -------- |
+| **Commands**      | 46 — portfolio info, utilities, network tools, games, all with man pages |
+| **Theming**       | 31 OKLCH color themes, 15 monospace fonts, both persisted in localStorage |
+| **Completion**    | Tab autocomplete with grouped suggestions and keyboard navigation |
+| **History**       | Arrow key navigation, Ctrl+R incremental reverse search, persisted across sessions |
+| **Audio**         | Web Audio API keyboard sounds — click, chime, buzz. Zero audio files shipped |
+| **Loading**       | 5 variants: braille spinner, ASCII progress bar, typewriter cursor, dots accumulator, rotating spinner |
+| **Utilities**     | Note manager, todo list, code snippet vault — all localStorage-backed with full CRUD |
+| **Network**       | curl simulator with SSRF protection, GitHub profile viewer (REST + GraphQL), IP geolocation |
+| **Crypto**        | SHA-1/256/384/512 hashes, Base64/URL/hex encode-decode — all local via Web Crypto API, nothing hits a server |
+| **Games**         | 40-question Frontend quiz with XP system, 4 rank tiers, and localStorage persistence |
+| **Accessibility** | ARIA live regions, combobox pattern, `aria-hidden` on decorative elements, `prefers-reduced-motion`, screen reader support |
+| **Security**      | DOMPurify sanitization, strict HTTP security headers, SSRF protection on the curl command |
+| **SEO**           | Full OpenGraph, Twitter Card, canonical URL, sitemap, robots.txt, JSON-LD Person schema |
 
 ---
 
-## Features at a Glance
-
-| Category          | Features                                                                                                 |
-| ----------------- | -------------------------------------------------------------------------------------------------------- |
-| **Commands**      | 43 commands — portfolio info, utilities, network tools, games, all with `--help` and `man` pages         |
-| **Theming**       | 31 OKLCH-based color themes, 15 monospace fonts, both persisted in localStorage                          |
-| **Completion**    | Tab autocomplete with grouped suggestions, descriptions, and keyboard navigation                         |
-| **History**       | `↑↓` navigation, `Ctrl+R` incremental reverse search, persisted across sessions                          |
-| **Audio**         | Web Audio API keyboard sounds — click, chime, buzz — no audio files                                      |
-| **Loading**       | 5 loading variants: braille spinner, ASCII progress bar, typewriter, dots, rotating spinner              |
-| **Utilities**     | Note manager, todo list, code snippet vault — all localStorage-backed                                    |
-| **Network**       | curl simulator with SSRF protection, GitHub profile viewer, IP geolocation                               |
-| **Crypto**        | SHA-1/256/384/512 hashes, Base64/URL/hex encode-decode — all local, no server                            |
-| **Games**         | 40-question Frontend quiz with XP system, rank progression, and localStorage persistence                 |
-| **Accessibility** | ARIA live regions, `aria-hidden` on decorative elements, `prefers-reduced-motion`, screen reader support |
-| **Security**      | DOMPurify sanitization, strict HTTP headers, SSRF protection                                             |
-| **SEO**           | Full OpenGraph, Twitter Card, canonical URL, sitemap, robots.txt, JSON-LD Person schema                  |
-
----
-
-## Commands Reference
-
-> Type **`help`** in the terminal to see all commands. Every command accepts **`--help`** or **`-h`** for detailed usage, and **`man <command>`** for the full manual page.
+## Commands
 
 ### Navigation & System
 
-| Command                       | Description                                       |
-| ----------------------------- | ------------------------------------------------- |
-| `audio [on\|off\|volume <n>]` | Toggle keyboard sounds, adjust volume (0–100)     |
-| `alias [name="value"]`        | Create or list persistent command shortcuts       |
-| `unalias <name>`              | Remove an alias                                   |
-| `clear` · `Ctrl+L`            | Clear the terminal screen                         |
-| `exit`                        | Display goodbye message                           |
-| `help`                        | List all available commands                       |
-| `hostname`                    | Portfolio hostname and uptime info                |
-| `neofetch`                    | Linux-style system summary with live theme & font |
-| `theme [name\|--random]`      | Switch color theme — 31 available                 |
-| `typeface [name\|--random]`   | Switch terminal font — 15 available               |
-| `welcome`                     | Display the welcome banner again                  |
-| `whoami`                      | Short bio                                         |
+| Command                       | Description |
+| ----------------------------- | ----------- |
+| `audio [on\|off\|volume <n>]` | Toggle keyboard sounds, adjust volume (0-100) |
+| `alias [name="value"]`        | Create or list persistent command shortcuts |
+| `unalias <name>`              | Remove an alias |
+| `clear` / `Ctrl+L`            | Clear the terminal screen |
+| `exit`                        | Display goodbye message |
+| `help`                        | List all available commands |
+| `hostname`                    | Portfolio hostname and uptime info |
+| `loader [name\|--random]`     | Switch loading indicator style — 5 available |
+| `neofetch`                    | Linux-style system summary with live theme and font |
+| `theme [name\|--random]`      | Switch color theme — 31 available |
+| `typeface [name\|--random]`   | Switch terminal font — 15 available |
+| `welcome`                     | Display the welcome banner again |
+| `whoami`                      | Short bio |
 
 ### Information
 
-| Command          | Description                                        |
-| ---------------- | -------------------------------------------------- |
-| `about`          | My story, journey, and tech stack                  |
-| `contact`        | All social networks and contact details            |
-| `date` · `time`  | Live clock with date, time, and timezone           |
-| `email`          | Email address with mailto link                     |
+| Command          | Description |
+| ---------------- | ----------- |
+| `about`          | My story, journey, and tech stack |
+| `contact`        | All social networks and contact details |
+| `date` / `time`  | Live clock with date, time, and timezone |
+| `email`          | Email address with mailto link |
 | `projects`       | Featured projects with live demos and source links |
-| `repo`           | This portfolio's source code on GitHub             |
-| `resume`         | View or download my CV in English or French (PDF)  |
-| `weather <city>` | Real-time weather for any city via wttr.in         |
+| `repo`           | This portfolio's source code on GitHub |
+| `resume`         | View or download my CV in English or French (PDF) |
+| `weather <city>` | Real-time weather for any city via wttr.in |
 
 ### Network
 
-| Command                | Description                                                                |
-| ---------------------- | -------------------------------------------------------------------------- |
+| Command                | Description |
+| ---------------------- | ----------- |
 | `curl [options] <url>` | Browser HTTP client — GET, POST, HEAD, verbose mode, auth, SSRF protection |
-| `github <username>`    | GitHub user profile, pinned repos, and top starred repositories            |
-| `ip`                   | Public IP address and geolocation info                                     |
+| `github <username>`    | GitHub user profile, pinned repos, and top starred repos |
+| `ip`                   | Public IP address and geolocation info |
 
 ### Utilities
 
-| Command                               | Description                                                   |
-| ------------------------------------- | ------------------------------------------------------------- |
-| `age <date>`                          | Exact age calculator with next-birthday countdown             |
-| `calc <expression>`                   | Math calculator — algebra, trig, units, constants (mathjs)    |
-| `color <value>`                       | Convert colors between HEX, RGB, HSL, OKLCH                   |
-| `convert <amount> <from> <to>`        | Real-time currency conversion (168+ currencies via ECB)       |
-| `convert list`                        | List all supported currencies with names and symbols          |
-| `decode [format] <text>`              | Decode base64, url, or hex — runs locally                     |
-| `echo <text>`                         | Output text with `\n` newline support                         |
-| `encode [format] <text>`              | Encode to base64, url, or hex — runs locally                  |
+| Command                               | Description |
+| ------------------------------------- | ----------- |
+| `age <date>`                          | Exact age calculator with next-birthday countdown |
+| `calc <expression>`                   | Math calculator — algebra, trig, units, constants (mathjs) |
+| `color <value>`                       | Convert colors between HEX, RGB, HSL, OKLCH |
+| `convert <amount> <from> <to>`        | Real-time currency conversion (168+ currencies via ECB) |
+| `convert list`                        | List all supported currencies with names and symbols |
+| `decode [format] <text>`              | Decode base64, url, or hex — runs locally |
+| `echo <text>`                         | Output text with `\n` newline support |
+| `encode [format] <text>`              | Encode to base64, url, or hex — runs locally |
 | `hash [algo] <text>`                  | Cryptographic hashes — sha256 (default), sha512, sha384, sha1 |
-| `history [n]`                         | Display recent command history (default 20, max 50)           |
-| `man <command>`                       | Full manual page for any command                              |
-| `note [add\|rm\|edit\|clear]`         | Persistent note manager                                       |
-| `snippet [add\|show\|rm\|clear]`      | Code snippet vault with syntax highlighting                   |
-| `timer <duration> [label]`            | Countdown timer — supports `25m`, `1h`, `1h30m`, `90s`        |
-| `todo [add\|done\|undone\|rm\|clear]` | Task list with done/pending states                            |
-| `uuid [v1\|v4] [n]` · `uuid validate` | Generate or validate UUIDs                                    |
+| `history [n]`                         | Display recent command history (default 20, max 50) |
+| `man <command>`                       | Full manual page for any command |
+| `note [add\|rm\|edit\|clear]`         | Persistent note manager |
+| `snippet [add\|show\|rm\|clear]`      | Code snippet vault with syntax highlighting |
+| `timer <duration> [label]`            | Countdown timer — supports `25m`, `1h`, `1h30m`, `90s` |
+| `todo [add\|done\|undone\|rm\|clear]` | Task list with done/pending states |
+| `uuid [v1\|v4] [n]` / `uuid validate` | Generate or validate UUIDs |
 
 ### Fun & Games
 
-| Command                       | Description                                    |
-| ----------------------------- | ---------------------------------------------- |
-| `cowsay <message>`            | ASCII cow says your message                    |
-| `game` · `game [1-3]`         | Frontend quiz — 40 questions, XP system, ranks |
-| `game stats` · `game reset`   | View or reset quiz progress                    |
-| `joke`                        | Random programming joke (JokeAPI)              |
-| `quote`                       | Random advice quote (Advice Slip API)          |
-| `rps <rock\|paper\|scissors>` | Rock-paper-scissors against the terminal       |
-| `sudo`                        | Attempt to gain root access… 😄                |
+| Command                       | Description |
+| ----------------------------- | ----------- |
+| `cowsay <message>`            | ASCII cow says your message |
+| `game` / `game [1-3]`         | Frontend quiz — 40 questions, XP system, 4 ranks |
+| `game stats` / `game reset`   | View or reset quiz progress |
+| `joke`                        | Random programming joke (JokeAPI) |
+| `quote`                       | Random advice quote (Advice Slip API) |
+| `rps <rock\|paper\|scissors>` | Rock-paper-scissors against the terminal |
+| `sudo`                        | Attempt to gain root access |
 
----
+### Keyboard Shortcuts
 
-## Keyboard Shortcuts
-
-| Shortcut  | Action                                                           |
-| --------- | ---------------------------------------------------------------- |
-| `Tab`     | Autocomplete command or argument — cycles through matches        |
+| Shortcut  | Action |
+| --------- | ------ |
+| `Tab`     | Autocomplete command or argument — cycles through matches |
 | `↑` / `↓` | Navigate history, or move through suggestions when panel is open |
-| `Esc`     | Dismiss suggestions panel, keep input focus                      |
-| `Enter`   | Execute command                                                  |
-| `Ctrl+L`  | Clear the terminal screen                                        |
-| `Ctrl+R`  | Enter reverse search — cycle through history matches             |
-| `Ctrl+C`  | Cancel a running command (only active while loading)             |
+| `Esc`     | Dismiss suggestions panel, keep input focus |
+| `Enter`   | Execute command |
+| `Ctrl+L`  | Clear the terminal screen |
+| `Ctrl+R`  | Enter reverse search — cycle through history matches |
+| `Ctrl+C`  | Cancel a running command (only active while loading) |
 
 ---
 
-## Theme & Font System
+## Look & feel
 
 ### Themes (31)
 
-Switch with `theme <name>`. All themes use **OKLCH** color values for perceptually uniform contrast across hue and lightness. Your preference is saved in localStorage and restored on every page load.
+Switch with `theme <name>`. All themes use OKLCH color values, which gives perceptually uniform contrast across hue and lightness. Your preference is saved in localStorage and restored on every page load.
 
 ```bash
 theme dracula
 theme catppuccin-mocha
 theme tokyo-night
 theme hack-the-box
-theme --random        # Roll the dice
-theme random          # Same result, positional form
+theme --random    # Roll the dice
+theme random      # Same result, positional form
 ```
 
-| Group               | Themes                                                                                                                                 |
-| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| **Catppuccin**      | `catppuccin` · `catppuccin-latte` · `catppuccin-frappe` · `catppuccin-mocha`                                                           |
-| **Popular Dark**    | `monokai` · `tokyo-night` · `dracula` · `nord` · `gruvbox` · `everforest` · `rose-pine`                                                |
-| **Editor Classics** | `solarized-dark` · `oceanic` · `cobalt2` · `github` · `one-dark` · `atom-one-dark`                                                     |
-| **Material**        | `material-default` · `material-lighter` · `material-oceanic` · `material-palenight` · `material-deep-ocean` · `material-high-contrast` |
-| **Others**          | `ayu-dark` · `night-owl` · `synthwave` · `kanagawa` · `horizon` · `poimandres` · `vesper` · `hack-the-box`                             |
+| Group               | Themes |
+| ------------------- | ------ |
+| **Catppuccin**      | `catppuccin` / `catppuccin-latte` / `catppuccin-frappe` / `catppuccin-mocha` |
+| **Popular Dark**    | `monokai` / `tokyo-night` / `dracula` / `nord` / `gruvbox` / `everforest` / `rose-pine` |
+| **Editor Classics** | `solarized-dark` / `oceanic` / `cobalt2` / `github` / `one-dark` / `atom-one-dark` |
+| **Material**        | `material-default` / `material-lighter` / `material-oceanic` / `material-palenight` / `material-deep-ocean` / `material-high-contrast` |
+| **Others**          | `ayu-dark` / `night-owl` / `synthwave` / `kanagawa` / `horizon` / `poimandres` / `vesper` / `hack-the-box` |
 
-> **Tip:** `theme [Tab]` cycles all 31 themes with grouped suggestions and inline descriptions.
+Hit `theme [Tab]` to cycle all 31 with grouped suggestions and inline descriptions.
 
 ### Fonts (15)
 
-Switch with `typeface <name>`. Fonts load on demand — the initial bundle stays lean. Once loaded, switching is instant.
+Switch with `typeface <name>`. Fonts load on demand. The initial bundle only ships Recursive Casual Mono. Everything else loads when you first request it — after that, switching is instant.
 
 ```bash
-typeface fira             # Fira Code — ligatures
-typeface jetbrains        # JetBrains Mono — clean readability
-typeface victor           # Victor Mono — cursive italics
-typeface geist            # Geist Mono — modern & sharp
-typeface --random         # Roll the dice
+typeface fira          # Fira Code with ligatures
+typeface jetbrains     # JetBrains Mono
+typeface victor        # Victor Mono — cursive italics
+typeface geist         # Geist Mono
+typeface --random      # Roll the dice
 ```
 
-| Category                     | Fonts                                                                                              |
-| ---------------------------- | -------------------------------------------------------------------------------------------------- |
-| **Static** (always loaded)   | `recursive-casual` → Recursive Casual Mono                                                         |
-| **Google Fonts** (on demand) | `fira` · `jetbrains` · `ibm-plex` · `source-code` · `ubuntu` · `space` · `inconsolata` · `cousine` |
-| **npm package**              | `geist` → Geist Mono                                                                               |
-| **Local fonts**              | `cascadia` · `recursive-linear` · `hack` · `victor` · `meslo`                                      |
+| Category                     | Fonts |
+| ---------------------------- | ----- |
+| **Static** (always loaded)   | `recursive-casual` (Recursive Casual Mono) |
+| **Google Fonts** (on demand) | `fira` / `jetbrains` / `ibm-plex` / `source-code` / `ubuntu` / `space` / `inconsolata` / `cousine` |
+| **npm package**              | `geist` (Geist Mono) |
+| **Local fonts**              | `cascadia` / `recursive-linear` / `hack` / `victor` / `meslo` |
 
-**Loading strategy:** Recursive Casual Mono is bundled statically at build time (~150 KB) — zero latency on first render. All other fonts load via `useDynamicFont` on first request: Google Fonts through CDN `<link>` injection, Geist Mono via the official npm package, and local fonts through the `FontFace` API from `/public/fonts/`. Every font is cached after first load. This reduces the initial bundle by ~75% compared to loading all fonts upfront.
+**How loading works:** Recursive Casual Mono is bundled statically at build time (~150 KB) — zero latency on first render. All other fonts load through `useDynamicFont` on first request: Google Fonts via CDN `<link>` injection, Geist Mono through the official npm package, and local fonts through the `FontFace` API from `/public/fonts/`. Every font is cached after first load. This cuts the initial bundle by roughly 75% compared to loading all 15 upfront.
 
 ---
 
-## Architecture
+## How it works
 
 ### Command Registry
 
 Every command maps to a handler in a single file (`src/utils/commandRegistry.ts`). Adding or removing a command requires editing exactly one line.
 
 ```typescript
-// src/utils/commandRegistry.ts
 export const COMMAND_REGISTRY: Record<string, CommandHandlerType> = {
   calc: (args) => handleCalcCommand(args),
   color: (args) => handleColorCommand(args),
   github: (args) => handleGithubCommand(args),
-  // 43 entries total
+  // 45 entries + clear (built-in)
 };
 ```
 
-The dispatcher (`executeCommand`) does a single registry lookup with alias resolution baked in — no switch statements, no if-chains. `clear` is the only exception: it bypasses the registry entirely.
+The dispatcher (`executeCommand`) does a single registry lookup with alias resolution built in. No switch statements. No if-chains. `clear` is the only exception — it bypasses the registry entirely.
 
 **Resolution order (first match wins):**
 
 1. `clear` — built-in, bypasses everything
 2. Alias expansion — transparently replace with stored expansion (single-level, no loops)
 3. `COMMAND_REGISTRY` — normal command handlers
-4. Not-found output — friendly error
+4. Not-found output — friendly error message
 
-### Unified Argument Parser
+### Argument Parser
 
 Every command uses `parseArgs()` from `src/utils/argParser.ts`.
 
 ```typescript
 parseArgs(["add", "--verbose", "-f", "file.txt"]);
-// → { subcommand: "add", flags: { verbose: true, f: true }, positional: ["file.txt"] }
+// => { subcommand: "add", flags: { verbose: true, f: true }, positional: ["file.txt"] }
 ```
 
-Handles long flags (`--flag`), short flags (`-f`), options with values (`--option value`), positional arguments, and automatic `--help` / `-h` detection.
+It handles long flags (`--flag`), short flags (`-f`), options with values (`--option value`), positional arguments, and automatic `--help`/`-h` detection.
 
 ### Output Factories
 
-All command output is created through typed factories. No command writes raw blocks manually.
+Every command returns output through typed factories. I wanted to avoid commands writing raw HTML by hand.
 
 ```typescript
 createHtmlOutput(html)         // HTML block — DOMPurify sanitized at render time
-createTextOutput(lines)        // Plain text, whitespace-pre preserved
+createTextOutput(lines)        // Plain text, whitespace preserved
 createErrorOutput(msg, hint?)  // Standardized error with optional guidance
 createSuccessOutput(msg)       // Standardized success feedback
-createHelpOutput(config)       // Full help block — name, usage, options, examples
+createHelpOutput(config)       // Full help block
 ```
 
 ### Service Layer
 
-Every external API call is isolated in `src/services/`. Command handlers never make HTTP requests directly.
+Every external API call is isolated in `src/services/`. Command handlers never touch HTTP directly — they call a service and get back data.
 
-| Service              | API                   | Used by   |
-| -------------------- | --------------------- | --------- |
+| Service              | API                   | Used by |
+| -------------------- | --------------------- | ------- |
 | `weather.service.ts` | wttr.in               | `weather` |
-| `joke.service.ts`    | JokeAPI v2            | `joke`    |
-| `quote.service.ts`   | Advice Slip API       | `quote`   |
+| `joke.service.ts`    | JokeAPI v2            | `joke` |
+| `quote.service.ts`   | Advice Slip API       | `quote` |
 | `convert.service.ts` | Frankfurter / ECB     | `convert` |
-| `ip.service.ts`      | ipapi.co              | `ip`      |
-| `github.service.ts`  | GitHub REST + GraphQL | `github`  |
-| `curl.service.ts`    | axios (browser)       | `curl`    |
-| `audio.service.ts`   | Web Audio API         | `audio`   |
+| `ip.service.ts`      | ipapi.co              | `ip` |
+| `github.service.ts`  | GitHub REST + GraphQL | `github` |
+| `curl.service.ts`    | axios (browser)       | `curl` |
+| `audio.service.ts`   | Web Audio API         | `audio` |
 
 ### Custom Hooks
 
-| Hook                | Purpose                                                             |
-| ------------------- | ------------------------------------------------------------------- |
-| `useCommandHistory` | Terminal history state with localStorage persistence                |
-| `useLocalStorage`   | SSR-safe generic localStorage hook with JSON serialization          |
-| `useThemeFont`      | Restore saved theme and font preferences on mount                   |
-| `useDynamicFont`    | Lazy-load and cache fonts on demand                                 |
-| `useDebounce`       | Debounce any value — used in suggestion computation                 |
-| `useReverseSearch`  | Incremental reverse search through history (Ctrl+R)                 |
-| `useSuggestions`    | Live suggestions panel — completions, grouping, keyboard nav        |
+| Hook                | Purpose |
+| ------------------- | ------- |
+| `useCommandHistory` | Terminal history state with localStorage persistence |
+| `useLocalStorage`   | SSR-safe generic localStorage hook with JSON serialization |
+| `useThemeFont`      | Restore saved theme and font preferences on mount |
+| `useDynamicFont`    | Lazy-load and cache fonts on demand |
+| `useDebounce`       | Debounce any value — used in suggestion computation |
+| `useReverseSearch`  | Incremental reverse search through history (Ctrl+R) |
+| `useSuggestions`    | Live suggestions panel — completions, grouping, keyboard nav |
 | `useAudio`          | Audio system — keyboard sounds, success/error feedback, persistence |
 
 ### Domain-Split Type System
 
 ```
 src/types/
-├── terminal.types.ts   — Block, CommandHistory, SerializableHistory
-├── command.types.ts    — CommandHandlerType, ParsedArgsType, HelpConfigType, ManPageType
-├── ui.types.ts         — Component prop types (Timer, ErrorBoundary, Loaders…)
-└── data.types.ts       — API response shapes (GitHub, IP, currency, curl…)
+  terminal.types.ts   — Block, CommandHistory, SerializableHistory
+  command.types.ts    — CommandHandlerType, ParsedArgsType, HelpConfigType, ManPageType
+  ui.types.ts         — Component prop types (Timer, ErrorBoundary, Loaders...)
+  data.types.ts       — API response shapes (GitHub, IP, currency, curl...)
 ```
 
 ---
 
-## Design System
+## Design Tokens
 
-The visual language is built on centralized tokens used consistently across all 43 commands.
+Every decorative element and spacing value comes from `src/utils/designTokens.ts`. I keep them centralized to avoid scattered inline strings across command files.
 
-### Semantic Color Roles
+### Semantic Colors
 
-| CSS Variable             | Role                                      |
-| ------------------------ | ----------------------------------------- |
-| `--color-primary-clr`    | Prompt, accents, interactive elements     |
+| CSS Variable             | Role |
+| ------------------------ | ---- |
+| `--color-primary-clr`    | Prompt, accents, interactive elements |
 | `--color-secondary-clr`  | Section headers, labels, error indicators |
-| `--color-tertiary-clr`   | Command names, highlighted values, code   |
-| `--color-text-clr`       | Body text                                 |
-| `--color-background-clr` | Terminal background                       |
-| `--color-foreground-clr` | Input bar, card surfaces                  |
+| `--color-tertiary-clr`   | Command names, highlighted values, code |
+| `--color-text-clr`       | Body text |
+| `--color-background-clr` | Terminal background |
+| `--color-foreground-clr` | Input bar, card surfaces |
 
-All values are in OKLCH — consistent perceptual lightness and chroma across all 31 themes.
+Every value uses OKLCH. Consistent perceptual lightness across all 31 themes.
 
 ### Spacing Scale
 
-| Token               | Usage                                    |
-| ------------------- | ---------------------------------------- |
-| `space-y-t-section` | Between major output sections            |
-| `space-y-t-group`   | Between lines within a section           |
-| `space-y-t-footer`  | Footer / hint area                       |
+| Token               | Usage |
+| ------------------- | ----- |
+| `space-y-t-section` | Between major output sections |
+| `space-y-t-group`   | Between lines within a section |
+| `space-y-t-footer`  | Footer / hint area |
 | `py-t-outer`        | Vertical padding on the output container |
 
-### Design Tokens
-
-All decorative elements are centralized in `src/utils/designTokens.ts` — no inline strings scattered across command files.
+### Decorative Elements
 
 ```typescript
 DT.separators.short; // ────────────────────────────────────────
-DT.separators.long; // ──────────────────────────────────────────────────────
-DT.icons.success; // ✓  (aria-hidden)
-DT.icons.warning; // ⚠  (aria-hidden)
-DT.icons.error; // ✗  (aria-hidden)
-DT.decorators.bullet; // •  (aria-hidden)
+DT.separators.long;  // ──────────────────────────────────────────────────────
+DT.icons.success;    // ✓  (aria-hidden)
+DT.icons.warning;    // ⚠  (aria-hidden)
+DT.icons.error;      // ✗  (aria-hidden)
+DT.decorators.bullet;// •  (aria-hidden)
 DT.decorators.arrow; // →  (aria-hidden)
-DT.decorators.quote; // '  (aria-hidden)
 ```
 
 ---
 
-## Performance
+## Performance (and what it cost me)
 
-| Metric             | Strategy                                                                                                                                                                     |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Initial bundle** | Static font reduced to 1 (Recursive Casual Mono ~150 KB). All other fonts lazy-loaded via `useDynamicFont` on first request — ~75% bundle reduction vs. loading all upfront. |
-| **Code splitting** | `mathjs` (heavy) is tree-shaken via `optimizePackageImports`. `highlight.js` is dynamically imported only on `snippet show`.                                                 |
-| **API responses**  | Currency list is cached in memory for the session after first fetch. Fonts are cached after first load — subsequent switches are instant.                                    |
-| **Rendering**      | `React.memo` on `HistoryEntry`. Output animations are staggered with configurable delays to avoid layout thrashing.                                                          |
-| **Compression**    | HTTP response compression enabled in `next.config.ts`.                                                                                                                       |
-| **Animations**     | All animations respect `prefers-reduced-motion` — durations collapse to 0.01ms via global CSS when the media query fires.                                                    |
+| Metric             | Strategy |
+| ------------------ | -------- |
+| **Initial bundle** | One static font (Recursive Casual Mono, ~150 KB). All others lazy-loaded via `useDynamicFont` — roughly 75% less CSS than loading all 15 upfront |
+| **Code splitting** | `mathjs` tree-shaken via `optimizePackageImports`. `highlight.js` dynamically imported only when you run `snippet show` |
+| **API responses**  | Currency list cached in memory after first fetch. Fonts cached after first load — subsequent switches are instant |
+| **Rendering**      | `React.memo` on `HistoryEntry`. Output animations staggered with configurable delays to avoid layout thrashing |
+| **Compression**    | HTTP response compression enabled in `next.config.ts` |
+| **Animations**     | All animations respect `prefers-reduced-motion` — durations collapse to 0.01ms globally when the media query fires. The audio engine also checks this before playing sound |
+
+The font loading strategy was the hardest piece to get right. Balancing rich visual customization against first-load performance meant writing a custom hook instead of using any off-the-shelf solution. Every font loads through the `FontFace` API, Google Fonts `<link>` injection, or the npm `geist` package — and every one caches after first use.
 
 ---
 
-## Accessibility
+## Accessibility (the hard parts)
 
-This project targets **WCAG 2.1 Level AA** compliance for the interactive terminal interface.
+This project targets WCAG 2.1 Level AA for the interactive terminal interface. Some of it was straightforward. Some of it was not.
 
-| Feature                 | Implementation                                                                                                                                                          |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **ARIA live region**    | `role="log"` with `aria-live="polite"` wraps command history — screen readers announce new output without losing focus.                                                 |
-| **Combobox pattern**    | The command input uses `role="combobox"` with `aria-haspopup`, `aria-expanded`, `aria-controls`, and `aria-activedescendant` to correctly expose the suggestions panel. |
-| **Decorative elements** | All ASCII art, separators, and icon spans carry `aria-hidden="true"`.                                                                                                   |
-| **VisuallyHidden**      | A `<VisuallyHidden>` component wraps screen-reader-only context (keyboard hint, timer announcements, copy-to-clipboard status).                                         |
-| **Focus management**    | ESC dismisses the suggestions panel and immediately restores focus to the input via `setTimeout(..., 0)` + `event.stopPropagation()`.                                   |
-| **Reduced motion**      | `@media (prefers-reduced-motion: reduce)` collapses all animation durations to 0.01ms globally. The audio system also checks this media query before playing any sound. |
-| **Keyboard-first**      | Every feature is fully operable by keyboard alone. No mouse dependency for any terminal action.                                                                         |
-| **Semantic HTML**       | `<main>`, `<label>` paired with `<input>`, `role="application"`, `role="log"`, `role="status"`, `role="alert"` used contextually throughout.                            |
-| **Color contrast**      | All 31 themes use OKLCH values tuned for ≥4.5:1 contrast ratio between text and background tokens.                                                                      |
+| Feature                 | Implementation |
+| ----------------------- | -------------- |
+| **ARIA live region**    | `role="log"` with `aria-live="polite"` wraps command history — screen readers announce new output without losing focus |
+| **Combobox pattern**    | The command input uses `role="combobox"` with `aria-haspopup`, `aria-expanded`, `aria-controls`, and `aria-activedescendant` |
+| **Decorative elements** | All ASCII art, separators, and icon spans carry `aria-hidden="true"` |
+| **VisuallyHidden**      | A `<VisuallyHidden>` component wraps screen-reader-only context (keyboard hint, timer announcements, copy status) |
+| **Focus management**    | ESC dismisses the suggestions panel and immediately restores focus to the input |
+| **Reduced motion**      | `@media (prefers-reduced-motion: reduce)` collapses all animation durations to 0.01ms globally. The audio system also checks this |
+| **Keyboard-first**      | Every feature works by keyboard alone. No mouse dependency |
+| **Semantic HTML**       | `<main>`, `<label>` + `<input>`, `role="application"`, `role="log"`, `role="status"`, `role="alert"` used contextually |
+| **Color contrast**      | All 31 themes use OKLCH values tuned for 4.5:1 minimum contrast ratio between text and background |
 
-> **Known limitation:** The terminal interface is inherently screen-reader-challenging by nature. Users relying on assistive technology will get a functional experience, though the character-by-character output animation may be verbose in some readers. The `aria-atomic="false"` on the log region is intentional to avoid reading the entire history on each update.
+**The honest limitation:** A terminal interface is inherently challenging for screen readers. The character-by-character output animation can be verbose. The `aria-atomic="false"` on the log region is intentional — setting it to `true` would make screen readers re-read the entire history on every new command, which is a terrible experience.
 
 ---
 
 ## Security
 
-| Measure                    | Details                                                                                                                                                                                                                                                                                     |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **XSS prevention**         | Every HTML output block passes through DOMPurify before reaching `dangerouslySetInnerHTML`. A post-sanitization hook adds `target="_blank" rel="noopener noreferrer"` to all links.                                                                                                         |
-| **SSRF protection**        | The `curl` command rejects local/private addresses (localhost, 127.x, 10.x, 192.168.x, 169.254.x, ::1) before dispatch.                                                                                                                                                                     |
-| **HTTP security headers**  | Set in `next.config.ts` on all routes: `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `X-XSS-Protection: 1; mode=block`, `Strict-Transport-Security` (HSTS), `Permissions-Policy` (camera/microphone/geolocation blocked). |
-| **No server-side secrets** | All cryptographic operations (hashing, encoding, UUID generation) run locally in the browser via the Web Crypto API. No data is sent to any server for these operations.                                                                                                                    |
-| **Alias safety**           | Alias resolution is single-level. Alias names are validated against a strict POSIX regex. Protected built-ins (`clear`) cannot be aliased.                                                                                                                                                  |
+| Measure                    | Details |
+| -------------------------- | ------- |
+| **XSS prevention**         | Every HTML output block passes through DOMPurify before reaching `dangerouslySetInnerHTML`. A post-sanitization hook adds `target="_blank" rel="noopener noreferrer"` to all links |
+| **SSRF protection**        | The `curl` command rejects local/private addresses (localhost, 127.x, 10.x, 192.168.x, 169.254.x, ::1) before dispatch |
+| **HTTP security headers**  | Set in `next.config.ts` on all routes: `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `X-XSS-Protection: 1; mode=block`, `Strict-Transport-Security` (HSTS), `Permissions-Policy` (camera/microphone/geolocation blocked) |
+| **No server-side secrets** | All cryptographic operations (hashing, encoding, UUID generation) run locally in the browser via the Web Crypto API. Nothing sent to a server |
+| **Alias safety**           | Alias resolution is single-level. Alias names validated against a strict POSIX regex. Protected built-ins (`clear`) cannot be aliased |
+
+---
+
+## SEO & Metadata
+
+| Feature           | Implementation |
+| ----------------- | -------------- |
+| **OpenGraph**     | Full `og:title`, `og:description`, `og:image` (1200x630), `og:type`, `og:url`, `og:locale` |
+| **Twitter Card**  | `summary_large_image` with `@Souleymanesy43` creator tag |
+| **Canonical URL** | Declared in Next.js metadata — prevents duplicate indexing |
+| **JSON-LD**       | `Person` schema with `name`, `url`, `sameAs` (GitHub, LinkedIn), `jobTitle`, `knowsAbout` |
+| **Sitemap**       | Generated at `/sitemap.xml` via `src/app/sitemap.ts` with monthly change frequency |
+| **robots.txt**    | Generated at `/robots.txt` via `src/app/robots.ts` — allows all crawlers, links to sitemap |
+| **DNS prefetch**  | `<link rel="dns-prefetch">` for `fonts.googleapis.com` and `fonts.gstatic.com` in the root layout |
+| **404 page**      | Custom terminal-style 404 with `robots: { index: false }` |
 
 ---
 
@@ -391,52 +390,52 @@ This project targets **WCAG 2.1 Level AA** compliance for the interactive termin
 
 ### Core
 
-| Technology   | Version | Role                                    |
-| ------------ | ------- | --------------------------------------- |
-| Next.js      | 16.2.4  | Framework, routing, headers, SSR        |
-| React        | 19.2.5  | UI rendering, hooks, error boundary     |
+| Technology   | Version | Role |
+| ------------ | ------- | ---- |
+| Next.js      | 16.2.4  | Framework, routing, headers, SSR |
+| React        | 19.2.5  | UI rendering, hooks, error boundary |
 | TypeScript   | 6.0.3   | Static typing, domain-split type system |
-| Tailwind CSS | 4.2.4   | Utility-first styling                   |
-| Bun          | latest  | Runtime and package manager             |
+| Tailwind CSS | 4.2.4   | Utility-first styling |
+| Bun          | latest  | Runtime and package manager |
 
 ### Libraries
 
-| Package       | Version | Role                                  |
-| ------------- | ------- | ------------------------------------- |
-| framer-motion | 12.38.0 | Animations and transitions            |
-| dompurify     | 3.4.1   | XSS sanitization                      |
-| axios         | 1.15.2  | HTTP client for all API calls         |
-| mathjs        | 15.2.0  | Math expression evaluator             |
-| uuid          | 14.0.0  | UUID v1 / v4 generation               |
-| date-fns      | 4.1.0   | Date parsing and arithmetic           |
+| Package       | Version | Role |
+| ------------- | ------- | ---- |
+| framer-motion | 12.38.0 | Animations and transitions |
+| dompurify     | 3.4.1   | XSS sanitization |
+| axios         | 1.15.2  | HTTP client for all API calls |
+| mathjs        | 15.2.0  | Math expression evaluator |
+| uuid          | 14.0.0  | UUID v1 / v4 generation |
+| date-fns      | 4.1.0   | Date parsing and arithmetic |
 | highlight.js  | 11.11.1 | Syntax highlighting in `snippet show` |
-| geist         | 1.7.0   | Geist Mono font package               |
+| geist         | 1.7.0   | Geist Mono font package |
 
 ### External APIs
 
-| API                   | Command   | Auth           | Rate limit         |
-| --------------------- | --------- | -------------- | ------------------ |
-| wttr.in               | `weather` | None           | Generous           |
-| JokeAPI v2            | `joke`    | None           | 120 req/min        |
-| Advice Slip API       | `quote`   | None           | Generous           |
-| Frankfurter (ECB)     | `convert` | None           | Generous           |
-| ipapi.co              | `ip`      | None           | 1,000 req/day      |
-| GitHub REST + GraphQL | `github`  | Optional token | 60 req/hr (unauth) |
+| API                   | Command   | Auth           | Rate limit |
+| --------------------- | --------- | -------------- | ---------- |
+| wttr.in               | `weather` | None           | Generous |
+| JokeAPI v2            | `joke`    | None           | 120 req/min |
+| Advice Slip API       | `quote`   | None           | Generous |
+| Frankfurter (ECB)     | `convert` | None           | Generous |
+| ipapi.co              | `ip`      | None           | 1,000 req/day |
+| GitHub REST + GraphQL | `github`  | Optional token | 60 req/hr (unauthenticated) |
 
 ---
 
 ## Browser Support
 
-| Browser                | Support                                        |
-| ---------------------- | ---------------------------------------------- |
-| Chrome / Edge 88+      | ✅ Full                                        |
-| Firefox 78+            | ✅ Full                                        |
-| Safari 14+             | ✅ Full                                        |
-| Mobile Chrome / Safari | ✅ Functional (keyboard UX degraded by design) |
+| Browser                | Support |
+| ---------------------- | ------- |
+| Chrome / Edge 88+      | Full |
+| Firefox 78+            | Full |
+| Safari 14+             | Full |
+| Mobile Chrome / Safari | Functional (keyboard UX degraded by design) |
 
-The terminal relies on: `Web Crypto API`, `FontFace API`, `AudioContext`, `ResizeObserver`, `Intl.DateTimeFormat`, `localStorage`. All are available in modern browsers without polyfills.
+The terminal relies on: `Web Crypto API`, `FontFace API`, `AudioContext`, `ResizeObserver`, `Intl.DateTimeFormat`, `localStorage`. All available in modern browsers without polyfills.
 
-> **Note:** Mobile browsers work, but the experience is intentionally designed for a physical keyboard. A banner communicates this to mobile visitors.
+Mobile browsers work, but the experience is built for a physical keyboard. A banner communicates this to mobile visitors.
 
 ---
 
@@ -466,7 +465,7 @@ Open [http://localhost:3000](http://localhost:3000) and type `help`.
 NEXT_PUBLIC_GITHUB_TOKEN=ghp_yourTokenHere
 ```
 
-Without the token, `github <username>` still works — only pinned repos are skipped, top starred repos are shown instead.
+Without the token, `github <username>` still works. Pinned repos are skipped — top starred repos are shown instead.
 
 ### Scripts
 
@@ -484,78 +483,101 @@ bun format   # Prettier
 
 ```
 terminal-portfolio-website/
-├── public/
-│   ├── fonts/                    # Local font files (.woff2)
-│   ├── resume/                   # CV PDFs — EN and FR
-│   └── og-image.png
-└── src/
-    ├── app/
-    │   ├── globals.css           # Design tokens, 31 themes, 15 font rules
-    │   ├── layout.tsx            # Root layout, SEO metadata, static font
-    │   ├── page.tsx              # Home — Terminal + MobileBanner
-    │   ├── not-found.tsx         # Custom 404
-    │   ├── robots.ts
-    │   └── sitemap.ts
-    ├── commands/
-    │   ├── curl/                 # curl — index, parser, formatters, outputs
-    │   ├── man/                  # man — index + pages (system, info, network, utils, fun)
-    │   ├── _template-command.ts  # Template for new commands (4 patterns documented)
-    │   └── *.ts                  # One file per command
-    ├── components/
-    │   ├── common/               # Custom404, VisuallyHidden
-    │   ├── terminal/             # Terminal, CommandInput, CommandOutput, TerminalPrompt
-    │   └── ui/                   # LiveClock, TimerWidget, JsonOutput, MobileBanner, loaders/
-    ├── constants/
-    │   ├── help/                 # Help outputs organized by category (fun, info, system, utils)
-    │   ├── quiz-game/            # 40 questions + XP / rank config
-    │   ├── ascii.ts              # All ASCII art constants
-    │   ├── commands.ts           # Command list + COMPLETIONS map
-    │   ├── storageKeys.ts        # Centralized localStorage key names
-    │   └── suggestions.ts        # Grouped suggestion data
-    ├── hooks/                    # 8 custom hooks
-    ├── services/                 # 8 service files — one per API
-    ├── types/                    # 4 domain-split type files
-    └── utils/
-        ├── output/               # output.ts + outputBuilders.ts + createJsonOutput.ts
-        ├── argParser.ts          # Unified argument parser
-        ├── command.ts            # executeCommand dispatcher with alias resolution
-        ├── commandRegistry.ts    # Central command → handler map
-        ├── commandStorage.ts     # SSR-safe localStorage wrapper
-        ├── date.ts               # Date utilities
-        ├── designTokens.ts       # Centralized design tokens (DT)
-        └── id.ts                 # Short ID generator
+  public/
+    fonts/                    # Local font files (.woff2)
+    resume/                   # CV PDFs — EN and FR
+    og-image.png
+  src/
+    app/
+      globals.css             # Design tokens, 31 themes, 15 font rules
+      layout.tsx              # Root layout, SEO metadata, static font
+      page.tsx                # Home — Terminal + MobileBanner
+      not-found.tsx           # Custom 404
+      robots.ts
+      sitemap.ts
+    commands/
+      curl/                   # curl — index, parser, formatters, outputs
+      man/                    # man — index + page handlers
+        pages/                # Man pages split by category
+      _template-command.ts    # Template for new commands (4 patterns)
+      *.ts                    # One file per command
+    components/
+      common/                 # Custom404, VisuallyHidden
+      terminal/               # Terminal, CommandInput, CommandOutput, TerminalPrompt
+      ui/                     # LiveClock, TimerWidget, JsonOutput, MobileBanner, loaders/
+    constants/
+      help/                   # Help outputs by category
+      quiz-game/              # 40 questions + XP / rank config
+      ascii.ts                # All ASCII art constants
+      commands.ts             # Command list + COMPLETIONS map
+      storageKeys.ts          # Centralized localStorage key names
+      suggestions.ts          # Grouped suggestion data
+    hooks/                    # 8 custom hooks
+    services/                 # 8 service files
+    types/                    # 4 domain-split type files
+    utils/
+      output/                 # output.ts + outputBuilders.ts + createJsonOutput.ts
+      argParser.ts            # Unified argument parser
+      command.ts              # executeCommand dispatcher with alias resolution
+      commandRegistry.ts      # Central command-to-handler map
+      commandStorage.ts       # SSR-safe localStorage wrapper
+      date.ts                 # Date utilities
+      designTokens.ts         # Centralized design tokens (DT)
+      id.ts                   # Short ID generator
 ```
 
 ---
 
 ## Adding a Command
 
-The codebase is designed to make this as frictionless as possible. Copy `src/commands/_template-command.ts` — it documents four implementation patterns with inline comments:
+I designed the codebase so adding a command takes minimal effort. Copy `src/commands/_template-command.ts` — it documents four implementation patterns:
 
-| Pattern              | Use case              | Examples in codebase              |
-| -------------------- | --------------------- | --------------------------------- |
+| Pattern              | Use case              | Examples |
+| -------------------- | --------------------- | -------- |
 | **Synchronous**      | Single-action, no I/O | `color`, `echo`, `cowsay`, `uuid` |
 | **Asynchronous**     | API call via service  | `github`, `weather`, `ip`, `joke` |
-| **Subcommand-based** | CRUD with storage     | `note`, `todo`, `snippet`         |
-| **React component**  | Live widget           | `timer`, `date`, `time`           |
+| **Subcommand-based** | CRUD with storage     | `note`, `todo`, `snippet` |
+| **React component**  | Live widget           | `timer`, `date`, `time` |
 
 **Checklist:**
 
-1. Copy `_template-command.ts` → `src/commands/mycommand-command.ts`
+1. Copy `_template-command.ts` to `src/commands/mycommand-command.ts`
 2. Write your handler using `parseArgs`, `createHtmlOutput`, `createErrorOutput`
 3. Register it in `src/utils/commandRegistry.ts` — one line
 4. Add it to `commands[]` in `src/constants/commands.ts` (alphabetical)
 5. Add tab completions in `COMPLETIONS` if applicable
 6. Write a `--help` entry in `src/constants/help/`
-7. _(Optional)_ Write a `man` page entry in `src/commands/man/pages/`
+7. (Optional) Write a `man` page entry in `src/commands/man/pages/`
 
-No switch statements to update. No global imports to hunt down.
+No switch statements. No global imports to hunt down.
+
+---
+
+## Design Decisions (and Regrets)
+
+A few things worth knowing before digging into the source.
+
+**What's intentional:**
+
+HTML output blocks use inline template literals rather than JSX components. This is deliberate — commands need to be composable and serializable to localStorage. JSX would require full React rendering for what are essentially static string templates. DOMPurify handles sanitization at render time.
+
+`aria-atomic="false"` on the history log region is intentional. Setting it to `true` would cause screen readers to re-read the entire history on every new command. That would be unusable.
+
+Alias resolution is single-level by design. Multi-level expansion could loop indefinitely.
+
+The `VisuallyHidden` component exposes itself in development mode (hold `Alt`) — useful for debugging accessibility markup without toggling a screen reader.
+
+**Trade-offs I live with:**
+
+The `gameState` in `quiz-game-command.ts` is module-level mutable state. Pragmatic choice for a game that persists across multiple command invocations within the same session without re-reading localStorage on every call. A reducer would be cleaner. A future refactor should fix this.
+
+`SanitizedHtmlLine` uses `dangerouslySetInnerHTML`. Unavoidable given the HTML-string output model. This is the entire reason DOMPurify is in the dependency tree.
 
 ---
 
 ## Contributing
 
-Found a bug, have a command idea, or want to improve the design system? Contributions are welcome.
+Found a bug? Have a command idea? Want to improve the design system? Contributions are welcome.
 
 ### Before You Start
 
@@ -584,26 +606,26 @@ git commit -m "feat(commands): add mycommand with --help support"
 
 ### Guidelines
 
-- **New commands** must follow the checklist in [Adding a Command](#adding-a-command).
-- **HTML in command outputs** should use plain strings — no helper abstraction layers.
-- **Decorative elements** (icons, separators, bullets) must come from `DT` in `designTokens.ts`.
-- **localStorage keys** must be added to `STORAGE_KEYS` in `storageKeys.ts` — no inline strings.
-- **API calls** belong in `src/services/` — command handlers receive data, not HTTP responses.
-- **Accessibility:** decorative spans need `aria-hidden="true"`. Interactive elements need accessible labels.
+- New commands must follow the checklist in [Adding a Command](#adding-a-command).
+- HTML in command outputs should use plain strings — no helper abstraction layers.
+- Decorative elements (icons, separators, bullets) must come from `DT` in `designTokens.ts`.
+- localStorage keys must go in `STORAGE_KEYS` in `storageKeys.ts` — no inline strings.
+- API calls belong in `src/services/` — command handlers receive data, not HTTP responses.
+- Accessibility: decorative spans need `aria-hidden="true"`. Interactive elements need accessible labels.
 
 ---
 
 ## Author
 
-If something here caught your attention — reach out.
+If something here caught your attention, reach out.
 
-|                 |                                                                        |
-| --------------- | ---------------------------------------------------------------------- |
-| **GitHub**      | [github.com/SouleymaneSy7](https://github.com/SouleymaneSy7)           |
+|                 | |
+| --------------- | - |
+| **GitHub**      | [github.com/SouleymaneSy7](https://github.com/SouleymaneSy7) |
 | **LinkedIn**    | [linkedin.com/in/souleymanesy7](https://linkedin.com/in/souleymanesy7) |
-| **Email**       | [souleymanesycodes@gmail.com](mailto:souleymanesycodes@gmail.com)      |
-| **Twitter / X** | [@Souleymanesy43](https://twitter.com/Souleymanesy43)                  |
+| **Email**       | [souleymanesycodes@gmail.com](mailto:souleymanesycodes@gmail.com) |
+| **Twitter / X** | [@Souleymanesy43](https://twitter.com/Souleymanesy43) |
 
 ---
 
-<p align="center">Built with ❤️ and too many terminal commands — from Coyah, Guinea-Conakry 🇬🇳</p>
+<p align="center">130+ hours. 46 commands. 31 themes. 15 fonts. Zero shortcuts.<br>Built from Coyah, Guinea-Conakry</p>
