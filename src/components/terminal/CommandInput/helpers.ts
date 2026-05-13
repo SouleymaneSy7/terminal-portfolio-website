@@ -1,6 +1,6 @@
-import { FONTS, THEMES } from "@/commands";
+import { FONTS, LOADERS, THEMES } from "@/commands";
 import { commands, COMPLETIONS } from "@/constants/commands";
-import { FONT_GROUPS, THEME_GROUPS } from "@/constants/suggestions";
+import { FONT_GROUPS, LOADER_GROUPS, THEME_GROUPS } from "@/constants/suggestions";
 import { SuggestionGroupType } from "@/types";
 
 const MAX_SUGGESTIONS = Object.keys(COMPLETIONS.man).length;
@@ -35,6 +35,9 @@ export function getDescription(cmd: string, suggestion: string): string {
 
   if (cmd === "typeface")
     return (FONTS as Record<string, { description: string }>)[suggestion]?.description ?? "";
+
+  if (cmd === "loader")
+    return (LOADERS as Record<string, { description: string }>)[suggestion]?.description ?? "";
   return "";
 }
 
@@ -42,6 +45,7 @@ export function getGroupedCompletions(cmd: string, partial: string): SuggestionG
   let groups: readonly SuggestionGroupType[] | null = null;
   if (cmd === "theme") groups = THEME_GROUPS;
   if (cmd === "typeface") groups = FONT_GROUPS;
+  if (cmd === "loader") groups = LOADER_GROUPS;
   if (!groups) return null;
 
   return groups

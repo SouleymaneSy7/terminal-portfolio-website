@@ -9,13 +9,15 @@ import { TerminalErrorBoundary } from "./TerminalErrorBoundary";
 import { handleWelcomeCommand } from "@/commands";
 import { STORAGE_KEYS } from "@/constants/storageKeys";
 import { useCommandHistory, useThemeFont } from "@/hooks";
-import { audioService } from "@/services/audio.service";
+import { audioService } from "@/services";
 
-import {
-  CommandHistory,
-  CommandHistoryOutputType,
-  SerializableHistoryType,
-  TerminalPropsTypes,
+import { LOADERS } from "@/commands/loader-command";
+import type {
+    CommandHistory,
+    CommandHistoryOutputType,
+    LoadingVariant,
+    SerializableHistoryType,
+    TerminalPropsTypes,
 } from "@/types";
 import { executeCommand } from "@/utils/command";
 import VisuallyHidden from "../common/VisuallyHidden";
@@ -40,6 +42,7 @@ const TerminalInner: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
   const [commandIndex, setCommandIndex] = React.useState(-1);
   const [inputReady, setInputReady] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [loaderVariant, setLoaderVariant] = React.useState<LoadingVariant>("braille");
 
   const currentCommandId = React.useRef(0);
   const runningCommandRef = React.useRef<string>("");
@@ -55,12 +58,6 @@ const TerminalInner: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
     () => history.map((h) => h.command).filter((c) => c && c !== "^C"),
     [history],
   );
-
-  // ─────────────────────────────────────────────────────────────
-  // HELPERS & CALLBACKS
-  // Declared before the effects that depend on them so ESLint can
-  // resolve deps correctly and no disable comments are needed.
-  // ─────────────────────────────────────────────────────────────
 
   const clearSafetyTimer = React.useCallback(() => {
     if (safetyTimer.current) {
@@ -94,15 +91,23 @@ const TerminalInner: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
     setCommandIndex(-1);
   }, [clearSafetyTimer, pushEntry]);
 
-  // ─────────────────────────────────────────────────────────────
-  // EFFECTS
-  // All callbacks they depend on are declared above — no disables needed.
-  // ─────────────────────────────────────────────────────────────
+  // ── Loaders ───────
+  React.useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEYS.LOADER) as LoadingVariant | null;
+    if (saved && saved in LOADERS) setLoaderVariant(saved);
+  }, []);
+
+  React.useEffect(() => {
+    const handler = (event: Event) => {
+      const { variant } = (event as CustomEvent<{ variant: LoadingVariant }>).detail;
+      setLoaderVariant(variant);
+    };
+
+    window.addEventListener("terminal:loader-change", handler);
+    return () => window.removeEventListener("terminal:loader-change", handler);
+  }, []);
 
   // ── Welcome entry on first load ───────────────────────────────
-  // setInputReady is a stable useState setter — not needed in deps.
-  // getWelcomeEntry and STORAGE_KEY are module-level — not reactive.
-  // The disable that was here was completely unnecessary.
   React.useEffect(() => {
     if (!isHydrated || hasInitialized.current) return;
     hasInitialized.current = true;
@@ -136,7 +141,6 @@ const TerminalInner: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
   }, [clearSafetyTimer]);
 
   // ── Ctrl+C global listener (only active during loading) ───────
-  // handleCancelCommand is now declared above — can be added to deps cleanly.
   React.useEffect(() => {
     if (!isLoading) return;
 
@@ -294,7 +298,7 @@ const TerminalInner: React.FC<TerminalPropsTypes> = ({ containerRef }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
           >
-            <LoadingIndicator variant="braille" />
+            <LoadingIndicator variant={loaderVariant} />
           </motion.div>
         )}
 
