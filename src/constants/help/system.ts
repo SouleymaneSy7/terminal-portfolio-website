@@ -64,7 +64,7 @@ export const SUDO_HELP = createHelpOutput({
 
 export const THEME_HELP = createHelpOutput({
   name: "theme",
-  usage: "theme <name> [--random]",
+  usage: "theme <name> [--random|-r|random]",
   description: "Switch the terminal color theme. Preference saved to localStorage.",
   options: [
     { flag: "theme", description: "List all available themes" },
@@ -90,7 +90,7 @@ export const THEME_HELP = createHelpOutput({
 
 export const TYPEFACE_HELP = createHelpOutput({
   name: "typeface",
-  usage: "typeface <name> [--random]",
+  usage: "typeface <name> [--random|-r|random]",
   description: "Switch the terminal monospace font. Preference saved to localStorage.",
   options: [
     { flag: "typeface", description: "List all available fonts" },
@@ -109,6 +109,25 @@ export const TYPEFACE_HELP = createHelpOutput({
   ],
   notes:
     "Tab completion is available — try typeface [Tab] to browse all 15 fonts, or use --random / -r / random for a surprise.",
+});
+
+export const LOADER_HELP = createHelpOutput({
+  name: "loader",
+  usage: "loader <name> [--random|-r|random]",
+  description: "Switch the terminal loading indicator style. Preference saved to localStorage.",
+  options: [
+    { flag: "loader", description: "List all available loader styles" },
+    { flag: "loader <name>", description: "Switch to specified loader" },
+    { flag: "loader --random, -r, random", description: "Switch to a random loader" },
+  ],
+  examples: [
+    { command: "loader braille", description: "Switch to Braille Spinner (default)" },
+    { command: "loader ascii", description: "Switch to ASCII Progress Bar" },
+    { command: "loader typewriter", description: "Switch to Typewriter Cursor" },
+    { command: "loader --random", description: "Roll the dice on a random loader" },
+  ],
+  notes:
+    "Tab completion is available — try loader [Tab] to browse all styles, or use --random / -r / random for a surprise.",
 });
 
 export const ALIAS_HELP = createHelpOutput({

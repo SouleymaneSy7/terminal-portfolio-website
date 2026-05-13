@@ -28,7 +28,7 @@ import { createHtmlOutput } from "@/utils/output";
 function cmd(name: string, desc: string, usage?: string): string {
   const paddedName = name.padEnd(10);
   const usageLine = usage
-    ? `\n          <p class="text-text-clr opacity-sep pl-4">↳ <span class="text-tertiary-clr font-bold">${usage}</span></p>`
+    ? `\n          <p class="text-text-clr opacity-dim pl-4">↳ <span class="text-tertiary-clr font-bold">${usage}</span></p>`
     : "";
 
   return `<p><span class="text-tertiary-clr font-bold">${paddedName}</span> — ${desc}</p>${usageLine}`;
@@ -45,7 +45,7 @@ export const handleHelpCommand = (): CommandHistoryOutputType => {
         <div class="space-y-t-group">
           <p class="text-secondary-clr font-bold">
             Commands
-            <span class="text-text-clr opacity-sep">(${commands.length} available)</span>
+            <span class="text-text-clr opacity-dim">(${commands.length} available)</span>
           </p>
           <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
           <p>
@@ -72,6 +72,7 @@ export const handleHelpCommand = (): CommandHistoryOutputType => {
           ${cmd("exit", "Display a farewell message. Close the browser tab to actually quit.")}
           ${cmd("help", "This screen — all commands grouped by category, with keyboard shortcuts.")}
           ${cmd("hostname", "Portfolio host metadata: name, owner, location, uptime.")}
+          ${cmd("loader", "Switch the terminal loading indicator style. Preference saved.", "loader [name|--random|-r]")}
           ${cmd("neofetch", "Full system card: OS, kernel, theme, font, resolution, stack, and journey stats.")}
           ${cmd("theme", "Switch between 31 OKLCH color themes. Preference saved in localStorage.", "theme [name|--random|-r]")}
           ${cmd("typeface", "Switch between 15 monospace fonts, loaded on demand. Preference saved.", "typeface [name|--random|-r]")}
@@ -160,7 +161,7 @@ export const handleHelpCommand = (): CommandHistoryOutputType => {
             ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">neofetch</span>${DT.decorators.quote} for the full system card.
           </p>
 
-          <p class="text-text-clr opacity-sep">
+          <p class="text-text-clr">
             <span class="text-primary-clr">Tip:</span>
             Tab completion is available for every command and most arguments.
           </p>
