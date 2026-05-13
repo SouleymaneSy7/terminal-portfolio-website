@@ -87,3 +87,18 @@ export const FONT_GROUPS: readonly SuggestionGroupType[] = [
     items: ["recursive-casual", "recursive-linear", "hack", "victor", "meslo"],
   },
 ] as const;
+
+// ─────────────────────────────────────────────────────────────────
+// LOADER GROUPS
+// ─────────────────────────────────────────────────────────────────
+
+export const LOADER_GROUPS: readonly SuggestionGroupType[] = [
+  {
+    label: "Special",
+    items: ["--random", "-r", "random"],
+  },
+  {
+    label: "Available Styles",
+    items: ["braille", "ascii", "spinner", "typewriter", "dots"],
+  },
+] as const;

@@ -22,6 +22,9 @@ export const STORAGE_KEYS = {
 
   // Aliases
   ALIASES: "terminal:aliases",
+
+  // Loader
+  LOADER: "terminal:loader",
 } as const;
 
 export type StorageKeyType = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];
