@@ -3,6 +3,7 @@
  *
  */
 
+export * from "./audio.service";
 export * from "./convert.service";
 export * from "./curl.service";
 export * from "./github.service";

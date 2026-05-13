@@ -4,7 +4,7 @@
  *   - The COMPLETIONS map (tab-completes arguments per command).
  */
 
-import { THEMES, FONTS } from "@/commands/theme-command";
+import { FONTS, LOADERS, THEMES } from "@/commands";
 
 // ─────────────────────────────────────────────────────────────────
 // COMMAND LIST  (alphabetical order)
@@ -36,6 +36,7 @@ export const commands: string[] = [
   "hostname",
   "ip",
   "joke",
+  "loader",
   "man",
   "neofetch",
   "note",
@@ -63,9 +64,9 @@ export const commands: string[] = [
 // ─────────────────────────────────────────────────────────────────
 
 export const COMPLETIONS: Record<string, string[]> = {
-  // Theming — derived from THEMES / FONTS objects automatically
   theme: Object.keys(THEMES),
   typeface: Object.keys(FONTS),
+  loader: Object.keys(LOADERS),
 
   // Audio
   audio: ["on", "off", "volume", "--help", "help", "-h"],
@@ -203,6 +204,7 @@ export const COMPLETIONS: Record<string, string[]> = {
     "hostname",
     "ip",
     "joke",
+    "loader",
     "man",
     "neofetch",
     "note",

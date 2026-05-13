@@ -34,6 +34,7 @@ import {
   handleHostnameCommand,
   handleIpCommand,
   handleJokeCommand,
+  handleLoaderCommand,
   handleManCommand,
   handleNeofetchCommand,
   handleNoteCommand,
@@ -53,13 +54,10 @@ import {
   handleUUIDCommand,
   handleWelcomeCommand,
   handleWhoamiCommand,
-  isValidPublicUrl,
 } from "@/commands";
 import type { CommandHandlerType } from "@/types";
 
-import { normalizeUrl, parseCurlArgs } from "@/commands/curl/parser";
 import { handleWeatherCommand } from "@/commands/weather-command";
-import { createErrorOutput } from "@/utils/output";
 
 // ─────────────────────────────────────────────────────────────────
 // REGISTRY
@@ -92,6 +90,8 @@ export const COMMAND_REGISTRY: Record<string, CommandHandlerType> = {
   audio: (args) => handleAudioCommand(args),
 
   hostname: (args) => handleHostnameCommand(args),
+
+  loader: (args) => handleLoaderCommand(args),
 
   neofetch: (args) => handleNeofetchCommand(args),
 

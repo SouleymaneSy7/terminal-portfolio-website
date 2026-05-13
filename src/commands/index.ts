@@ -18,6 +18,7 @@ export * from "./help-command";
 export * from "./history-command";
 export * from "./ip-command";
 export * from "./joke-command";
+export * from "./loader-command";
 export * from "./man";
 export * from "./note-command";
 export * from "./projects-command";
