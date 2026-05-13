@@ -69,7 +69,7 @@ export const handleHistoryCommand = (args: string[]) => {
       <div class="space-y-t-group">
         <p class="text-secondary-clr font-bold">
           History
-          <span class="text-text-clr opacity-sep">(${slice.length} entries)</span>
+          <span class="text-text-clr opacity-dim">(${slice.length} entries)</span>
         </p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         ${rows}
