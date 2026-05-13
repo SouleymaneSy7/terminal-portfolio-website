@@ -101,16 +101,16 @@ function buildAboutOutput(): CommandHistoryOutputType {
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p>
           <span class="text-tertiary-clr font-bold">3</span><span> years of self-teaching</span>
-          <span class="text-text-clr opacity-sep"> · </span>
+          <span class="text-text-clr opacity-dim"> · </span>
           <span class="text-tertiary-clr font-bold">89+</span><span> GitHub repos</span>
-          <span class="text-text-clr opacity-sep"> · </span>
+          <span class="text-text-clr opacity-dim"> · </span>
           <span class="text-tertiary-clr font-bold">50+</span><span> challenges</span>
         </p>
         <p>
           <span class="text-tertiary-clr font-bold">1</span><span> contest podium</span>
-          <span class="text-text-clr opacity-sep"> · </span>
+          <span class="text-text-clr opacity-dim"> · </span>
           <span class="text-tertiary-clr font-bold">1</span><span> certified internship</span>
-          <span class="text-text-clr opacity-sep"> · </span>
+          <span class="text-text-clr opacity-dim"> · </span>
           <span class="text-tertiary-clr font-bold">0</span><span> shortcuts taken</span>
         </p>
       </div>
