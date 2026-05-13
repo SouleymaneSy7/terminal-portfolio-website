@@ -32,6 +32,7 @@
 
   /* ── Opacity ── */
   --opacity-sep: 0.3;
+  --opacity-dim: 0.6;
 
   /* ── Animations ── */
   --animate-pulse-live: pulse-live 1500ms ease-in-out infinite;
