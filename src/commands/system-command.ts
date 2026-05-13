@@ -20,16 +20,17 @@ import type { CommandHistoryOutputType } from "@/types";
 import { parseArgs } from "@/utils/argParser";
 import { DESIGN_TOKENS as DT } from "@/utils/designTokens";
 
-import { getCurrentFont, getCurrentTheme, getFontLabel, getThemeLabel } from "./theme-command";
+import {
+  HOSTNAME_HELP,
+  NEOFETCH_HELP,
+  SUDO_HELP,
+  WELCOME_HELP,
+  WHOAMI_HELP,
+} from "@/constants/help/system";
 import { audioService } from "@/services/audio.service";
 import { createHtmlOutput } from "@/utils/output";
-import {
-  WELCOME_HELP,
-  NEOFETCH_HELP,
-  HOSTNAME_HELP,
-  WHOAMI_HELP,
-  SUDO_HELP,
-} from "@/constants/help/system";
+import { getCurrentLoader, getLoaderLabel } from "./loader-command";
+import { getCurrentFont, getCurrentTheme, getFontLabel, getThemeLabel } from "./theme-command";
 
 // ─────────────────────────────────────────────────────────────────
 // CONSTANTS
@@ -102,6 +103,7 @@ function buildWelcomeOutput(): CommandHistoryOutputType {
 function buildNeofetchOutput(): CommandHistoryOutputType {
   const themeLabel = getThemeLabel(getCurrentTheme());
   const fontLabel = getFontLabel(getCurrentFont());
+  const loaderLabel = getLoaderLabel(getCurrentLoader());
   const { enabled, volume } = audioService.getState();
 
   return createHtmlOutput(
@@ -125,8 +127,9 @@ function buildNeofetchOutput(): CommandHistoryOutputType {
         <p><span class="text-secondary-clr font-bold">Kernel:      </span>  Next.js 16 · React 19</p>
         <p><span class="text-secondary-clr font-bold">Shell:       </span>  TypeScript 5.x</p>
         <p><span class="text-secondary-clr font-bold">DE:          </span>  Terminal Portfolio v1.0</p>
-        <p><span class="text-secondary-clr font-bold">Theme:       </span>  ${themeLabel}</p>
-        <p><span class="text-secondary-clr font-bold">Font:        </span>  ${fontLabel}</p>
+        <p><span class="text-secondary-clr font-bold">Theme:       </span>  <span class="text-tertiary-clr">${themeLabel}</span></p>
+        <p><span class="text-secondary-clr font-bold">Font:        </span>  <span class="text-tertiary-clr">${fontLabel}</span></p>
+        <p><span class="text-secondary-clr font-bold">Loader:      </span>  <span class="text-tertiary-clr">${loaderLabel}</span></p>
         <p><span class="text-secondary-clr font-bold">Audio:       </span>  ${enabled ? `<span class="text-tertiary-clr">ON</span><span class="text-text-clr opacity-sep"> · ${volume}%</span>` : `<span class="text-secondary-clr">OFF</span> <span class="text-text-clr opacity-sep">← type 'audio on' to enable</span>`}</p>
         <p><span class="text-secondary-clr font-bold">Resolution:  </span>  ${getResolution()}</p>
         <p><span class="text-secondary-clr font-bold">Uptime:      </span>  Online since 2025, no interruptions</p>
@@ -135,10 +138,11 @@ function buildNeofetchOutput(): CommandHistoryOutputType {
 
       <div class="space-y-t-group">
         <p class="text-tertiary-clr font-bold">Stack</p>
-        <p>${DT.decorators.bullet}  Next.js · React</p>
-        <p>${DT.decorators.bullet}  TypeScript · Tailwind CSS v4</p>
-        <p>${DT.decorators.bullet}  GSAP · Framer Motion</p>
+        <p>${DT.decorators.bullet}  Next.js 16 · React 19</p>
+        <p>${DT.decorators.bullet}  TypeScript 5 · Tailwind CSS v4</p>
+        <p>${DT.decorators.bullet}  Framer Motion · Geist Mono</p>
         <p>${DT.decorators.bullet}  Axios · Date-fns · DOMPurify</p>
+        <p>${DT.decorators.bullet}  Math.js · Highlight.js · UUID</p>
         <p>${DT.decorators.bullet}  Git · GitHub · Bun · Vercel</p>
       </div>
 

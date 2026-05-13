@@ -76,6 +76,26 @@ export const SYSTEM_PAGES: Record<string, ManPageType> = {
     seeAlso: ["help", "man"],
   },
 
+  loader: {
+    name: "loader",
+    synopsis: "loader [name]\nloader --random\nloader -r\nloader random",
+    description:
+      "Switches the terminal loading indicator style. This visual element appears when a command is processing or fetching data. The choice is persisted in localStorage ('terminal:loader') and restored on page load. Switching happens instantly and affects all subsequent command executions.",
+    options: `
+      <p><span class="text-tertiary-clr font-bold">loader              </span> - List all 5 available styles with descriptions and previews.</p>
+      <p><span class="text-tertiary-clr font-bold">loader &lt;name&gt;       </span> - Apply the named loader immediately (braille, ascii, spinner, typewriter, dots).</p>
+      <p><span class="text-tertiary-clr font-bold">loader --random, -r </span> - Switch to a random loader style.</p>
+      <p><span class="text-tertiary-clr font-bold">loader random       </span> - Same as above, positional form.</p>`,
+    examples: `
+      <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  loader braille</p>
+      <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  loader ascii</p>
+      <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  loader typewriter</p>
+      <p class="text-tertiary-clr font-bold"><span aria-hidden="true" class="text-text-clr"> •</span>  loader --random</p>`,
+    notes:
+      "To preview a loader, type a long-running command like 'weather' after switching. The default is 'braille', which uses Unicode braille characters for a smooth rotation.",
+    seeAlso: ["theme", "typeface", "neofetch"],
+  },
+
   hostname: {
     name: "hostname",
     synopsis: "hostname",
@@ -116,7 +136,7 @@ export const SYSTEM_PAGES: Record<string, ManPageType> = {
 
   theme: {
     name: "theme",
-    synopsis: "theme [name]\ntheme --random\ntheme random",
+    synopsis: "theme [name]\ntheme --random\ntheme -r\ntheme random",
     description:
       "Switches the terminal color theme instantly. All 31 themes use OKLCH color values for perceptually uniform contrast, derived from official palette hex codes. The chosen theme is written to localStorage ('terminal:theme') and restored on every page load via initThemeAndFont(). Running neofetch after switching shows the live theme name.",
     options: `
@@ -145,7 +165,7 @@ export const SYSTEM_PAGES: Record<string, ManPageType> = {
 
   typeface: {
     name: "typeface",
-    synopsis: "typeface [name]\ntypeface --random\ntypeface random",
+    synopsis: "typeface [name]\ntypeface --random\ntypeface -r\ntypeface random",
     description:
       "Switches the terminal monospace font. 15 fonts available: 1 loaded statically (Recursive Casual Mono), 8 from Google Fonts, 1 from npm package (Geist Mono), and 5 local fonts. Fonts are loaded dynamically on demand for optimal performance. The chosen font is written to localStorage ('terminal:font') and restored on every page load. Font switching is implemented via html[data-font] CSS attribute selectors.",
     options: `
