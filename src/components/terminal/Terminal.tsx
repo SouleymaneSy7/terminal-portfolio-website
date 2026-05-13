@@ -13,11 +13,11 @@ import { audioService } from "@/services";
 
 import { LOADERS } from "@/commands/loader-command";
 import type {
-    CommandHistory,
-    CommandHistoryOutputType,
-    LoadingVariant,
-    SerializableHistoryType,
-    TerminalPropsTypes,
+  CommandHistory,
+  CommandHistoryOutputType,
+  LoadingVariant,
+  SerializableHistoryType,
+  TerminalPropsTypes,
 } from "@/types";
 import { executeCommand } from "@/utils/command";
 import VisuallyHidden from "../common/VisuallyHidden";
