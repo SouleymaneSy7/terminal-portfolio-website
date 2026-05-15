@@ -4,6 +4,19 @@
 
 ![Preview](./preview/preview.png)
 
+**A portfolio website you actually use like a terminal.**
+Type commands. Explore my work. Switch themes. Play a quiz. All from the prompt.
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-terminal--portfolio--website--xi.vercel.app-6e40c9?style=flat-square&logo=vercel)](https://terminal-portfolio-website-xi.vercel.app)
+[![Source Code](https://img.shields.io/badge/Source-GitHub-24292e?style=flat-square&logo=github)](https://github.com/SouleymaneSy7/terminal-portfolio-website)
+[![WakaTime](https://wakatime.com/badge/user/018cb534-87bb-4814-975b-ca5e3cb8572b/project/86de76f6-9a37-458f-b8dd-2975978d2205.svg?style=flat-square)](https://wakatime.com/badge/user/018cb534-87bb-4814-975b-ca5e3cb8572b/project/86de76f6-9a37-458f-b8dd-2975978d2205)
+
+[![Next.js](https://img.shields.io/badge/Next.js-16.2-black?style=flat-square&logo=next.js)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6-3178c6?style=flat-square&logo=typescript)](https://www.typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4-38bdf8?style=flat-square&logo=tailwindcss)](https://tailwindcss.com)
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000?style=flat-square&logo=vercel)](https://vercel.com)
+
 </div>
 
 ---
@@ -19,23 +32,6 @@ This portfolio is the result of 130+ hours on this single project. Not 130 hours
 
 This is not a template. This is not a generic showcase.
 This is a statement.
-
-**A terminal you actually use like a terminal.**
-Type commands. Explore my work. Switch themes. Play a quiz. All from the prompt.
-
-<div align="center">
-
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-terminal--portfolio--website--xi.vercel.app-6e40c9?style=flat-square&logo=vercel)](https://terminal-portfolio-website-xi.vercel.app)
-[![Source Code](https://img.shields.io/badge/Source-GitHub-24292e?style=flat-square&logo=github)](https://github.com/SouleymaneSy7/terminal-portfolio-website)
-[![WakaTime](https://wakatime.com/badge/user/018cb534-87bb-4814-975b-ca5e3cb8572b/project/86de76f6-9a37-458f-b8dd-2975978d2205.svg?style=flat-square)](https://wakatime.com/badge/user/018cb534-87bb-4814-975b-ca5e3cb8572b/project/86de76f6-9a37-458f-b8dd-2975978d2205)
-
-[![Next.js](https://img.shields.io/badge/Next.js-16.2-black?style=flat-square&logo=next.js)](https://nextjs.org)
-[![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react)](https://react.dev)
-[![TypeScript](https://img.shields.io/badge/TypeScript-6-3178c6?style=flat-square&logo=typescript)](https://www.typescriptlang.org)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4-38bdf8?style=flat-square&logo=tailwindcss)](https://tailwindcss.com)
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000?style=flat-square&logo=vercel)](https://vercel.com)
-
-</div>
 
 ---
 
