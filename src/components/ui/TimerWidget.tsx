@@ -56,7 +56,7 @@ const TimerWidget: React.FC<TimerWidgetPropsType> = ({ totalSeconds, label }) =>
           <p className="font-bold text-tertiary-clr">🔔 Timer done! {label ? ` — ${label}` : ""}</p>
         </div>
 
-        <p className="text-text-clr opacity-sep">
+        <p className="text-text-clr opacity-dim">
           Duration:{" "}
           {totalSeconds >= 3600
             ? `${Math.floor(totalSeconds / 3600)}h ${Math.floor((totalSeconds % 3600) / 60)}m`
@@ -84,14 +84,14 @@ const TimerWidget: React.FC<TimerWidgetPropsType> = ({ totalSeconds, label }) =>
         >
           {display}
         </span>
-        {label && <span className="text-text-clr opacity-sep"> — {label}</span>}
+        {label && <span className="text-text-clr opacity-dim"> — {label}</span>}
       </p>
 
       <p className="text-primary-clr" aria-hidden="true">
         [{bar}] {Math.round(progress * 100)}%
       </p>
 
-      <p className="text-text-clr opacity-sep" aria-hidden="true">
+      <p className="text-text-clr opacity-dim" aria-hidden="true">
         {remaining}s remaining
       </p>
     </motion.div>

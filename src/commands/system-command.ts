@@ -130,7 +130,7 @@ function buildNeofetchOutput(): CommandHistoryOutputType {
         <p><span class="text-secondary-clr font-bold">Theme:       </span>  <span class="text-tertiary-clr">${themeLabel}</span></p>
         <p><span class="text-secondary-clr font-bold">Font:        </span>  <span class="text-tertiary-clr">${fontLabel}</span></p>
         <p><span class="text-secondary-clr font-bold">Loader:      </span>  <span class="text-tertiary-clr">${loaderLabel}</span></p>
-        <p><span class="text-secondary-clr font-bold">Audio:       </span>  ${enabled ? `<span class="text-tertiary-clr">ON</span><span class="text-text-clr opacity-sep"> · ${volume}%</span>` : `<span class="text-secondary-clr">OFF</span> <span class="text-text-clr opacity-sep">← type 'audio on' to enable</span>`}</p>
+        <p><span class="text-secondary-clr font-bold">Audio:       </span>  ${enabled ? `<span class="text-tertiary-clr">ON</span><span class="text-text-clr opacity-dim"> · ${volume}%</span>` : `<span class="text-secondary-clr">OFF</span> <span class="text-text-clr opacity-dim">← type 'audio on' to enable</span>`}</p>
         <p><span class="text-secondary-clr font-bold">Resolution:  </span>  ${getResolution()}</p>
         <p><span class="text-secondary-clr font-bold">Uptime:      </span>  Online since 2025, no interruptions</p>
         <p><span class="text-secondary-clr font-bold">Packages:    </span>  ${packages.length} (prod) · ${packagesDev.length} (dev)</p>
@@ -164,10 +164,10 @@ function buildNeofetchOutput(): CommandHistoryOutputType {
           <span class="text-text-clr">████</span>
         </div>
         <div class="flex gap-0.5 items-baseline leading-none">
-          <span class="text-primary-clr opacity-sep">████</span>
-          <span class="text-secondary-clr opacity-sep">████</span>
-          <span class="text-tertiary-clr opacity-sep">████</span>
-          <span class="text-text-clr opacity-sep">████</span>
+          <span class="text-primary-clr opacity-dim">████</span>
+          <span class="text-secondary-clr opacity-dim">████</span>
+          <span class="text-tertiary-clr opacity-dim">████</span>
+          <span class="text-text-clr opacity-dim">████</span>
         </div>
       </div>
 

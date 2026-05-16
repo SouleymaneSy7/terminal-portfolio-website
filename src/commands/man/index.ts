@@ -121,7 +121,7 @@ export const handleManCommand = (args: string[]) => {
         </div>
 
         <div class="space-y-t-group">
-          <p class="text-secondary-clr font-bold">Available pages <span class="text-text-clr opacity-sep">(${ALL_PAGES.length} total)</span></p>
+          <p class="text-secondary-clr font-bold">Available pages <span class="text-text-clr opacity-dim">(${ALL_PAGES.length} total)</span></p>
           <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
           <p>${available}</p>
         </div>

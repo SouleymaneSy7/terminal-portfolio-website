@@ -26,14 +26,14 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
           <div className="flex flex-wrap items-center gap-2">
             <div className="flex items-center gap-2">
               <p className="font-bold text-secondary-clr">Suggestions</p>
-              <p className="text-text-clr opacity-sep" aria-hidden="true">
+              <p className="text-text-clr opacity-dim" aria-hidden="true">
                 ───
               </p>
               <p
                 role="status"
                 aria-live="polite"
                 aria-atomic="true"
-                className="text-text-clr opacity-sep"
+                className="text-text-clr opacity-dim"
               >
                 {totalCount} match{totalCount > 1 ? "es" : ""}
               </p>
@@ -41,10 +41,10 @@ export const SuggestionsPanel: React.FC<SuggestionsPanelPropsType> = ({
 
             {activeDescription && (
               <React.Fragment>
-                <p className="hidden text-text-clr opacity-sep md:inline-block" aria-hidden="true">
+                <p className="hidden text-text-clr opacity-dim md:inline-block" aria-hidden="true">
                   ·
                 </p>
-                <p className="text-text-clr opacity-sep">{activeDescription}.</p>
+                <p className="text-text-clr opacity-dim">{activeDescription}.</p>
               </React.Fragment>
             )}
           </div>

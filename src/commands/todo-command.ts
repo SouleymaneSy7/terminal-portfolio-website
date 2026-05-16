@@ -47,7 +47,7 @@ const listTodos = () => {
     .map((t, i) => {
       const statusIcon = t.done
         ? `<span class="text-tertiary-clr font-bold">✓</span>`
-        : `<span class="text-text-clr opacity-sep">○</span>`;
+        : `<span class="text-text-clr opacity-dim">○</span>`;
       const textClass = t.done ? "text-text-clr opacity-dim" : "text-text-clr";
       return `<p>
         <span class="text-primary-clr font-bold">${String(i + 1).padStart(2, "0")}</span>

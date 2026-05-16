@@ -87,7 +87,7 @@ const convertCurrency = async (amountStr: string, from: string, to: string, json
           <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
           <p>
             <span class="text-primary-clr font-bold">${amountFormatted} ${fromUpper}${fromSymbol ? ` (${fromSymbol})` : ""}</span>
-            <span class="text-text-clr opacity-sep">  →  </span>
+            <span class="text-text-clr opacity-dim">  →  </span>
             <span class="text-tertiary-clr font-bold">${formatted} ${toUpper}${toSymbol ? ` (${toSymbol})` : ""}</span>
           </p>
         </div>
@@ -102,7 +102,7 @@ const convertCurrency = async (amountStr: string, from: string, to: string, json
         <div class="space-y-t-footer">
           <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
           <p class="text-text-clr"><span class="text-primary-clr">Tip:</span> type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">convert ${amount} ${fromUpper} ${toUpper} --json</span>${DT.decorators.quote} for raw JSON.</p>
-          <p class="text-text-clr opacity-sep"><span class="text-primary-clr">Source:</span> <span class="font-bold text-tertiary-clr">frankfurter.dev</span> · Daily reference rates published by the European Central Bank</p>
+          <p class="text-text-clr opacity-dim"><span class="text-primary-clr">Source:</span> <span class="font-bold text-tertiary-clr">frankfurter.dev</span> · Daily reference rates published by the European Central Bank</p>
         </div>
       </div>`,
     );
@@ -125,7 +125,7 @@ const listCurrencies = async () => {
       ([code, info]) =>
         `<p>
           <span class="text-tertiary-clr font-bold">${code}</span>
-          <span class="text-text-clr opacity-sep">  ·  </span>
+          <span class="text-text-clr opacity-dim">  ·  </span>
           <span>${info.name}</span>
           ${info.symbol ? `<span class="text-secondary-clr"> (${info.symbol})</span>` : ""}
         </p>`,
@@ -135,7 +135,7 @@ const listCurrencies = async () => {
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
       <div class="space-y-t-group">
-        <p class="text-secondary-clr font-bold">Supported Currencies <span class="text-text-clr opacity-sep">(${Object.keys(currencies).length})</span></p>
+        <p class="text-secondary-clr font-bold">Supported Currencies <span class="text-text-clr opacity-dim">(${Object.keys(currencies).length})</span></p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         ${rows}
       </div>

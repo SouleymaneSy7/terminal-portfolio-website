@@ -116,7 +116,7 @@ function listAliases() {
       ([name, value]) =>
         `<p>
           <span class="text-tertiary-clr font-bold">${name}</span>
-          <span class="text-text-clr opacity-sep"> = </span>
+          <span class="text-text-clr opacity-dim"> = </span>
           <span class="text-text-clr">${value}</span>
         </p>`,
     )

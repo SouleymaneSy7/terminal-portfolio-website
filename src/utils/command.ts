@@ -25,7 +25,7 @@ const notFoundOutput = (cmd: string): CommandHistoryOutputType =>
         <p><span class="text-secondary-clr">'${cmd}'</span> command not found.</p>
       </div>
       <div class="space-y-t-footer">
-        <p class="text-text-clr opacity-sep" aria-hidden="true">────────────────────────────────────────</p>
+        <p class="text-text-clr opacity-dim" aria-hidden="true">────────────────────────────────────────</p>
         <p>Type <span aria-hidden="true">'</span><span class="text-tertiary-clr font-bold">help</span><span aria-hidden="true">'</span> to see all available commands.</p>
       </div>
     </div>`,

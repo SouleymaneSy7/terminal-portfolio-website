@@ -59,7 +59,7 @@ const Custom404: React.FC = () => {
         </motion.pre>
       </div>
 
-      <motion.p variants={itemVariants} className="text-text-clr opacity-sep" aria-hidden="true">
+      <motion.p variants={itemVariants} className="text-text-clr opacity-dim" aria-hidden="true">
         ────────────────────────────────────────
       </motion.p>
 

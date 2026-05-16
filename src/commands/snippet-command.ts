@@ -68,9 +68,9 @@ function listSnippets(): CommandHistoryOutputType {
 
       return `<p>
           <span class="text-primary-clr font-bold">${String(i + 1).padStart(2, "0")}</span>
-          <span class="text-text-clr opacity-sep">  [</span><span class="text-tertiary-clr">${safeShortId}</span><span class="text-text-clr opacity-sep">]</span>
+          <span class="text-text-clr opacity-dim">  [</span><span class="text-tertiary-clr">${safeShortId}</span><span class="text-text-clr opacity-dim">]</span>
           <span class="text-text-clr font-bold">${safeName}</span>
-          <span class="text-text-clr opacity-sep">  ·  </span>
+          <span class="text-text-clr opacity-dim">  ·  </span>
           <span class="text-secondary-clr">${safeLang}</span>
         </p>`;
     })
@@ -79,7 +79,7 @@ function listSnippets(): CommandHistoryOutputType {
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
       <div class="space-y-t-group">
-        <p class="text-secondary-clr font-bold">Snippets <span class="text-text-clr opacity-sep">(${snips.length})</span></p>
+        <p class="text-secondary-clr font-bold">Snippets <span class="text-text-clr opacity-dim">(${snips.length})</span></p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         ${rows}
       </div>
@@ -198,7 +198,7 @@ async function showSnippet(shortId: string): Promise<CommandHistoryOutputType> {
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
       <div class="space-y-t-group">
-        <p class="text-secondary-clr font-bold">${safeName} <span class="text-text-clr opacity-sep">· ${safeLang}</span></p>
+        <p class="text-secondary-clr font-bold">${safeName} <span class="text-text-clr opacity-dim">· ${safeLang}</span></p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
       </div>
       <pre class="whitespace-pre-wrap text-tertiary-clr text-fs-body">${highlighted}</pre>
@@ -239,8 +239,8 @@ function removeSnippet(shortId: string): CommandHistoryOutputType {
       <div class="space-y-t-group">
         <p>${DT.icons.success}  <span class="text-tertiary-clr font-bold">Snippet deleted</span></p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p><span class="text-secondary-clr">Name  </span>${DT.decorators.arrow}<span class="text-text-clr opacity-sep">${safeName}</span></p>
-        <p><span class="text-secondary-clr">Lang  </span>${DT.decorators.arrow}<span class="text-text-clr opacity-sep">${safeLang}</span></p>
+        <p><span class="text-secondary-clr">Name  </span>${DT.decorators.arrow}<span class="text-text-clr opacity-dim">${safeName}</span></p>
+        <p><span class="text-secondary-clr">Lang  </span>${DT.decorators.arrow}<span class="text-text-clr opacity-dim">${safeLang}</span></p>
       </div>
       <div class="space-y-t-footer">
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>

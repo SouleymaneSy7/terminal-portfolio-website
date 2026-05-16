@@ -118,7 +118,7 @@ const JsonOutput: React.FC<JsonOutputPropsType> = ({ data, label }) => {
               {label}
             </p>
           )}
-          <p className="text-fs-body font-bold text-text-clr opacity-sep">— ({lineCount} lines)</p>
+          <p className="text-fs-body font-bold text-text-clr opacity-dim">— ({lineCount} lines)</p>
         </div>
 
         <button
@@ -138,7 +138,7 @@ const JsonOutput: React.FC<JsonOutputPropsType> = ({ data, label }) => {
         </button>
       </div>
 
-      <p className="text-text-clr opacity-sep" aria-hidden="true">
+      <p className="text-text-clr opacity-dim" aria-hidden="true">
         ────────────────────────────────────────
       </p>
 
@@ -156,11 +156,11 @@ const JsonOutput: React.FC<JsonOutputPropsType> = ({ data, label }) => {
         {copied ? "JSON copied to clipboard." : ""}
       </VisuallyHidden>
 
-      <p className="text-text-clr opacity-sep" aria-hidden="true">
+      <p className="text-text-clr opacity-dim" aria-hidden="true">
         ────────────────────────────────────────
       </p>
 
-      <p className="text-text-clr opacity-sep">
+      <p className="text-text-clr opacity-dim">
         Raw JSON — <span className="font-bold text-tertiary-clr">{rawJsonLength} KB</span>
       </p>
     </motion.div>

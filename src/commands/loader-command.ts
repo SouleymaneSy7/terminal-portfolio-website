@@ -99,7 +99,7 @@ const getLoaderListOutput = (): CommandHistoryOutputType => {
           <span class="${nameClass}">${loader.label.padEnd(22)}</span>
           <span class="text-text-clr"> - ${loader.description}.</span>${activeTag}
         </p>
-        <p class="text-text-clr opacity-sep pl-4">↳ ${loader.preview}</p>
+        <p class="text-text-clr opacity-dim pl-4">↳ ${loader.preview}</p>
 
       </div>`;
     })
@@ -108,14 +108,14 @@ const getLoaderListOutput = (): CommandHistoryOutputType => {
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
       <div class="space-y-t-group">
-        <p class="text-secondary-clr font-bold">Loading Indicators <span class="text-text-clr opacity-sep">(5 available)</span></p>
+        <p class="text-secondary-clr font-bold">Loading Indicators <span class="text-text-clr opacity-dim">(5 available)</span></p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
       </div>
       ${rows}
       <div class="space-y-t-footer">
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p>Type ${DT.decorators.quote}<span class="text-tertiary-clr font-bold">loader &lt;name&gt;</span>${DT.decorators.quote} to switch.</p>
-        <p class="text-text-clr opacity-sep"><span class="text-primary-clr">Tip:</span> type a long-running command like ${DT.decorators.quote}<span class="text-tertiary-clr">weather Paris</span>${DT.decorators.quote} to preview it.</p>
+        <p class="text-text-clr opacity-dim"><span class="text-primary-clr">Tip:</span> type a long-running command like ${DT.decorators.quote}<span class="text-tertiary-clr">weather Paris</span>${DT.decorators.quote} to preview it.</p>
       </div>
     </div>`,
   );
@@ -131,7 +131,7 @@ const getLoaderSwitchOutput = (variant: LoadingVariant): CommandHistoryOutputTyp
         <p class="text-secondary-clr font-bold">${DT.icons.success} Loader switched${DT.decorators.arrow}${label}</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         <p>${description}.</p>
-               <p class="text-text-clr opacity-sep pl-4">↳ ${preview}</p>
+               <p class="text-text-clr opacity-dim pl-4">↳ ${preview}</p>
         <p><span class="text-primary-clr font-bold">${DT.icons.success} Preference saved.</span> Active immediately.</p>
       </div>
       <div class="space-y-t-footer">

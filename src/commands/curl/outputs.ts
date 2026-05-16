@@ -13,7 +13,7 @@ export function curlHelpOutput(): CommandHistoryOutputType {
         </div>
 
         <div class="space-y-t-group">
-          <p class="text-secondary-clr font-bold">Options  <span class="text-text-clr opacity-sep">(browser subset)</span></p>
+          <p class="text-secondary-clr font-bold">Options  <span class="text-text-clr opacity-dim">(browser subset)</span></p>
           <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
           <p><span class="text-tertiary-clr font-bold">-v, --verbose        </span> Make the operation more talkative</p>
           <p><span class="text-tertiary-clr font-bold">-I, --head           </span> Show document info only (HEAD request)</p>

@@ -52,7 +52,7 @@ function buildRepoRow(repo: GithubRepoType): string {
   return `<p>
     <span class="text-tertiary-clr font-bold">★ ${String(repo.stargazers_count).padEnd(5)}</span> -
     <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a>
-    ${repo.language ? `<span class="text-text-clr opacity-sep"> · ${repo.language}</span>` : ""}
+    ${repo.language ? `<span class="text-text-clr opacity-dim"> · ${repo.language}</span>` : ""}
   </p>`;
 }
 

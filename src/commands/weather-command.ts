@@ -29,7 +29,7 @@ export const createWeatherOutput = (weather: string): CommandHistoryOutputType =
 
       <div class="space-y-t-footer">
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p class="text-text-clr opacity-sep"><span class="text-primary-clr">Source:</span> <span class="font-bold text-tertiary-clr">wttr.in</span> · Console-oriented weather service</p>
+        <p class="text-text-clr opacity-dim"><span class="text-primary-clr">Source:</span> <span class="font-bold text-tertiary-clr">wttr.in</span> · Console-oriented weather service</p>
       </div>
     </div>`,
   );

@@ -212,16 +212,16 @@ const CommandInput: React.FC<CommandInputPropsType> = ({
     <div className="space-y-t-group">
       {/* Reverse search prompt */}
       {reverseSearch.isActive && (
-        <p className="text-text-clr opacity-sep" aria-live="polite" aria-atomic="true">
+        <p className="text-text-clr opacity-dim" aria-live="polite" aria-atomic="true">
           <span className="text-secondary-clr">(reverse-i-search)</span>
           <span className="text-text-clr">'{reverseSearch.query}'</span>
-          <span className="text-text-clr opacity-sep">: </span>
+          <span className="text-text-clr opacity-dim">: </span>
           {reverseSearch.match ? (
             <span className="text-tertiary-clr">{reverseSearch.match.command}</span>
           ) : reverseSearch.query ? (
-            <span className="text-secondary-clr opacity-sep">(no match)</span>
+            <span className="text-secondary-clr opacity-dim">(no match)</span>
           ) : (
-            <span className="text-text-clr opacity-sep">type to search…</span>
+            <span className="text-text-clr opacity-dim">type to search…</span>
           )}
         </p>
       )}

@@ -31,7 +31,7 @@ export function formatRequestHeaders(
     ">",
   ];
   return lines
-    .map((l) => `<p class="text-text-clr opacity-sep whitespace-pre">${escHtml(l)}</p>`)
+    .map((l) => `<p class="text-text-clr opacity-dim whitespace-pre">${escHtml(l)}</p>`)
     .join("\n");
 }
 

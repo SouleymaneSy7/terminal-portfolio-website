@@ -110,7 +110,7 @@ export async function curlCommand(rawArgs: string[]): Promise<CommandHistoryOutp
           <p>${DT.icons.warning} curl: Could not connect to <span class="text-tertiary-clr">${escapeHtml(
             url,
           )}</span></p>
-          <p class="text-text-clr opacity-sep">${escapeHtml(msg)}</p>
+          <p class="text-text-clr opacity-dim">${escapeHtml(msg)}</p>
         </div>`,
     );
   }
@@ -126,10 +126,10 @@ export async function curlCommand(rawArgs: string[]): Promise<CommandHistoryOutp
     blocks.push(
       ...createHtmlOutput(
         `<div class="space-y-t-footer">
-          <p class="text-text-clr opacity-sep">
+          <p class="text-text-clr opacity-dim">
             <span class="text-tertiary-clr">HTTP ${resp.status}</span>
             <span> ${resp.statusText}</span>
-            <span class="text-text-clr opacity-sep"> · </span>
+            <span class="text-text-clr opacity-dim"> · </span>
             <span>${kb} KB received</span>
           </p>
         </div>`,
@@ -153,7 +153,7 @@ export async function curlCommand(rawArgs: string[]): Promise<CommandHistoryOutp
       .map((l) => `<p class="whitespace-pre">${escapeHtml(l)}</p>`)
       .join("\n");
     const note = truncated
-      ? `<p class="text-secondary-clr opacity-sep">… output truncated at 2 000 lines</p>`
+      ? `<p class="text-secondary-clr opacity-dim">… output truncated at 2 000 lines</p>`
       : "";
 
     blocks.push(
@@ -164,7 +164,7 @@ export async function curlCommand(rawArgs: string[]): Promise<CommandHistoryOutp
   if (opts.outputNote) {
     blocks.push(
       ...createHtmlOutput(
-        `<p class="text-text-clr opacity-sep">${escapeHtml(opts.outputNote)}</p>`,
+        `<p class="text-text-clr opacity-dim">${escapeHtml(opts.outputNote)}</p>`,
       ),
     );
   }

@@ -45,7 +45,7 @@ const listNotes = () => {
       (n, i) =>
         `<p>
           <span class="text-primary-clr font-bold">${String(i + 1).padStart(2, "0")}</span>
-          <span class="text-text-clr opacity-sep"> [</span><span class="text-tertiary-clr">${n.shortId}</span><span class="text-text-clr opacity-sep">]</span>
+          <span class="text-text-clr opacity-dim"> [</span><span class="text-tertiary-clr">${n.shortId}</span><span class="text-text-clr opacity-dim">]</span>
           <span>  ${n.text}</span>
         </p>`,
     )
@@ -54,7 +54,7 @@ const listNotes = () => {
   return createHtmlOutput(
     `<div class="space-y-t-section py-t-outer">
       <div class="space-y-t-group">
-        <p class="text-secondary-clr font-bold">Notes <span class="text-text-clr opacity-sep">(${notes.length})</span></p>
+        <p class="text-secondary-clr font-bold">Notes <span class="text-text-clr opacity-dim">(${notes.length})</span></p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
         ${rows}
       </div>
@@ -129,7 +129,7 @@ const removeNote = (shortId: string) => {
       <div class="space-y-t-group">
         <p class="text-tertiary-clr font-bold">${DT.icons.success} Note deleted</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p><span class="text-secondary-clr">Removed  </span>${DT.decorators.arrow}<span class="text-text-clr opacity-sep">${removed.text}</span></p>
+        <p><span class="text-secondary-clr">Removed  </span>${DT.decorators.arrow}<span class="text-text-clr opacity-dim">${removed.text}</span></p>
       </div>
       <div class="space-y-t-footer">
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
@@ -166,7 +166,7 @@ const editNote = (shortId: string, newText: string) => {
       <div class="space-y-t-group">
         <p class="text-tertiary-clr font-bold">${DT.icons.success} Note updated</p>
         <p class="text-text-clr opacity-sep" aria-hidden="true">${DT.separators.short}</p>
-        <p><span class="text-secondary-clr">Before  </span>${DT.decorators.arrow}<span class="text-text-clr opacity-sep">${oldText}</span></p>
+        <p><span class="text-secondary-clr">Before  </span>${DT.decorators.arrow}<span class="text-text-clr opacity-dim">${oldText}</span></p>
         <p><span class="text-secondary-clr">After   </span>${DT.decorators.arrow}${note.text}</p>
       </div>
       <div class="space-y-t-footer">
